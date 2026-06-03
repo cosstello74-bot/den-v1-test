@@ -1,0 +1,22 @@
+{
+  "productStats": {
+    "p3": { "impressions": 450, "clicks": 63, "conversions": 14 },
+    "p4": { "impressions": 380, "clicks": 45, "conversions": 9 },
+    "p9": { "impressions": 310, "clicks": 38, "conversions": 8 },
+    "p1": { "impressions": 420, "clicks": 38, "conversions": 7 },
+    "p7": { "impressions": 290, "clicks": 29, "conversions": 6 },
+    "p12": { "impressions": 260, "clicks": 24, "conversions": 5 },
+    "p2": { "impressions": 340, "clicks": 27, "conversions": 4 },
+    "p5": { "impressions": 200, "clicks": 14, "conversions": 3 },
+    "p8": { "impressions": 180, "clicks": 9, "conversions": 1 },
+    "p10": { "impressions": 155, "clicks": 4, "conversions": 0 }
+  },
+  "categoryStats": {
+    "laptops": { "totalImpressions": 5200, "ctr": 0.087 },
+    "phones": { "totalImpressions": 0, "ctr": 0 },
+    "monitors": { "totalImpressions": 0, "ctr": 0 },
+    "tablets": { "totalImpressions": 0, "ctr": 0 },
+    "pcs": { "totalImpressions": 0, "ctr": 0 }
+  },
+  "lastUpdated": "2025-01-01T00:00:00.000Z"
+}

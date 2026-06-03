@@ -1,0 +1,105 @@
+{
+  "updatedAt": "2025-01-01T00:00:00.000Z",
+  "intents": [
+    {
+      "id": "intent-001",
+      "keyword": "best gaming laptops under 1000",
+      "category": "laptops",
+      "estimatedVolume": 8200,
+      "conversionPotential": 0.72,
+      "priority": 87,
+      "status": "live",
+      "discoveredAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "intent-002",
+      "keyword": "best laptops for students",
+      "category": "laptops",
+      "estimatedVolume": 12400,
+      "conversionPotential": 0.68,
+      "priority": 91,
+      "status": "live",
+      "discoveredAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "intent-003",
+      "keyword": "best laptop for coding",
+      "category": "laptops",
+      "estimatedVolume": 6800,
+      "conversionPotential": 0.75,
+      "priority": 85,
+      "status": "live",
+      "discoveredAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "intent-004",
+      "keyword": "lightweight laptops for travel",
+      "category": "laptops",
+      "estimatedVolume": 4200,
+      "conversionPotential": 0.71,
+      "priority": 78,
+      "status": "live",
+      "discoveredAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "intent-005",
+      "keyword": "best budget laptops under 500",
+      "category": "laptops",
+      "estimatedVolume": 9600,
+      "conversionPotential": 0.55,
+      "priority": 74,
+      "status": "live",
+      "discoveredAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "intent-006",
+      "keyword": "best work from home laptops",
+      "category": "laptops",
+      "estimatedVolume": 5100,
+      "conversionPotential": 0.69,
+      "priority": 80,
+      "status": "live",
+      "discoveredAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "intent-007",
+      "keyword": "best MacBook alternatives",
+      "category": "laptops",
+      "estimatedVolume": 3800,
+      "conversionPotential": 0.66,
+      "priority": 72,
+      "status": "pending",
+      "discoveredAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "intent-008",
+      "keyword": "best 2-in-1 laptops",
+      "category": "laptops",
+      "estimatedVolume": 4400,
+      "conversionPotential": 0.63,
+      "priority": 68,
+      "status": "pending",
+      "discoveredAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "intent-009",
+      "keyword": "best smartphones under 400",
+      "category": "phones",
+      "estimatedVolume": 7200,
+      "conversionPotential": 0.60,
+      "priority": 76,
+      "status": "pending",
+      "discoveredAt": "2025-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "intent-010",
+      "keyword": "best gaming monitors 144hz",
+      "category": "monitors",
+      "estimatedVolume": 5600,
+      "conversionPotential": 0.70,
+      "priority": 79,
+      "status": "pending",
+      "discoveredAt": "2025-01-01T00:00:00.000Z"
+    }
+  ]
+}

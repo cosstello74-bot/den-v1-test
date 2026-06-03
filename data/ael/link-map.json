@@ -1,0 +1,30 @@
+{
+  "best-gaming-laptops-under-1000": {
+    "quizHref": "/quiz?category=laptops&intent=gaming",
+    "related": [
+      { "slug": "best-laptops-for-gaming", "href": "/best-laptops-for-gaming", "title": "Best Laptops for Gaming", "description": "GPU-focused performance rankings" },
+      { "slug": "best-budget-laptops", "href": "/best-budget-laptops", "title": "Best Budget Laptops", "description": "Maximum value at entry-level price points" }
+    ]
+  },
+  "best-laptops-for-students": {
+    "quizHref": "/quiz?category=laptops&intent=student",
+    "related": [
+      { "slug": "best-budget-laptops", "href": "/best-budget-laptops", "title": "Best Budget Laptops", "description": "Maximum value at entry-level price points" },
+      { "slug": "work-from-home-laptops", "href": "/work-from-home-laptops", "title": "Work-From-Home Laptops", "description": "Battery + productivity for remote use" }
+    ]
+  },
+  "best-laptops-for-coding": {
+    "quizHref": "/quiz?category=laptops&intent=coding",
+    "related": [
+      { "slug": "laptops-for-coding", "href": "/laptops-for-coding", "title": "Best Laptops for Coding", "description": "Developer-optimised productivity picks" },
+      { "slug": "work-from-home-laptops", "href": "/work-from-home-laptops", "title": "Work-From-Home Laptops", "description": "Battery + productivity for remote dev work" }
+    ]
+  },
+  "lightweight-laptops-for-travel": {
+    "quizHref": "/quiz?category=laptops&intent=wfh",
+    "related": [
+      { "slug": "work-from-home-laptops", "href": "/work-from-home-laptops", "title": "Work-From-Home Laptops", "description": "Battery + productivity for remote use" },
+      { "slug": "best-laptops-for-gaming", "href": "/best-laptops-for-gaming", "title": "Best Laptops for Gaming", "description": "GPU-focused performance rankings" }
+    ]
+  }
+}

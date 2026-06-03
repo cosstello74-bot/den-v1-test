@@ -1,0 +1,123 @@
+{
+  "lastRun": "2025-01-01T00:00:00.000Z",
+  "totalPagesGenerated": 4,
+  "totalCategoriesGenerated": 3,
+  "expansionHistory": [
+    { "runId": "run-001", "timestamp": "2025-01-01T00:00:00.000Z", "pagesAdded": 4, "categoriesAdded": 3, "opportunitiesDetected": 7, "confidenceThreshold": 0.85 }
+  ],
+  "currentOpportunities": [
+    {
+      "id": "opp-001",
+      "type": "new_intent_page",
+      "name": "best-gaming-laptops-under-1000",
+      "category": "laptops",
+      "confidence": 0.92,
+      "rationale": "gamer segment CTR on p1+p4 is 22%+. No dedicated mid-price gaming page exists. Revenue gap: £85/unit payout × estimated 12 missed conversions.",
+      "estimatedImpact": "high",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "metadata": { "triggerProduct": "p1", "avgSegmentCtr": 22.0 }
+    },
+    {
+      "id": "opp-002",
+      "type": "new_intent_page",
+      "name": "best-laptops-for-students",
+      "category": "laptops",
+      "confidence": 0.94,
+      "rationale": "student segment has highest conversion bias (1.10×) but no dedicated value-focused landing page. p2, p7, p8 all have value_score >= 83 at budget/mid price bands.",
+      "estimatedImpact": "high",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "metadata": { "triggerSegment": "student", "avgConversionBias": 1.10 }
+    },
+    {
+      "id": "opp-003",
+      "type": "new_intent_page",
+      "name": "best-laptops-for-coding",
+      "category": "laptops",
+      "confidence": 0.90,
+      "rationale": "professional segment CTR on p3+p9 is 16-18%. Developer intent has no dedicated landing page. 5 products qualify with productivity_score >= 88.",
+      "estimatedImpact": "high",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "metadata": { "triggerProduct": "p9", "avgSegmentCtr": 17.0 }
+    },
+    {
+      "id": "opp-004",
+      "type": "new_intent_page",
+      "name": "lightweight-laptops-for-travel",
+      "category": "laptops",
+      "confidence": 0.89,
+      "rationale": "portability signal is under-represented in existing pages. 5 laptops qualify with portability >= 80 AND battery >= 80. Travel segment is under-served.",
+      "estimatedImpact": "medium",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "metadata": { "qualifyingProducts": ["p3", "p4", "p6", "p9", "p12"] }
+    },
+    {
+      "id": "opp-005",
+      "type": "new_category",
+      "name": "ultrabooks",
+      "category": "laptops",
+      "confidence": 0.91,
+      "rationale": "Cluster of 5 products (p3, p4, p6, p9, p12) with portability >= 80 and battery >= 80. No ultrabook-specific category exists. Estimated 30% engagement uplift from targeted content.",
+      "estimatedImpact": "medium",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "metadata": { "clusterSize": 5, "clusterType": "portable_battery" }
+    },
+    {
+      "id": "opp-006",
+      "type": "revenue_fix",
+      "name": "p10-conversion-optimisation",
+      "category": "laptops",
+      "confidence": 0.87,
+      "rationale": "p10 (Dell Inspiron 15): conversionRate 0.04, well below category average 0.074. High value_score (87) suggests ranking issue not product quality issue.",
+      "estimatedImpact": "medium",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "metadata": { "productId": "p10", "conversionRate": 0.04, "categoryAvg": 0.074 }
+    },
+    {
+      "id": "opp-007",
+      "type": "geo_coverage_gap",
+      "name": "monitors-geo-coverage",
+      "category": "monitors",
+      "confidence": 0.86,
+      "rationale": "monitors GEO page has lower entity density vs laptops. No intent-specific landing pages exist for monitors. gaming-monitors and creative-monitors intents unserved.",
+      "estimatedImpact": "medium",
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "metadata": { "categoryGeoScore": 62, "missingIntents": ["gaming-monitors", "creative-monitors"] }
+    }
+  ],
+  "revenueScans": [
+    {
+      "productId": "p10",
+      "issue": "high_ctr_low_conversion",
+      "currentMetrics": { "conversionRate": 0.04, "affiliatePayout": 11, "totalRevenue": 44, "revenueTrend": "declining" },
+      "suggestion": "Increase ranking visibility for student segment where value_score is primary signal. Add to best-laptops-for-students page.",
+      "priority": "urgent"
+    },
+    {
+      "productId": "p8",
+      "issue": "high_payout_low_traffic",
+      "currentMetrics": { "conversionRate": 0.11, "affiliatePayout": 14, "totalRevenue": 126, "revenueTrend": "declining" },
+      "suggestion": "p8 has highest conversion rate (11%) but low payout. Increase traffic via student and budget intent pages to capitalise on conversion efficiency.",
+      "priority": "medium"
+    },
+    {
+      "productId": "p9",
+      "issue": "missing_coverage",
+      "currentMetrics": { "conversionRate": 0.05, "affiliatePayout": 95, "totalRevenue": 855, "revenueTrend": "rising" },
+      "suggestion": "Highest affiliate payout product (£95). Add dedicated professional/creator intent page to capture premium segment traffic.",
+      "priority": "medium"
+    },
+    {
+      "productId": "p3",
+      "issue": "missing_coverage",
+      "currentMetrics": { "conversionRate": 0.06, "affiliatePayout": 85, "totalRevenue": 1020, "revenueTrend": "rising" },
+      "suggestion": "Top revenue product but low conversion rate vs payout potential. Creative/professional landing page would increase segment-specific conversion.",
+      "priority": "medium"
+    }
+  ],
+  "feedbackState": {
+    "confidenceThreshold": 0.85,
+    "expansionRecords": [],
+    "avgExpansionScore": 0,
+    "lastEvaluated": "2025-01-01T00:00:00.000Z"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "products": {
+    "p3": {
+      "global_ctr": 14.0,
+      "weighted_ctr": 13.2,
+      "time_decay_factor": 0.92,
+      "trend": "rising",
+      "segment_ctr": { "creator": 22.0, "professional": 16.0, "general": 12.0, "student": 8.0, "gamer": 5.0 }
+    },
+    "p9": {
+      "global_ctr": 12.3,
+      "weighted_ctr": 11.8,
+      "time_decay_factor": 0.92,
+      "trend": "rising",
+      "segment_ctr": { "creator": 25.0, "professional": 18.0, "general": 9.0, "student": 7.0, "gamer": 4.0 }
+    },
+    "p4": {
+      "global_ctr": 11.8,
+      "weighted_ctr": 11.4,
+      "time_decay_factor": 0.92,
+      "trend": "rising",
+      "segment_ctr": { "gamer": 22.0, "creator": 12.0, "general": 10.0, "professional": 8.0, "student": 6.0 }
+    },
+    "p7": {
+      "global_ctr": 10.0,
+      "weighted_ctr": 9.6,
+      "time_decay_factor": 0.92,
+      "trend": "stable",
+      "segment_ctr": { "professional": 18.0, "student": 12.0, "general": 9.0, "creator": 6.0, "gamer": 3.0 }
+    },
+    "p12": {
+      "global_ctr": 9.2,
+      "weighted_ctr": 9.0,
+      "time_decay_factor": 0.92,
+      "trend": "stable",
+      "segment_ctr": { "professional": 14.0, "student": 13.0, "general": 8.0, "creator": 7.0, "gamer": 3.0 }
+    },
+    "p1": {
+      "global_ctr": 9.0,
+      "weighted_ctr": 8.5,
+      "time_decay_factor": 0.92,
+      "trend": "stable",
+      "segment_ctr": { "gamer": 19.0, "general": 8.0, "student": 7.0, "creator": 5.0, "professional": 4.0 }
+    },
+    "p2": {
+      "global_ctr": 7.9,
+      "weighted_ctr": 7.6,
+      "time_decay_factor": 0.92,
+      "trend": "stable",
+      "segment_ctr": { "student": 14.0, "general": 9.0, "professional": 7.0, "creator": 5.0, "gamer": 3.0 }
+    },
+    "p5": {
+      "global_ctr": 7.0,
+      "weighted_ctr": 6.5,
+      "time_decay_factor": 0.92,
+      "trend": "stable",
+      "segment_ctr": { "creator": 14.0, "professional": 10.0, "general": 6.0, "student": 5.0, "gamer": 3.0 }
+    },
+    "p6": {
+      "global_ctr": 6.8,
+      "weighted_ctr": 6.4,
+      "time_decay_factor": 0.92,
+      "trend": "stable",
+      "segment_ctr": { "professional": 12.0, "creator": 10.0, "general": 6.0, "student": 5.0, "gamer": 2.0 }
+    },
+    "p11": {
+      "global_ctr": 6.0,
+      "weighted_ctr": 5.8,
+      "time_decay_factor": 0.92,
+      "trend": "stable",
+      "segment_ctr": { "gamer": 15.0, "general": 6.0, "student": 5.0, "creator": 4.0, "professional": 3.0 }
+    },
+    "p8": {
+      "global_ctr": 5.0,
+      "weighted_ctr": 4.6,
+      "time_decay_factor": 0.92,
+      "trend": "stable",
+      "segment_ctr": { "student": 8.0, "general": 7.0, "professional": 4.0, "creator": 3.0, "gamer": 2.0 }
+    },
+    "p10": {
+      "global_ctr": 2.6,
+      "weighted_ctr": 2.1,
+      "time_decay_factor": 0.88,
+      "trend": "declining",
+      "segment_ctr": { "student": 4.0, "general": 3.0, "professional": 2.0, "creator": 1.5, "gamer": 1.0 }
+    }
+  }
+}

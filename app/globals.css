@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background-color: rgb(99 102 241 / 0.25);
+    color: white;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  }
+}
+
+/* ─── Page-level animations ──────────────────────────── */
+
+.animate-fade-in {
+  animation: den-fade-in 0.5s ease both;
+}
+
+.animate-slide-up {
+  animation: den-slide-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slide-right {
+  animation: den-slide-right 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.delay-75  { animation-delay: 75ms;  }
+.delay-150 { animation-delay: 150ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-250 { animation-delay: 250ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+
+@keyframes den-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes den-slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes den-slide-right {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ─── Score bar reveal (left → right, clip-path trick) ─ */
+
+.score-bar {
+  clip-path: inset(0 100% 0 0);
+  animation: den-score-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 400ms;
+}
+
+@keyframes den-score-reveal {
+  to { clip-path: inset(0 0% 0 0); }
+}
+
+/* ─── Spinner ─────────────────────────────────────────── */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  animation: spin 0.8s linear infinite;
+}
+
+/* ─── Subtle gradient glow helper ────────────────────── */
+
+.glow-indigo {
+  box-shadow: 0 0 60px 20px rgb(99 102 241 / 0.06);
+}

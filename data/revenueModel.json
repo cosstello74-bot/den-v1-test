@@ -1,0 +1,116 @@
+{
+  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "products": {
+    "p1": {
+      "affiliatePayout": 32,
+      "totalRevenue": 384,
+      "clickToRevenueRatio": 2.56,
+      "conversionRate": 0.08,
+      "revenueTrend": "stable"
+    },
+    "p2": {
+      "affiliatePayout": 18,
+      "totalRevenue": 216,
+      "clickToRevenueRatio": 1.80,
+      "conversionRate": 0.10,
+      "revenueTrend": "stable"
+    },
+    "p3": {
+      "affiliatePayout": 85,
+      "totalRevenue": 1020,
+      "clickToRevenueRatio": 5.10,
+      "conversionRate": 0.06,
+      "revenueTrend": "rising"
+    },
+    "p4": {
+      "affiliatePayout": 58,
+      "totalRevenue": 696,
+      "clickToRevenueRatio": 4.06,
+      "conversionRate": 0.07,
+      "revenueTrend": "rising"
+    },
+    "p5": {
+      "affiliatePayout": 52,
+      "totalRevenue": 468,
+      "clickToRevenueRatio": 3.12,
+      "conversionRate": 0.06,
+      "revenueTrend": "stable"
+    },
+    "p6": {
+      "affiliatePayout": 48,
+      "totalRevenue": 480,
+      "clickToRevenueRatio": 3.36,
+      "conversionRate": 0.07,
+      "revenueTrend": "stable"
+    },
+    "p7": {
+      "affiliatePayout": 68,
+      "totalRevenue": 816,
+      "clickToRevenueRatio": 5.44,
+      "conversionRate": 0.08,
+      "revenueTrend": "stable"
+    },
+    "p8": {
+      "affiliatePayout": 14,
+      "totalRevenue": 126,
+      "clickToRevenueRatio": 1.54,
+      "conversionRate": 0.11,
+      "revenueTrend": "declining"
+    },
+    "p9": {
+      "affiliatePayout": 95,
+      "totalRevenue": 855,
+      "clickToRevenueRatio": 4.75,
+      "conversionRate": 0.05,
+      "revenueTrend": "rising"
+    },
+    "p10": {
+      "affiliatePayout": 11,
+      "totalRevenue": 44,
+      "clickToRevenueRatio": 0.44,
+      "conversionRate": 0.04,
+      "revenueTrend": "declining"
+    },
+    "p11": {
+      "affiliatePayout": 27,
+      "totalRevenue": 270,
+      "clickToRevenueRatio": 2.43,
+      "conversionRate": 0.09,
+      "revenueTrend": "stable"
+    },
+    "p12": {
+      "affiliatePayout": 42,
+      "totalRevenue": 462,
+      "clickToRevenueRatio": 3.36,
+      "conversionRate": 0.08,
+      "revenueTrend": "stable"
+    }
+  },
+  "categories": {
+    "laptops": {
+      "revenuePerSession": 2.80,
+      "avgAffiliatePayout": 46.0,
+      "totalRevenue": 5841
+    },
+    "phones": {
+      "revenuePerSession": 1.90,
+      "avgAffiliatePayout": 30.0,
+      "totalRevenue": 1140
+    },
+    "monitors": {
+      "revenuePerSession": 1.50,
+      "avgAffiliatePayout": 28.0,
+      "totalRevenue": 420
+    },
+    "tablets": {
+      "revenuePerSession": 1.20,
+      "avgAffiliatePayout": 22.0,
+      "totalRevenue": 176
+    },
+    "pcs": {
+      "revenuePerSession": 2.10,
+      "avgAffiliatePayout": 55.0,
+      "totalRevenue": 660
+    }
+  }
+}

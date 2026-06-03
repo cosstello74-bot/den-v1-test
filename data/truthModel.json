@@ -1,0 +1,77 @@
+{
+  "generatedAt": "2025-01-01T00:00:00.000Z",
+  "products": {
+    "p3": {
+      "truth_score": 0.82,
+      "bias_corrected_ctr": 13.0,
+      "confidence": 1.0,
+      "interaction_count": 85
+    },
+    "p9": {
+      "truth_score": 0.78,
+      "bias_corrected_ctr": 11.5,
+      "confidence": 1.0,
+      "interaction_count": 72
+    },
+    "p4": {
+      "truth_score": 0.75,
+      "bias_corrected_ctr": 11.0,
+      "confidence": 1.0,
+      "interaction_count": 68
+    },
+    "p7": {
+      "truth_score": 0.65,
+      "bias_corrected_ctr": 9.2,
+      "confidence": 0.8,
+      "interaction_count": 48
+    },
+    "p12": {
+      "truth_score": 0.62,
+      "bias_corrected_ctr": 8.8,
+      "confidence": 0.8,
+      "interaction_count": 44
+    },
+    "p1": {
+      "truth_score": 0.60,
+      "bias_corrected_ctr": 8.2,
+      "confidence": 0.8,
+      "interaction_count": 40
+    },
+    "p2": {
+      "truth_score": 0.55,
+      "bias_corrected_ctr": 7.2,
+      "confidence": 0.8,
+      "interaction_count": 35
+    },
+    "p5": {
+      "truth_score": 0.50,
+      "bias_corrected_ctr": 6.2,
+      "confidence": 0.8,
+      "interaction_count": 28
+    },
+    "p6": {
+      "truth_score": 0.52,
+      "bias_corrected_ctr": 6.0,
+      "confidence": 0.8,
+      "interaction_count": 26
+    },
+    "p11": {
+      "truth_score": 0.48,
+      "bias_corrected_ctr": 5.5,
+      "confidence": 0.8,
+      "interaction_count": 22
+    },
+    "p8": {
+      "truth_score": 0.45,
+      "bias_corrected_ctr": 4.2,
+      "confidence": 0.8,
+      "interaction_count": 18
+    },
+    "p10": {
+      "truth_score": 0.32,
+      "bias_corrected_ctr": 1.8,
+      "confidence": 0.5,
+      "interaction_count": 8
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "pages": [
+    {
+      "slug": "best-gaming-laptops-under-1000",
+      "title": "Best Gaming Laptops Under £1000",
+      "h1": "Best Gaming Laptops Under £1000",
+      "intent": "gaming_budget",
+      "category": "laptops",
+      "description": "Truth-calibrated ranking of gaming laptops at mid-range price points. Scored on gaming performance, thermal capability, and value. Outcome-verified by real session data.",
+      "productFilter": {
+        "minGamingScore": 80,
+        "priceBands": ["mid", "budget"],
+        "maxCount": 5
+      },
+      "intentWeights": { "gaming_score": 0.55, "value_score": 0.25, "productivity_score": 0.10, "battery_score": 0.10 },
+      "geoKeywords": ["gaming laptops under 1000", "best budget gaming laptops", "mid-range gaming laptop", "gaming laptop value"],
+      "confidence": 0.92,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "expansionOpportunityId": "opp-001"
+    },
+    {
+      "slug": "best-laptops-for-students",
+      "title": "Best Laptops for Students",
+      "h1": "Best Laptops for Students",
+      "intent": "student_value",
+      "category": "laptops",
+      "description": "Ranked laptops for university and student use. Weighted on value score, battery endurance, and portability. Budget and mid-range options prioritised for cost efficiency.",
+      "productFilter": {
+        "minValueScore": 82,
+        "priceBands": ["budget", "mid"],
+        "maxCount": 5
+      },
+      "intentWeights": { "value_score": 0.40, "battery_score": 0.25, "portability_score": 0.20, "productivity_score": 0.15 },
+      "geoKeywords": ["best student laptops", "laptops for university", "cheap laptops for students", "student laptop under 700"],
+      "confidence": 0.94,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "expansionOpportunityId": "opp-002"
+    },
+    {
+      "slug": "best-laptops-for-coding",
+      "title": "Best Laptops for Coding and Software Development",
+      "h1": "Best Laptops for Coding",
+      "intent": "developer_professional",
+      "category": "laptops",
+      "description": "Developer-optimised laptop rankings. Scored primarily on productivity and processing performance, with secondary weighting on RAM scalability, display quality, and battery life for extended coding sessions.",
+      "productFilter": {
+        "minProductivityScore": 88,
+        "maxCount": 5
+      },
+      "intentWeights": { "productivity_score": 0.50, "battery_score": 0.20, "portability_score": 0.15, "value_score": 0.15 },
+      "geoKeywords": ["best laptops for coding", "developer laptops", "laptops for software engineers", "programming laptops"],
+      "confidence": 0.90,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "expansionOpportunityId": "opp-003"
+    },
+    {
+      "slug": "lightweight-laptops-for-travel",
+      "title": "Best Lightweight Laptops for Travel",
+      "h1": "Best Lightweight Laptops for Travel",
+      "intent": "travel_portable",
+      "category": "laptops",
+      "description": "Highly portable laptops ranked on portability score and battery endurance. All-day battery life, compact 13–14 inch form factors, and lightweight builds. Verified by outcome signals from traveller segments.",
+      "productFilter": {
+        "minPortabilityScore": 80,
+        "minBatteryScore": 80,
+        "maxCount": 5
+      },
+      "intentWeights": { "portability_score": 0.40, "battery_score": 0.35, "productivity_score": 0.15, "value_score": 0.10 },
+      "geoKeywords": ["lightweight laptops", "best travel laptops", "portable laptops for work", "thin light laptop"],
+      "confidence": 0.89,
+      "createdAt": "2025-01-01T00:00:00.000Z",
+      "expansionOpportunityId": "opp-004"
+    }
+  ]
+}
