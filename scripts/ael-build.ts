@@ -23,6 +23,7 @@ import { discoverCategories as discoverV4Categories }      from "../lib/ael/cate
 import { evaluateExpansionTrigger }                        from "../lib/ael/expansionTrigger";
 import { buildExpandedLinks, buildLinkMap, mergeLinkMaps } from "../lib/ael/internalLinkExpansion";
 import { discoverIntents }                                 from "../lib/ael/intentDiscovery";
+import type { IntentSignal }                               from "../lib/ael/intentDiscovery";
 import type { GeneratedPageConfig }                        from "../lib/ael/pageGenerator";
 import { generatePageFromIntent }                          from "../lib/ael/pageGenerator";
 import type { Event }                                      from "../types/event";
@@ -282,7 +283,17 @@ async function main(): Promise<void> {
     for (const intent of trigger.approvedIntents) {
       const alreadyQueued = newPages.find((p) => p.slug === intent.slug);
       if (alreadyQueued) continue;
-      const cfg = generatePageFromIntent(intent, `opp-v4-${intent.key}-${runId}`);
+      const intentSignal: IntentSignal = {
+        intent:              intent.key,
+        slug:                intent.slug,
+        category:            intent.category,
+        searchVolume:        intent.frequency >= 10 ? "high" : intent.frequency >= 3 ? "medium" : "low",
+        conversionPotential: intent.conversionRate >= 0.10 ? "high" : intent.conversionRate >= 0.05 ? "medium" : "low",
+        hasPage:             false,
+        priority:            Math.round(intent.confidence * 100),
+        quizMapping:         intent.quizMapping,
+      };
+      const cfg = generatePageFromIntent(intentSignal, `opp-v4-${intent.key}-${runId}`);
       v4NewPageConfigs.push(cfg);
       log(`v4: + Generated page: /${cfg.slug} (intent: ${cfg.intent})`);
     }

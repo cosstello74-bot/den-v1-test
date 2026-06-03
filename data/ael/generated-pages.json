@@ -9,11 +9,24 @@
       "description": "Truth-calibrated ranking of gaming laptops at mid-range price points. Scored on gaming performance, thermal capability, and value. Outcome-verified by real session data.",
       "productFilter": {
         "minGamingScore": 80,
-        "priceBands": ["mid", "budget"],
+        "priceBands": [
+          "mid",
+          "budget"
+        ],
         "maxCount": 5
       },
-      "intentWeights": { "gaming_score": 0.55, "value_score": 0.25, "productivity_score": 0.10, "battery_score": 0.10 },
-      "geoKeywords": ["gaming laptops under 1000", "best budget gaming laptops", "mid-range gaming laptop", "gaming laptop value"],
+      "intentWeights": {
+        "gaming_score": 0.55,
+        "value_score": 0.25,
+        "productivity_score": 0.1,
+        "battery_score": 0.1
+      },
+      "geoKeywords": [
+        "gaming laptops under 1000",
+        "best budget gaming laptops",
+        "mid-range gaming laptop",
+        "gaming laptop value"
+      ],
       "confidence": 0.92,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "expansionOpportunityId": "opp-001"
@@ -27,11 +40,24 @@
       "description": "Ranked laptops for university and student use. Weighted on value score, battery endurance, and portability. Budget and mid-range options prioritised for cost efficiency.",
       "productFilter": {
         "minValueScore": 82,
-        "priceBands": ["budget", "mid"],
+        "priceBands": [
+          "budget",
+          "mid"
+        ],
         "maxCount": 5
       },
-      "intentWeights": { "value_score": 0.40, "battery_score": 0.25, "portability_score": 0.20, "productivity_score": 0.15 },
-      "geoKeywords": ["best student laptops", "laptops for university", "cheap laptops for students", "student laptop under 700"],
+      "intentWeights": {
+        "value_score": 0.4,
+        "battery_score": 0.25,
+        "portability_score": 0.2,
+        "productivity_score": 0.15
+      },
+      "geoKeywords": [
+        "best student laptops",
+        "laptops for university",
+        "cheap laptops for students",
+        "student laptop under 700"
+      ],
       "confidence": 0.94,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "expansionOpportunityId": "opp-002"
@@ -47,9 +73,19 @@
         "minProductivityScore": 88,
         "maxCount": 5
       },
-      "intentWeights": { "productivity_score": 0.50, "battery_score": 0.20, "portability_score": 0.15, "value_score": 0.15 },
-      "geoKeywords": ["best laptops for coding", "developer laptops", "laptops for software engineers", "programming laptops"],
-      "confidence": 0.90,
+      "intentWeights": {
+        "productivity_score": 0.5,
+        "battery_score": 0.2,
+        "portability_score": 0.15,
+        "value_score": 0.15
+      },
+      "geoKeywords": [
+        "best laptops for coding",
+        "developer laptops",
+        "laptops for software engineers",
+        "programming laptops"
+      ],
+      "confidence": 0.9,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "expansionOpportunityId": "opp-003"
     },
@@ -65,11 +101,270 @@
         "minBatteryScore": 80,
         "maxCount": 5
       },
-      "intentWeights": { "portability_score": 0.40, "battery_score": 0.35, "productivity_score": 0.15, "value_score": 0.10 },
-      "geoKeywords": ["lightweight laptops", "best travel laptops", "portable laptops for work", "thin light laptop"],
+      "intentWeights": {
+        "portability_score": 0.4,
+        "battery_score": 0.35,
+        "productivity_score": 0.15,
+        "value_score": 0.1
+      },
+      "geoKeywords": [
+        "lightweight laptops",
+        "best travel laptops",
+        "portable laptops for work",
+        "thin light laptop"
+      ],
       "confidence": 0.89,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "expansionOpportunityId": "opp-004"
+    },
+    {
+      "slug": "best-laptops-for-video-editing",
+      "title": "Best  Laptops  For  Video  Editing",
+      "h1": "Best Laptops For Video Editing",
+      "intent": "creative_professional",
+      "category": "laptops",
+      "description": "Truth-calibrated laptops ranking for the creative professional intent.",
+      "productFilter": {
+        "minProductivityScore": 90,
+        "priceBands": [
+          "high",
+          "premium"
+        ],
+        "maxCount": 5
+      },
+      "intentWeights": {
+        "productivity_score": 0.5,
+        "battery_score": 0.2,
+        "portability_score": 0.15,
+        "value_score": 0.15
+      },
+      "geoKeywords": [
+        "best laptops for video editing",
+        "creative laptops"
+      ],
+      "confidence": 0.87,
+      "createdAt": "2026-06-03T17:12:48.165Z",
+      "expansionOpportunityId": "opp-intent-best-laptops-for-video-editing"
+    },
+    {
+      "slug": "best-gaming-monitors",
+      "title": "Best  Gaming  Monitors",
+      "h1": "Best Gaming Monitors",
+      "intent": "gaming_monitor",
+      "category": "monitors",
+      "description": "Truth-calibrated monitors ranking for the gaming monitor intent.",
+      "productFilter": {
+        "maxCount": 5
+      },
+      "intentWeights": {
+        "gaming_score": 0.6,
+        "value_score": 0.2,
+        "productivity_score": 0.2
+      },
+      "geoKeywords": [
+        "best gaming monitors",
+        "144hz monitors"
+      ],
+      "confidence": 0.91,
+      "createdAt": "2026-06-03T17:12:48.165Z",
+      "expansionOpportunityId": "opp-intent-best-gaming-monitors"
+    },
+    {
+      "slug": "best-tablets-for-students",
+      "title": "Best  Tablets  For  Students",
+      "h1": "Best Tablets For Students",
+      "intent": "student_tablet",
+      "category": "tablets",
+      "description": "Truth-calibrated tablets ranking for the student tablet intent.",
+      "productFilter": {
+        "maxCount": 5
+      },
+      "intentWeights": {
+        "value_score": 0.45,
+        "battery_score": 0.3,
+        "productivity_score": 0.25
+      },
+      "geoKeywords": [
+        "best tablets for students",
+        "student tablet"
+      ],
+      "confidence": 0.89,
+      "createdAt": "2026-06-03T17:12:48.165Z",
+      "expansionOpportunityId": "opp-intent-best-tablets-for-students"
+    },
+    {
+      "slug": "best-gaming-pcs",
+      "title": "Best  Gaming  Pcs",
+      "h1": "Best Gaming Pcs",
+      "intent": "gaming_pc",
+      "category": "pcs",
+      "description": "Truth-calibrated pcs ranking for the gaming pc intent.",
+      "productFilter": {
+        "minGamingScore": 80,
+        "maxCount": 5
+      },
+      "intentWeights": {
+        "gaming_score": 0.6,
+        "value_score": 0.25,
+        "productivity_score": 0.15
+      },
+      "geoKeywords": [
+        "best gaming PCs",
+        "gaming desktop"
+      ],
+      "confidence": 0.91,
+      "createdAt": "2026-06-03T17:12:48.165Z",
+      "expansionOpportunityId": "opp-intent-best-gaming-pcs"
+    },
+    {
+      "slug": "best-phones-for-photography",
+      "title": "Best Phones For Photography",
+      "h1": "Best Phones For Photography",
+      "intent": "camera_phone",
+      "category": "phones",
+      "description": "Truth-calibrated phones rankings for the camera phone use case. Scored across multiple dimensions, verified by outcome signals.",
+      "productFilter": {
+        "maxCount": 5
+      },
+      "intentWeights": {
+        "productivity_score": 0.3,
+        "value_score": 0.25,
+        "battery_score": 0.2,
+        "portability_score": 0.15,
+        "gaming_score": 0.1
+      },
+      "geoKeywords": [
+        "best phones for photography",
+        "camera phone"
+      ],
+      "confidence": 0.75,
+      "createdAt": "2026-06-03T17:12:48.169Z",
+      "expansionOpportunityId": "opp-v4-camera_phone-run-1780506768165"
+    },
+    {
+      "slug": "best-budget-smartphones",
+      "title": "Best Budget Smartphones",
+      "h1": "Best Budget Smartphones",
+      "intent": "budget_phone",
+      "category": "phones",
+      "description": "Truth-calibrated phones rankings for the budget phone use case. Scored across multiple dimensions, verified by outcome signals.",
+      "productFilter": {
+        "maxCount": 5
+      },
+      "intentWeights": {
+        "productivity_score": 0.3,
+        "value_score": 0.25,
+        "battery_score": 0.2,
+        "portability_score": 0.15,
+        "gaming_score": 0.1
+      },
+      "geoKeywords": [
+        "best budget smartphones",
+        "affordable smartphones"
+      ],
+      "confidence": 0.75,
+      "createdAt": "2026-06-03T17:12:48.169Z",
+      "expansionOpportunityId": "opp-v4-budget_phone-run-1780506768165"
+    },
+    {
+      "slug": "best-budget-laptops-under-500",
+      "title": "Best Budget Laptops Under 500",
+      "h1": "Best Budget Laptops Under 500",
+      "intent": "budget_general",
+      "category": "laptops",
+      "description": "Truth-calibrated laptops rankings for the budget general use case. Scored across multiple dimensions, verified by outcome signals.",
+      "productFilter": {
+        "maxCount": 5
+      },
+      "intentWeights": {
+        "productivity_score": 0.3,
+        "value_score": 0.25,
+        "battery_score": 0.2,
+        "portability_score": 0.15,
+        "gaming_score": 0.1
+      },
+      "geoKeywords": [
+        "best budget laptops under 500",
+        "cheap laptops under 500"
+      ],
+      "confidence": 0.75,
+      "createdAt": "2026-06-03T17:12:48.169Z",
+      "expansionOpportunityId": "opp-v4-budget_general-run-1780506768165"
+    },
+    {
+      "slug": "best-premium-laptops-for-professionals",
+      "title": "Best Premium Laptops For Professionals",
+      "h1": "Best Premium Laptops For Professionals",
+      "intent": "premium_professional",
+      "category": "laptops",
+      "description": "Truth-calibrated laptops rankings for the premium professional use case. Scored across multiple dimensions, verified by outcome signals.",
+      "productFilter": {
+        "maxCount": 5
+      },
+      "intentWeights": {
+        "productivity_score": 0.3,
+        "value_score": 0.25,
+        "battery_score": 0.2,
+        "portability_score": 0.15,
+        "gaming_score": 0.1
+      },
+      "geoKeywords": [
+        "best premium laptops for professionals",
+        "premium professional laptops"
+      ],
+      "confidence": 0.75,
+      "createdAt": "2026-06-03T17:12:48.169Z",
+      "expansionOpportunityId": "opp-v4-premium_professional-run-1780506768165"
+    },
+    {
+      "slug": "best-battery-life-phones",
+      "title": "Best Battery Life Phones",
+      "h1": "Best Battery Life Phones",
+      "intent": "battery_phone",
+      "category": "phones",
+      "description": "Truth-calibrated phones rankings for the battery phone use case. Scored across multiple dimensions, verified by outcome signals.",
+      "productFilter": {
+        "maxCount": 5
+      },
+      "intentWeights": {
+        "productivity_score": 0.3,
+        "value_score": 0.25,
+        "battery_score": 0.2,
+        "portability_score": 0.15,
+        "gaming_score": 0.1
+      },
+      "geoKeywords": [
+        "best battery life phones",
+        "long battery life smartphones"
+      ],
+      "confidence": 0.75,
+      "createdAt": "2026-06-03T17:12:48.169Z",
+      "expansionOpportunityId": "opp-v4-battery_phone-run-1780506768165"
+    },
+    {
+      "slug": "best-monitors-for-video-editing",
+      "title": "Best Monitors For Video Editing",
+      "h1": "Best Monitors For Video Editing",
+      "intent": "creative_monitor",
+      "category": "monitors",
+      "description": "Truth-calibrated monitors rankings for the creative monitor use case. Scored across multiple dimensions, verified by outcome signals.",
+      "productFilter": {
+        "maxCount": 5
+      },
+      "intentWeights": {
+        "productivity_score": 0.3,
+        "value_score": 0.25,
+        "battery_score": 0.2,
+        "portability_score": 0.15,
+        "gaming_score": 0.1
+      },
+      "geoKeywords": [
+        "best monitors for video editing",
+        "video editing monitor"
+      ],
+      "confidence": 0.75,
+      "createdAt": "2026-06-03T17:12:48.169Z",
+      "expansionOpportunityId": "opp-v4-creative_monitor-run-1780506768165"
     }
   ]
 }

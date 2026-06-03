@@ -2,29 +2,171 @@
   "best-gaming-laptops-under-1000": {
     "quizHref": "/quiz?category=laptops&intent=gaming",
     "related": [
-      { "slug": "best-laptops-for-gaming", "href": "/best-laptops-for-gaming", "title": "Best Laptops for Gaming", "description": "GPU-focused performance rankings" },
-      { "slug": "best-budget-laptops", "href": "/best-budget-laptops", "title": "Best Budget Laptops", "description": "Maximum value at entry-level price points" }
+      {
+        "slug": "best-laptops-for-gaming",
+        "href": "/best-laptops-for-gaming",
+        "title": "Best Laptops for Gaming",
+        "description": "GPU-focused performance rankings"
+      },
+      {
+        "slug": "best-budget-laptops",
+        "href": "/best-budget-laptops",
+        "title": "Best Budget Laptops",
+        "description": "Maximum value at entry-level price points"
+      }
     ]
   },
   "best-laptops-for-students": {
     "quizHref": "/quiz?category=laptops&intent=student",
     "related": [
-      { "slug": "best-budget-laptops", "href": "/best-budget-laptops", "title": "Best Budget Laptops", "description": "Maximum value at entry-level price points" },
-      { "slug": "work-from-home-laptops", "href": "/work-from-home-laptops", "title": "Work-From-Home Laptops", "description": "Battery + productivity for remote use" }
+      {
+        "slug": "best-budget-laptops",
+        "href": "/best-budget-laptops",
+        "title": "Best Budget Laptops",
+        "description": "Maximum value at entry-level price points"
+      },
+      {
+        "slug": "work-from-home-laptops",
+        "href": "/work-from-home-laptops",
+        "title": "Work-From-Home Laptops",
+        "description": "Battery + productivity for remote use"
+      }
     ]
   },
   "best-laptops-for-coding": {
     "quizHref": "/quiz?category=laptops&intent=coding",
     "related": [
-      { "slug": "laptops-for-coding", "href": "/laptops-for-coding", "title": "Best Laptops for Coding", "description": "Developer-optimised productivity picks" },
-      { "slug": "work-from-home-laptops", "href": "/work-from-home-laptops", "title": "Work-From-Home Laptops", "description": "Battery + productivity for remote dev work" }
+      {
+        "slug": "laptops-for-coding",
+        "href": "/laptops-for-coding",
+        "title": "Best Laptops for Coding",
+        "description": "Developer-optimised productivity picks"
+      },
+      {
+        "slug": "work-from-home-laptops",
+        "href": "/work-from-home-laptops",
+        "title": "Work-From-Home Laptops",
+        "description": "Battery + productivity for remote dev work"
+      }
     ]
   },
   "lightweight-laptops-for-travel": {
     "quizHref": "/quiz?category=laptops&intent=wfh",
     "related": [
-      { "slug": "work-from-home-laptops", "href": "/work-from-home-laptops", "title": "Work-From-Home Laptops", "description": "Battery + productivity for remote use" },
-      { "slug": "best-laptops-for-gaming", "href": "/best-laptops-for-gaming", "title": "Best Laptops for Gaming", "description": "GPU-focused performance rankings" }
+      {
+        "slug": "work-from-home-laptops",
+        "href": "/work-from-home-laptops",
+        "title": "Work-From-Home Laptops",
+        "description": "Battery + productivity for remote use"
+      },
+      {
+        "slug": "best-laptops-for-gaming",
+        "href": "/best-laptops-for-gaming",
+        "title": "Best Laptops for Gaming",
+        "description": "GPU-focused performance rankings"
+      }
+    ]
+  },
+  "best-phones-for-photography": {
+    "quizHref": "/quiz?category=phones",
+    "related": [
+      {
+        "slug": "phones",
+        "href": "/phones",
+        "title": "All Phone Rankings",
+        "description": "Full phone category — all use cases ranked"
+      },
+      {
+        "slug": "best-battery-life-phones",
+        "href": "/generated/best-battery-life-phones",
+        "title": "Best Battery Life Phones",
+        "description": "Truth-calibrated phones rankings for the  use case. Scored across multiple dimensi…"
+      }
+    ]
+  },
+  "best-budget-smartphones": {
+    "quizHref": "/quiz?category=phones",
+    "related": [
+      {
+        "slug": "phones",
+        "href": "/phones",
+        "title": "All Phone Rankings",
+        "description": "Full phone category — all use cases ranked"
+      },
+      {
+        "slug": "best-phones-for-photography",
+        "href": "/generated/best-phones-for-photography",
+        "title": "Best Phones For Photography",
+        "description": "Truth-calibrated phones rankings for the  use case. Scored across multiple dimensi…"
+      }
+    ]
+  },
+  "best-budget-laptops-under-500": {
+    "quizHref": "/quiz?category=laptops",
+    "related": [
+      {
+        "slug": "laptops",
+        "href": "/laptops",
+        "title": "All Laptop Rankings",
+        "description": "Full laptop category — all use cases and segments ranked"
+      },
+      {
+        "slug": "best-gaming-laptops-under-1000",
+        "href": "/generated/best-gaming-laptops-under-1000",
+        "title": "Best Gaming Laptops Under £1000",
+        "description": "Truth-calibrated ranking of gaming laptops at mid-range price points. Scored on ga…"
+      }
+    ]
+  },
+  "best-premium-laptops-for-professionals": {
+    "quizHref": "/quiz?category=laptops",
+    "related": [
+      {
+        "slug": "laptops",
+        "href": "/laptops",
+        "title": "All Laptop Rankings",
+        "description": "Full laptop category — all use cases and segments ranked"
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      }
+    ]
+  },
+  "best-battery-life-phones": {
+    "quizHref": "/quiz?category=phones",
+    "related": [
+      {
+        "slug": "phones",
+        "href": "/phones",
+        "title": "All Phone Rankings",
+        "description": "Full phone category — all use cases ranked"
+      },
+      {
+        "slug": "best-phones-for-photography",
+        "href": "/generated/best-phones-for-photography",
+        "title": "Best Phones For Photography",
+        "description": "Truth-calibrated phones rankings for the  use case. Scored across multiple dimensi…"
+      }
+    ]
+  },
+  "best-monitors-for-video-editing": {
+    "quizHref": "/quiz?category=monitors",
+    "related": [
+      {
+        "slug": "monitors",
+        "href": "/monitors",
+        "title": "All Monitor Rankings",
+        "description": "Full monitor category — all segments ranked"
+      },
+      {
+        "slug": "best-laptops-for-gaming",
+        "href": "/best-laptops-for-gaming",
+        "title": "Best Laptops for Gaming",
+        "description": "GPU-focused performance rankings"
+      }
     ]
   }
 }

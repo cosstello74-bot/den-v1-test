@@ -97,30 +97,39 @@ const CATEGORY_PARENT_LINKS: Record<string, InternalLink> = {
 };
 
 // ─── Sibling scoring ──────────────────────────────────────────────────────────
-
 /**
  * Score relevance between source and candidate for sibling link selection.
  * Higher score = more relevant sibling.
  */
 function siblingRelevanceScore(
-  source:    GeneratedPageConfig,
+  source: GeneratedPageConfig,
   candidate: GeneratedPageConfig
 ): number {
   if (source.slug === candidate.slug) return -Infinity;
+
+  // 🧯 Safety guards (prevents undefined crashes)
+  const sourceIntent = String(source.intent ?? "");
+  const candidateIntent = String(candidate.intent ?? "");
+  const sourceSlug = String(source.slug ?? "");
+  const candidateSlug = String(candidate.slug ?? "");
 
   let score = 0;
 
   // Same category: strong signal
   if (source.category === candidate.category) score += 10;
 
-  // Shared intent prefix (e.g. "gaming_*" → "gaming_*")
-  const srcPrefix = source.intent.split("_")[0];
-  const cndPrefix = candidate.intent.split("_")[0];
-  if (srcPrefix === cndPrefix) score += 5;
+  // Shared intent prefix (e.g. "gaming_*" → "gaming")
+  const srcPrefix = sourceIntent.split("_")[0];
+  const cndPrefix = candidateIntent.split("_")[0];
+
+  if (srcPrefix && srcPrefix === cndPrefix) score += 5;
 
   // Keyword overlap in slugs
-  const srcParts = new Set(source.slug.split("-"));
-  const overlap  = candidate.slug.split("-").filter((p) => srcParts.has(p)).length;
+  const srcParts = new Set(sourceSlug.split("-"));
+  const overlap = candidateSlug
+    .split("-")
+    .filter((p) => srcParts.has(p)).length;
+
   score += overlap;
 
   return score;

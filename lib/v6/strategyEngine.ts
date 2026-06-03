@@ -151,5 +151,7 @@ export function deduplicateStrategies(strategies: Strategy[]): Strategy[] {
     const existing = seen.get(key);
     if (!existing || s.priority > existing.priority) seen.set(key, s);
   }
-  return [...seen.values()].sort((a, b) => b.priority - a.priority);
+  return Array.from(seen.values()).sort(
+  (a, b) => b.priority - a.priority
+);
 }

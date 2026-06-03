@@ -5,8 +5,17 @@
       "name": "Ultrabooks",
       "description": "Ultra-portable laptops with premium battery life and compact form factors. Scored primarily on portability and battery endurance. Ideal for travel and on-the-go professionals.",
       "baseCategory": "laptops",
-      "productIds": ["p3", "p4", "p6", "p9", "p12"],
-      "filterCriteria": { "minPortabilityScore": 80, "minBatteryScore": 80 },
+      "productIds": [
+        "p3",
+        "p4",
+        "p6",
+        "p9",
+        "p12"
+      ],
+      "filterCriteria": {
+        "minPortabilityScore": 80,
+        "minBatteryScore": 80
+      },
       "confidence": 0.91,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "source": "cluster_portable"
@@ -16,8 +25,20 @@
       "name": "Budget Workhorses",
       "description": "High-value laptops that deliver strong productivity for budget-conscious buyers. Optimised for value-score and productivity-score at budget and mid price points.",
       "baseCategory": "laptops",
-      "productIds": ["p2", "p7", "p8", "p10"],
-      "filterCriteria": { "minValueScore": 82, "minProductivityScore": 75, "priceBands": ["budget", "mid"] },
+      "productIds": [
+        "p2",
+        "p7",
+        "p8",
+        "p10"
+      ],
+      "filterCriteria": {
+        "minValueScore": 82,
+        "minProductivityScore": 75,
+        "priceBands": [
+          "budget",
+          "mid"
+        ]
+      },
       "confidence": 0.88,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "source": "cluster_value"
@@ -27,8 +48,14 @@
       "name": "Performance Gaming Laptops",
       "description": "Top-tier gaming laptops with gaming scores above 88. Optimised for GPU performance, display refresh rate, and thermal management. Suited to serious and competitive gamers.",
       "baseCategory": "laptops",
-      "productIds": ["p1", "p4", "p11"],
-      "filterCriteria": { "minGamingScore": 88 },
+      "productIds": [
+        "p1",
+        "p4",
+        "p11"
+      ],
+      "filterCriteria": {
+        "minGamingScore": 88
+      },
       "confidence": 0.93,
       "createdAt": "2025-01-01T00:00:00.000Z",
       "source": "cluster_gaming"
