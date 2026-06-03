@@ -127,15 +127,32 @@ const INTENT_TEMPLATES: Record<string, PageTemplate> = {
 // ─── Fallback template generator ─────────────────────────────────────────────
 
 function buildFallbackTemplate(intent: IntentSignal): PageTemplate {
-  const titleLabel = intent.slug.replace(/-/g, " ")
+  const titleLabel = String(intent?.slug ?? "")
+    .replace(/-/g, " ")
     .replace(/\b\w/g, (l) => l.toUpperCase());
+
+  const intentLabel = String(intent?.intent ?? "").replace(/_/g, " ");
+
   return {
-    title:         titleLabel,
-    h1:            titleLabel,
-    description:   `Truth-calibrated ${intent.category} rankings for the ${intent.intent.replace(/_/g, " ")} use case. Scored across multiple dimensions, verified by outcome signals.`,
+    title: titleLabel,
+    h1: titleLabel,
+
+    description: `Truth-calibrated ${intent?.category ?? "products"} rankings for the ${intentLabel} use case. Scored across multiple dimensions, verified by outcome signals.`,
+
     productFilter: { maxCount: 5 },
-    intentWeights: { productivity_score: 0.30, value_score: 0.25, battery_score: 0.20, portability_score: 0.15, gaming_score: 0.10 },
-    geoKeywords:   [intent.slug.replace(/-/g, " "), intent.intent.replace(/_/g, " ")],
+
+    intentWeights: {
+      productivity_score: 0.30,
+      value_score: 0.25,
+      battery_score: 0.20,
+      portability_score: 0.15,
+      gaming_score: 0.10,
+    },
+
+    geoKeywords: [
+      String(intent?.slug ?? "").replace(/-/g, " "),
+      intentLabel,
+    ],
   };
 }
 
