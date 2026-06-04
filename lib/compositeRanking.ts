@@ -2,58 +2,44 @@
  * Composite ranking — display layer only.
  * Does NOT modify the intelligence model, truth model, or any persisted state.
  *
- * final_score = 0.6 × intelligence_score + 0.4 × revenue_score
+ * Architecture: revenue is ANNOTATION ONLY — it never affects rank position.
+ *
+ *   finalScore    = relevanceScore          (determines rank)
+ *   revenueScore  = metadata annotation     (displayed, not ranked on)
+ *   compositeScore = relevanceScore         (same — kept for type compatibility)
+ *
+ * Tiebreaker: when two products are within TIEBREAK_EPSILON of each other,
+ * revenueScore breaks the tie. This is the only point revenue touches order.
+ * A 3-point epsilon means two products must score identically or near-identically
+ * before commission data has any effect — genuine user-fit differences always win.
+ *
+ * V16 layer separation:
+ *   Revenue enrichment  →  v16/monetisation/applyMonetisation
+ *   Sorting             →  v16/ranking/pureRanker
+ *   This file           →  thin coordinator; no direct revenueEngine import
  */
 import type { Recommendation }       from "@/types/product";
 import type { RevenueModelSnapshot } from "./metrics/revenueMetrics";
-import type { UserContext }          from "./revenueEngine";
-import { calculateRevenueScore }     from "./revenueEngine";
+import { applyMonetisation }         from "./v16/monetisation/applyMonetisation";
+import { rankProducts }              from "./v16/ranking/pureRanker";
+import type { RevenueEnrichedRecommendation, UserContext } from "./v16/types";
 
-export type RevenueEnrichedRecommendation = Recommendation & {
-  revenueScore:    number;
-  compositeScore:  number;
-  revenueEfficiency: "high" | "medium" | "low";
-};
-
-const INTELLIGENCE_WEIGHT = 0.6;
-const REVENUE_WEIGHT      = 0.4;
-
-export function computeCompositeScore(intelligenceScore: number, revenueScore: number): number {
-  return Math.round(
-    INTELLIGENCE_WEIGHT * intelligenceScore + REVENUE_WEIGHT * revenueScore
-  );
-}
-
-function revenueEfficiencyLabel(revenueScore: number): "high" | "medium" | "low" {
-  if (revenueScore >= 65) return "high";
-  if (revenueScore >= 35) return "medium";
-  return "low";
-}
+// Re-export types so existing importers (results page, compositeScoring) need no changes.
+export type { RevenueEnrichedRecommendation, UserContext };
 
 export function applyCompositeRanking(
   recommendations: Recommendation[],
   revenueModel:    RevenueModelSnapshot | null,
-  context:         UserContext
+  context:         UserContext,
 ): RevenueEnrichedRecommendation[] {
-  const enriched = recommendations.map((rec): RevenueEnrichedRecommendation => {
-    const revenueOut = revenueModel
-      ? calculateRevenueScore(rec.product.id, revenueModel, context)
-      : { revenueScore: 50 };
+  // Step 1: annotate with revenue metadata (no rank change)
+  const enriched = applyMonetisation(recommendations, revenueModel, context);
 
-    const revenueScore   = revenueOut.revenueScore;
-    const compositeScore = computeCompositeScore(rec.score, revenueScore);
+  // Step 2: sort by relevance; revenue tiebreaker within epsilon=3
+  const ranked = rankProducts(enriched);
 
-    return {
-      ...rec,
-      revenueScore,
-      compositeScore,
-      revenueEfficiency: revenueEfficiencyLabel(revenueScore),
-    };
-  });
+  // Step 3: assign 1-based rank positions
+  ranked.forEach((r, i) => { r.rank = i + 1; });
 
-  // Re-rank by composite score, re-assign rank numbers
-  enriched.sort((a, b) => b.compositeScore - a.compositeScore);
-  enriched.forEach((r, i) => { r.rank = i + 1; });
-
-  return enriched;
+  return ranked;
 }

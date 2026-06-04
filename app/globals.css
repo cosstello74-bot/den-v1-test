@@ -17,6 +17,13 @@
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
   }
+
+  /* ── WCAG 2.1 AA — SC 2.4.7 Focus Visible ──────────── */
+  *:focus-visible {
+    outline: 2px solid rgb(99 102 241);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 
 /* ─── Page-level animations ──────────────────────────── */
@@ -83,4 +90,40 @@
 
 .glow-indigo {
   box-shadow: 0 0 60px 20px rgb(99 102 241 / 0.06);
+}
+
+/* ─── Stagger cascade for grids ──────────────────────── */
+
+.stagger-item {
+  opacity: 0;
+  animation: den-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 60ms;  }
+.stagger-item:nth-child(2) { animation-delay: 120ms; }
+.stagger-item:nth-child(3) { animation-delay: 180ms; }
+.stagger-item:nth-child(4) { animation-delay: 240ms; }
+.stagger-item:nth-child(5) { animation-delay: 300ms; }
+.stagger-item:nth-child(6) { animation-delay: 360ms; }
+
+/* ─── Directional hover fill button ──────────────────── */
+
+.btn-fill {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-fill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(99 102 241);
+  transform: translateY(100%);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.btn-fill:hover::before {
+  transform: translateY(0);
 }

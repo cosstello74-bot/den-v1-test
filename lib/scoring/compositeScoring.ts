@@ -4,11 +4,12 @@
  * Re-exports the composite ranking engine and adds descriptive helpers.
  * This is the single import point for all composite score operations.
  *
- * Formula: final_score = 0.6 × intelligence_score + 0.4 × revenue_score
+ * Architecture: ranking is purely relevance-driven.
+ * Revenue is annotation-only metadata; it does not affect rank position.
+ * See compositeRanking.ts for tiebreaker details.
  */
 
 export {
-  computeCompositeScore,
   applyCompositeRanking,
 } from "@/lib/compositeRanking";
 

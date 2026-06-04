@@ -6,99 +6,10 @@ import Link from "next/link";
 import { logEvent } from "@/lib/eventLogger";
 import { detectSegment } from "@/lib/segment";
 import { CATEGORY_META, isValidCategory } from "@/lib/category";
-import type {
-  Purpose,
-  Budget,
-  BatteryImportance,
-  Portability,
-  ScreenPreference,
-  BrandPreference,
-} from "@/types/product";
+import { getQuestions } from "@/lib/v3/questionRegistry";
+import type { Purpose } from "@/types/product";
 
-type QuizAnswers = {
-  purpose?: Purpose;
-  budget?: Budget;
-  battery_importance?: BatteryImportance;
-  portability?: Portability;
-  screen_size?: ScreenPreference;
-  brand_preference?: BrandPreference;
-};
-
-type Step = {
-  id: keyof QuizAnswers;
-  question: string;
-  subtitle: string;
-  options: { value: string; label: string; description: string; icon: string }[];
-};
-
-const STEPS: Step[] = [
-  {
-    id: "purpose",
-    question: "What will you mainly use it for?",
-    subtitle: "This shapes your entire recommendation profile.",
-    options: [
-      { value: "gaming",     icon: "🎮", label: "Gaming",    description: "High-performance games and streaming" },
-      { value: "work",       icon: "💼", label: "Work",       description: "Productivity, docs and video calls" },
-      { value: "university", icon: "📚", label: "University", description: "Student work, research and notes" },
-      { value: "creative",   icon: "🎨", label: "Creative",   description: "Design, video editing and music" },
-    ],
-  },
-  {
-    id: "budget",
-    question: "What's your budget?",
-    subtitle: "We'll find the best value at your price point.",
-    options: [
-      { value: "under-500",  icon: "💰", label: "Under £500",    description: "Entry-level, great for everyday tasks" },
-      { value: "500-1000",   icon: "💳", label: "£500–£1,000",   description: "Mid-range, solid all-round performance" },
-      { value: "1000-1500",  icon: "🏆", label: "£1,000–£1,500", description: "High-end, powerful and refined" },
-      { value: "1500+",      icon: "✨", label: "£1,500+",        description: "Premium, absolutely no compromise" },
-    ],
-  },
-  {
-    id: "battery_importance",
-    question: "How important is battery life?",
-    subtitle: "Be honest — do you actually leave your desk?",
-    options: [
-      { value: "not-important",      icon: "🔌", label: "Not Important",      description: "I'm always near a power outlet" },
-      { value: "somewhat-important", icon: "🔋", label: "Somewhat Important", description: "Nice to have but not critical" },
-      { value: "very-important",     icon: "⚡", label: "Very Important",     description: "I need all-day battery life" },
-    ],
-  },
-  {
-    id: "portability",
-    question: "How often will you carry it?",
-    subtitle: "Weight and form factor depend heavily on this.",
-    options: [
-      { value: "desk-use",            icon: "🏠", label: "Mostly Desk Use",     description: "Stays at home or the office" },
-      { value: "occasionally-travel", icon: "🚌", label: "Occasionally Travel", description: "Commute a few times a week" },
-      { value: "frequently-travel",   icon: "✈️", label: "Frequently Travel",   description: "Always on the move" },
-    ],
-  },
-  {
-    id: "screen_size",
-    question: "Preferred screen size?",
-    subtitle: "Bigger isn't always better — it depends on your use.",
-    options: [
-      { value: "13-14",         icon: "🤏", label: "13–14 inch",    description: "Compact and lightweight" },
-      { value: "15-16",         icon: "💻", label: "15–16 inch",    description: "Balanced size and real estate" },
-      { value: "17+",           icon: "🖥", label: "17+ inch",      description: "Maximum screen space" },
-      { value: "no-preference", icon: "🎯", label: "No Preference", description: "Open to anything" },
-    ],
-  },
-  {
-    id: "brand_preference",
-    question: "Any brand preference?",
-    subtitle: "If not, we'll ignore brand and optimise purely on value.",
-    options: [
-      { value: "no-preference", icon: "🌐", label: "No Preference", description: "Show me the best regardless of brand" },
-      { value: "Lenovo",        icon: "🔴", label: "Lenovo",         description: "Reliability and value" },
-      { value: "ASUS",          icon: "🔵", label: "ASUS",           description: "Innovative designs" },
-      { value: "HP",            icon: "🔵", label: "HP",             description: "Versatile work and home" },
-      { value: "Dell",          icon: "⚪", label: "Dell",           description: "Premium build quality" },
-      { value: "Apple",         icon: "🍎", label: "Apple",          description: "macOS and M-series chips" },
-    ],
-  },
-];
+type QuizAnswers = Record<string, string>;
 
 const SEGMENT_LABELS: Record<string, string> = {
   student:      "Student Profile",
@@ -137,6 +48,8 @@ function QuizContent() {
     creative: "creative",
   };
   const prefillPurpose = INTENT_TO_PURPOSE[intentParam.toLowerCase()] ?? null;
+
+  const STEPS = getQuestions(category);
 
   const [step, setStep]                         = useState(prefillPurpose ? 1 : 0);
   const [answers, setAnswers]                   = useState<QuizAnswers>(prefillPurpose ? { purpose: prefillPurpose } : {});
@@ -188,7 +101,17 @@ function QuizContent() {
   const isTwoCol = current.options.length > 3;
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-[100dvh] flex flex-col">
+
+      {/* ── WCAG: announce question changes to screen readers ── */}
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {`Step ${step + 1} of ${STEPS.length}: ${current.question}`}
+      </div>
 
       {/* ── Top bar ────────────────────────────────────────── */}
       <div className="flex items-center justify-between px-6 py-4 border-b border-gray-800/40">
@@ -213,7 +136,7 @@ function QuizContent() {
       {/* ── Progress bar ───────────────────────────────────── */}
       <div className="h-[2px] bg-gray-800/80">
         <div
-          className="h-full bg-gradient-to-r from-indigo-600 to-violet-500 transition-all duration-500 ease-out"
+          className="h-full bg-indigo-600 transition-all duration-500 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -262,16 +185,15 @@ function QuizContent() {
                     disabled={isTransitioning}
                     style={{ animationDelay: `${i * 55}ms` }}
                     className={`
-                      group flex items-center gap-4 w-full text-left rounded-2xl border px-5 py-4
+                      group flex items-center gap-3 w-full text-left rounded-2xl border px-5 py-4
                       transition-all duration-150 active:scale-[0.98]
                       animate-fade-in
                       ${isChosen
-                        ? "bg-indigo-600 border-indigo-500 shadow-lg shadow-indigo-900/40"
-                        : "bg-gray-900 border-gray-800 hover:bg-gray-800 hover:border-indigo-500/50 hover:shadow-lg hover:shadow-indigo-900/10"
+                        ? "bg-indigo-600 border-indigo-500"
+                        : "bg-gray-900 border-gray-800 hover:bg-gray-800 hover:border-indigo-500/50"
                       }
                     `}
                   >
-                    <span className="text-xl shrink-0">{opt.icon}</span>
                     <div className="min-w-0 flex-1">
                       <p className={`font-semibold text-sm transition-colors ${isChosen ? "text-white" : "text-white group-hover:text-indigo-200"}`}>
                         {opt.label}

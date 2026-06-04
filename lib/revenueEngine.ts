@@ -1,11 +1,11 @@
-import type { UserProfile }        from "@/types/product";
+import type { ScoringSignals }     from "./v15/categoryScoring";
 import type { RevenueModelSnapshot } from "./metrics/revenueMetrics";
 import { getSegmentRevenueMultiplier } from "./segmentRevenue";
 import { getTrafficWeight }            from "./trafficWeights";
 import { detectSegment }               from "./segment";
 
 export type UserContext = {
-  user:          UserProfile;
+  user:          ScoringSignals;
   trafficSource: string;
   sessionId?:    string;
 };
@@ -24,7 +24,7 @@ export type RevenueScoreOutput = {
  * Intent strength = weighted composite of user-profile signals.
  * Higher budget + purposeful use case → stronger purchase intent.
  */
-function calculateIntentStrength(user: UserProfile): number {
+function calculateIntentStrength(user: ScoringSignals): number {
   let strength = 0.5; // baseline
 
   // Budget signal

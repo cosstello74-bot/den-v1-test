@@ -11,7 +11,6 @@
  * Server-side safe: all localStorage access is guarded.
  */
 
-import type { UserProfile } from "@/types/product";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -19,7 +18,7 @@ export interface SessionState {
   sessionId:       string;
   startedAt:       number;     // Unix ms
   lastActiveAt:    number;     // Unix ms
-  quizAnswers?:    Partial<UserProfile>;
+  quizAnswers?:    Record<string, string>;
   viewedProducts:  Record<string, number>;  // productId → view count
   clickedProducts: string[];
   affiliateClicks: string[];   // may repeat if user clicks same product multiple times
@@ -76,14 +75,14 @@ export function getSession(): SessionState {
 }
 
 /** Persist quiz answers for prefill on retake. */
-export function saveQuizAnswers(answers: Partial<UserProfile>): void {
+export function saveQuizAnswers(answers: Record<string, string>): void {
   const s = getSession();
   s.quizAnswers = answers;
   write(s);
 }
 
 /** Get last stored quiz answers. */
-export function getSavedQuizAnswers(): Partial<UserProfile> | undefined {
+export function getSavedQuizAnswers(): Record<string, string> | undefined {
   return read()?.quizAnswers;
 }
 

@@ -8,11 +8,13 @@ import { getStoredEvents, logEvent, flushPendingEvents } from "@/lib/eventLogger
 import { detectSegment } from "@/lib/segment";
 import { CATEGORY_META, isValidCategory } from "@/lib/category";
 import { applyCompositeRanking } from "@/lib/compositeRanking";
-import type { UserProfile, Recommendation } from "@/types/product";
+import type { Recommendation } from "@/types/product";
 import type { IntelligenceModel } from "@/lib/learningEngine";
 import type { TruthModel, ProductTruth } from "@/lib/truthModel";
 import type { RevenueModelSnapshot } from "@/lib/metrics/revenueMetrics";
 import type { RevenueEnrichedRecommendation } from "@/lib/compositeRanking";
+import { collectParams } from "@/lib/v15/inputLayer";
+import { interpretParams } from "@/lib/v15/categoryScoring";
 import { computeAdjustmentMap, applyBehaviourAdjustment } from "@/lib/learning/learningEngine";
 import { getSession, saveQuizAnswers, recordProductView, recordAffiliateClick, isReturningUser, sessionToSignalEvents } from "@/lib/session/sessionMemory";
 import { trackImpression, trackAffiliateClick, trackResultView, getBehaviorProfile } from "@/lib/analytics/liteAnalytics";
@@ -59,7 +61,7 @@ function ScoreBar({ score }: { score: number }) {
     <div className="flex items-center gap-3">
       <div className="flex-1 h-2.5 bg-gray-800 rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-indigo-600 via-violet-500 to-indigo-400 rounded-full score-bar"
+          className="h-full bg-indigo-600 rounded-full score-bar"
           style={{ width: `${w}%` }}
         />
       </div>
@@ -105,48 +107,43 @@ function SegmentBadge({ segment }: { segment: string }) {
   );
 }
 
-function parseUser(params: URLSearchParams): UserProfile {
-  return {
-    purpose:            (params.get("purpose")            as UserProfile["purpose"])            ?? "work",
-    budget:             (params.get("budget")             as UserProfile["budget"])             ?? "500-1000",
-    battery_importance: (params.get("battery_importance") as UserProfile["battery_importance"]) ?? "somewhat-important",
-    portability:        (params.get("portability")        as UserProfile["portability"])        ?? "occasionally-travel",
-    screen_size:        (params.get("screen_size")        as UserProfile["screen_size"])        ?? "no-preference",
-    brand_preference:   (params.get("brand_preference")   as UserProfile["brand_preference"])   ?? "no-preference",
-  };
-}
+// Input layer is a pure passthrough — no interpretation here.
+// All category-native signal mapping happens in lib/v15/categoryScoring.ts.
 
 // ─── Main page ────────────────────────────────────────────────────────────────
 
 function ResultsContent() {
-  const params   = useSearchParams();
-  const rawCat   = params.get("category") ?? "laptops";
-  const category = isValidCategory(rawCat) ? rawCat : "laptops";
-  const meta     = CATEGORY_META[category];
-  const user     = parseUser(params);
-  const segment  = detectSegment(user.purpose);
+  const params     = useSearchParams();
+  const rawCat     = params.get("category") ?? "laptops";
+  const category   = isValidCategory(rawCat) ? rawCat : "laptops";
+  const meta       = CATEGORY_META[category];
+  // V15 INPUT LAYER: pure passthrough — no category logic here
+  const rawParams  = collectParams(params);
+  // V15 SCORING LAYER: interpretation happens in categoryScoring.ts
+  const signals    = interpretParams(rawParams, category);
+  const segment    = detectSegment(signals.purpose);
 
   const [results, setResults]           = useState<RevenueEnrichedRecommendation[]>(() => {
     const base = getRecommendations(
-      category, user, [],
+      category, rawParams, [],
       seedIntelligence as IntelligenceModel,
       seedTruth as TruthModel
     );
     return applyCompositeRanking(base, seedRevenue as RevenueModelSnapshot, {
-      user,
+      user: signals,
       trafficSource: "unknown",
     });
   });
   const [truthModel, setTruthModel]     = useState<TruthModel>(seedTruth as TruthModel);
   const [intelligence, setIntelligence] = useState<IntelligenceModel>(seedIntelligence as IntelligenceModel);
   const [returning, setReturning]       = useState(false);
-  const [synced, setSynced]             = useState(false);
+  const [, setSynced]                   = useState(false);
 
   useEffect(() => {
     const run = async () => {
       // ── v2: session memory + lite analytics ────────────────────────────────
       setReturning(isReturningUser());
-      saveQuizAnswers(user);
+      saveQuizAnswers(rawParams);
       trackResultView();
 
       // ── Live model fetch ────────────────────────────────────────────────────
@@ -178,9 +175,9 @@ function ResultsContent() {
       const localEvents = getStoredEvents();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const adapted     = localEvents as any[];
-      const base        = getRecommendations(category, user, adapted, liveIntelligence, liveTruth);
+      const base        = getRecommendations(category, rawParams, adapted, liveIntelligence, liveTruth);
       const composite   = applyCompositeRanking(base, liveRevenue, {
-        user,
+        user: signals,
         trafficSource: document.referrer.includes("google") ? "organic_search"
                      : document.referrer.includes("facebook") || document.referrer.includes("twitter") ? "social"
                      : document.referrer ? "referral"
@@ -192,11 +189,11 @@ function ResultsContent() {
       setResults(learned);
 
       // ── Event logging ───────────────────────────────────────────────────────
-      logEvent("results_viewed", category, { purpose: user.purpose, budget: user.budget });
+      logEvent("results_viewed", category, { purpose: signals.purpose, budget: signals.budget });
       learned.forEach((rec) => {
         logEvent("product_viewed", category, {
           productId: rec.product.id,
-          purpose:   user.purpose,
+          purpose:   signals.purpose,
           metadata:  { rank: rec.rank },
         });
         // v2: session memory + lite analytics impression tracking
@@ -222,13 +219,9 @@ function ResultsContent() {
           <span className="text-sm font-semibold text-white">DEN</span>
         </Link>
         <div className="flex items-center gap-3 text-xs text-gray-500">
-          {synced && (
-            <span className="flex items-center gap-1 text-emerald-500 font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-              Synced
-            </span>
-          )}
-          <Link href="/admin" className="hover:text-indigo-400 transition-colors">Analytics →</Link>
+          <Link href={`/${category}`} className="hover:text-gray-300 transition-colors capitalize">
+            {category} →
+          </Link>
         </div>
       </nav>
 
@@ -244,7 +237,7 @@ function ResultsContent() {
             </div>
             <h1 className="text-3xl font-bold tracking-tight">Your ranked picks</h1>
             <p className="text-sm text-gray-500 leading-relaxed">
-              Scored by truth-calibrated intelligence — outcome-verified, position-bias corrected, segment-aware.
+              Ranked against real purchase outcomes for people with your profile. No sponsored results.
             </p>
           </div>
 
@@ -268,12 +261,7 @@ function ResultsContent() {
                   `}
                   style={{ animationDelay: `${index * 130}ms` }}
                 >
-                  {/* Top accent stripe for best match */}
-                  {isBest && (
-                    <div className="h-0.5 bg-gradient-to-r from-indigo-600 via-violet-500 to-indigo-400" />
-                  )}
-
-                  <div className={`p-6 space-y-5 ${isBest ? "bg-gradient-to-b from-indigo-950/30 to-gray-900" : "bg-gray-900"}`}>
+                  <div className={`p-6 space-y-5 ${isBest ? "bg-indigo-950/20" : "bg-gray-900"}`}>
 
                     {/* Rank label */}
                     <div className="flex items-start justify-between gap-3">
@@ -283,8 +271,8 @@ function ResultsContent() {
                             {RANK_LABELS[index] ?? `Option ${index + 1}`}
                           </span>
                           {isBest && (
-                            <span className="inline-flex text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-2.5 py-0.5 rounded-full">
-                              ★ Best Match
+                            <span className="inline-flex text-[10px] font-bold uppercase tracking-wider bg-indigo-600 text-white px-2.5 py-0.5 rounded-full">
+                              Best Match
                             </span>
                           )}
                         </div>
@@ -337,16 +325,10 @@ function ResultsContent() {
                       ))}
                     </div>
 
-                    {/* Truth + Segment + Revenue badges */}
+                    {/* Truth + Segment badges */}
                     <div className="flex items-center gap-2 flex-wrap">
                       <TruthBadge truth={truth} />
                       <SegmentBadge segment={segment} />
-                      {rec.revenueEfficiency === "high" && (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-violet-400 bg-violet-950/40 border border-violet-800/40 px-2.5 py-1 rounded-full">
-                          <span className="w-1.5 h-1.5 rounded-full bg-violet-400 shrink-0" />
-                          High revenue efficiency
-                        </span>
-                      )}
                     </div>
 
                     {/* Strengths */}
@@ -376,7 +358,7 @@ function ResultsContent() {
                       onClick={() => {
                         logEvent("affiliate_clicked", category, {
                           productId: rec.product.id,
-                          purpose:   user.purpose,
+                          purpose:   signals.purpose,
                           metadata:  { rank: rec.rank },
                         });
                         // v2: session memory + lite analytics

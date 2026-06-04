@@ -1,10 +1,11 @@
-import type { UserProfile, ProductWithMetrics, ScoringProfile } from "@/types/product";
+import type { ProductWithMetrics, ScoringProfile } from "@/types/product";
 import type { IntelligenceModel } from "./learningEngine";
 import type { TruthModel } from "./truthModel";
+import type { ScoringSignals } from "./v15/categoryScoring";
 import { ctrToMultiplier, truthScoreToMultiplier } from "./globalMultiplier";
 import { detectSegment } from "./segment";
 
-function calculateBaseScore(user: UserProfile, product: ProductWithMetrics): number {
+function calculateBaseScore(user: ScoringSignals, product: ProductWithMetrics): number {
   let score = 0;
 
   switch (user.purpose) {
@@ -35,7 +36,7 @@ function calculateBaseScore(user: UserProfile, product: ProductWithMetrics): num
 }
 
 export function calculateScore(
-  user: UserProfile,
+  user: ScoringSignals,
   product: ProductWithMetrics,
   intelligence: IntelligenceModel | null,
   scoringProfile: ScoringProfile = {},
