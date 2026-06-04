@@ -3,7 +3,7 @@ import { classifyPages } from "@/lib/v2/revenueBrain";
 import { generateCandidateNodes } from "@/lib/v7/nodeGenerator";
 
 export async function runV2Cycle(context: any) {
-  const metrics = getAllMetrics();
+  const metrics = await getAllMetrics();
 
   const { winners, losers } = classifyPages(metrics);
 
