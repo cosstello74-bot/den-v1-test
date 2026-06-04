@@ -15,10 +15,10 @@
  *            (stable, idempotent sort)
  */
 
-import type { Rankable } from "../types";
+import type { Rankable }      from "../types";
+import { TIEBREAK_EPSILON }   from "../config";
 
-/** Score gap below which the revenue tiebreaker activates. */
-export const TIEBREAK_EPSILON = 3;
+export { TIEBREAK_EPSILON };
 
 /**
  * Sort items by relevance score descending.

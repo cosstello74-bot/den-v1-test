@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 import Link from "next/link";
 import { getRecommendations } from "@/lib/recommendByCategory";
 import { getStoredEvents, logEvent, flushPendingEvents } from "@/lib/eventLogger";
@@ -15,6 +15,9 @@ import type { RevenueModelSnapshot } from "@/lib/metrics/revenueMetrics";
 import type { RevenueEnrichedRecommendation } from "@/lib/compositeRanking";
 import { collectParams } from "@/lib/v15/inputLayer";
 import { interpretParams } from "@/lib/v15/categoryScoring";
+import { runV16Guardrails } from "@/lib/v16/guardrails/guardrailRunner";
+import { getObservabilitySnapshot, logSnapshot } from "@/lib/v16/observability/metricsAggregator";
+import { recordSignal } from "@/lib/v16/observability/learningSignalStore";
 import { computeAdjustmentMap, applyBehaviourAdjustment } from "@/lib/learning/learningEngine";
 import { getSession, saveQuizAnswers, recordProductView, recordAffiliateClick, isReturningUser, sessionToSignalEvents } from "@/lib/session/sessionMemory";
 import { trackImpression, trackAffiliateClick, trackResultView, getBehaviorProfile } from "@/lib/analytics/liteAnalytics";
@@ -123,6 +126,8 @@ function ResultsContent() {
   const signals    = interpretParams(rawParams, category);
   const segment    = detectSegment(signals.purpose);
 
+  const sessionId = useRef(Math.random().toString(36).slice(2)).current;
+
   const [results, setResults]           = useState<RevenueEnrichedRecommendation[]>(() => {
     const base = getRecommendations(
       category, rawParams, [],
@@ -184,6 +189,13 @@ function ResultsContent() {
                      : "direct",
       });
 
+      // ── V16 Guardrails (non-throwing in all environments here) ─────────────
+      runV16Guardrails(composite, category, rawParams, { throwOnViolation: false });
+
+      // ── V16 Observability snapshot ──────────────────────────────────────────
+      const snapshot = getObservabilitySnapshot(category, composite);
+      logSnapshot(snapshot);
+
       // Apply v2 behaviour layer (10% weight — biases from session memory)
       const learned = applyBehaviourAdjustment(composite, adjustmentMap);
       setResults(learned);
@@ -199,6 +211,15 @@ function ResultsContent() {
         // v2: session memory + lite analytics impression tracking
         recordProductView(rec.product.id);
         trackImpression(rec.product.id);
+        // V16: learning signal — product view
+        recordSignal({
+          sessionId,
+          productId: rec.product.id,
+          category,
+          type: "view",
+          timestamp: Date.now(),
+          rank: rec.rank,
+        });
       });
 
       const { synced: n } = await flushPendingEvents();
@@ -364,6 +385,15 @@ function ResultsContent() {
                         // v2: session memory + lite analytics
                         recordAffiliateClick(rec.product.id);
                         trackAffiliateClick(rec.product.id);
+                        // V16: learning signal — affiliate click
+                        recordSignal({
+                          sessionId,
+                          productId: rec.product.id,
+                          category,
+                          type: "affiliate_click",
+                          timestamp: Date.now(),
+                          rank: rec.rank,
+                        });
                       }}
                       className={`
                         flex items-center justify-center gap-2 w-full font-semibold rounded-xl px-6 py-3.5

@@ -13,6 +13,12 @@
  * A 3-point epsilon means two products must score identically or near-identically
  * before commission data has any effect — genuine user-fit differences always win.
  *
+ * V5 compatibility note:
+ * V5 Variant B ("revenue_first", 55% revenue weight) is architecturally
+ * incompatible with the revenue-neutrality contract enforced here.
+ * Any resurrection of V5 Variant B MUST NOT be wired into this module.
+ * If A/B testing is required, use the V17 rollout controller instead.
+ *
  * V16 layer separation:
  *   Revenue enrichment  →  v16/monetisation/applyMonetisation
  *   Sorting             →  v16/ranking/pureRanker

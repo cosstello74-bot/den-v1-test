@@ -65,9 +65,21 @@ export function runV16Guardrails(
       const first = violations[0];
       throw new Error(`[V16 Guardrail] ${first.rule}: ${first.message}`);
     }
-    // Production: log without throwing
+    // Non-throwing: log + persist to Supabase via API route (fire-and-forget)
     for (const v of violations) {
       console.error(`[V16 Guardrail] ${v.rule}:`, v.message, v.data ?? "");
+      if (typeof fetch !== "undefined") {
+        void fetch("/api/v16/violations", {
+          method:  "POST",
+          headers: { "Content-Type": "application/json" },
+          body:    JSON.stringify({
+            rule:     v.rule,
+            message:  v.message,
+            category,
+            data:     v.data,
+          }),
+        }).catch(() => { /* non-critical */ });
+      }
     }
   }
 

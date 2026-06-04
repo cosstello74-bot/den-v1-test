@@ -11,7 +11,7 @@
  */
 
 import type { RevenueEnrichedRecommendation } from "../types";
-import { TIEBREAK_EPSILON }                   from "../ranking/pureRanker";
+import { TIEBREAK_EPSILON }                   from "../config";
 import { emitEvent }                          from "./eventCollector";
 
 // ─── Types ────────────────────────────────────────────────────────────────────

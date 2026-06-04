@@ -11,7 +11,7 @@
 
 import type { RevenueEnrichedRecommendation } from "../types";
 import type { GuardrailViolation }            from "../types";
-import { TIEBREAK_EPSILON }                   from "../ranking/pureRanker";
+import { TIEBREAK_EPSILON }                   from "../config";
 
 export function checkRankingIntegrity(
   ranked: RevenueEnrichedRecommendation[],
