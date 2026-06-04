@@ -28,7 +28,7 @@
   "crons": [
     {
       "path": "/api/v2/cycle",
-      "schedule": "0 */6 * * *"
+      "schedule": "0 0 * * *"
     }
   ]
 }
