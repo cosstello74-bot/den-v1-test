@@ -541,14 +541,14 @@ function ResultsContent() {
           <div className="animate-fade-in delay-500 border-t border-gray-800/50 pt-8 space-y-3">
             <Link
               href={`/quiz?category=${category}`}
-              className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-indigo-400 transition-colors duration-150"
+              className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-indigo-400 transition-colors duration-150 py-1"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Retake quiz for {meta.label}
             </Link>
             <Link
               href="/"
-              className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-400 transition-colors duration-150"
+              className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-400 transition-colors duration-150 py-1"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Explore all categories

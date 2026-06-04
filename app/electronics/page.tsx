@@ -109,7 +109,7 @@ export default function ElectronicsPage() {
           </span>
           <span className="font-semibold text-white tracking-tight">DEN</span>
         </div>
-        <Link href="/" className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors duration-150 font-medium">
+        <Link href="/" className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors duration-150 font-medium py-2 px-1">
           <ArrowLeft className="w-3.5 h-3.5" />
           All categories
         </Link>

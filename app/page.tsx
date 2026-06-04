@@ -180,7 +180,7 @@ export default function LandingPage() {
         </div>
         <Link
           href="/electronics"
-          className="text-xs text-gray-500 hover:text-gray-300 transition-colors duration-150 font-medium"
+          className="text-xs text-gray-500 hover:text-gray-300 transition-colors duration-150 font-medium py-2 px-1"
         >
           Start →
         </Link>
@@ -220,7 +220,7 @@ export default function LandingPage() {
               </p>
 
               {/* Primary CTA */}
-              <div className="flex items-center gap-5 pt-1">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
                 <Link
                   href="/electronics"
                   className="inline-flex items-center gap-2.5 bg-indigo-600 hover:bg-indigo-500 active:-translate-y-[1px] text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-150 text-sm shadow-lg shadow-indigo-900/30"
