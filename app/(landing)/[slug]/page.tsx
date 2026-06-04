@@ -14,6 +14,7 @@ import {
 import { evaluatePageGeoScore } from "@/lib/geo/geoScore";
 import type { CategoryKey }     from "@/types/product";
 import GeoSignalTracker         from "@/components/geo/GeoSignalTracker";
+import generatedPagesData       from "@/data/ael/generated-pages.json";
 
 // ─── Static params ────────────────────────────────────────────────────────────
 
@@ -303,6 +304,42 @@ export default function GeoLandingPage({
               ))}
             </div>
           </section>
+
+          {/* ── SECTION 6 — Intent Rankings (generated pages) ─────── */}
+          {(() => {
+            const intentPages = (generatedPagesData.pages as Array<{ slug: string; title: string; h1: string; intent: string; category: string; description: string; confidence: number }>)
+              .filter((p) => p.category === category);
+
+            if (intentPages.length === 0) return null;
+
+            return (
+              <section aria-label="Browse by intent" className="space-y-4">
+                <div className="space-y-1">
+                  <h2 className="text-xl font-bold tracking-tight">Browse by Intent</h2>
+                  <p className="text-xs text-gray-500">
+                    Focused rankings for specific use cases — each scored for a single intent.
+                  </p>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {intentPages.map((p) => (
+                    <Link
+                      key={p.slug}
+                      href={`/generated/${p.slug}`}
+                      className="group flex flex-col gap-1 bg-gray-900 border border-gray-800 hover:border-indigo-800/50 rounded-xl px-4 py-3.5 transition-all duration-150 hover:-translate-y-0.5"
+                    >
+                      <span className="text-sm font-semibold text-gray-200 group-hover:text-indigo-300 transition-colors">
+                        {p.h1}
+                      </span>
+                      <span className="text-xs text-gray-500 line-clamp-2">{p.description}</span>
+                      <span className="text-[10px] text-indigo-500 font-mono mt-0.5">
+                        {p.intent.replace(/_/g, " ")} · {Math.round(p.confidence * 100)}% confidence
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            );
+          })()}
 
           {/* ── CTA ───────────────────────────────────────────────── */}
           <section aria-label="Get personalised recommendation" className="text-center space-y-4 py-6 border-t border-gray-800/50">

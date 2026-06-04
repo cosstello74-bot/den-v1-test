@@ -69,6 +69,53 @@ const PRICE_BAND_LABEL: Record<string, string> = {
   premium: "Premium",
 };
 
+// Category-aware score dimension labels.
+// All categories share the same 5 underlying score fields but the
+// meaning of each differs — e.g. gaming_score means "refresh rate"
+// for monitors, "camera quality" for phones.
+type ScoreDim = {
+  label: string;
+  key:   "battery_score" | "portability_score" | "gaming_score" | "productivity_score" | "value_score";
+};
+
+const CATEGORY_DIMS: Record<string, ScoreDim[]> = {
+  laptops: [
+    { label: "Battery",     key: "battery_score"      },
+    { label: "Portable",    key: "portability_score"  },
+    { label: "Gaming",      key: "gaming_score"       },
+    { label: "Productive",  key: "productivity_score" },
+    { label: "Value",       key: "value_score"        },
+  ],
+  phones: [
+    { label: "Battery",     key: "battery_score"      },
+    { label: "Compact",     key: "portability_score"  },
+    { label: "Performance", key: "gaming_score"       },
+    { label: "Camera",      key: "productivity_score" },
+    { label: "Value",       key: "value_score"        },
+  ],
+  monitors: [
+    { label: "Refresh",     key: "gaming_score"       },
+    { label: "Colour",      key: "productivity_score" },
+    { label: "Build",       key: "battery_score"      },
+    { label: "Size",        key: "portability_score"  },
+    { label: "Value",       key: "value_score"        },
+  ],
+  tablets: [
+    { label: "Battery",     key: "battery_score"      },
+    { label: "Portable",    key: "portability_score"  },
+    { label: "Performance", key: "gaming_score"       },
+    { label: "Productive",  key: "productivity_score" },
+    { label: "Value",       key: "value_score"        },
+  ],
+  pcs: [
+    { label: "Gaming",      key: "gaming_score"       },
+    { label: "Processing",  key: "productivity_score" },
+    { label: "Efficiency",  key: "battery_score"      },
+    { label: "Design",      key: "portability_score"  },
+    { label: "Value",       key: "value_score"        },
+  ],
+};
+
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function GeneratedLandingPage({
@@ -82,6 +129,7 @@ export default function GeneratedLandingPage({
   const config     = getCategoryConfig(page.category);
   const products   = filterProductsForPage(config.products, page);
   const enrichment = enrichPage(page, config.products);
+  const dims       = CATEGORY_DIMS[page.category] ?? CATEGORY_DIMS.laptops;
 
   // v4: intent-prefilled quiz href + related links from link map
   const linkEntry  = LINK_MAP[page.slug];
@@ -231,23 +279,21 @@ export default function GeneratedLandingPage({
 
                     {/* Dimension bars */}
                     <div className="grid grid-cols-5 gap-2">
-                      {[
-                        { label: "Battery",     val: product.battery_score,      weight: w.battery_score      ?? 0 },
-                        { label: "Portable",    val: product.portability_score,  weight: w.portability_score  ?? 0 },
-                        { label: "Gaming",      val: product.gaming_score,       weight: w.gaming_score       ?? 0 },
-                        { label: "Productive",  val: product.productivity_score, weight: w.productivity_score ?? 0 },
-                        { label: "Value",       val: product.value_score,        weight: w.value_score        ?? 0 },
-                      ].map(({ label, val, weight }) => (
-                        <div key={label} className="text-center space-y-1">
-                          <div className={`h-10 rounded-lg overflow-hidden flex flex-col-reverse ${weight > 0.2 ? "bg-indigo-950/40" : "bg-gray-800"}`}>
-                            <div
-                              className={`w-full rounded-b-lg ${weight > 0.2 ? "bg-indigo-500/60" : "bg-gray-700"}`}
-                              style={{ height: `${val}%` }}
-                            />
+                      {dims.map(({ label, key }) => {
+                        const val    = product[key];
+                        const weight = w[key as keyof typeof w] ?? 0;
+                        return (
+                          <div key={label} className="text-center space-y-1">
+                            <div className={`h-10 rounded-lg overflow-hidden flex flex-col-reverse ${weight > 0.2 ? "bg-indigo-950/40" : "bg-gray-800"}`}>
+                              <div
+                                className={`w-full rounded-b-lg ${weight > 0.2 ? "bg-indigo-500/60" : "bg-gray-700"}`}
+                                style={{ height: `${val}%` }}
+                              />
+                            </div>
+                            <p className="text-[9px] text-gray-600 font-medium leading-tight">{label}</p>
                           </div>
-                          <p className="text-[9px] text-gray-600 font-medium leading-tight">{label}</p>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
 
                     <a
