@@ -9,6 +9,7 @@ import { detectSegment } from "@/lib/segment";
 import { CATEGORY_META, isValidCategory } from "@/lib/category";
 import { applyCompositeRanking } from "@/lib/compositeRanking";
 import type { Recommendation } from "@/types/product";
+import type { ProductWithMetrics } from "@/types/product";
 import type { IntelligenceModel } from "@/lib/learningEngine";
 import type { TruthModel, ProductTruth } from "@/lib/truthModel";
 import type { RevenueModelSnapshot } from "@/lib/metrics/revenueMetrics";
@@ -25,7 +26,7 @@ import seedIntelligence from "@/data/intelligenceModel.json";
 import seedTruth        from "@/data/truthModel.json";
 import seedRevenue      from "@/data/revenueModel.json";
 
-// ─── Design tokens ───────────────────────────────────────────────────────────
+// ─── Design tokens ────────────────────────────────────────────────────────────
 
 const RANK_LABELS    = ["Best Match", "Strong Match", "Solid Option"];
 const RANK_SUBTITLES = [
@@ -56,21 +57,69 @@ const PRICE_BAND_COLORS: Record<string, string> = {
   premium: "text-amber-400 bg-amber-950/50 border-amber-800/50",
 };
 
+// Score bar delay class by rank position
+const SCORE_BAR_CLASSES = ["score-bar", "score-bar-600", "score-bar-800"] as const;
+
+// ─── Icons ────────────────────────────────────────────────────────────────────
+
+function ExternalLinkIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+    </svg>
+  );
+}
+
+function ArrowLeft({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      <path d="M19 12H5M12 19l-7-7 7-7" />
+    </svg>
+  );
+}
+
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function ScoreBar({ score }: { score: number }) {
-  const w = Math.min(score, 100);
+function ScoreBar({ score, variant = 0 }: { score: number; variant?: number }) {
+  const barClass = SCORE_BAR_CLASSES[Math.min(variant, 2)];
+  const w = Math.min(Math.round(score), 100);
   return (
     <div className="flex items-center gap-3">
       <div className="flex-1 h-2.5 bg-gray-800 rounded-full overflow-hidden">
         <div
-          className="h-full bg-indigo-600 rounded-full score-bar"
+          className={`h-full bg-indigo-600 rounded-full ${barClass}`}
           style={{ width: `${w}%` }}
         />
       </div>
       <span className="text-sm font-bold text-indigo-400 w-10 text-right tabular-nums shrink-0">
-        {score}
+        {w}
       </span>
+    </div>
+  );
+}
+
+function DimensionBars({ product }: { product: ProductWithMetrics }) {
+  const dims = [
+    { label: "Battery",      val: product.battery_score },
+    { label: "Portable",     val: product.portability_score },
+    { label: "Gaming",       val: product.gaming_score },
+    { label: "Productivity", val: product.productivity_score },
+    { label: "Value",        val: product.value_score },
+  ];
+  return (
+    <div className="space-y-2.5">
+      {dims.map(({ label, val }) => (
+        <div key={label} className="flex items-center gap-3">
+          <span className="text-[11px] text-gray-600 w-24 shrink-0 leading-none">{label}</span>
+          <div className="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-indigo-600/50 rounded-full"
+              style={{ width: `${Math.min(val, 100)}%` }}
+            />
+          </div>
+          <span className="text-[11px] text-gray-600 w-6 text-right tabular-nums shrink-0">{val}</span>
+        </div>
+      ))}
     </div>
   );
 }
@@ -102,27 +151,81 @@ function ConfidenceBadge({ confidence }: { confidence: number }) {
   return <span className="text-[11px] font-semibold text-gray-600">● Early Signals</span>;
 }
 
-function SegmentBadge({ segment }: { segment: string }) {
+// ─── Skeleton (Suspense fallback) ─────────────────────────────────────────────
+
+function ResultsSkeleton() {
   return (
-    <span className="inline-flex items-center text-[11px] font-semibold text-gray-500 bg-gray-900 border border-gray-800 px-2.5 py-1 rounded-full">
-      {SEGMENT_LABELS[segment] ?? "Good Match"}
-    </span>
+    <div className="min-h-screen flex flex-col bg-gray-950 text-gray-300">
+      <nav className="flex items-center justify-between px-6 py-4 border-b border-gray-800/40 sticky top-0 z-20 backdrop-blur-sm bg-gray-950/80">
+        <div className="flex items-center gap-2.5">
+          <span className="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-sm font-bold text-white">D</span>
+          <span className="text-sm font-semibold text-white">DEN</span>
+        </div>
+      </nav>
+      <main className="flex-1 px-4 py-12">
+        <div className="max-w-2xl mx-auto space-y-10">
+
+          {/* Header skeleton */}
+          <div className="space-y-2.5 animate-pulse">
+            <div className="h-3 w-44 bg-gray-800 rounded-full" />
+            <div className="h-9 w-52 bg-gray-800 rounded-lg" />
+            <div className="h-3 w-72 bg-gray-800 rounded-full" />
+          </div>
+
+          {/* Card skeletons */}
+          <div className="space-y-5">
+            {[7, 5, 5].map((padding, i) => (
+              <div
+                key={i}
+                className={`bg-gray-900 border border-gray-800 rounded-2xl animate-pulse p-${padding}`}
+              >
+                <div className="space-y-5 p-1">
+                  {/* Rank row */}
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-1.5">
+                      <div className="h-3 w-24 bg-gray-800 rounded-full" />
+                      <div className="h-2.5 w-44 bg-gray-800 rounded-full" />
+                    </div>
+                    <div className="h-6 w-20 bg-gray-800 rounded-full" />
+                  </div>
+                  {/* Product name */}
+                  <div className={`bg-gray-800 rounded-lg ${i === 0 ? "h-9 w-56" : "h-6 w-44"}`} />
+                  {/* Score bar */}
+                  <div className="space-y-2">
+                    <div className="h-2.5 w-24 bg-gray-800 rounded-full" />
+                    <div className="h-2.5 bg-gray-800 rounded-full" />
+                  </div>
+                  {/* Dimension bars */}
+                  <div className="space-y-2.5">
+                    {[...Array(5)].map((_, j) => (
+                      <div key={j} className="flex items-center gap-3">
+                        <div className="h-2 w-20 bg-gray-800 rounded-full shrink-0" />
+                        <div className="flex-1 h-1.5 bg-gray-800 rounded-full" />
+                        <div className="h-2 w-5 bg-gray-800 rounded-full" />
+                      </div>
+                    ))}
+                  </div>
+                  {/* CTA */}
+                  <div className={`h-11 w-full rounded-xl ${i === 0 ? "bg-indigo-950" : "bg-gray-800"}`} />
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </main>
+    </div>
   );
 }
 
-// Input layer is a pure passthrough — no interpretation here.
-// All category-native signal mapping happens in lib/v15/categoryScoring.ts.
-
-// ─── Main page ────────────────────────────────────────────────────────────────
+// ─── Results content ──────────────────────────────────────────────────────────
 
 function ResultsContent() {
   const params     = useSearchParams();
   const rawCat     = params.get("category") ?? "laptops";
   const category   = isValidCategory(rawCat) ? rawCat : "laptops";
   const meta       = CATEGORY_META[category];
-  // V15 INPUT LAYER: pure passthrough — no category logic here
   const rawParams  = collectParams(params);
-  // V15 SCORING LAYER: interpretation happens in categoryScoring.ts
   const signals    = interpretParams(rawParams, category);
   const segment    = detectSegment(signals.purpose);
 
@@ -146,12 +249,10 @@ function ResultsContent() {
 
   useEffect(() => {
     const run = async () => {
-      // ── v2: session memory + lite analytics ────────────────────────────────
       setReturning(isReturningUser());
       saveQuizAnswers(rawParams);
       trackResultView();
 
-      // ── Live model fetch ────────────────────────────────────────────────────
       let liveIntelligence: IntelligenceModel   = seedIntelligence as IntelligenceModel;
       let liveTruth: TruthModel                  = seedTruth as TruthModel;
       let liveRevenue: RevenueModelSnapshot      = seedRevenue as RevenueModelSnapshot;
@@ -172,7 +273,6 @@ function ResultsContent() {
 
       setIntelligence(liveIntelligence);
 
-      // ── v2: behaviour adjustment from session signals ───────────────────────
       const session         = getSession();
       const signalEvents    = sessionToSignalEvents(session);
       const adjustmentMap   = computeAdjustmentMap(signalEvents);
@@ -189,18 +289,14 @@ function ResultsContent() {
                      : "direct",
       });
 
-      // ── V16 Guardrails (non-throwing in all environments here) ─────────────
       runV16Guardrails(composite, category, rawParams, { throwOnViolation: false });
 
-      // ── V16 Observability snapshot ──────────────────────────────────────────
       const snapshot = getObservabilitySnapshot(category, composite);
       logSnapshot(snapshot);
 
-      // Apply v2 behaviour layer (10% weight — biases from session memory)
       const learned = applyBehaviourAdjustment(composite, adjustmentMap);
       setResults(learned);
 
-      // ── Event logging ───────────────────────────────────────────────────────
       logEvent("results_viewed", category, { purpose: signals.purpose, budget: signals.budget });
       learned.forEach((rec) => {
         logEvent("product_viewed", category, {
@@ -208,10 +304,8 @@ function ResultsContent() {
           purpose:   signals.purpose,
           metadata:  { rank: rec.rank },
         });
-        // v2: session memory + lite analytics impression tracking
         recordProductView(rec.product.id);
         trackImpression(rec.product.id);
-        // V16: learning signal — product view
         recordSignal({
           sessionId,
           productId: rec.product.id,
@@ -231,38 +325,53 @@ function ResultsContent() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gray-950 text-gray-300">
 
-      {/* ── Nav ────────────────────────────────────────────── */}
+      {/* ── Nav ─────────────────────────────────────────── */}
       <nav className="flex items-center justify-between px-6 py-4 border-b border-gray-800/40 sticky top-0 z-20 backdrop-blur-sm bg-gray-950/80">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="w-6 h-6 rounded-md bg-indigo-600 flex items-center justify-center text-xs font-bold">D</span>
+        <Link href="/" className="flex items-center gap-2.5">
+          <span className="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-sm font-bold text-white" aria-hidden="true">D</span>
           <span className="text-sm font-semibold text-white">DEN</span>
         </Link>
-        <div className="flex items-center gap-3 text-xs text-gray-500">
-          <Link href={`/${category}`} className="hover:text-gray-300 transition-colors capitalize">
-            {category} →
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-1.5 text-xs text-gray-600">
+          <Link href="/electronics" className="hover:text-gray-400 transition-colors duration-150">
+            Electronics
           </Link>
+          <span aria-hidden="true">/</span>
+          <span className="text-gray-500">{meta.label}</span>
         </div>
       </nav>
 
       <main className="flex-1 px-4 py-12">
         <div className="max-w-2xl mx-auto space-y-10">
 
-          {/* ── Header ───────────────────────────────────────── */}
-          <div className="animate-fade-in space-y-2">
-            <div className="flex items-center gap-2 flex-wrap text-xs">
+          {/* ── Page header ───────────────────────────────── */}
+          <div className="animate-slide-up space-y-2">
+            <div className="flex items-center gap-2 flex-wrap text-[11px]">
+              <span className="font-bold tracking-widest text-gray-600 uppercase">Electronics</span>
+              <span className="text-gray-800" aria-hidden="true">·</span>
               <span className="font-bold tracking-widest text-indigo-400 uppercase">{meta.label}</span>
-              <span className="text-gray-700">·</span>
-              <span className="text-gray-500 font-medium">{SEGMENT_LABELS[segment]}</span>
+              <span className="text-gray-800" aria-hidden="true">·</span>
+              <span className="text-gray-600">{SEGMENT_LABELS[segment] ?? "Your Profile"}</span>
             </div>
-            <h1 className="text-3xl font-bold tracking-tight">Your ranked picks</h1>
-            <p className="text-sm text-gray-500 leading-relaxed">
-              Ranked against real purchase outcomes for people with your profile. No sponsored results.
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tighter text-white leading-tight">
+              Your ranked picks
+            </h1>
+            <p className="text-sm text-gray-500 leading-relaxed max-w-[50ch]">
+              Ranked against real purchase outcomes for your profile. No sponsored results.
             </p>
           </div>
 
-          {/* ── Product cards ─────────────────────────────────── */}
+          {/* ── Returning user indicator ──────────────────── */}
+          {returning && (
+            <div className="flex items-center gap-2 text-xs text-indigo-400 bg-indigo-950/30 border border-indigo-900/40 rounded-xl px-4 py-2.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0" />
+              Rankings personalised from your previous session
+            </div>
+          )}
+
+          {/* ── Product cards ──────────────────────────────── */}
           <div className="space-y-5">
             {results.map((rec, index) => {
               const isBest = index === 0;
@@ -271,107 +380,97 @@ function ResultsContent() {
               return (
                 <article
                   key={rec.product.id}
+                  aria-label={`${RANK_LABELS[index] ?? `Option ${index + 1}`}: ${rec.product.name}`}
                   className={`
-                    relative rounded-2xl border overflow-hidden
+                    rounded-2xl border overflow-hidden
                     animate-slide-up transition-all duration-200
                     hover:-translate-y-0.5
                     ${isBest
-                      ? "border-indigo-500/60 shadow-2xl shadow-indigo-900/20"
-                      : "border-gray-800 hover:border-gray-700 hover:shadow-xl hover:shadow-black/30"
+                      ? "border-indigo-600/30 bg-indigo-950/20 hover:border-indigo-600/50"
+                      : "border-gray-800 bg-gray-900 hover:border-gray-700"
                     }
                   `}
-                  style={{ animationDelay: `${index * 130}ms` }}
+                  style={{ animationDelay: `${index * 150}ms` }}
                 >
-                  <div className={`p-6 space-y-5 ${isBest ? "bg-indigo-950/20" : "bg-gray-900"}`}>
+                  <div className={isBest ? "p-7 space-y-6" : "p-5 space-y-5"}>
 
-                    {/* Rank label */}
+                    {/* ── Rank row ──────────────────────────── */}
                     <div className="flex items-start justify-between gap-3">
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className={`text-[11px] font-bold uppercase tracking-widest ${isBest ? "text-indigo-400" : "text-gray-600"}`}>
+                      <div className="space-y-0.5">
+                        <div className="flex items-center gap-2">
+                          <span className={`text-[11px] font-bold uppercase tracking-widest ${isBest ? "text-indigo-400" : "text-gray-500"}`}>
                             {RANK_LABELS[index] ?? `Option ${index + 1}`}
                           </span>
                           {isBest && (
-                            <span className="inline-flex text-[10px] font-bold uppercase tracking-wider bg-indigo-600 text-white px-2.5 py-0.5 rounded-full">
-                              Best Match
+                            <span className="inline-flex text-[9px] font-bold uppercase tracking-widest bg-indigo-600 text-white px-2 py-0.5 rounded-full">
+                              #1
                             </span>
                           )}
                         </div>
-                        <p className="text-[11px] text-gray-600">{RANK_SUBTITLES[index]}</p>
+                        <p className="text-[11px] text-gray-600">
+                          {RANK_SUBTITLES[index] ?? ""}
+                        </p>
                       </div>
-
-                      {/* Price band badge */}
                       <span className={`shrink-0 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${PRICE_BAND_COLORS[rec.product.price_band] ?? PRICE_BAND_COLORS.mid}`}>
                         {PRICE_BAND_LABELS[rec.product.price_band] ?? rec.product.price_band}
                       </span>
                     </div>
 
-                    {/* Product name */}
-                    <div>
-                      <h2 className={`font-bold leading-tight tracking-tight ${isBest ? "text-2xl text-white" : "text-xl text-gray-100"}`}>
+                    {/* ── Product name + brand ───────────────── */}
+                    <div className="space-y-2">
+                      <h2 className={`font-bold tracking-tighter leading-none text-white ${isBest ? "text-3xl" : "text-xl"}`}>
                         {rec.product.name}
                       </h2>
-                      <p className="text-xs text-gray-600 mt-0.5">{rec.product.brand}</p>
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="text-xs text-gray-600">{rec.product.brand}</span>
+                        {truth && (
+                          <>
+                            <span className="text-gray-800" aria-hidden="true">·</span>
+                            <TruthBadge truth={truth} />
+                          </>
+                        )}
+                      </div>
                     </div>
 
-                    {/* Score bar */}
-                    <div className="space-y-1.5">
+                    {/* ── Match score ────────────────────────── */}
+                    <div className="space-y-2">
                       <div className="flex items-center justify-between">
                         <span className="text-[11px] text-gray-600 uppercase tracking-widest font-semibold">
                           Match Score
                         </span>
                         <ConfidenceBadge confidence={truth?.confidence ?? 1.0} />
                       </div>
-                      <ScoreBar score={rec.score} />
+                      <ScoreBar score={rec.score} variant={index} />
                     </div>
 
-                    {/* Dimension scores mini bar row */}
-                    <div className="grid grid-cols-5 gap-2">
-                      {[
-                        { key: "battery_score",     label: "Battery",       val: rec.product.battery_score },
-                        { key: "portability_score",  label: "Portable",     val: rec.product.portability_score },
-                        { key: "gaming_score",       label: "Gaming",        val: rec.product.gaming_score },
-                        { key: "productivity_score", label: "Productivity",  val: rec.product.productivity_score },
-                        { key: "value_score",        label: "Value",         val: rec.product.value_score },
-                      ].map(({ key, label, val }) => (
-                        <div key={key} className="text-center space-y-1.5">
-                          <div className="h-12 bg-gray-800 rounded-lg overflow-hidden flex flex-col-reverse mx-auto w-full">
-                            <div
-                              className="bg-indigo-600/60 w-full rounded-b-lg transition-none"
-                              style={{ height: `${val}%` }}
-                            />
-                          </div>
-                          <p className="text-[9px] text-gray-600 font-medium leading-tight">{label}</p>
-                        </div>
-                      ))}
+                    {/* ── Dimension bars ─────────────────────── */}
+                    <div className="space-y-2">
+                      <p className="text-[11px] text-gray-600 uppercase tracking-widest font-semibold">
+                        Dimensions
+                      </p>
+                      <DimensionBars product={rec.product} />
                     </div>
 
-                    {/* Truth + Segment badges */}
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <TruthBadge truth={truth} />
-                      <SegmentBadge segment={segment} />
-                    </div>
-
-                    {/* Strengths */}
+                    {/* ── Numbered strengths ─────────────────── */}
                     {rec.strengths.length > 0 && (
                       <div className="space-y-2">
                         <p className="text-[11px] text-gray-600 uppercase tracking-widest font-semibold">
                           Why This Matches You
                         </p>
-                        <ul className="space-y-1.5">
-                          {rec.strengths.map((s) => (
-                            <li key={s} className="flex items-center gap-2.5 text-sm text-gray-300">
-                              <span className="w-4 h-4 rounded-full bg-indigo-950/70 border border-indigo-800/60 flex items-center justify-center text-indigo-400 text-[9px] shrink-0 font-bold">
-                                ✓
+                        <ol className="space-y-2">
+                          {rec.strengths.map((s, i) => (
+                            <li key={s} className="flex items-start gap-3">
+                              <span className="font-mono text-[10px] font-bold text-indigo-600/50 tabular-nums shrink-0 pt-0.5 w-5 leading-none">
+                                {String(i + 1).padStart(2, "0")}
                               </span>
-                              {s}
+                              <span className="text-sm text-gray-300 leading-snug">{s}</span>
                             </li>
                           ))}
-                        </ul>
+                        </ol>
                       </div>
                     )}
 
-                    {/* CTA */}
+                    {/* ── CTA ────────────────────────────────── */}
                     <a
                       href={rec.product.affiliate_url}
                       target="_blank"
@@ -382,10 +481,8 @@ function ResultsContent() {
                           purpose:   signals.purpose,
                           metadata:  { rank: rec.rank },
                         });
-                        // v2: session memory + lite analytics
                         recordAffiliateClick(rec.product.id);
                         trackAffiliateClick(rec.product.id);
-                        // V16: learning signal — affiliate click
                         recordSignal({
                           sessionId,
                           productId: rec.product.id,
@@ -397,7 +494,7 @@ function ResultsContent() {
                       }}
                       className={`
                         flex items-center justify-center gap-2 w-full font-semibold rounded-xl px-6 py-3.5
-                        transition-all duration-150 active:scale-[0.98] text-sm
+                        transition-all duration-150 active:scale-[0.98] text-sm cursor-pointer
                         ${isBest
                           ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/30"
                           : "bg-gray-800 hover:bg-gray-700 text-gray-200 hover:text-white"
@@ -405,25 +502,16 @@ function ResultsContent() {
                       `}
                     >
                       Check Current Price
-                      <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                      </svg>
+                      <ExternalLinkIcon className="w-4 h-4 shrink-0" />
                     </a>
+
                   </div>
                 </article>
               );
             })}
           </div>
 
-          {/* ── v2: Returning user indicator ──────────────────── */}
-          {returning && (
-            <div className="flex items-center gap-2 text-xs text-indigo-400 bg-indigo-950/30 border border-indigo-900/40 rounded-xl px-4 py-2.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0" />
-              Rankings personalised from your previous session
-            </div>
-          )}
-
-          {/* ── v2: Trending based on users like you ──────────── */}
+          {/* ── Trending ──────────────────────────────────── */}
           {(() => {
             const trending = results.filter(
               (rec) => intelligence.products[rec.product.id]?.trend === "rising"
@@ -432,7 +520,7 @@ function ResultsContent() {
             return (
               <div className="animate-fade-in space-y-3 border-t border-gray-800/50 pt-6">
                 <p className="text-[11px] font-bold uppercase tracking-widest text-gray-600">
-                  Trending with {SEGMENT_LABELS[segment].toLowerCase()} users
+                  Trending with {SEGMENT_LABELS[segment]?.toLowerCase() ?? "similar"} users
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {trending.map((rec) => (
@@ -440,7 +528,7 @@ function ResultsContent() {
                       key={rec.product.id}
                       className="flex items-center gap-2 bg-gray-900 border border-emerald-900/40 rounded-xl px-3.5 py-2"
                     >
-                      <span className="text-[10px] font-bold text-emerald-400">↑</span>
+                      <span className="text-[10px] font-bold text-emerald-400" aria-hidden="true">↑</span>
                       <span className="text-xs text-gray-300">{rec.product.name}</span>
                     </div>
                   ))}
@@ -449,39 +537,35 @@ function ResultsContent() {
             );
           })()}
 
-          {/* ── Footer links ──────────────────────────────────── */}
-          <div className="animate-fade-in delay-500 text-center space-y-3 pt-2 border-t border-gray-800/50 pt-8">
+          {/* ── Footer links ──────────────────────────────── */}
+          <div className="animate-fade-in delay-500 border-t border-gray-800/50 pt-8 space-y-3">
             <Link
               href={`/quiz?category=${category}`}
-              className="block text-sm text-gray-500 hover:text-indigo-400 transition-colors"
+              className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-indigo-400 transition-colors duration-150"
             >
-              ← Retake quiz for {meta.label}
+              <ArrowLeft className="w-3.5 h-3.5" />
+              Retake quiz for {meta.label}
             </Link>
             <Link
               href="/"
-              className="block text-sm text-gray-600 hover:text-gray-400 transition-colors"
+              className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-400 transition-colors duration-150"
             >
-              Explore other categories
+              <ArrowLeft className="w-3.5 h-3.5" />
+              Explore all categories
             </Link>
           </div>
+
         </div>
       </main>
     </div>
   );
 }
 
+// ─── Page wrapper ─────────────────────────────────────────────────────────────
+
 export default function ResultsPage() {
   return (
-    <Suspense
-      fallback={
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center space-y-4">
-            <div className="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full spinner mx-auto" />
-            <p className="text-gray-500 text-sm">Calculating your matches…</p>
-          </div>
-        </div>
-      }
-    >
+    <Suspense fallback={<ResultsSkeleton />}>
       <ResultsContent />
     </Suspense>
   );

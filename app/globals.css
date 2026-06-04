@@ -72,8 +72,27 @@
   animation-delay: 400ms;
 }
 
+.score-bar-600 {
+  clip-path: inset(0 100% 0 0);
+  animation: den-score-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 600ms;
+}
+
+.score-bar-800 {
+  clip-path: inset(0 100% 0 0);
+  animation: den-score-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 800ms;
+}
+
 @keyframes den-score-reveal {
   to { clip-path: inset(0 0% 0 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .score-bar, .score-bar-600, .score-bar-800 {
+    animation: none;
+    clip-path: inset(0 0% 0 0);
+  }
 }
 
 /* ─── Spinner ─────────────────────────────────────────── */
@@ -105,6 +124,8 @@
 .stagger-item:nth-child(4) { animation-delay: 240ms; }
 .stagger-item:nth-child(5) { animation-delay: 300ms; }
 .stagger-item:nth-child(6) { animation-delay: 360ms; }
+.stagger-item:nth-child(7) { animation-delay: 420ms; }
+.stagger-item:nth-child(8) { animation-delay: 480ms; }
 
 /* ─── Directional hover fill button ──────────────────── */
 
