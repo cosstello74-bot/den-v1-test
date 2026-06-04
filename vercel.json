@@ -24,5 +24,11 @@
     }
   ],
   "rewrites": [],
-  "redirects": []
+  "redirects": [],
+  "crons": [
+    {
+      "path": "/api/v2/cycle",
+      "schedule": "0 */6 * * *"
+    }
+  ]
 }

@@ -7,6 +7,7 @@ import type { GeneratedPageConfig } from "@/lib/ael/pageGenerator";
 import type { CategoryKey }     from "@/types/product";
 import type { InternalLink }    from "@/lib/seo/internalLinks";
 import GeoSignalTracker         from "@/components/geo/GeoSignalTracker";
+import PageTracker              from "@/components/v2/PageTracker";
 import generatedPagesData       from "@/data/ael/generated-pages.json";
 import linkMapData              from "@/data/ael/link-map.json";
 
@@ -101,6 +102,8 @@ export default function GeneratedLandingPage({
 
   return (
     <>
+      <PageTracker slug={params.slug} />
+
       {/* ── JSON-LD structured data ─────────────────────────────── */}
       <script
         type="application/ld+json"
