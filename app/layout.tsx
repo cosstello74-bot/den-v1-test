@@ -10,9 +10,22 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://den-v1.vercel.app"),
   title: "DEN — Decision Intelligence",
   description:
     "Find the perfect product in 60 seconds. Truth-calibrated recommendations powered by shared intelligence.",
+  openGraph: {
+    title:       "DEN — Decision Intelligence",
+    description: "Stop scrolling Reddit. Get your match. Truth-calibrated electronics rankings in 60 seconds.",
+    siteName:    "DEN",
+    locale:      "en_GB",
+    type:        "website",
+  },
+  twitter: {
+    card:        "summary_large_image",
+    title:       "DEN — Decision Intelligence",
+    description: "Stop scrolling Reddit. Get your match. Truth-calibrated electronics rankings in 60 seconds.",
+  },
 };
 
 export default function RootLayout({
