@@ -10,28 +10,6 @@ import seedTruth from "@/data/truthModel.json";
 let runtimeModel: IntelligenceModel = seedModel as IntelligenceModel;
 let runtimeTruth: TruthModel        = seedTruth as TruthModel;
 
-function persistModel(model: IntelligenceModel): void {
-  try {
-    const fs   = require("fs") as typeof import("fs");
-    const path = require("path") as typeof import("path");
-    const p = path.join(process.cwd(), "data", "intelligenceModel.json");
-    fs.writeFileSync(p, JSON.stringify(model, null, 2));
-  } catch {
-    // Read-only filesystem — in-memory model remains valid
-  }
-}
-
-function persistTruth(model: TruthModel): void {
-  try {
-    const fs   = require("fs") as typeof import("fs");
-    const path = require("path") as typeof import("path");
-    const p = path.join(process.cwd(), "data", "truthModel.json");
-    fs.writeFileSync(p, JSON.stringify(model, null, 2));
-  } catch {
-    // Read-only filesystem — in-memory model remains valid
-  }
-}
-
 export async function POST(req: NextRequest) {
   try {
     const body: BatchPayload = await req.json();
@@ -40,20 +18,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Expected { events: Event[] }" }, { status: 400 });
     }
 
-    // 1. Append to event store (idempotent)
-    appendEvents(body.events);
+    // 1. Persist events (Supabase when configured, in-memory fallback otherwise)
+    await appendEvents(body.events);
 
     // 2. Re-derive intelligence and truth from full event stream
-    const allEvents = readAllEvents();
+    const allEvents = await readAllEvents();
     const derived   = processEventBatch(allEvents);
     runtimeModel    = mergeIntelligence(seedModel as IntelligenceModel, derived);
 
     const derivedTruth = buildTruthModel(allEvents);
     runtimeTruth       = mergeTruthModels(seedTruth as TruthModel, derivedTruth);
-
-    // 3. Persist both models (best-effort)
-    persistModel(runtimeModel);
-    persistTruth(runtimeTruth);
 
     return NextResponse.json({
       ok: true,
@@ -68,7 +42,7 @@ export async function POST(req: NextRequest) {
 // Admin / results page fetches live intelligence model here
 export async function GET() {
   try {
-    const allEvents = readAllEvents();
+    const allEvents = await readAllEvents();
     if (allEvents.length > 0) {
       const derived   = processEventBatch(allEvents);
       runtimeModel    = mergeIntelligence(seedModel as IntelligenceModel, derived);

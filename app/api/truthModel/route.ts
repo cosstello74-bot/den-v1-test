@@ -7,7 +7,7 @@ let runtimeTruth: TruthModel = seedTruth as TruthModel;
 
 export async function GET() {
   try {
-    const allEvents = readAllEvents();
+    const allEvents = await readAllEvents();
     if (allEvents.length > 0) {
       const derived = buildTruthModel(allEvents);
       runtimeTruth  = mergeTruthModels(seedTruth as TruthModel, derived);

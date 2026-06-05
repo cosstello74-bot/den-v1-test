@@ -13,17 +13,6 @@ const OUTCOME_TYPES = new Set<EventType>([
 
 let runtimeTruth: TruthModel = seedTruth as TruthModel;
 
-function persistTruth(model: TruthModel): void {
-  try {
-    const fs   = require("fs") as typeof import("fs");
-    const path = require("path") as typeof import("path");
-    const p = path.join(process.cwd(), "data", "truthModel.json");
-    fs.writeFileSync(p, JSON.stringify(model, null, 2));
-  } catch {
-    // Read-only filesystem — in-memory model remains valid
-  }
-}
-
 export async function POST(req: NextRequest) {
   try {
     const body: { events: Event[] } = await req.json();
@@ -37,13 +26,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "No valid outcome event types" }, { status: 400 });
     }
 
-    appendEvents(outcomeEvents);
+    await appendEvents(outcomeEvents);
 
-    const allEvents = readAllEvents();
+    const allEvents = await readAllEvents();
     const derived   = buildTruthModel(allEvents);
     runtimeTruth    = mergeTruthModels(seedTruth as TruthModel, derived);
-
-    persistTruth(runtimeTruth);
 
     return NextResponse.json({
       ok: true,
@@ -56,7 +43,7 @@ export async function POST(req: NextRequest) {
 
 export async function GET() {
   try {
-    const allEvents = readAllEvents();
+    const allEvents = await readAllEvents();
     if (allEvents.length > 0) {
       const derived = buildTruthModel(allEvents);
       runtimeTruth  = mergeTruthModels(seedTruth as TruthModel, derived);

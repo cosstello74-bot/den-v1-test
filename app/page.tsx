@@ -472,10 +472,15 @@ export default function LandingPage() {
       {/* ── Footer ───────────────────────────────────────── */}
       <footer className="px-6 py-6 border-t border-gray-800/50">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-700">
-          <span>© 2025 DEN</span>
-          <Link href="/electronics" className="hover:text-gray-400 transition-colors duration-150">
-            Start Quiz →
-          </Link>
+          <span>© {new Date().getFullYear()} DEN</span>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="hover:text-gray-400 transition-colors duration-150">
+              Privacy
+            </Link>
+            <Link href="/electronics" className="hover:text-gray-400 transition-colors duration-150">
+              Start Quiz →
+            </Link>
+          </div>
         </div>
       </footer>
 
