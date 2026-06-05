@@ -19,21 +19,21 @@
       "affiliatePayout": 85,
       "totalRevenue": 1020,
       "clickToRevenueRatio": 5.10,
-      "conversionRate": 0.06,
-      "revenueTrend": "rising"
+      "conversionRate": 0.08,
+      "revenueTrend": "stable"
     },
     "p4": {
       "affiliatePayout": 58,
       "totalRevenue": 696,
       "clickToRevenueRatio": 4.06,
-      "conversionRate": 0.07,
-      "revenueTrend": "rising"
+      "conversionRate": 0.08,
+      "revenueTrend": "stable"
     },
     "p5": {
       "affiliatePayout": 52,
       "totalRevenue": 468,
       "clickToRevenueRatio": 3.12,
-      "conversionRate": 0.06,
+      "conversionRate": 0.08,
       "revenueTrend": "stable"
     },
     "p6": {
@@ -55,21 +55,21 @@
       "totalRevenue": 126,
       "clickToRevenueRatio": 1.54,
       "conversionRate": 0.11,
-      "revenueTrend": "declining"
+      "revenueTrend": "stable"
     },
     "p9": {
       "affiliatePayout": 95,
       "totalRevenue": 855,
       "clickToRevenueRatio": 4.75,
-      "conversionRate": 0.05,
-      "revenueTrend": "rising"
+      "conversionRate": 0.08,
+      "revenueTrend": "stable"
     },
     "p10": {
       "affiliatePayout": 11,
       "totalRevenue": 44,
       "clickToRevenueRatio": 0.44,
-      "conversionRate": 0.04,
-      "revenueTrend": "declining"
+      "conversionRate": 0.08,
+      "revenueTrend": "stable"
     },
     "p11": {
       "affiliatePayout": 27,
