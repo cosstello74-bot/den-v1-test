@@ -138,18 +138,18 @@ function CategoryBadge({ cat }: { cat: DenTopCategory }) {
 const STEPS = [
   {
     n:     "01",
-    title: "Choose your category",
-    body:  "Electronics, Finance, Home, Health, Travel or Business — pick what you need ranked.",
+    title: "Ingestion",
+    body:  "Strips marketing copy and extracts verified specifications from real purchase data across thousands of outcomes.",
   },
   {
     n:     "02",
-    title: "Answer a few questions",
-    body:  "Use case, budget, and priorities. Takes about 60 seconds.",
+    title: "Correlation",
+    body:  "Identifies patterns across returns, revisits, and satisfaction signals — weighted for your use case and budget.",
   },
   {
     n:     "03",
-    title: "Get your match",
-    body:  "Ranked against real outcomes — returns, revisits, conversions. One clear winner.",
+    title: "Synthesis",
+    body:  "Assigns calibrated match scores against your profile. One ranked output. No hedging.",
   },
 ];
 
@@ -416,7 +416,7 @@ export default function LandingPage() {
               {/* Rotated label */}
               <div className="hidden md:flex items-start pt-1">
                 <p className="text-[11px] font-semibold tracking-widest text-gray-600 uppercase">
-                  How&nbsp;it<br />works
+                  The&nbsp;method
                 </p>
               </div>
 

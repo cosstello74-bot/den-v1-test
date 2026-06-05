@@ -96,6 +96,27 @@ const CATEGORY_PARENT_LINKS: Record<string, InternalLink> = {
   },
 };
 
+// ─── Topic cluster map ────────────────────────────────────────────────────────
+// Pages in the same cluster get a bonus score as siblings.
+
+const TOPIC_CLUSTERS: Record<string, string[]> = {
+  gaming:     ["gaming_budget", "gaming_mid", "gaming_high", "gaming_premium", "gaming_any", "gaming_monitor", "gaming_pc", "gaming_phone"],
+  student:    ["student_value", "student_budget", "student_any", "student_tablet", "budget_general"],
+  creative:   ["creative_budget", "creative_mid", "creative_high", "creative_premium", "creative_any", "creative_professional", "creative_monitor"],
+  budget:     ["budget_general", "budget_any", "student_budget", "student_value", "professional_budget", "creative_budget", "gaming_budget"],
+  work:       ["professional_budget", "professional_mid", "professional_high", "professional_premium", "professional_any", "premium_professional", "developer_professional", "travel_portable"],
+  camera:     ["camera_phone", "camera_any"],
+  battery:    ["battery_phone", "battery_any", "travel_portable"],
+};
+
+/** Returns the cluster name for a given intent, or null. */
+function getCluster(intent: string): string | null {
+  for (const [cluster, intents] of Object.entries(TOPIC_CLUSTERS)) {
+    if (intents.includes(intent)) return cluster;
+  }
+  return null;
+}
+
 // ─── Sibling scoring ──────────────────────────────────────────────────────────
 /**
  * Score relevance between source and candidate for sibling link selection.
@@ -107,11 +128,10 @@ function siblingRelevanceScore(
 ): number {
   if (source.slug === candidate.slug) return -Infinity;
 
-  // 🧯 Safety guards (prevents undefined crashes)
-  const sourceIntent = String(source.intent ?? "");
+  const sourceIntent    = String(source.intent    ?? "");
   const candidateIntent = String(candidate.intent ?? "");
-  const sourceSlug = String(source.slug ?? "");
-  const candidateSlug = String(candidate.slug ?? "");
+  const sourceSlug      = String(source.slug      ?? "");
+  const candidateSlug   = String(candidate.slug   ?? "");
 
   let score = 0;
 
@@ -121,15 +141,16 @@ function siblingRelevanceScore(
   // Shared intent prefix (e.g. "gaming_*" → "gaming")
   const srcPrefix = sourceIntent.split("_")[0];
   const cndPrefix = candidateIntent.split("_")[0];
-
   if (srcPrefix && srcPrefix === cndPrefix) score += 5;
+
+  // Same topic cluster: bonus
+  const srcCluster = getCluster(sourceIntent);
+  const cndCluster = getCluster(candidateIntent);
+  if (srcCluster && srcCluster === cndCluster) score += 4;
 
   // Keyword overlap in slugs
   const srcParts = new Set(sourceSlug.split("-"));
-  const overlap = candidateSlug
-    .split("-")
-    .filter((p) => srcParts.has(p)).length;
-
+  const overlap  = candidateSlug.split("-").filter((p) => srcParts.has(p)).length;
   score += overlap;
 
   return score;
@@ -150,7 +171,7 @@ const V3_MANUAL_PAGES: InternalLink[] = [
 
 /**
  * Build ExpandedLinkConfig[] for a batch of generated pages.
- * Each page gets: a quiz href, a parent category link, and up to 2 sibling links.
+ * Each page gets: a quiz href, a parent category link, and up to 5 sibling links.
  */
 export function buildExpandedLinks(
   newPages: GeneratedPageConfig[],
@@ -160,12 +181,13 @@ export function buildExpandedLinks(
     const quizHref   = buildQuizHref(page.intent, page.category);
     const parentLink = CATEGORY_PARENT_LINKS[page.category];
 
-    // Score all other generated pages as sibling candidates
+    // Score all other pages as sibling candidates (same category or same cluster)
     const generatedSiblings = allPages
-      .filter((p) => p.slug !== page.slug && p.category === page.category)
+      .filter((p) => p.slug !== page.slug)
       .map((p) => ({ page: p, score: siblingRelevanceScore(page, p) }))
+      .filter(({ score }) => score > 0)
       .sort((a, b) => b.score - a.score)
-      .slice(0, 2)
+      .slice(0, 5)
       .map(({ page: p }): InternalLink => ({
         slug:        p.slug,
         href:        `/generated/${p.slug}`,
@@ -175,15 +197,15 @@ export function buildExpandedLinks(
           : p.description),
       }));
 
-    // Fill remaining slots with v3 manual pages (same category intent)
-    const usedSlugs = new Set(generatedSiblings.map((s) => s.slug));
+    // Fill remaining slots with v3 manual pages
+    const usedSlugs  = new Set(generatedSiblings.map((s) => s.slug));
     const manualFill = V3_MANUAL_PAGES
       .filter((l) => !usedSlugs.has(l.slug))
-      .slice(0, 2 - generatedSiblings.length);
+      .slice(0, 5 - generatedSiblings.length);
 
-    const related: InternalLink[] = [...generatedSiblings, ...manualFill].slice(0, 2);
+    const related: InternalLink[] = [...generatedSiblings, ...manualFill].slice(0, 5);
 
-    // Prepend parent link if slots available and parent not already included
+    // Prepend parent category link
     if (parentLink && !related.find((r) => r.slug === parentLink.slug)) {
       related.unshift(parentLink);
     }
@@ -191,7 +213,7 @@ export function buildExpandedLinks(
     return {
       slug:     page.slug,
       quizHref,
-      related:  related.slice(0, 2),
+      related:  related.slice(0, 5),
       source:   "generated",
     };
   });

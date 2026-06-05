@@ -440,7 +440,18 @@ function ResultsContent() {
                         </span>
                         <ConfidenceBadge confidence={truth?.confidence ?? 1.0} />
                       </div>
-                      <ScoreBar score={rec.score} variant={index} />
+                      {isBest ? (
+                        <div className="flex items-end gap-4">
+                          <span className="text-5xl font-bold tracking-tighter text-white tabular-nums leading-none">
+                            {Math.min(Math.round(rec.score), 100)}
+                          </span>
+                          <div className="flex-1 pb-1.5">
+                            <ScoreBar score={rec.score} variant={index} />
+                          </div>
+                        </div>
+                      ) : (
+                        <ScoreBar score={rec.score} variant={index} />
+                      )}
                     </div>
 
                     {/* ── Dimension bars ─────────────────────── */}

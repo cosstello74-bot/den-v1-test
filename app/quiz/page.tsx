@@ -185,12 +185,12 @@ function QuizContent() {
                     disabled={isTransitioning}
                     style={{ animationDelay: `${i * 55}ms` }}
                     className={`
-                      group flex items-center gap-3 w-full text-left rounded-2xl border px-5 py-4
+                      group flex items-center gap-4 w-full text-left rounded-2xl border px-5 py-4
                       transition-all duration-150 active:scale-[0.98]
                       animate-fade-in
                       ${isChosen
-                        ? "bg-indigo-600 border-indigo-500"
-                        : "bg-gray-900 border-gray-800 hover:bg-gray-800 hover:border-indigo-500/50"
+                        ? "bg-indigo-950/60 border-indigo-500/60 ring-1 ring-indigo-500/30"
+                        : "bg-gray-900 border-gray-800 hover:bg-gray-800/80 hover:border-indigo-800/60"
                       }
                     `}
                   >
@@ -198,20 +198,20 @@ function QuizContent() {
                       <p className={`font-semibold text-sm transition-colors ${isChosen ? "text-white" : "text-white group-hover:text-indigo-200"}`}>
                         {opt.label}
                       </p>
-                      <p className={`text-xs mt-0.5 transition-colors ${isChosen ? "text-indigo-200" : "text-gray-500"}`}>
+                      <p className={`text-xs mt-0.5 leading-relaxed transition-colors ${isChosen ? "text-indigo-300" : "text-gray-500"}`}>
                         {opt.description}
                       </p>
                     </div>
                     <span
-                      className={`ml-auto shrink-0 w-5 h-5 rounded-full border flex items-center justify-center transition-all duration-150 ${
+                      className={`ml-auto shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-150 ${
                         isChosen
-                          ? "bg-white border-white text-indigo-600"
-                          : "border-gray-700 text-transparent"
+                          ? "bg-indigo-500 border-indigo-400"
+                          : "border-gray-700"
                       }`}
                     >
-                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                      </svg>
+                      {isChosen && (
+                        <span className="w-2 h-2 rounded-full bg-white" />
+                      )}
                     </span>
                   </button>
                 );

@@ -174,13 +174,25 @@ export default function GeneratedLandingPage({
                 {page.category} →
               </Link>
               <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-950/50 border border-violet-800/40 text-violet-400">
-                GEO {enrichment.geoScore} · {enrichment.geoGrade}
-              </span>
-              <span className="text-[10px] text-gray-700 font-mono">
-                AEL · {(page.confidence * 100).toFixed(0)}% conf
+                {enrichment.geoGrade} Match
               </span>
             </div>
           </div>
+        </nav>
+
+        {/* ── Breadcrumb ────────────────────────────────────────── */}
+        <nav aria-label="Breadcrumb" className="max-w-4xl mx-auto px-6 pt-4 pb-0">
+          <ol className="flex items-center gap-1.5 text-xs text-gray-600">
+            <li><Link href="/" className="hover:text-gray-400 transition-colors">Home</Link></li>
+            <li aria-hidden="true" className="select-none">›</li>
+            <li>
+              <Link href={`/${page.category}`} className="hover:text-gray-400 transition-colors capitalize">
+                {page.category}
+              </Link>
+            </li>
+            <li aria-hidden="true" className="select-none">›</li>
+            <li className="text-gray-400 truncate max-w-[200px]">{page.h1}</li>
+          </ol>
         </nav>
 
         <main className="max-w-4xl mx-auto px-6 py-12 space-y-14">
@@ -193,14 +205,14 @@ export default function GeneratedLandingPage({
                   Decision Intelligence · {page.category.charAt(0).toUpperCase() + page.category.slice(1)}
                 </span>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-950/40 border border-violet-800/30 text-violet-500">
-                  Auto-generated · {page.intent.replace(/_/g, " ")}
+                  {page.category.charAt(0).toUpperCase() + page.category.slice(1)} · Ranked
                 </span>
               </div>
               <h1 className="text-3xl font-bold tracking-tight">{page.h1}</h1>
             </div>
 
             <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-3">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-gray-500">Machine Summary</p>
+              <p className="text-[11px] font-bold uppercase tracking-widest text-gray-500">Summary</p>
               <p className="text-sm text-gray-300 leading-relaxed">{enrichment.summary}</p>
               <dl className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 border-t border-gray-800 text-xs">
                 <div>
@@ -251,11 +263,10 @@ export default function GeneratedLandingPage({
                     id={product.id}
                     className={`rounded-2xl border p-5 space-y-4 ${
                       isBest
-                        ? "border-indigo-500/60 bg-gradient-to-b from-indigo-950/20 to-gray-900"
+                        ? "border-indigo-500/60 bg-indigo-950/20"
                         : "border-gray-800 bg-gray-900 hover:border-gray-700"
                     } transition-colors`}
                   >
-                    {isBest && <div className="h-0.5 -mx-5 -mt-5 bg-gradient-to-r from-indigo-600 via-violet-500 to-indigo-400 rounded-t-2xl" />}
 
                     <div className="flex items-start justify-between gap-3">
                       <div className="space-y-0.5">

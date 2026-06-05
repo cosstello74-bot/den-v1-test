@@ -305,7 +305,7 @@ async function main(): Promise<void> {
     ...existingPages.map((p) => p as unknown as GeneratedPageConfig),
     ...v4NewPageConfigs,
   ];
-  const expandedLinks = buildExpandedLinks(v4NewPageConfigs, allKnownPageConfigs);
+  const expandedLinks = buildExpandedLinks(allKnownPageConfigs, allKnownPageConfigs);
   const newLinkEntries = buildLinkMap(expandedLinks);
   const mergedLinkMap  = mergeLinkMaps(
     existingLinkMap as Parameters<typeof mergeLinkMaps>[0],
