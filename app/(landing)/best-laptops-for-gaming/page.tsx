@@ -17,8 +17,8 @@ const SLUG = "best-laptops-for-gaming";
 const PRODUCT_IDS = ["p1", "p4", "p11"] as const;
 
 const products = allProducts.products.filter(
-  (p): p is Product => (PRODUCT_IDS as readonly string[]).includes(p.id)
-);
+  (p) => (PRODUCT_IDS as readonly string[]).includes(p.id)
+) as unknown as Product[];
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 

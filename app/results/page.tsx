@@ -14,6 +14,7 @@ import type { IntelligenceModel } from "@/lib/learningEngine";
 import type { TruthModel, ProductTruth } from "@/lib/truthModel";
 import type { RevenueModelSnapshot } from "@/lib/metrics/revenueMetrics";
 import type { RevenueEnrichedRecommendation } from "@/lib/compositeRanking";
+import { resolveAffiliateUrl } from "@/lib/v4/affiliateResolver";
 import { collectParams } from "@/lib/v15/inputLayer";
 import { interpretParams } from "@/lib/v15/categoryScoring";
 import { runV16Guardrails } from "@/lib/v16/guardrails/guardrailRunner";
@@ -483,7 +484,7 @@ function ResultsContent() {
 
                     {/* ── CTA ────────────────────────────────── */}
                     <a
-                      href={rec.product.affiliate_url}
+                      href={resolveAffiliateUrl(rec.product)}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => {

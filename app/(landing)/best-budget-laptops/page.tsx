@@ -17,8 +17,8 @@ const SLUG = "best-budget-laptops";
 const PRODUCT_IDS = ["p2", "p8", "p10"] as const;
 
 const products = allProducts.products.filter(
-  (p): p is Product => (PRODUCT_IDS as readonly string[]).includes(p.id)
-);
+  (p) => (PRODUCT_IDS as readonly string[]).includes(p.id)
+) as unknown as Product[];
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 

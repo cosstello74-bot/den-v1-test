@@ -51,23 +51,54 @@ export function detectNetwork(url: string): AffiliateNetwork {
   return "direct";
 }
 
+/** Returns the first active (non-PENDING) URL from affiliate_urls, or falls back to affiliate_url. */
+function pickBestRaw(product: Product): { url: string; network: AffiliateNetwork } {
+  if (product.affiliate_urls?.length) {
+    const active = product.affiliate_urls.find(
+      (l) => l.url && l.url !== "PENDING"
+    );
+    if (active) return { url: active.url, network: active.network as AffiliateNetwork };
+  }
+  const url = product.affiliate_url;
+  return { url, network: detectNetwork(url) };
+}
+
 export function resolveAffiliateUrl(product: Product): string {
-  const raw     = product.affiliate_url;
-  const network = detectNetwork(raw);
+  const { url, network } = pickBestRaw(product);
 
   switch (network) {
-    case "amazon": return buildAmazonUrl(raw);
-    case "awin":   return buildAwinUrl(raw);
-    case "cj":     return buildCjUrl(raw);
-    default:       return raw;
+    case "amazon": return buildAmazonUrl(url);
+    case "awin":   return buildAwinUrl(url);
+    case "cj":     return buildCjUrl(url);
+    default:       return url;
   }
 }
 
 export function resolveWithEntry(product: Product): AffiliateEntry {
-  const network = detectNetwork(product.affiliate_url);
+  const { url, network } = pickBestRaw(product);
   return {
     network,
-    rawUrl:     product.affiliate_url,
+    rawUrl:     url,
     trackingId: TRACKING_IDS[network],
   };
+
+}
+
+/** Returns all active affiliate links for a product, with tracking applied. */
+export function resolveAllAffiliateUrls(
+  product: Product
+): Array<{ retailer: string; url: string; commission_pct: number }> {
+  if (!product.affiliate_urls?.length) {
+    return [{ retailer: "amazon", url: resolveAffiliateUrl(product), commission_pct: 1.5 }];
+  }
+  return product.affiliate_urls
+    .filter((l) => l.url && l.url !== "PENDING")
+    .map((l) => {
+      const network = l.network as AffiliateNetwork;
+      let tracked = l.url;
+      if (network === "amazon") tracked = buildAmazonUrl(l.url);
+      if (network === "awin")   tracked = buildAwinUrl(l.url);
+      if (network === "cj")     tracked = buildCjUrl(l.url);
+      return { retailer: l.retailer, url: tracked, commission_pct: l.commission_pct };
+    });
 }

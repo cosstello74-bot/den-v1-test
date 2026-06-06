@@ -6,6 +6,7 @@ import { filterProductsForPage, enrichPage } from "@/lib/ael/enrichmentPipeline"
 import type { GeneratedPageConfig } from "@/lib/ael/pageGenerator";
 import type { CategoryKey }     from "@/types/product";
 import type { InternalLink }    from "@/lib/seo/internalLinks";
+import { resolveAffiliateUrl }  from "@/lib/v4/affiliateResolver";
 import GeoSignalTracker         from "@/components/geo/GeoSignalTracker";
 import PageTracker              from "@/components/v2/PageTracker";
 import generatedPagesData       from "@/data/ael/generated-pages.json";
@@ -308,7 +309,7 @@ export default function GeneratedLandingPage({
                     </div>
 
                     <a
-                      href={product.affiliate_url}
+                      href={resolveAffiliateUrl(product)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`flex items-center justify-center gap-2 w-full font-semibold rounded-xl px-5 py-3 text-sm transition-all duration-150 active:scale-[0.98] ${

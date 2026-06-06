@@ -13,11 +13,29 @@ export interface RevenueProfile {
   revenueTrend:           "rising" | "stable" | "declining";
 }
 
+export type AffiliateRetailer =
+  | "amazon"
+  | "currys"
+  | "john_lewis"
+  | "laptops_direct"
+  | "very"
+  | "dell_direct"
+  | "hp_direct"
+  | "lenovo_direct";
+
+export interface AffiliateLink {
+  retailer:       string;  // AffiliateRetailer values — string for JSON compat
+  network:        string;  // AffiliateNetwork values — string for JSON compat
+  url:            string;  // "PENDING" until real URL is added
+  commission_pct: number;
+}
+
 export interface Product {
   id: string;
   name: string;
   category: string;
-  affiliate_url: string;
+  affiliate_url: string;        // primary URL — kept for backward compat
+  affiliate_urls?: AffiliateLink[]; // multi-retailer registry
   price_band: PriceBand;
   battery_score: number;
   portability_score: number;
