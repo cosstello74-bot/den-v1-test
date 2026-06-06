@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-04T00:00:00.000Z",
+  "title": "Design System: DEN",
+  "extensions": {
+    "colorMeta": {
+      "workbench-deep":      { "role": "neutral",   "displayName": "Workbench Deep",    "canonical": "#030712", "tonalRamp": ["#030712","#0a0f1e","#111827","#1f2937","#374151","#4b5563","#6b7280","#9ca3af"] },
+      "instrument-surface":  { "role": "neutral",   "displayName": "Instrument Surface","canonical": "#111827", "tonalRamp": ["#030712","#0a0f1e","#111827","#1f2937","#374151","#4b5563","#6b7280","#9ca3af"] },
+      "boundary-line":       { "role": "neutral",   "displayName": "Boundary Line",     "canonical": "#1f2937", "tonalRamp": ["#030712","#0a0f1e","#111827","#1f2937","#374151","#4b5563","#6b7280","#9ca3af"] },
+      "annotation":          { "role": "neutral",   "displayName": "Annotation",        "canonical": "#6b7280", "tonalRamp": ["#111827","#1f2937","#374151","#4b5563","#6b7280","#9ca3af","#d1d5db","#f9fafb"] },
+      "reading-text":        { "role": "neutral",   "displayName": "Reading Text",      "canonical": "#d1d5db", "tonalRamp": ["#374151","#4b5563","#6b7280","#9ca3af","#d1d5db","#e5e7eb","#f3f4f6","#ffffff"] },
+      "output-text":         { "role": "neutral",   "displayName": "Output Text",       "canonical": "#ffffff", "tonalRamp": ["#374151","#4b5563","#6b7280","#9ca3af","#d1d5db","#e5e7eb","#f3f4f6","#ffffff"] },
+      "signal":              { "role": "primary",   "displayName": "Signal",            "canonical": "#4f46e5", "tonalRamp": ["#1e1b4b","#2e1065","#312e81","#3730a3","#4f46e5","#6366f1","#818cf8","#a5b4fc"] },
+      "signal-active":       { "role": "primary",   "displayName": "Signal Active",     "canonical": "#6366f1", "tonalRamp": ["#1e1b4b","#312e81","#3730a3","#4f46e5","#6366f1","#818cf8","#a5b4fc","#c7d2fe"] },
+      "analysis-violet":     { "role": "secondary", "displayName": "Analysis Violet",   "canonical": "#8b5cf6", "tonalRamp": ["#2e1065","#4c1d95","#5b21b6","#7c3aed","#8b5cf6","#a78bfa","#c4b5fd","#ede9fe"] },
+      "analysis-depth":      { "role": "secondary", "displayName": "Analysis Depth",    "canonical": "#2e1065", "tonalRamp": ["#1a0533","#2e1065","#4c1d95","#5b21b6","#7c3aed","#8b5cf6","#a78bfa","#ede9fe"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Page H1, quiz question. One per page." },
+      "headline": { "displayName": "Headline", "purpose": "Section headings when a second level is needed." },
+      "title":    { "displayName": "Title",    "purpose": "Card headings, product names in results." },
+      "body":     { "displayName": "Body",     "purpose": "All prose and descriptions. Max 65–75ch." },
+      "label":    { "displayName": "Label",    "purpose": "Metadata, category tags, all-caps identifiers." }
+    },
+    "shadows": [
+      { "name": "signal-glow",  "value": "0 10px 15px -3px rgb(49 46 129 / 0.3)",  "purpose": "Primary CTA button only. Not reused elsewhere." },
+      { "name": "ambient-glow", "value": "0 0 60px 20px rgb(99 102 241 / 0.06)",   "purpose": "Hero section accent only. Extremely subtle." }
+    ],
+    "motion": [
+      { "name": "standard",       "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Default easing for all transitions: slide-up, fade-in." },
+      { "name": "score-reveal",   "value": "clip-path: inset(0 100% 0 0) → inset(0 0% 0 0), 1.2s cubic-bezier(0.16,1,0.3,1), 400ms delay", "purpose": "Score bar left-to-right reveal on page load only." },
+      { "name": "hover-lift",     "value": "translateY(-2px), 150ms ease-out", "purpose": "Card hover lift." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main CTA. Signal indigo. Used for quiz entry and affiliate links.",
+      "html": "<button class=\"ds-btn-primary\"><span>Get Recommendation</span></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #4f46e5; color: #ffffff; font-size: 14px; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; padding: 14px 32px; border-radius: 12px; border: none; cursor: pointer; box-shadow: 0 10px 15px -3px rgb(49 46 129 / 0.3); transition: background 150ms ease-out, transform 150ms ease-out; } .ds-btn-primary:hover { background: #6366f1; } .ds-btn-primary:focus-visible { outline: 2px solid #3730a3; outline-offset: 2px; } .ds-btn-primary:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Low-priority action. Back navigation, secondary CTAs.",
+      "html": "<button class=\"ds-btn-ghost\">← Back</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #6b7280; font-size: 14px; font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; padding: 8px 16px; border-radius: 8px; border: 1px solid #1f2937; cursor: pointer; transition: background 150ms ease-out, color 150ms ease-out; } .ds-btn-ghost:hover { background: #111827; color: #d1d5db; } .ds-btn-ghost:focus-visible { outline: 2px solid #3730a3; outline-offset: 2px; }"
+    },
+    {
+      "name": "Content Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Related page card, product card, intent link. Flat at rest, lifts on hover.",
+      "html": "<a class=\"ds-card\" href=\"#\"><span class=\"ds-card-title\">Best Gaming Laptops Under £1,000</span><span class=\"ds-card-desc\">GPU-weighted rankings for mid-budget builds.</span></a>",
+      "css": ".ds-card { display: flex; flex-direction: column; gap: 4px; background: #111827; border: 1px solid #1f2937; border-radius: 12px; padding: 14px 16px; text-decoration: none; transition: border-color 150ms ease-out, transform 150ms ease-out; } .ds-card:hover { border-color: rgba(55 48 163 / 0.5); transform: translateY(-2px); } .ds-card:focus-visible { outline: 2px solid #3730a3; outline-offset: 2px; } .ds-card-title { font-size: 14px; font-weight: 600; color: #e5e7eb; font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; } .ds-card-title:hover { color: #818cf8; } .ds-card-desc { font-size: 12px; color: #6b7280; font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; }"
+    },
+    {
+      "name": "Intelligence Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "AEL/auto-generated content signal. Analysis Violet palette only.",
+      "html": "<span class=\"ds-badge-intelligence\">Auto-generated · gaming_budget</span>",
+      "css": ".ds-badge-intelligence { display: inline-flex; align-items: center; background: #2e1065; color: #8b5cf6; border: 1px solid #5b21b6; border-radius: 9999px; font-size: 10px; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; }"
+    },
+    {
+      "name": "Score Bar",
+      "kind": "custom",
+      "refersTo": "score-bar",
+      "description": "DEN's signature ranked score visualization. Clip-path reveal on load.",
+      "html": "<div class=\"ds-score-row\"><span class=\"ds-score-label\">Gaming</span><div class=\"ds-score-track\"><div class=\"ds-score-fill\" style=\"width:82%\"></div></div><span class=\"ds-score-value\">82</span></div>",
+      "css": ".ds-score-row { display: flex; align-items: center; gap: 12px; } .ds-score-label { font-size: 11px; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.1em; min-width: 80px; font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; } .ds-score-track { flex: 1; height: 8px; background: #1f2937; border-radius: 9999px; overflow: hidden; } .ds-score-fill { height: 100%; background: #4f46e5; border-radius: 9999px; clip-path: inset(0 100% 0 0); animation: ds-score-reveal 1.2s cubic-bezier(0.16,1,0.3,1) 400ms forwards; } @keyframes ds-score-reveal { to { clip-path: inset(0 0% 0 0); } } @media (prefers-reduced-motion: reduce) { .ds-score-fill { clip-path: none; animation: none; } } .ds-score-value { font-size: 14px; font-weight: 700; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; min-width: 28px; text-align: right; }"
+    },
+    {
+      "name": "Site Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Sticky top nav with blur. Logo mark + category links + badges.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-logo\" href=\"/\"><span class=\"ds-nav-logomark\">D</span><span class=\"ds-nav-brand\">DEN</span></a><div class=\"ds-nav-links\"><a class=\"ds-nav-link\" href=\"/laptops\">Laptops</a><a class=\"ds-nav-link\" href=\"/phones\">Phones</a></div></nav>",
+      "css": ".ds-nav { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(8px); background: rgba(3 7 18 / 0.8); border-bottom: 1px solid rgba(31 41 55 / 0.4); display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; } .ds-nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; } .ds-nav-logomark { width: 24px; height: 24px; border-radius: 6px; background: #4f46e5; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; } .ds-nav-brand { font-size: 14px; font-weight: 600; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; } .ds-nav-links { display: flex; align-items: center; gap: 12px; } .ds-nav-link { font-size: 12px; color: #6b7280; text-decoration: none; font-family: -apple-system, BlinkMacSystemFont, 'Inter', system-ui, sans-serif; transition: color 150ms ease-out; } .ds-nav-link:hover { color: #d1d5db; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Specialist's Workbench",
+    "overview": "DEN is not a UI, a blog, or a comparison tool. It is a decision system that produces outcomes. The design reflects this: tools are visible but not decorative, every element exists for a purpose, output quality matters more than visual flourish. The workbench metaphor is exact — a place built by experts, for decisions, where the instrument you reach for is always exactly where it should be.\n\nThe system is dark by design. Users arrive mid-research, often at night, cross-referencing multiple tabs. The dark surface reduces ambient fatigue and signals 'I'm already working' — not 'let me sell you something.' Depth is conveyed through tonal layering (three levels: base, surface, raised) not shadows. The single accent, Signal indigo, appears sparingly. When it appears, it means something.\n\nThis is the antithesis of the autopilot SEO content farm: no thin editorial filler, no affiliate-first structure, no AI slop aesthetic.",
+    "keyCharacteristics": [
+      "Tonal dark with cold blue-gray neutrals — no warm blacks",
+      "One accent color (Signal indigo) used at strict ≤10% surface coverage",
+      "System font stack — no web font load, no layout shift",
+      "Tight tracking on headings; loose leading on body",
+      "Components are flat at rest, responsive to interaction only",
+      "AEL/intelligence layer uses a distinct violet sub-palette to signal automation"
+    ],
+    "rules": [
+      { "name": "The Signal Scarcity Rule",   "body": "Signal indigo covers ≤10% of any given screen. Its rarity is the point.", "section": "colors" },
+      { "name": "The Violet Firewall Rule",   "body": "Analysis Violet is reserved exclusively for the AEL intelligence layer. It must never appear on navigation, editorial content, or CTAs.", "section": "colors" },
+      { "name": "The Weight-Only Emphasis Rule", "body": "Emphasis is conveyed through font weight and color step changes only. Italic, underline, and color highlights are prohibited in editorial content.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule",   "body": "Every surface is flat at rest. Shadows appear only as interactive state feedback (hover, focus) or as a single structural marker (primary CTA).", "section": "elevation" }
+    ],
+    "dos": [
+      "Use tonal layering (Workbench Deep → Instrument Surface → Boundary Line) to convey depth",
+      "Cap Signal indigo to ≤10% of any given screen surface",
+      "Use Output Text (#ffffff) for headings and ranked results only",
+      "Use font-weight contrast (400/600/700) for typographic hierarchy",
+      "Keep Analysis Violet exclusively for machine-generated / AEL content",
+      "Respect prefers-reduced-motion for all clip-path and transform animations",
+      "Keep body line length at 65–75ch maximum",
+      "Give interactive elements a clear hover state — flat at rest, responsive to touch"
+    ],
+    "donts": [
+      "Don't build autopilot SEO content — thin editorial, affiliate-first structure, AI boilerplate",
+      "Don't use gradient text (background-clip: text with any gradient)",
+      "Don't use glassmorphism as decoration — navbar blur is structural only",
+      "Don't build price comparison aggregator layouts",
+      "Don't use warm blacks or warm grays — all neutrals must be cold blue-gray",
+      "Don't add shadows to cards at rest",
+      "Don't use Analysis Violet for navigation, CTAs, or user-initiated actions",
+      "Don't animate layout properties — opacity and transform only",
+      "Don't use side-stripe borders (border-left/right > 1px as colored accent)",
+      "Don't restate the page title as the first sentence of body copy"
+    ]
+  }
+}

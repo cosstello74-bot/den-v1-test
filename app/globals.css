@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ink:       #14202E;
+  --ink-soft:  #1F2E40;
+  --paper:     #F4EFE6;
+  --paper-soft:#EAE3D3;
+  --accent:    #B97A6B;
+  --muted:     #5B6779;
+  --line:      rgba(20,32,46,.16);
+  --line-soft: rgba(20,32,46,.08);
+  --alert:     #8B4843;
+}
+
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
@@ -10,17 +22,19 @@
   }
 
   ::selection {
-    background-color: rgb(99 102 241 / 0.25);
-    color: white;
+    background-color: rgb(185 122 107 / 0.25);
+    color: #14202E;
   }
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+    background-color: var(--paper);
+    color: var(--ink);
   }
 
   /* ── WCAG 2.1 AA — SC 2.4.7 Focus Visible ──────────── */
   *:focus-visible {
-    outline: 2px solid rgb(99 102 241);
+    outline: 2px solid var(--accent);
     outline-offset: 2px;
     border-radius: 4px;
   }
@@ -107,8 +121,13 @@
 
 /* ─── Subtle gradient glow helper ────────────────────── */
 
+.glow-accent {
+  box-shadow: 0 0 60px 20px rgb(185 122 107 / 0.08);
+}
+
+/* kept for backward compat */
 .glow-indigo {
-  box-shadow: 0 0 60px 20px rgb(99 102 241 / 0.06);
+  box-shadow: 0 0 60px 20px rgb(185 122 107 / 0.08);
 }
 
 /* ─── Stagger cascade for grids ──────────────────────── */
@@ -139,7 +158,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgb(99 102 241);
+  background: var(--accent);
   transform: translateY(100%);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: -1;

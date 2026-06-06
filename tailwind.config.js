@@ -14,6 +14,13 @@ module.exports = {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
+      colors: {
+        ink:    { DEFAULT: "#14202E", soft: "#1F2E40" },
+        paper:  { DEFAULT: "#F4EFE6", soft: "#EAE3D3" },
+        accent: { DEFAULT: "#B97A6B", dark: "#A06258" },
+        muted:  "#5B6779",
+        alert:  "#8B4843",
+      },
     },
   },
   plugins: [],

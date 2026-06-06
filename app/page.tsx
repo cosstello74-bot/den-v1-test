@@ -121,13 +121,13 @@ function CategoryBadge({ cat }: { cat: DenTopCategory }) {
   }
   if (cat.locationBadge) {
     return (
-      <span className="text-[10px] font-medium text-indigo-400/70 border border-indigo-900/40 px-2 py-0.5 rounded-full">
+      <span className="text-[10px] font-medium text-accent/70 border border-accent/30 px-2 py-0.5 rounded-full">
         {cat.locationBadge}
       </span>
     );
   }
   return (
-    <span className="text-[10px] font-bold tracking-wide bg-gray-800/80 text-gray-600 border border-gray-700/60 px-2 py-0.5 rounded-full uppercase">
+    <span className="text-[10px] font-bold tracking-wide bg-ink/8 text-muted border border-ink/15 px-2 py-0.5 rounded-full uppercase">
       Soon
     </span>
   );
@@ -168,19 +168,19 @@ export default function LandingPage() {
   const midCats     = categories.filter(c => !["electronics", "beauty", "business"].includes(c.id));
 
   return (
-    <div className="min-h-[100dvh] flex flex-col bg-gray-950 text-gray-300">
+    <div className="min-h-[100dvh] flex flex-col bg-paper text-ink">
 
       {/* ── Nav ──────────────────────────────────────────── */}
-      <nav className="sticky top-0 z-20 backdrop-blur-sm bg-gray-950/80 border-b border-gray-800/40 flex items-center justify-between px-6 py-4">
+      <nav className="sticky top-0 z-20 backdrop-blur-sm bg-paper/90 border-b border-ink/10 flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-2.5">
-          <span className="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-sm font-bold tracking-tight text-white" aria-hidden="true">
+          <span className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center text-sm font-bold tracking-tight text-white" aria-hidden="true">
             D
           </span>
-          <span className="font-semibold text-white tracking-tight">DEN</span>
+          <span className="font-semibold text-ink tracking-tight">DEN</span>
         </div>
         <Link
           href="/electronics"
-          className="text-xs text-gray-500 hover:text-gray-300 transition-colors duration-150 font-medium py-2 px-1"
+          className="text-xs text-muted hover:text-ink transition-colors duration-150 font-medium py-2 px-1"
         >
           Start →
         </Link>
@@ -192,7 +192,7 @@ export default function LandingPage() {
         <section className="relative px-6 pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden">
           {/* Ambient background accent — barely visible */}
           <div
-            className="absolute top-0 right-0 w-[480px] h-[480px] bg-indigo-600/[0.04] rounded-full blur-3xl pointer-events-none"
+            className="absolute top-0 right-0 w-[480px] h-[480px] bg-accent/[0.06] rounded-full blur-3xl pointer-events-none"
             aria-hidden="true"
           />
 
@@ -200,21 +200,21 @@ export default function LandingPage() {
             <div className="max-w-[38rem] space-y-7 animate-slide-up">
 
               {/* Eyebrow */}
-              <div className="inline-flex items-center gap-2 border border-indigo-800/50 rounded-full px-3.5 py-1 text-[11px] font-semibold text-indigo-400 tracking-widest uppercase">
+              <div className="inline-flex items-center gap-2 border border-accent/30 rounded-full px-3.5 py-1 text-[11px] font-semibold text-accent tracking-widest uppercase">
                 Decision Intelligence
               </div>
 
               {/* Headline */}
-              <h1 className="text-5xl md:text-[5.5rem] font-bold tracking-tighter leading-none text-white">
+              <h1 className="text-5xl md:text-[5.5rem] font-bold tracking-tighter leading-none text-ink">
                 Stop scrolling
                 <br />
                 Reddit.
                 <br />
-                <span className="text-indigo-400">Get your match.</span>
+                <span className="text-accent">Get your match.</span>
               </h1>
 
               {/* Body */}
-              <p className="text-base text-gray-400 leading-relaxed max-w-[52ch]">
+              <p className="text-base text-muted leading-relaxed max-w-[52ch]">
                 Answer a few questions about use case, budget, and priorities.
                 We rank against real purchase outcomes — not what paid the most.
               </p>
@@ -223,12 +223,12 @@ export default function LandingPage() {
               <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
                 <Link
                   href="/electronics"
-                  className="inline-flex items-center gap-2.5 bg-indigo-600 hover:bg-indigo-500 active:-translate-y-[1px] text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-150 text-sm shadow-lg shadow-indigo-900/30"
+                  className="inline-flex items-center gap-2.5 bg-accent hover:bg-accent-dark active:-translate-y-[1px] text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-150 text-sm shadow-lg shadow-accent/20"
                 >
                   Find My Match
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-                <span className="text-xs text-gray-600 tracking-wide">Free · No sign-up · 60 seconds</span>
+                <span className="text-xs text-muted/60 tracking-wide">Free · No sign-up · 60 seconds</span>
               </div>
 
               {/* Trust signals */}
@@ -238,8 +238,8 @@ export default function LandingPage() {
                   "No sponsored results",
                   "No account required",
                 ].map((s) => (
-                  <div key={s} className="flex items-center gap-1.5 text-xs text-gray-500">
-                    <CheckIcon className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+                  <div key={s} className="flex items-center gap-1.5 text-xs text-muted">
+                    <CheckIcon className="w-3.5 h-3.5 text-accent shrink-0" />
                     {s}
                   </div>
                 ))}
@@ -255,19 +255,19 @@ export default function LandingPage() {
           {/* Electronics — featured, full-width */}
           <Link
             href={electronics.href}
-            className="stagger-item group block bg-gray-900 hover:bg-gray-800/70 border border-gray-800 hover:border-indigo-800/50 rounded-2xl px-6 py-6 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
+            className="stagger-item group block bg-paper-soft hover:bg-[#ddd6c4] border border-ink/12 hover:border-accent/40 rounded-2xl px-6 py-6 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="flex items-center gap-3">
-                <ElectronicsIcon className="w-6 h-6 text-indigo-400" />
-                <span className="font-bold text-white text-lg tracking-tight group-hover:text-indigo-300 transition-colors duration-150">
+                <ElectronicsIcon className="w-6 h-6 text-accent" />
+                <span className="font-bold text-ink text-lg tracking-tight group-hover:text-accent transition-colors duration-150">
                   {electronics.label}
                 </span>
               </div>
               <CategoryBadge cat={electronics} />
             </div>
 
-            <p className="text-sm text-gray-500 leading-relaxed max-w-[60ch] mb-5">
+            <p className="text-sm text-muted leading-relaxed max-w-[60ch] mb-5">
               {electronics.tagline}
             </p>
 
@@ -278,8 +278,8 @@ export default function LandingPage() {
                   key={sub.id}
                   className={`text-[11px] font-medium px-2.5 py-1 rounded-full border ${
                     sub.comingSoon
-                      ? "bg-gray-800/50 text-gray-600 border-gray-700/50"
-                      : "bg-indigo-950/60 text-indigo-400 border-indigo-900/40"
+                      ? "bg-ink/5 text-muted border-ink/10"
+                      : "bg-accent/10 text-accent border-accent/30"
                   }`}
                 >
                   {sub.label}
@@ -287,7 +287,7 @@ export default function LandingPage() {
               ))}
             </div>
 
-            <div className="flex items-center gap-1.5 text-sm font-medium text-indigo-400 group-hover:text-indigo-300 transition-colors duration-150">
+            <div className="flex items-center gap-1.5 text-sm font-medium text-accent group-hover:text-accent-dark transition-colors duration-150">
               <span>Start Quiz</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-150" />
             </div>
@@ -303,29 +303,29 @@ export default function LandingPage() {
                   key={cat.id}
                   href={cat.href}
                   style={{ "--index": i + 1 } as React.CSSProperties}
-                  className="stagger-item group block bg-gray-900 hover:bg-gray-800/60 border border-gray-800 hover:border-gray-700 rounded-2xl px-5 py-5 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
+                  className="stagger-item group block bg-paper-soft hover:bg-[#ddd6c4] border border-ink/12 hover:border-ink/20 rounded-2xl px-5 py-5 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <Icon className="w-5 h-5 text-gray-600 group-hover:text-gray-400 transition-colors duration-150" />
+                    <Icon className="w-5 h-5 text-muted group-hover:text-ink transition-colors duration-150" />
                     <CategoryBadge cat={cat} />
                   </div>
 
-                  <p className="font-semibold text-white group-hover:text-gray-100 transition-colors duration-150 text-sm mb-1.5">
+                  <p className="font-semibold text-ink text-sm mb-1.5">
                     {cat.label}
                   </p>
-                  <p className="text-xs text-gray-600 leading-relaxed mb-4 max-w-[38ch]">
+                  <p className="text-xs text-muted leading-relaxed mb-4 max-w-[38ch]">
                     {cat.tagline}
                   </p>
 
                   {/* Sub-category pills — muted, informational only */}
                   <div className="flex flex-wrap gap-1">
                     {cat.subCategories.slice(0, 3).map((sub) => (
-                      <span key={sub.id} className="text-[10px] text-gray-700 border border-gray-800 px-2 py-0.5 rounded-full">
+                      <span key={sub.id} className="text-[10px] text-muted border border-ink/10 px-2 py-0.5 rounded-full">
                         {sub.label}
                       </span>
                     ))}
                     {cat.subCategories.length > 3 && (
-                      <span className="text-[10px] text-gray-700 border border-gray-800 px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] text-muted border border-ink/10 px-2 py-0.5 rounded-full">
                         +{cat.subCategories.length - 3} more
                       </span>
                     )}
@@ -342,19 +342,19 @@ export default function LandingPage() {
               <Link
                 href={business.href}
                 style={{ "--index": 5 } as React.CSSProperties}
-                className="stagger-item group flex items-center justify-between gap-6 bg-gray-900 hover:bg-gray-800/60 border border-gray-800 hover:border-gray-700 rounded-2xl px-6 py-5 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
+                className="stagger-item group flex items-center justify-between gap-6 bg-paper-soft hover:bg-[#ddd6c4] border border-ink/12 hover:border-ink/20 rounded-2xl px-6 py-5 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
               >
                 <div className="flex items-center gap-4 min-w-0">
-                  <Icon className="w-5 h-5 text-gray-600 group-hover:text-gray-400 transition-colors duration-150 shrink-0" />
+                  <Icon className="w-5 h-5 text-muted group-hover:text-ink transition-colors duration-150 shrink-0" />
                   <div className="min-w-0">
                     <div className="flex items-center gap-2.5 mb-0.5">
-                      <span className="font-semibold text-white text-sm">{business.label}</span>
+                      <span className="font-semibold text-ink text-sm">{business.label}</span>
                       <CategoryBadge cat={business} />
                     </div>
-                    <p className="text-xs text-gray-600 truncate max-w-[55ch]">{business.tagline}</p>
+                    <p className="text-xs text-muted truncate max-w-[55ch]">{business.tagline}</p>
                   </div>
                 </div>
-                <ArrowRight className="w-4 h-4 text-gray-700 group-hover:text-gray-500 group-hover:translate-x-0.5 transition-all duration-150 shrink-0" />
+                <ArrowRight className="w-4 h-4 text-muted/40 group-hover:text-muted group-hover:translate-x-0.5 transition-all duration-150 shrink-0" />
               </Link>
             );
           })()}
@@ -365,12 +365,12 @@ export default function LandingPage() {
               <Link
                 href={beauty.href}
                 style={{ "--index": 6 } as React.CSSProperties}
-                className="stagger-item group block bg-gray-900 hover:bg-gray-800/70 border border-gray-800 hover:border-indigo-800/40 rounded-2xl px-6 py-6 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
+                className="stagger-item group block bg-paper-soft hover:bg-[#ddd6c4] border border-ink/12 hover:border-accent/30 rounded-2xl px-6 py-6 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <BeautyIcon className="w-6 h-6 text-indigo-400/70" />
-                    <span className="font-bold text-white text-lg tracking-tight group-hover:text-indigo-300 transition-colors duration-150">
+                    <BeautyIcon className="w-6 h-6 text-accent/70" />
+                    <span className="font-bold text-ink text-lg tracking-tight group-hover:text-accent transition-colors duration-150">
                       {beauty.label}
                     </span>
                   </div>
@@ -382,7 +382,7 @@ export default function LandingPage() {
                   </div>
                 </div>
 
-                <p className="text-sm text-gray-500 leading-relaxed max-w-[60ch] mb-5">
+                <p className="text-sm text-muted leading-relaxed max-w-[60ch] mb-5">
                   {beauty.tagline}
                 </p>
 
@@ -391,14 +391,14 @@ export default function LandingPage() {
                   {beauty.subCategories.map((sub) => (
                     <span
                       key={sub.id}
-                      className="text-[11px] font-medium px-2.5 py-1 rounded-full border bg-indigo-950/40 text-indigo-400/70 border-indigo-900/30"
+                      className="text-[11px] font-medium px-2.5 py-1 rounded-full border bg-accent/8 text-accent/80 border-accent/25"
                     >
                       {sub.label}
                     </span>
                   ))}
                 </div>
 
-                <div className="flex items-center gap-1.5 text-sm font-medium text-indigo-400/80 group-hover:text-indigo-300 transition-colors duration-150">
+                <div className="flex items-center gap-1.5 text-sm font-medium text-accent group-hover:text-accent-dark transition-colors duration-150">
                   <span>Book Treatment</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-150" />
                 </div>
@@ -409,27 +409,27 @@ export default function LandingPage() {
         </section>
 
         {/* ── How it works ──────────────────────────────────── */}
-        <section className="px-6 py-16 border-t border-gray-800/50">
+        <section className="px-6 py-16 border-t border-ink/10">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-[5rem_1fr] gap-x-10 items-start">
 
               {/* Rotated label */}
               <div className="hidden md:flex items-start pt-1">
-                <p className="text-[11px] font-semibold tracking-widest text-gray-600 uppercase">
+                <p className="text-[11px] font-semibold tracking-widest text-muted uppercase">
                   The&nbsp;method
                 </p>
               </div>
 
               {/* Steps */}
-              <div className="divide-y divide-gray-800/60">
+              <div className="divide-y divide-ink/10">
                 {STEPS.map(({ n, title, body }) => (
                   <div key={n} className="grid grid-cols-[3rem_1fr] gap-6 py-6 first:pt-0 last:pb-0">
-                    <span className="text-3xl font-bold text-indigo-600/30 font-mono tracking-tighter leading-none tabular-nums">
+                    <span className="text-3xl font-bold text-accent/30 font-mono tracking-tighter leading-none tabular-nums">
                       {n}
                     </span>
                     <div className="space-y-1.5 pt-1">
-                      <h3 className="font-semibold text-white text-sm tracking-tight">{title}</h3>
-                      <p className="text-sm text-gray-500 leading-relaxed max-w-[55ch]">{body}</p>
+                      <h3 className="font-semibold text-ink text-sm tracking-tight">{title}</h3>
+                      <p className="text-sm text-muted leading-relaxed max-w-[55ch]">{body}</p>
                     </div>
                   </div>
                 ))}
@@ -440,16 +440,16 @@ export default function LandingPage() {
         </section>
 
         {/* ── Why DEN ──────────────────────────────────────── */}
-        <section className="px-6 py-16 border-t border-gray-800/50">
+        <section className="px-6 py-16 border-t border-ink/10">
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-8">
             <div className="space-y-3 max-w-[38rem]">
-              <p className="text-[11px] font-semibold tracking-widest text-indigo-400 uppercase">
+              <p className="text-[11px] font-semibold tracking-widest text-accent uppercase">
                 What makes DEN different
               </p>
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tighter leading-tight text-white">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tighter leading-tight text-ink">
                 Built on outcomes, not opinions.
               </h2>
-              <p className="text-sm text-gray-500 leading-relaxed max-w-[55ch]">
+              <p className="text-sm text-muted leading-relaxed max-w-[55ch]">
                 Most recommendation engines rank by click-through or affiliate margin.
                 DEN tracks what happens after the decision — returns, revisits, satisfaction
                 signals — and weights every result against your specific profile.
@@ -458,7 +458,7 @@ export default function LandingPage() {
             <div className="shrink-0">
               <Link
                 href="/electronics"
-                className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 active:-translate-y-[1px] text-white font-semibold px-5 py-3 rounded-xl text-sm transition-all duration-150"
+                className="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark active:-translate-y-[1px] text-white font-semibold px-5 py-3 rounded-xl text-sm transition-all duration-150"
               >
                 Try it now
                 <ArrowRight className="w-4 h-4" />
@@ -470,14 +470,14 @@ export default function LandingPage() {
       </main>
 
       {/* ── Footer ───────────────────────────────────────── */}
-      <footer className="px-6 py-6 border-t border-gray-800/50">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-700">
+      <footer className="px-6 py-6 border-t border-ink/10">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted">
           <span>© {new Date().getFullYear()} DEN</span>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="hover:text-gray-400 transition-colors duration-150">
+            <Link href="/privacy" className="hover:text-ink transition-colors duration-150">
               Privacy
             </Link>
-            <Link href="/electronics" className="hover:text-gray-400 transition-colors duration-150">
+            <Link href="/electronics" className="hover:text-ink transition-colors duration-150">
               Start Quiz →
             </Link>
           </div>

@@ -20,11 +20,11 @@ const SEGMENT_LABELS: Record<string, string> = {
 };
 
 const SEGMENT_COLORS: Record<string, string> = {
-  student:      "bg-emerald-950/80 text-emerald-400 border-emerald-800/50",
-  gamer:        "bg-red-950/80 text-red-400 border-red-800/50",
-  professional: "bg-blue-950/80 text-blue-400 border-blue-800/50",
-  creator:      "bg-violet-950/80 text-violet-400 border-violet-800/50",
-  general:      "bg-gray-900 text-gray-400 border-gray-700",
+  student:      "bg-emerald-50 text-emerald-700 border-emerald-200",
+  gamer:        "bg-red-50 text-red-700 border-red-200",
+  professional: "bg-blue-50 text-blue-700 border-blue-200",
+  creator:      "bg-violet-50 text-violet-700 border-violet-200",
+  general:      "bg-ink/5 text-muted border-ink/15",
 };
 
 function QuizContent() {
@@ -101,7 +101,7 @@ function QuizContent() {
   const isTwoCol = current.options.length > 3;
 
   return (
-    <div className="min-h-[100dvh] flex flex-col">
+    <div className="min-h-[100dvh] flex flex-col bg-paper text-ink">
 
       {/* ── WCAG: announce question changes to screen readers ── */}
       <div
@@ -114,10 +114,10 @@ function QuizContent() {
       </div>
 
       {/* ── Top bar ────────────────────────────────────────── */}
-      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-800/40">
+      <div className="flex items-center justify-between px-6 py-4 border-b border-ink/10">
         <Link href="/" className="flex items-center gap-2">
-          <span className="w-6 h-6 rounded-md bg-indigo-600 flex items-center justify-center text-xs font-bold">D</span>
-          <span className="text-sm font-semibold text-white">{categoryMeta.label}</span>
+          <span className="w-6 h-6 rounded-md bg-accent flex items-center justify-center text-xs font-bold text-white">D</span>
+          <span className="text-sm font-semibold text-ink">{categoryMeta.label}</span>
         </Link>
         <div className="flex items-center gap-3">
           {detectedSegment && (
@@ -127,16 +127,16 @@ function QuizContent() {
               {SEGMENT_LABELS[detectedSegment]}
             </span>
           )}
-          <span className="text-xs text-gray-600 font-mono tabular-nums">
+          <span className="text-xs text-muted font-mono tabular-nums">
             {step + 1}/{STEPS.length}
           </span>
         </div>
       </div>
 
       {/* ── Progress bar ───────────────────────────────────── */}
-      <div className="h-[2px] bg-gray-800/80">
+      <div className="h-[2px] bg-ink/12">
         <div
-          className="h-full bg-indigo-600 transition-all duration-500 ease-out"
+          className="h-full bg-accent transition-all duration-500 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -149,10 +149,10 @@ function QuizContent() {
             onClick={() => !isTransitioning && i < step && setStep(i)}
             className={`rounded-full transition-all duration-300 ${
               i < step
-                ? "w-2 h-2 bg-indigo-500 cursor-pointer hover:bg-indigo-400"
+                ? "w-2 h-2 bg-accent cursor-pointer hover:bg-accent-dark"
                 : i === step
-                ? "w-3 h-3 bg-white ring-2 ring-white/20"
-                : "w-2 h-2 bg-gray-700 cursor-default"
+                ? "w-3 h-3 bg-ink ring-2 ring-ink/20"
+                : "w-2 h-2 bg-ink/20 cursor-default"
             }`}
           />
         ))}
@@ -165,13 +165,13 @@ function QuizContent() {
           {/* Question — key forces re-mount + animation on each step change */}
           <div key={step} className="animate-slide-up space-y-8">
             <div className="space-y-2 text-center">
-              <p className="text-xs font-semibold text-indigo-400 uppercase tracking-widest">
+              <p className="text-xs font-semibold text-accent uppercase tracking-widest">
                 Step {step + 1} of {STEPS.length}
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight text-ink">
                 {current.question}
               </h2>
-              <p className="text-sm text-gray-500">{current.subtitle}</p>
+              <p className="text-sm text-muted">{current.subtitle}</p>
             </div>
 
             {/* Options */}
@@ -189,24 +189,24 @@ function QuizContent() {
                       transition-all duration-150 active:scale-[0.98]
                       animate-fade-in
                       ${isChosen
-                        ? "bg-indigo-950/60 border-indigo-500/60 ring-1 ring-indigo-500/30"
-                        : "bg-gray-900 border-gray-800 hover:bg-gray-800/80 hover:border-indigo-800/60"
+                        ? "bg-accent/10 border-accent/50 ring-1 ring-accent/20"
+                        : "bg-paper-soft border-ink/12 hover:bg-[#ddd6c4] hover:border-accent/40"
                       }
                     `}
                   >
                     <div className="min-w-0 flex-1">
-                      <p className={`font-semibold text-sm transition-colors ${isChosen ? "text-white" : "text-white group-hover:text-indigo-200"}`}>
+                      <p className={`font-semibold text-sm transition-colors ${isChosen ? "text-ink" : "text-ink group-hover:text-accent"}`}>
                         {opt.label}
                       </p>
-                      <p className={`text-xs mt-0.5 leading-relaxed transition-colors ${isChosen ? "text-indigo-300" : "text-gray-500"}`}>
+                      <p className={`text-xs mt-0.5 leading-relaxed transition-colors ${isChosen ? "text-accent/80" : "text-muted"}`}>
                         {opt.description}
                       </p>
                     </div>
                     <span
                       className={`ml-auto shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-150 ${
                         isChosen
-                          ? "bg-indigo-500 border-indigo-400"
-                          : "border-gray-700"
+                          ? "bg-accent border-accent/70"
+                          : "border-ink/25"
                       }`}
                     >
                       {isChosen && (
@@ -223,7 +223,7 @@ function QuizContent() {
               <div className="text-center">
                 <button
                   onClick={() => !isTransitioning && setStep((s) => s - 1)}
-                  className="text-sm text-gray-600 hover:text-gray-400 transition-colors"
+                  className="text-sm text-muted hover:text-ink transition-colors"
                 >
                   ← Back
                 </button>
@@ -240,8 +240,8 @@ export default function QuizPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center">
-          <p className="text-gray-500 text-sm">Loading quiz…</p>
+        <div className="min-h-screen flex items-center justify-center bg-paper">
+          <p className="text-muted text-sm">Loading quiz…</p>
         </div>
       }
     >

@@ -1,6 +1,6 @@
 {
-  "lastRun": "2026-06-03T17:12:48.165Z",
-  "totalPagesGenerated": 14,
+  "lastRun": "2026-06-05T20:48:04.513Z",
+  "totalPagesGenerated": 16,
   "totalCategoriesGenerated": 3,
   "expansionHistory": [
     {
@@ -18,6 +18,14 @@
       "categoriesAdded": 0,
       "opportunitiesDetected": 4,
       "confidenceThreshold": 0.85
+    },
+    {
+      "runId": "run-1780692484513",
+      "timestamp": "2026-06-05T20:48:04.513Z",
+      "pagesAdded": 0,
+      "categoriesAdded": 0,
+      "opportunitiesDetected": 0,
+      "confidenceThreshold": 0.87
     }
   ],
   "currentOpportunities": [
@@ -181,87 +189,14 @@
       }
     }
   ],
-  "revenueScans": [
-    {
-      "productId": "p3",
-      "issue": "high_payout_low_traffic",
-      "currentMetrics": {
-        "conversionRate": 0.06,
-        "affiliatePayout": 85,
-        "totalRevenue": 1020,
-        "revenueTrend": "rising"
-      },
-      "suggestion": "p3: payout £85 but conv 6.0% below avg. Add to intent pages.",
-      "priority": "urgent"
-    },
-    {
-      "productId": "p4",
-      "issue": "high_payout_low_traffic",
-      "currentMetrics": {
-        "conversionRate": 0.07,
-        "affiliatePayout": 58,
-        "totalRevenue": 696,
-        "revenueTrend": "rising"
-      },
-      "suggestion": "p4: payout £58 but conv 7.0% below avg. Add to intent pages.",
-      "priority": "medium"
-    },
-    {
-      "productId": "p5",
-      "issue": "high_payout_low_traffic",
-      "currentMetrics": {
-        "conversionRate": 0.06,
-        "affiliatePayout": 52,
-        "totalRevenue": 468,
-        "revenueTrend": "stable"
-      },
-      "suggestion": "p5: payout £52 but conv 6.0% below avg. Add to intent pages.",
-      "priority": "medium"
-    },
-    {
-      "productId": "p8",
-      "issue": "declining_trend",
-      "currentMetrics": {
-        "conversionRate": 0.11,
-        "affiliatePayout": 14,
-        "totalRevenue": 126,
-        "revenueTrend": "declining"
-      },
-      "suggestion": "p8: declining trend. Investigate niche page to retain segment.",
-      "priority": "low"
-    },
-    {
-      "productId": "p9",
-      "issue": "high_payout_low_traffic",
-      "currentMetrics": {
-        "conversionRate": 0.05,
-        "affiliatePayout": 95,
-        "totalRevenue": 855,
-        "revenueTrend": "rising"
-      },
-      "suggestion": "p9: payout £95 but conv 5.0% below avg. Add to intent pages.",
-      "priority": "urgent"
-    },
-    {
-      "productId": "p10",
-      "issue": "declining_trend",
-      "currentMetrics": {
-        "conversionRate": 0.04,
-        "affiliatePayout": 11,
-        "totalRevenue": 44,
-        "revenueTrend": "declining"
-      },
-      "suggestion": "p10: declining trend. Investigate niche page to retain segment.",
-      "priority": "low"
-    }
-  ],
+  "revenueScans": [],
   "feedbackState": {
-    "confidenceThreshold": 0.87,
+    "confidenceThreshold": 0.89,
     "expansionRecords": [
       {
         "pageSlug": "best-gaming-laptops-under-1000",
         "generatedAt": "2025-01-01T00:00:00.000Z",
-        "evaluatedAt": "2026-06-03T17:12:48.168Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -272,7 +207,7 @@
       {
         "pageSlug": "best-laptops-for-students",
         "generatedAt": "2025-01-01T00:00:00.000Z",
-        "evaluatedAt": "2026-06-03T17:12:48.168Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -283,7 +218,7 @@
       {
         "pageSlug": "best-laptops-for-coding",
         "generatedAt": "2025-01-01T00:00:00.000Z",
-        "evaluatedAt": "2026-06-03T17:12:48.168Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -294,7 +229,117 @@
       {
         "pageSlug": "lightweight-laptops-for-travel",
         "generatedAt": "2025-01-01T00:00:00.000Z",
-        "evaluatedAt": "2026-06-03T17:12:48.168Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
+        "sessions": 0,
+        "quizConversions": 0,
+        "conversionRate": 0,
+        "avgScrollDepth": 0,
+        "faqEngagement": 0,
+        "expansionScore": 0
+      },
+      {
+        "pageSlug": "best-laptops-for-video-editing",
+        "generatedAt": "2026-06-03T17:12:48.165Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
+        "sessions": 0,
+        "quizConversions": 0,
+        "conversionRate": 0,
+        "avgScrollDepth": 0,
+        "faqEngagement": 0,
+        "expansionScore": 0
+      },
+      {
+        "pageSlug": "best-gaming-monitors",
+        "generatedAt": "2026-06-03T17:12:48.165Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
+        "sessions": 0,
+        "quizConversions": 0,
+        "conversionRate": 0,
+        "avgScrollDepth": 0,
+        "faqEngagement": 0,
+        "expansionScore": 0
+      },
+      {
+        "pageSlug": "best-tablets-for-students",
+        "generatedAt": "2026-06-03T17:12:48.165Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
+        "sessions": 0,
+        "quizConversions": 0,
+        "conversionRate": 0,
+        "avgScrollDepth": 0,
+        "faqEngagement": 0,
+        "expansionScore": 0
+      },
+      {
+        "pageSlug": "best-gaming-pcs",
+        "generatedAt": "2026-06-03T17:12:48.165Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
+        "sessions": 0,
+        "quizConversions": 0,
+        "conversionRate": 0,
+        "avgScrollDepth": 0,
+        "faqEngagement": 0,
+        "expansionScore": 0
+      },
+      {
+        "pageSlug": "best-phones-for-photography",
+        "generatedAt": "2026-06-03T17:12:48.169Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
+        "sessions": 0,
+        "quizConversions": 0,
+        "conversionRate": 0,
+        "avgScrollDepth": 0,
+        "faqEngagement": 0,
+        "expansionScore": 0
+      },
+      {
+        "pageSlug": "best-budget-smartphones",
+        "generatedAt": "2026-06-03T17:12:48.169Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
+        "sessions": 0,
+        "quizConversions": 0,
+        "conversionRate": 0,
+        "avgScrollDepth": 0,
+        "faqEngagement": 0,
+        "expansionScore": 0
+      },
+      {
+        "pageSlug": "best-budget-laptops-under-500",
+        "generatedAt": "2026-06-03T17:12:48.169Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
+        "sessions": 0,
+        "quizConversions": 0,
+        "conversionRate": 0,
+        "avgScrollDepth": 0,
+        "faqEngagement": 0,
+        "expansionScore": 0
+      },
+      {
+        "pageSlug": "best-premium-laptops-for-professionals",
+        "generatedAt": "2026-06-03T17:12:48.169Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
+        "sessions": 0,
+        "quizConversions": 0,
+        "conversionRate": 0,
+        "avgScrollDepth": 0,
+        "faqEngagement": 0,
+        "expansionScore": 0
+      },
+      {
+        "pageSlug": "best-battery-life-phones",
+        "generatedAt": "2026-06-03T17:12:48.169Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
+        "sessions": 0,
+        "quizConversions": 0,
+        "conversionRate": 0,
+        "avgScrollDepth": 0,
+        "faqEngagement": 0,
+        "expansionScore": 0
+      },
+      {
+        "pageSlug": "best-monitors-for-video-editing",
+        "generatedAt": "2026-06-03T17:12:48.169Z",
+        "evaluatedAt": "2026-06-05T20:48:04.515Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -304,6 +349,6 @@
       }
     ],
     "avgExpansionScore": 0,
-    "lastEvaluated": "2026-06-03T17:12:48.168Z"
+    "lastEvaluated": "2026-06-05T20:48:04.515Z"
   }
 }

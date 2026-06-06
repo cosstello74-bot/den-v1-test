@@ -52,10 +52,10 @@ const PRICE_BAND_LABELS: Record<string, string> = {
 };
 
 const PRICE_BAND_COLORS: Record<string, string> = {
-  budget:  "text-emerald-400 bg-emerald-950/50 border-emerald-800/50",
-  mid:     "text-gray-400 bg-gray-800/60 border-gray-700",
-  high:    "text-indigo-400 bg-indigo-950/50 border-indigo-800/50",
-  premium: "text-amber-400 bg-amber-950/50 border-amber-800/50",
+  budget:  "text-emerald-700 bg-emerald-50 border-emerald-200",
+  mid:     "text-muted bg-ink/8 border-ink/15",
+  high:    "text-accent bg-accent/10 border-accent/30",
+  premium: "text-amber-700 bg-amber-50 border-amber-200",
 };
 
 // Score bar delay class by rank position
@@ -86,13 +86,13 @@ function ScoreBar({ score, variant = 0 }: { score: number; variant?: number }) {
   const w = Math.min(Math.round(score), 100);
   return (
     <div className="flex items-center gap-3">
-      <div className="flex-1 h-2.5 bg-gray-800 rounded-full overflow-hidden">
+      <div className="flex-1 h-2.5 bg-ink/12 rounded-full overflow-hidden">
         <div
-          className={`h-full bg-indigo-600 rounded-full ${barClass}`}
+          className={`h-full bg-accent rounded-full ${barClass}`}
           style={{ width: `${w}%` }}
         />
       </div>
-      <span className="text-sm font-bold text-indigo-400 w-10 text-right tabular-nums shrink-0">
+      <span className="text-sm font-bold text-accent w-10 text-right tabular-nums shrink-0">
         {w}
       </span>
     </div>
@@ -111,14 +111,14 @@ function DimensionBars({ product }: { product: ProductWithMetrics }) {
     <div className="space-y-2.5">
       {dims.map(({ label, val }) => (
         <div key={label} className="flex items-center gap-3">
-          <span className="text-[11px] text-gray-600 w-24 shrink-0 leading-none">{label}</span>
-          <div className="flex-1 h-1.5 bg-gray-800 rounded-full overflow-hidden">
+          <span className="text-[11px] text-muted w-24 shrink-0 leading-none">{label}</span>
+          <div className="flex-1 h-1.5 bg-ink/12 rounded-full overflow-hidden">
             <div
-              className="h-full bg-indigo-600/50 rounded-full"
+              className="h-full bg-accent/40 rounded-full"
               style={{ width: `${Math.min(val, 100)}%` }}
             />
           </div>
-          <span className="text-[11px] text-gray-600 w-6 text-right tabular-nums shrink-0">{val}</span>
+          <span className="text-[11px] text-muted w-6 text-right tabular-nums shrink-0">{val}</span>
         </div>
       ))}
     </div>
@@ -131,10 +131,10 @@ function TruthBadge({ truth }: { truth: ProductTruth | undefined }) {
   const isHigh = truth.truth_score >= 0.7;
   const isMid  = truth.truth_score >= 0.5;
   const cls    = isHigh
-    ? "text-emerald-400 bg-emerald-950/50 border-emerald-800/50"
+    ? "text-emerald-700 bg-emerald-50 border-emerald-200"
     : isMid
-    ? "text-indigo-400 bg-indigo-950/50 border-indigo-800/50"
-    : "text-amber-400 bg-amber-950/50 border-amber-800/50";
+    ? "text-accent bg-accent/10 border-accent/30"
+    : "text-amber-700 bg-amber-50 border-amber-200";
   const label  = isHigh ? "Verified" : isMid ? "Mixed signals" : "Sparse data";
   return (
     <span className={`inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${cls}`}>
@@ -146,21 +146,21 @@ function TruthBadge({ truth }: { truth: ProductTruth | undefined }) {
 
 function ConfidenceBadge({ confidence }: { confidence: number }) {
   if (confidence >= 1.0)
-    return <span className="text-[11px] font-semibold text-emerald-400">● High Confidence</span>;
+    return <span className="text-[11px] font-semibold text-emerald-600">● High Confidence</span>;
   if (confidence >= 0.8)
-    return <span className="text-[11px] font-semibold text-indigo-400">● Growing Data</span>;
-  return <span className="text-[11px] font-semibold text-gray-600">● Early Signals</span>;
+    return <span className="text-[11px] font-semibold text-accent">● Growing Data</span>;
+  return <span className="text-[11px] font-semibold text-muted">● Early Signals</span>;
 }
 
 // ─── Skeleton (Suspense fallback) ─────────────────────────────────────────────
 
 function ResultsSkeleton() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-950 text-gray-300">
-      <nav className="flex items-center justify-between px-6 py-4 border-b border-gray-800/40 sticky top-0 z-20 backdrop-blur-sm bg-gray-950/80">
+    <div className="min-h-screen flex flex-col bg-paper text-ink">
+      <nav className="flex items-center justify-between px-6 py-4 border-b border-ink/10 sticky top-0 z-20 backdrop-blur-sm bg-paper/90">
         <div className="flex items-center gap-2.5">
-          <span className="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-sm font-bold text-white">D</span>
-          <span className="text-sm font-semibold text-white">DEN</span>
+          <span className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center text-sm font-bold text-white">D</span>
+          <span className="text-sm font-semibold text-ink">DEN</span>
         </div>
       </nav>
       <main className="flex-1 px-4 py-12">
@@ -168,9 +168,9 @@ function ResultsSkeleton() {
 
           {/* Header skeleton */}
           <div className="space-y-2.5 animate-pulse">
-            <div className="h-3 w-44 bg-gray-800 rounded-full" />
-            <div className="h-9 w-52 bg-gray-800 rounded-lg" />
-            <div className="h-3 w-72 bg-gray-800 rounded-full" />
+            <div className="h-3 w-44 bg-ink/10 rounded-full" />
+            <div className="h-9 w-52 bg-ink/10 rounded-lg" />
+            <div className="h-3 w-72 bg-ink/10 rounded-full" />
           </div>
 
           {/* Card skeletons */}
@@ -178,36 +178,36 @@ function ResultsSkeleton() {
             {[7, 5, 5].map((padding, i) => (
               <div
                 key={i}
-                className={`bg-gray-900 border border-gray-800 rounded-2xl animate-pulse p-${padding}`}
+                className={`bg-paper-soft border border-ink/12 rounded-2xl animate-pulse p-${padding}`}
               >
                 <div className="space-y-5 p-1">
                   {/* Rank row */}
                   <div className="flex items-start justify-between">
                     <div className="space-y-1.5">
-                      <div className="h-3 w-24 bg-gray-800 rounded-full" />
-                      <div className="h-2.5 w-44 bg-gray-800 rounded-full" />
+                      <div className="h-3 w-24 bg-ink/10 rounded-full" />
+                      <div className="h-2.5 w-44 bg-ink/10 rounded-full" />
                     </div>
-                    <div className="h-6 w-20 bg-gray-800 rounded-full" />
+                    <div className="h-6 w-20 bg-ink/10 rounded-full" />
                   </div>
                   {/* Product name */}
-                  <div className={`bg-gray-800 rounded-lg ${i === 0 ? "h-9 w-56" : "h-6 w-44"}`} />
+                  <div className={`bg-ink/10 rounded-lg ${i === 0 ? "h-9 w-56" : "h-6 w-44"}`} />
                   {/* Score bar */}
                   <div className="space-y-2">
-                    <div className="h-2.5 w-24 bg-gray-800 rounded-full" />
-                    <div className="h-2.5 bg-gray-800 rounded-full" />
+                    <div className="h-2.5 w-24 bg-ink/10 rounded-full" />
+                    <div className="h-2.5 bg-ink/10 rounded-full" />
                   </div>
                   {/* Dimension bars */}
                   <div className="space-y-2.5">
                     {[...Array(5)].map((_, j) => (
                       <div key={j} className="flex items-center gap-3">
-                        <div className="h-2 w-20 bg-gray-800 rounded-full shrink-0" />
-                        <div className="flex-1 h-1.5 bg-gray-800 rounded-full" />
-                        <div className="h-2 w-5 bg-gray-800 rounded-full" />
+                        <div className="h-2 w-20 bg-ink/10 rounded-full shrink-0" />
+                        <div className="flex-1 h-1.5 bg-ink/10 rounded-full" />
+                        <div className="h-2 w-5 bg-ink/10 rounded-full" />
                       </div>
                     ))}
                   </div>
                   {/* CTA */}
-                  <div className={`h-11 w-full rounded-xl ${i === 0 ? "bg-indigo-950" : "bg-gray-800"}`} />
+                  <div className={`h-11 w-full rounded-xl ${i === 0 ? "bg-accent/15" : "bg-ink/10"}`} />
                 </div>
               </div>
             ))}
@@ -326,21 +326,21 @@ function ResultsContent() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-950 text-gray-300">
+    <div className="min-h-screen flex flex-col bg-paper text-ink">
 
       {/* ── Nav ─────────────────────────────────────────── */}
-      <nav className="flex items-center justify-between px-6 py-4 border-b border-gray-800/40 sticky top-0 z-20 backdrop-blur-sm bg-gray-950/80">
+      <nav className="flex items-center justify-between px-6 py-4 border-b border-ink/10 sticky top-0 z-20 backdrop-blur-sm bg-paper/90">
         <Link href="/" className="flex items-center gap-2.5">
-          <span className="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-sm font-bold text-white" aria-hidden="true">D</span>
-          <span className="text-sm font-semibold text-white">DEN</span>
+          <span className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center text-sm font-bold text-white" aria-hidden="true">D</span>
+          <span className="text-sm font-semibold text-ink">DEN</span>
         </Link>
         {/* Breadcrumb */}
-        <div className="flex items-center gap-1.5 text-xs text-gray-600">
-          <Link href="/electronics" className="hover:text-gray-400 transition-colors duration-150">
+        <div className="flex items-center gap-1.5 text-xs text-muted">
+          <Link href="/electronics" className="hover:text-ink transition-colors duration-150">
             Electronics
           </Link>
           <span aria-hidden="true">/</span>
-          <span className="text-gray-500">{meta.label}</span>
+          <span>{meta.label}</span>
         </div>
       </nav>
 
@@ -350,24 +350,24 @@ function ResultsContent() {
           {/* ── Page header ───────────────────────────────── */}
           <div className="animate-slide-up space-y-2">
             <div className="flex items-center gap-2 flex-wrap text-[11px]">
-              <span className="font-bold tracking-widest text-gray-600 uppercase">Electronics</span>
-              <span className="text-gray-800" aria-hidden="true">·</span>
-              <span className="font-bold tracking-widest text-indigo-400 uppercase">{meta.label}</span>
-              <span className="text-gray-800" aria-hidden="true">·</span>
-              <span className="text-gray-600">{SEGMENT_LABELS[segment] ?? "Your Profile"}</span>
+              <span className="font-bold tracking-widest text-muted uppercase">Electronics</span>
+              <span className="text-ink/20" aria-hidden="true">·</span>
+              <span className="font-bold tracking-widest text-accent uppercase">{meta.label}</span>
+              <span className="text-ink/20" aria-hidden="true">·</span>
+              <span className="text-muted">{SEGMENT_LABELS[segment] ?? "Your Profile"}</span>
             </div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tighter text-white leading-tight">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tighter text-ink leading-tight">
               Your ranked picks
             </h1>
-            <p className="text-sm text-gray-500 leading-relaxed max-w-[50ch]">
+            <p className="text-sm text-muted leading-relaxed max-w-[50ch]">
               Ranked against real purchase outcomes for your profile. No sponsored results.
             </p>
           </div>
 
           {/* ── Returning user indicator ──────────────────── */}
           {returning && (
-            <div className="flex items-center gap-2 text-xs text-indigo-400 bg-indigo-950/30 border border-indigo-900/40 rounded-xl px-4 py-2.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 shrink-0" />
+            <div className="flex items-center gap-2 text-xs text-accent bg-accent/8 border border-accent/25 rounded-xl px-4 py-2.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
               Rankings personalised from your previous session
             </div>
           )}
@@ -387,8 +387,8 @@ function ResultsContent() {
                     animate-slide-up transition-all duration-200
                     hover:-translate-y-0.5
                     ${isBest
-                      ? "border-indigo-600/30 bg-indigo-950/20 hover:border-indigo-600/50"
-                      : "border-gray-800 bg-gray-900 hover:border-gray-700"
+                      ? "border-accent/30 bg-accent/5 hover:border-accent/50"
+                      : "border-ink/12 bg-paper-soft hover:border-ink/20"
                     }
                   `}
                   style={{ animationDelay: `${index * 150}ms` }}
@@ -399,16 +399,16 @@ function ResultsContent() {
                     <div className="flex items-start justify-between gap-3">
                       <div className="space-y-0.5">
                         <div className="flex items-center gap-2">
-                          <span className={`text-[11px] font-bold uppercase tracking-widest ${isBest ? "text-indigo-400" : "text-gray-500"}`}>
+                          <span className={`text-[11px] font-bold uppercase tracking-widest ${isBest ? "text-accent" : "text-muted"}`}>
                             {RANK_LABELS[index] ?? `Option ${index + 1}`}
                           </span>
                           {isBest && (
-                            <span className="inline-flex text-[9px] font-bold uppercase tracking-widest bg-indigo-600 text-white px-2 py-0.5 rounded-full">
+                            <span className="inline-flex text-[9px] font-bold uppercase tracking-widest bg-accent text-white px-2 py-0.5 rounded-full">
                               #1
                             </span>
                           )}
                         </div>
-                        <p className="text-[11px] text-gray-600">
+                        <p className="text-[11px] text-muted">
                           {RANK_SUBTITLES[index] ?? ""}
                         </p>
                       </div>
@@ -419,11 +419,11 @@ function ResultsContent() {
 
                     {/* ── Product name + brand ───────────────── */}
                     <div className="space-y-2">
-                      <h2 className={`font-bold tracking-tighter leading-none text-white ${isBest ? "text-3xl" : "text-xl"}`}>
+                      <h2 className={`font-bold tracking-tighter leading-none text-ink ${isBest ? "text-3xl" : "text-xl"}`}>
                         {rec.product.name}
                       </h2>
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-xs text-gray-600">{rec.product.brand}</span>
+                        <span className="text-xs text-muted">{rec.product.brand}</span>
                         {truth && (
                           <>
                             <span className="text-gray-800" aria-hidden="true">·</span>
@@ -436,14 +436,14 @@ function ResultsContent() {
                     {/* ── Match score ────────────────────────── */}
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-[11px] text-gray-600 uppercase tracking-widest font-semibold">
+                        <span className="text-[11px] text-muted uppercase tracking-widest font-semibold">
                           Match Score
                         </span>
                         <ConfidenceBadge confidence={truth?.confidence ?? 1.0} />
                       </div>
                       {isBest ? (
                         <div className="flex items-end gap-4">
-                          <span className="text-5xl font-bold tracking-tighter text-white tabular-nums leading-none">
+                          <span className="text-5xl font-bold tracking-tighter text-ink tabular-nums leading-none">
                             {Math.min(Math.round(rec.score), 100)}
                           </span>
                           <div className="flex-1 pb-1.5">
@@ -457,7 +457,7 @@ function ResultsContent() {
 
                     {/* ── Dimension bars ─────────────────────── */}
                     <div className="space-y-2">
-                      <p className="text-[11px] text-gray-600 uppercase tracking-widest font-semibold">
+                      <p className="text-[11px] text-muted uppercase tracking-widest font-semibold">
                         Dimensions
                       </p>
                       <DimensionBars product={rec.product} />
@@ -466,16 +466,16 @@ function ResultsContent() {
                     {/* ── Numbered strengths ─────────────────── */}
                     {rec.strengths.length > 0 && (
                       <div className="space-y-2">
-                        <p className="text-[11px] text-gray-600 uppercase tracking-widest font-semibold">
+                        <p className="text-[11px] text-muted uppercase tracking-widest font-semibold">
                           Why This Matches You
                         </p>
                         <ol className="space-y-2">
                           {rec.strengths.map((s, i) => (
                             <li key={s} className="flex items-start gap-3">
-                              <span className="font-mono text-[10px] font-bold text-indigo-600/50 tabular-nums shrink-0 pt-0.5 w-5 leading-none">
+                              <span className="font-mono text-[10px] font-bold text-accent/50 tabular-nums shrink-0 pt-0.5 w-5 leading-none">
                                 {String(i + 1).padStart(2, "0")}
                               </span>
-                              <span className="text-sm text-gray-300 leading-snug">{s}</span>
+                              <span className="text-sm text-ink leading-snug">{s}</span>
                             </li>
                           ))}
                         </ol>
@@ -508,8 +508,8 @@ function ResultsContent() {
                         flex items-center justify-center gap-2 w-full font-semibold rounded-xl px-6 py-3.5
                         transition-all duration-150 active:scale-[0.98] text-sm cursor-pointer
                         ${isBest
-                          ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/30"
-                          : "bg-gray-800 hover:bg-gray-700 text-gray-200 hover:text-white"
+                          ? "bg-accent hover:bg-accent-dark text-white shadow-lg shadow-accent/20"
+                          : "bg-ink/8 hover:bg-ink/15 text-ink"
                         }
                       `}
                     >
@@ -530,18 +530,18 @@ function ResultsContent() {
             );
             if (trending.length === 0) return null;
             return (
-              <div className="animate-fade-in space-y-3 border-t border-gray-800/50 pt-6">
-                <p className="text-[11px] font-bold uppercase tracking-widest text-gray-600">
+              <div className="animate-fade-in space-y-3 border-t border-ink/10 pt-6">
+                <p className="text-[11px] font-bold uppercase tracking-widest text-muted">
                   Trending with {SEGMENT_LABELS[segment]?.toLowerCase() ?? "similar"} users
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {trending.map((rec) => (
                     <div
                       key={rec.product.id}
-                      className="flex items-center gap-2 bg-gray-900 border border-emerald-900/40 rounded-xl px-3.5 py-2"
+                      className="flex items-center gap-2 bg-paper-soft border border-emerald-700/30 rounded-xl px-3.5 py-2"
                     >
-                      <span className="text-[10px] font-bold text-emerald-400" aria-hidden="true">↑</span>
-                      <span className="text-xs text-gray-300">{rec.product.name}</span>
+                      <span className="text-[10px] font-bold text-emerald-600" aria-hidden="true">↑</span>
+                      <span className="text-xs text-ink">{rec.product.name}</span>
                     </div>
                   ))}
                 </div>
@@ -550,17 +550,17 @@ function ResultsContent() {
           })()}
 
           {/* ── Footer links ──────────────────────────────── */}
-          <div className="animate-fade-in delay-500 border-t border-gray-800/50 pt-8 space-y-3">
+          <div className="animate-fade-in delay-500 border-t border-ink/10 pt-8 space-y-3">
             <Link
               href={`/quiz?category=${category}`}
-              className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-indigo-400 transition-colors duration-150 py-1"
+              className="flex items-center gap-1.5 text-sm text-muted hover:text-accent transition-colors duration-150 py-1"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Retake quiz for {meta.label}
             </Link>
             <Link
               href="/"
-              className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-gray-400 transition-colors duration-150 py-1"
+              className="flex items-center gap-1.5 text-sm text-muted hover:text-ink transition-colors duration-150 py-1"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               Explore all categories

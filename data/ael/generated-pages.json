@@ -365,6 +365,56 @@
       "confidence": 0.75,
       "createdAt": "2026-06-03T17:12:48.169Z",
       "expansionOpportunityId": "opp-v4-creative_monitor-run-1780506768165"
+    },
+    {
+      "slug": "best-tablets-for-drawing",
+      "title": "Best Tablets For Drawing",
+      "h1": "Best Tablets For Drawing",
+      "intent": "drawing_tablet",
+      "category": "tablets",
+      "description": "Truth-calibrated tablets rankings for the drawing tablet use case. Scored across multiple dimensions, verified by outcome signals.",
+      "productFilter": {
+        "maxCount": 5
+      },
+      "intentWeights": {
+        "productivity_score": 0.3,
+        "value_score": 0.25,
+        "battery_score": 0.2,
+        "portability_score": 0.15,
+        "gaming_score": 0.1
+      },
+      "geoKeywords": [
+        "best tablets for drawing",
+        "drawing tablet"
+      ],
+      "confidence": 0.85,
+      "createdAt": "2026-06-05T20:48:04.516Z",
+      "expansionOpportunityId": "opp-v4-drawing_tablet-run-1780692484513"
+    },
+    {
+      "slug": "best-pcs-for-video-editing",
+      "title": "Best Pcs For Video Editing",
+      "h1": "Best Pcs For Video Editing",
+      "intent": "editing_pc",
+      "category": "pcs",
+      "description": "Truth-calibrated pcs rankings for the editing pc use case. Scored across multiple dimensions, verified by outcome signals.",
+      "productFilter": {
+        "maxCount": 5
+      },
+      "intentWeights": {
+        "productivity_score": 0.3,
+        "value_score": 0.25,
+        "battery_score": 0.2,
+        "portability_score": 0.15,
+        "gaming_score": 0.1
+      },
+      "geoKeywords": [
+        "best pcs for video editing",
+        "editing pc"
+      ],
+      "confidence": 0.85,
+      "createdAt": "2026-06-05T20:48:04.516Z",
+      "expansionOpportunityId": "opp-v4-editing_pc-run-1780692484513"
     }
   ]
 }

@@ -3,16 +3,34 @@
     "quizHref": "/quiz?category=laptops&intent=gaming",
     "related": [
       {
-        "slug": "best-laptops-for-gaming",
-        "href": "/best-laptops-for-gaming",
-        "title": "Best Laptops for Gaming",
-        "description": "GPU-focused performance rankings"
+        "slug": "laptops",
+        "href": "/laptops",
+        "title": "All Laptop Rankings",
+        "description": "Full laptop category — all use cases and segments ranked"
       },
       {
-        "slug": "best-budget-laptops",
-        "href": "/best-budget-laptops",
-        "title": "Best Budget Laptops",
-        "description": "Maximum value at entry-level price points"
+        "slug": "best-budget-laptops-under-500",
+        "href": "/generated/best-budget-laptops-under-500",
+        "title": "Best Budget Laptops Under 500",
+        "description": "Truth-calibrated laptops rankings for the budget general use case. Scored across m…"
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      },
+      {
+        "slug": "best-laptops-for-coding",
+        "href": "/generated/best-laptops-for-coding",
+        "title": "Best Laptops for Coding",
+        "description": "Developer-optimised laptop rankings. Scored primarily on productivity and processi…"
+      },
+      {
+        "slug": "best-laptops-for-video-editing",
+        "href": "/generated/best-laptops-for-video-editing",
+        "title": "Best Laptops For Video Editing",
+        "description": "Truth-calibrated laptops ranking for the creative professional intent."
       }
     ]
   },
@@ -20,16 +38,34 @@
     "quizHref": "/quiz?category=laptops&intent=student",
     "related": [
       {
-        "slug": "best-budget-laptops",
-        "href": "/best-budget-laptops",
-        "title": "Best Budget Laptops",
-        "description": "Maximum value at entry-level price points"
+        "slug": "laptops",
+        "href": "/laptops",
+        "title": "All Laptop Rankings",
+        "description": "Full laptop category — all use cases and segments ranked"
       },
       {
-        "slug": "work-from-home-laptops",
-        "href": "/work-from-home-laptops",
-        "title": "Work-From-Home Laptops",
-        "description": "Battery + productivity for remote use"
+        "slug": "best-budget-laptops-under-500",
+        "href": "/generated/best-budget-laptops-under-500",
+        "title": "Best Budget Laptops Under 500",
+        "description": "Truth-calibrated laptops rankings for the budget general use case. Scored across m…"
+      },
+      {
+        "slug": "best-laptops-for-coding",
+        "href": "/generated/best-laptops-for-coding",
+        "title": "Best Laptops for Coding",
+        "description": "Developer-optimised laptop rankings. Scored primarily on productivity and processi…"
+      },
+      {
+        "slug": "best-laptops-for-video-editing",
+        "href": "/generated/best-laptops-for-video-editing",
+        "title": "Best Laptops For Video Editing",
+        "description": "Truth-calibrated laptops ranking for the creative professional intent."
+      },
+      {
+        "slug": "best-premium-laptops-for-professionals",
+        "href": "/generated/best-premium-laptops-for-professionals",
+        "title": "Best Premium Laptops For Professionals",
+        "description": "Truth-calibrated laptops rankings for the premium professional use case. Scored ac…"
       }
     ]
   },
@@ -37,16 +73,34 @@
     "quizHref": "/quiz?category=laptops&intent=coding",
     "related": [
       {
-        "slug": "laptops-for-coding",
-        "href": "/laptops-for-coding",
-        "title": "Best Laptops for Coding",
-        "description": "Developer-optimised productivity picks"
+        "slug": "laptops",
+        "href": "/laptops",
+        "title": "All Laptop Rankings",
+        "description": "Full laptop category — all use cases and segments ranked"
       },
       {
-        "slug": "work-from-home-laptops",
-        "href": "/work-from-home-laptops",
-        "title": "Work-From-Home Laptops",
-        "description": "Battery + productivity for remote dev work"
+        "slug": "best-premium-laptops-for-professionals",
+        "href": "/generated/best-premium-laptops-for-professionals",
+        "title": "Best Premium Laptops For Professionals",
+        "description": "Truth-calibrated laptops rankings for the premium professional use case. Scored ac…"
+      },
+      {
+        "slug": "lightweight-laptops-for-travel",
+        "href": "/generated/lightweight-laptops-for-travel",
+        "title": "Best Lightweight Laptops for Travel",
+        "description": "Highly portable laptops ranked on portability score and battery endurance. All-day…"
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      },
+      {
+        "slug": "best-laptops-for-video-editing",
+        "href": "/generated/best-laptops-for-video-editing",
+        "title": "Best Laptops For Video Editing",
+        "description": "Truth-calibrated laptops ranking for the creative professional intent."
       }
     ]
   },
@@ -54,16 +108,34 @@
     "quizHref": "/quiz?category=laptops&intent=wfh",
     "related": [
       {
-        "slug": "work-from-home-laptops",
-        "href": "/work-from-home-laptops",
-        "title": "Work-From-Home Laptops",
-        "description": "Battery + productivity for remote use"
+        "slug": "laptops",
+        "href": "/laptops",
+        "title": "All Laptop Rankings",
+        "description": "Full laptop category — all use cases and segments ranked"
       },
       {
-        "slug": "best-laptops-for-gaming",
-        "href": "/best-laptops-for-gaming",
-        "title": "Best Laptops for Gaming",
-        "description": "GPU-focused performance rankings"
+        "slug": "best-laptops-for-coding",
+        "href": "/generated/best-laptops-for-coding",
+        "title": "Best Laptops for Coding",
+        "description": "Developer-optimised laptop rankings. Scored primarily on productivity and processi…"
+      },
+      {
+        "slug": "best-premium-laptops-for-professionals",
+        "href": "/generated/best-premium-laptops-for-professionals",
+        "title": "Best Premium Laptops For Professionals",
+        "description": "Truth-calibrated laptops rankings for the premium professional use case. Scored ac…"
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      },
+      {
+        "slug": "best-laptops-for-video-editing",
+        "href": "/generated/best-laptops-for-video-editing",
+        "title": "Best Laptops For Video Editing",
+        "description": "Truth-calibrated laptops ranking for the creative professional intent."
       }
     ]
   },
@@ -80,7 +152,25 @@
         "slug": "best-battery-life-phones",
         "href": "/generated/best-battery-life-phones",
         "title": "Best Battery Life Phones",
-        "description": "Truth-calibrated phones rankings for the  use case. Scored across multiple dimensi…"
+        "description": "Truth-calibrated phones rankings for the battery phone use case. Scored across mul…"
+      },
+      {
+        "slug": "best-budget-smartphones",
+        "href": "/generated/best-budget-smartphones",
+        "title": "Best Budget Smartphones",
+        "description": "Truth-calibrated phones rankings for the budget phone use case. Scored across mult…"
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      },
+      {
+        "slug": "best-laptops-for-coding",
+        "href": "/generated/best-laptops-for-coding",
+        "title": "Best Laptops for Coding",
+        "description": "Developer-optimised laptop rankings. Scored primarily on productivity and processi…"
       }
     ]
   },
@@ -97,18 +187,19 @@
         "slug": "best-phones-for-photography",
         "href": "/generated/best-phones-for-photography",
         "title": "Best Phones For Photography",
-        "description": "Truth-calibrated phones rankings for the  use case. Scored across multiple dimensi…"
-      }
-    ]
-  },
-  "best-budget-laptops-under-500": {
-    "quizHref": "/quiz?category=laptops",
-    "related": [
+        "description": "Truth-calibrated phones rankings for the camera phone use case. Scored across mult…"
+      },
       {
-        "slug": "laptops",
-        "href": "/laptops",
-        "title": "All Laptop Rankings",
-        "description": "Full laptop category — all use cases and segments ranked"
+        "slug": "best-battery-life-phones",
+        "href": "/generated/best-battery-life-phones",
+        "title": "Best Battery Life Phones",
+        "description": "Truth-calibrated phones rankings for the battery phone use case. Scored across mul…"
+      },
+      {
+        "slug": "best-budget-laptops-under-500",
+        "href": "/generated/best-budget-laptops-under-500",
+        "title": "Best Budget Laptops Under 500",
+        "description": "Truth-calibrated laptops rankings for the budget general use case. Scored across m…"
       },
       {
         "slug": "best-gaming-laptops-under-1000",
@@ -118,8 +209,8 @@
       }
     ]
   },
-  "best-premium-laptops-for-professionals": {
-    "quizHref": "/quiz?category=laptops",
+  "best-budget-laptops-under-500": {
+    "quizHref": "/quiz?category=laptops&intent=budget",
     "related": [
       {
         "slug": "laptops",
@@ -132,6 +223,59 @@
         "href": "/generated/best-laptops-for-students",
         "title": "Best Laptops for Students",
         "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      },
+      {
+        "slug": "best-gaming-laptops-under-1000",
+        "href": "/generated/best-gaming-laptops-under-1000",
+        "title": "Best Gaming Laptops Under £1000",
+        "description": "Truth-calibrated ranking of gaming laptops at mid-range price points. Scored on ga…"
+      },
+      {
+        "slug": "best-laptops-for-coding",
+        "href": "/generated/best-laptops-for-coding",
+        "title": "Best Laptops for Coding",
+        "description": "Developer-optimised laptop rankings. Scored primarily on productivity and processi…"
+      },
+      {
+        "slug": "best-laptops-for-video-editing",
+        "href": "/generated/best-laptops-for-video-editing",
+        "title": "Best Laptops For Video Editing",
+        "description": "Truth-calibrated laptops ranking for the creative professional intent."
+      }
+    ]
+  },
+  "best-premium-laptops-for-professionals": {
+    "quizHref": "/quiz?category=laptops&intent=work",
+    "related": [
+      {
+        "slug": "laptops",
+        "href": "/laptops",
+        "title": "All Laptop Rankings",
+        "description": "Full laptop category — all use cases and segments ranked"
+      },
+      {
+        "slug": "best-laptops-for-coding",
+        "href": "/generated/best-laptops-for-coding",
+        "title": "Best Laptops for Coding",
+        "description": "Developer-optimised laptop rankings. Scored primarily on productivity and processi…"
+      },
+      {
+        "slug": "lightweight-laptops-for-travel",
+        "href": "/generated/lightweight-laptops-for-travel",
+        "title": "Best Lightweight Laptops for Travel",
+        "description": "Highly portable laptops ranked on portability score and battery endurance. All-day…"
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      },
+      {
+        "slug": "best-laptops-for-video-editing",
+        "href": "/generated/best-laptops-for-video-editing",
+        "title": "Best Laptops For Video Editing",
+        "description": "Truth-calibrated laptops ranking for the creative professional intent."
       }
     ]
   },
@@ -148,7 +292,25 @@
         "slug": "best-phones-for-photography",
         "href": "/generated/best-phones-for-photography",
         "title": "Best Phones For Photography",
-        "description": "Truth-calibrated phones rankings for the  use case. Scored across multiple dimensi…"
+        "description": "Truth-calibrated phones rankings for the camera phone use case. Scored across mult…"
+      },
+      {
+        "slug": "best-budget-smartphones",
+        "href": "/generated/best-budget-smartphones",
+        "title": "Best Budget Smartphones",
+        "description": "Truth-calibrated phones rankings for the budget phone use case. Scored across mult…"
+      },
+      {
+        "slug": "best-gaming-laptops-under-1000",
+        "href": "/generated/best-gaming-laptops-under-1000",
+        "title": "Best Gaming Laptops Under £1000",
+        "description": "Truth-calibrated ranking of gaming laptops at mid-range price points. Scored on ga…"
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
       }
     ]
   },
@@ -162,10 +324,238 @@
         "description": "Full monitor category — all segments ranked"
       },
       {
-        "slug": "best-laptops-for-gaming",
-        "href": "/best-laptops-for-gaming",
-        "title": "Best Laptops for Gaming",
-        "description": "GPU-focused performance rankings"
+        "slug": "best-laptops-for-video-editing",
+        "href": "/generated/best-laptops-for-video-editing",
+        "title": "Best Laptops For Video Editing",
+        "description": "Truth-calibrated laptops ranking for the creative professional intent."
+      },
+      {
+        "slug": "best-gaming-monitors",
+        "href": "/generated/best-gaming-monitors",
+        "title": "Best Gaming Monitors",
+        "description": "Truth-calibrated monitors ranking for the gaming monitor intent."
+      },
+      {
+        "slug": "best-pcs-for-video-editing",
+        "href": "/generated/best-pcs-for-video-editing",
+        "title": "Best Pcs For Video Editing",
+        "description": "Truth-calibrated pcs rankings for the editing pc use case. Scored across multiple …"
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      }
+    ]
+  },
+  "best-laptops-for-video-editing": {
+    "quizHref": "/quiz?category=laptops&intent=creative",
+    "related": [
+      {
+        "slug": "laptops",
+        "href": "/laptops",
+        "title": "All Laptop Rankings",
+        "description": "Full laptop category — all use cases and segments ranked"
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      },
+      {
+        "slug": "best-laptops-for-coding",
+        "href": "/generated/best-laptops-for-coding",
+        "title": "Best Laptops for Coding",
+        "description": "Developer-optimised laptop rankings. Scored primarily on productivity and processi…"
+      },
+      {
+        "slug": "best-premium-laptops-for-professionals",
+        "href": "/generated/best-premium-laptops-for-professionals",
+        "title": "Best Premium Laptops For Professionals",
+        "description": "Truth-calibrated laptops rankings for the premium professional use case. Scored ac…"
+      },
+      {
+        "slug": "best-monitors-for-video-editing",
+        "href": "/generated/best-monitors-for-video-editing",
+        "title": "Best Monitors For Video Editing",
+        "description": "Truth-calibrated monitors rankings for the creative monitor use case. Scored acros…"
+      }
+    ]
+  },
+  "best-gaming-monitors": {
+    "quizHref": "/quiz?category=monitors",
+    "related": [
+      {
+        "slug": "monitors",
+        "href": "/monitors",
+        "title": "All Monitor Rankings",
+        "description": "Full monitor category — all segments ranked"
+      },
+      {
+        "slug": "best-monitors-for-video-editing",
+        "href": "/generated/best-monitors-for-video-editing",
+        "title": "Best Monitors For Video Editing",
+        "description": "Truth-calibrated monitors rankings for the creative monitor use case. Scored acros…"
+      },
+      {
+        "slug": "best-gaming-laptops-under-1000",
+        "href": "/generated/best-gaming-laptops-under-1000",
+        "title": "Best Gaming Laptops Under £1000",
+        "description": "Truth-calibrated ranking of gaming laptops at mid-range price points. Scored on ga…"
+      },
+      {
+        "slug": "best-gaming-pcs",
+        "href": "/generated/best-gaming-pcs",
+        "title": "Best Gaming Pcs",
+        "description": "Truth-calibrated pcs ranking for the gaming pc intent."
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      }
+    ]
+  },
+  "best-tablets-for-students": {
+    "quizHref": "/quiz?category=tablets",
+    "related": [
+      {
+        "slug": "tablets",
+        "href": "/tablets",
+        "title": "All Tablet Rankings",
+        "description": "Full tablet category — all use cases ranked"
+      },
+      {
+        "slug": "best-tablets-for-drawing",
+        "href": "/generated/best-tablets-for-drawing",
+        "title": "Best Tablets For Drawing",
+        "description": "Truth-calibrated tablets rankings for the drawing tablet use case. Scored across m…"
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      },
+      {
+        "slug": "best-budget-laptops-under-500",
+        "href": "/generated/best-budget-laptops-under-500",
+        "title": "Best Budget Laptops Under 500",
+        "description": "Truth-calibrated laptops rankings for the budget general use case. Scored across m…"
+      },
+      {
+        "slug": "best-laptops-for-coding",
+        "href": "/generated/best-laptops-for-coding",
+        "title": "Best Laptops for Coding",
+        "description": "Developer-optimised laptop rankings. Scored primarily on productivity and processi…"
+      }
+    ]
+  },
+  "best-gaming-pcs": {
+    "quizHref": "/quiz?category=pcs",
+    "related": [
+      {
+        "slug": "pcs",
+        "href": "/pcs",
+        "title": "All Desktop PC Rankings",
+        "description": "Full desktop PC category — all segments ranked"
+      },
+      {
+        "slug": "best-pcs-for-video-editing",
+        "href": "/generated/best-pcs-for-video-editing",
+        "title": "Best Pcs For Video Editing",
+        "description": "Truth-calibrated pcs rankings for the editing pc use case. Scored across multiple …"
+      },
+      {
+        "slug": "best-gaming-laptops-under-1000",
+        "href": "/generated/best-gaming-laptops-under-1000",
+        "title": "Best Gaming Laptops Under £1000",
+        "description": "Truth-calibrated ranking of gaming laptops at mid-range price points. Scored on ga…"
+      },
+      {
+        "slug": "best-gaming-monitors",
+        "href": "/generated/best-gaming-monitors",
+        "title": "Best Gaming Monitors",
+        "description": "Truth-calibrated monitors ranking for the gaming monitor intent."
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      }
+    ]
+  },
+  "best-tablets-for-drawing": {
+    "quizHref": "/quiz?category=tablets",
+    "related": [
+      {
+        "slug": "tablets",
+        "href": "/tablets",
+        "title": "All Tablet Rankings",
+        "description": "Full tablet category — all use cases ranked"
+      },
+      {
+        "slug": "best-tablets-for-students",
+        "href": "/generated/best-tablets-for-students",
+        "title": "Best Tablets For Students",
+        "description": "Truth-calibrated tablets ranking for the student tablet intent."
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
+      },
+      {
+        "slug": "best-laptops-for-coding",
+        "href": "/generated/best-laptops-for-coding",
+        "title": "Best Laptops for Coding",
+        "description": "Developer-optimised laptop rankings. Scored primarily on productivity and processi…"
+      },
+      {
+        "slug": "best-laptops-for-video-editing",
+        "href": "/generated/best-laptops-for-video-editing",
+        "title": "Best Laptops For Video Editing",
+        "description": "Truth-calibrated laptops ranking for the creative professional intent."
+      }
+    ]
+  },
+  "best-pcs-for-video-editing": {
+    "quizHref": "/quiz?category=pcs",
+    "related": [
+      {
+        "slug": "pcs",
+        "href": "/pcs",
+        "title": "All Desktop PC Rankings",
+        "description": "Full desktop PC category — all segments ranked"
+      },
+      {
+        "slug": "best-gaming-pcs",
+        "href": "/generated/best-gaming-pcs",
+        "title": "Best Gaming Pcs",
+        "description": "Truth-calibrated pcs ranking for the gaming pc intent."
+      },
+      {
+        "slug": "best-laptops-for-video-editing",
+        "href": "/generated/best-laptops-for-video-editing",
+        "title": "Best Laptops For Video Editing",
+        "description": "Truth-calibrated laptops ranking for the creative professional intent."
+      },
+      {
+        "slug": "best-monitors-for-video-editing",
+        "href": "/generated/best-monitors-for-video-editing",
+        "title": "Best Monitors For Video Editing",
+        "description": "Truth-calibrated monitors rankings for the creative monitor use case. Scored acros…"
+      },
+      {
+        "slug": "best-laptops-for-students",
+        "href": "/generated/best-laptops-for-students",
+        "title": "Best Laptops for Students",
+        "description": "Ranked laptops for university and student use. Weighted on value score, battery en…"
       }
     ]
   }

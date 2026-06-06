@@ -10,7 +10,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://den-v1.vercel.app"),
+  metadataBase: new URL("https://askden.co"),
   title: "DEN — Decision Intelligence",
   description:
     "Find the perfect product in 60 seconds. Truth-calibrated recommendations powered by shared intelligence.",
