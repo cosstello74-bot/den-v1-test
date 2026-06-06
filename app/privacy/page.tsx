@@ -42,7 +42,7 @@ export default function PrivacyPage() {
 
         <Section title="Who We Are">
           <p>
-            DEN is a decision intelligence engine that helps UK consumers find the right electronics and other products. We are operated as a private project and can be contacted at <span className="text-gray-400">[contact@den.so]</span>. Replace this with your actual contact address before launching.
+            DEN is a decision intelligence engine that helps UK consumers find the right electronics and other products. We are operated as a private project and can be contacted at <a href="mailto:hello@askden.co" className="text-indigo-400 hover:text-indigo-300 transition-colors">hello@askden.co</a>.
           </p>
         </Section>
 
@@ -122,7 +122,7 @@ export default function PrivacyPage() {
             ))}
           </ul>
           <p className="mt-4">
-            To exercise any of these rights, contact us at <span className="text-gray-400">[contact@den.so]</span>. We will respond within 30 days. You also have the right to lodge a complaint with the ICO (Information Commissioner's Office) at <span className="text-gray-400">ico.org.uk</span>.
+            To exercise any of these rights, contact us at <a href="mailto:hello@askden.co" className="text-indigo-400 hover:text-indigo-300 transition-colors">hello@askden.co</a>. We will respond within 30 days. You also have the right to lodge a complaint with the ICO (Information Commissioner's Office) at <span className="text-gray-400">ico.org.uk</span>.
           </p>
         </Section>
 
