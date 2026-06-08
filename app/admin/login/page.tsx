@@ -14,18 +14,34 @@ export default function AdminLogin() {
     setError("");
     setLoading(true);
 
-    const res = await fetch("/api/admin/auth", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password: pw }),
-    });
+    try {
+      // Fetch a fresh CSRF token before submitting
+      const csrfRes = await fetch("/api/admin/csrf");
+      if (!csrfRes.ok) throw new Error("Failed to fetch CSRF token");
+      const { csrfToken } = await csrfRes.json() as { csrfToken: string };
 
-    if (res.ok) {
-      router.replace("/admin");
-    } else {
-      setError("Incorrect password.");
-      setPw("");
+      const res = await fetch("/api/admin/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify({ password: pw }),
+      });
+
+      if (res.ok) {
+        router.replace("/admin");
+      } else if (res.status === 429) {
+        setError("Too many attempts. Please wait before trying again.");
+        setPw("");
+      } else {
+        setError("Incorrect password.");
+        setPw("");
+      }
+    } catch {
+      setError("Something went wrong. Please try again.");
     }
+
     setLoading(false);
   }
 
