@@ -35,7 +35,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`h-full ${outfit.variable}`}>
-      <body className="min-h-screen bg-gray-950 text-white antialiased font-sans">
+      <body className="min-h-screen bg-paper text-ink antialiased font-sans">
         {children}
         <PrivacyBanner />
       </body>

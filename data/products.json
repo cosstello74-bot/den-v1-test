@@ -4,11 +4,11 @@
       "id": "p1",
       "name": "Lenovo IdeaPad Gaming 3",
       "category": "gaming",
-      "affiliate_url": "https://www.amazon.co.uk/dp/B09NW3NFYY?tag=TAG_PLACEHOLDER",
+      "affiliate_url": "https://www.amazon.co.uk/dp/B09NW3NFYY",
       "affiliate_urls": [
         { "retailer": "currys",         "network": "awin",   "url": "PENDING", "commission_pct": 2.5 },
         { "retailer": "laptops_direct", "network": "awin",   "url": "PENDING", "commission_pct": 4.0 },
-        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B09NW3NFYY?tag=TAG_PLACEHOLDER", "commission_pct": 1.5 }
+        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B09NW3NFYY", "commission_pct": 1.5 }
       ],
       "price_band": "mid",
       "battery_score": 65,
@@ -23,11 +23,11 @@
       "id": "p2",
       "name": "ASUS VivoBook 15",
       "category": "work",
-      "affiliate_url": "https://www.amazon.co.uk/dp/B0BTVQMYJP?tag=TAG_PLACEHOLDER",
+      "affiliate_url": "https://www.amazon.co.uk/dp/B0BTVQMYJP",
       "affiliate_urls": [
         { "retailer": "currys",         "network": "awin",   "url": "PENDING", "commission_pct": 2.5 },
         { "retailer": "laptops_direct", "network": "awin",   "url": "PENDING", "commission_pct": 4.0 },
-        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0BTVQMYJP?tag=TAG_PLACEHOLDER", "commission_pct": 1.5 }
+        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0BTVQMYJP", "commission_pct": 1.5 }
       ],
       "price_band": "budget",
       "battery_score": 75,
@@ -42,11 +42,11 @@
       "id": "p3",
       "name": "MacBook Air M2",
       "category": "creative",
-      "affiliate_url": "https://www.amazon.co.uk/dp/B0B3CNFNVK?tag=TAG_PLACEHOLDER",
+      "affiliate_url": "https://www.amazon.co.uk/dp/B0B3CNFNVK",
       "affiliate_urls": [
         { "retailer": "john_lewis",     "network": "awin",   "url": "PENDING", "commission_pct": 3.5 },
         { "retailer": "currys",         "network": "awin",   "url": "PENDING", "commission_pct": 2.5 },
-        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0B3CNFNVK?tag=TAG_PLACEHOLDER", "commission_pct": 1.5 }
+        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0B3CNFNVK", "commission_pct": 1.5 }
       ],
       "price_band": "high",
       "battery_score": 95,
@@ -61,12 +61,12 @@
       "id": "p4",
       "name": "ASUS ROG Zephyrus G14",
       "category": "gaming",
-      "affiliate_url": "https://www.amazon.co.uk/dp/B0C6FGZQLC?tag=TAG_PLACEHOLDER",
+      "affiliate_url": "https://www.amazon.co.uk/dp/B0C6FGZQLC",
       "affiliate_urls": [
         { "retailer": "currys",         "network": "awin",   "url": "PENDING", "commission_pct": 2.5 },
         { "retailer": "laptops_direct", "network": "awin",   "url": "PENDING", "commission_pct": 4.0 },
         { "retailer": "john_lewis",     "network": "awin",   "url": "PENDING", "commission_pct": 3.5 },
-        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0C6FGZQLC?tag=TAG_PLACEHOLDER", "commission_pct": 1.5 }
+        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0C6FGZQLC", "commission_pct": 1.5 }
       ],
       "price_band": "high",
       "battery_score": 80,
@@ -81,12 +81,12 @@
       "id": "p5",
       "name": "Dell XPS 15",
       "category": "creative",
-      "affiliate_url": "https://www.amazon.co.uk/dp/B0BSTP4FRD?tag=TAG_PLACEHOLDER",
+      "affiliate_url": "https://www.amazon.co.uk/dp/B0BSTP4FRD",
       "affiliate_urls": [
         { "retailer": "john_lewis",     "network": "awin",   "url": "PENDING", "commission_pct": 3.5 },
         { "retailer": "currys",         "network": "awin",   "url": "PENDING", "commission_pct": 2.5 },
         { "retailer": "laptops_direct", "network": "awin",   "url": "PENDING", "commission_pct": 4.0 },
-        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0BSTP4FRD?tag=TAG_PLACEHOLDER", "commission_pct": 1.5 }
+        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0BSTP4FRD", "commission_pct": 1.5 }
       ],
       "price_band": "high",
       "battery_score": 78,
@@ -101,12 +101,12 @@
       "id": "p6",
       "name": "HP Spectre x360 14",
       "category": "work",
-      "affiliate_url": "https://www.amazon.co.uk/dp/B0C6Z39WD6?tag=TAG_PLACEHOLDER",
+      "affiliate_url": "https://www.amazon.co.uk/dp/B0C6Z39WD6",
       "affiliate_urls": [
         { "retailer": "john_lewis",     "network": "awin",   "url": "PENDING", "commission_pct": 3.5 },
         { "retailer": "currys",         "network": "awin",   "url": "PENDING", "commission_pct": 2.5 },
         { "retailer": "laptops_direct", "network": "awin",   "url": "PENDING", "commission_pct": 4.0 },
-        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0C6Z39WD6?tag=TAG_PLACEHOLDER", "commission_pct": 1.5 }
+        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0C6Z39WD6", "commission_pct": 1.5 }
       ],
       "price_band": "high",
       "battery_score": 86,
@@ -121,11 +121,11 @@
       "id": "p7",
       "name": "Lenovo ThinkPad E15",
       "category": "work",
-      "affiliate_url": "https://www.amazon.co.uk/dp/B0B9HZN4N9?tag=TAG_PLACEHOLDER",
+      "affiliate_url": "https://www.amazon.co.uk/dp/B0B9HZN4N9",
       "affiliate_urls": [
         { "retailer": "currys",         "network": "awin",   "url": "PENDING", "commission_pct": 2.5 },
         { "retailer": "laptops_direct", "network": "awin",   "url": "PENDING", "commission_pct": 4.0 },
-        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0B9HZN4N9?tag=TAG_PLACEHOLDER", "commission_pct": 1.5 }
+        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0B9HZN4N9", "commission_pct": 1.5 }
       ],
       "price_band": "mid",
       "battery_score": 82,
@@ -140,10 +140,10 @@
       "id": "p8",
       "name": "HP Pavilion 15",
       "category": "general",
-      "affiliate_url": "https://www.amazon.co.uk/dp/B0BVNBHQB8?tag=TAG_PLACEHOLDER",
+      "affiliate_url": "https://www.amazon.co.uk/dp/B0BVNBHQB8",
       "affiliate_urls": [
         { "retailer": "currys",         "network": "awin",   "url": "PENDING", "commission_pct": 2.5 },
-        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0BVNBHQB8?tag=TAG_PLACEHOLDER", "commission_pct": 1.5 }
+        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0BVNBHQB8", "commission_pct": 1.5 }
       ],
       "price_band": "budget",
       "battery_score": 68,
@@ -158,11 +158,11 @@
       "id": "p9",
       "name": "MacBook Pro 14",
       "category": "creative",
-      "affiliate_url": "https://www.amazon.co.uk/dp/B0CM5JV268?tag=TAG_PLACEHOLDER",
+      "affiliate_url": "https://www.amazon.co.uk/dp/B0CM5JV268",
       "affiliate_urls": [
         { "retailer": "john_lewis",     "network": "awin",   "url": "PENDING", "commission_pct": 3.5 },
         { "retailer": "currys",         "network": "awin",   "url": "PENDING", "commission_pct": 2.5 },
-        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0CM5JV268?tag=TAG_PLACEHOLDER", "commission_pct": 1.5 }
+        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0CM5JV268", "commission_pct": 1.5 }
       ],
       "price_band": "premium",
       "battery_score": 90,
@@ -177,11 +177,11 @@
       "id": "p10",
       "name": "Dell Inspiron 15",
       "category": "general",
-      "affiliate_url": "https://www.amazon.co.uk/dp/B0BXPWYQB1?tag=TAG_PLACEHOLDER",
+      "affiliate_url": "https://www.amazon.co.uk/dp/B0BXPWYQB1",
       "affiliate_urls": [
         { "retailer": "currys",         "network": "awin",   "url": "PENDING", "commission_pct": 2.5 },
         { "retailer": "laptops_direct", "network": "awin",   "url": "PENDING", "commission_pct": 4.0 },
-        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0BXPWYQB1?tag=TAG_PLACEHOLDER", "commission_pct": 1.5 }
+        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0BXPWYQB1", "commission_pct": 1.5 }
       ],
       "price_band": "budget",
       "battery_score": 72,
@@ -196,12 +196,12 @@
       "id": "p11",
       "name": "Lenovo Legion 5 Pro",
       "category": "gaming",
-      "affiliate_url": "https://www.amazon.co.uk/dp/B0C3K5T3XL?tag=TAG_PLACEHOLDER",
+      "affiliate_url": "https://www.amazon.co.uk/dp/B0C3K5T3XL",
       "affiliate_urls": [
         { "retailer": "currys",         "network": "awin",   "url": "PENDING", "commission_pct": 2.5 },
         { "retailer": "laptops_direct", "network": "awin",   "url": "PENDING", "commission_pct": 4.0 },
         { "retailer": "john_lewis",     "network": "awin",   "url": "PENDING", "commission_pct": 3.5 },
-        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0C3K5T3XL?tag=TAG_PLACEHOLDER", "commission_pct": 1.5 }
+        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B0C3K5T3XL", "commission_pct": 1.5 }
       ],
       "price_band": "high",
       "battery_score": 62,
@@ -216,12 +216,12 @@
       "id": "p12",
       "name": "ASUS ZenBook 14",
       "category": "work",
-      "affiliate_url": "https://www.amazon.co.uk/dp/B09NZR3F33?tag=TAG_PLACEHOLDER",
+      "affiliate_url": "https://www.amazon.co.uk/dp/B09NZR3F33",
       "affiliate_urls": [
         { "retailer": "currys",         "network": "awin",   "url": "PENDING", "commission_pct": 2.5 },
         { "retailer": "john_lewis",     "network": "awin",   "url": "PENDING", "commission_pct": 3.5 },
         { "retailer": "laptops_direct", "network": "awin",   "url": "PENDING", "commission_pct": 4.0 },
-        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B09NZR3F33?tag=TAG_PLACEHOLDER", "commission_pct": 1.5 }
+        { "retailer": "amazon",         "network": "amazon", "url": "https://www.amazon.co.uk/dp/B09NZR3F33", "commission_pct": 1.5 }
       ],
       "price_band": "mid",
       "battery_score": 88,

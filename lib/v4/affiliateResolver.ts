@@ -19,21 +19,22 @@ export type AffiliateEntry = {
 // ─── Network builder functions ────────────────────────────────────────────────
 
 const TRACKING_IDS: Record<AffiliateNetwork, string> = {
-  amazon: process.env.AMAZON_TRACKING_ID  ?? "den-21",
-  awin:   process.env.AWIN_PUBLISHER_ID   ?? "0",
-  cj:     process.env.CJ_PUBLISHER_ID     ?? "0",
+  amazon: process.env.AMAZON_TRACKING_ID  ?? "",
+  awin:   process.env.AWIN_PUBLISHER_ID   ?? "",
+  cj:     process.env.CJ_PUBLISHER_ID     ?? "",
   direct: "",
 };
 
 function buildAmazonUrl(rawUrl: string): string {
   const id  = TRACKING_IDS.amazon;
-  const url = new URL(rawUrl);
-  url.searchParams.set("tag", id);
+  const url = new URL(rawUrl.split("?")[0]); // strip any placeholder params
+  if (id) url.searchParams.set("tag", id);
   return url.toString();
 }
 
 function buildAwinUrl(rawUrl: string): string {
   const id = TRACKING_IDS.awin;
+  if (!id) return rawUrl;
   return `https://www.awin1.com/cread.php?awinaffid=${id}&ued=${encodeURIComponent(rawUrl)}`;
 }
 

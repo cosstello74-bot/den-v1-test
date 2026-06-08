@@ -184,7 +184,7 @@ export default function ElectronicsPage() {
       <footer className="px-6 py-6 border-t border-ink/10">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted/50">
           <Link href="/" className="hover:text-ink transition-colors duration-150">← DEN Home</Link>
-          <span>© 2025 DEN</span>
+          <span>© {new Date().getFullYear()} DEN</span>
         </div>
       </footer>
 
