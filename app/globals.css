@@ -27,9 +27,13 @@
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+    font-family: var(--font-outfit), system-ui, sans-serif;
     background-color: var(--paper);
     color: var(--ink);
+  }
+
+  h1, h2, h3, h4, h5 {
+    text-wrap: balance;
   }
 
   /* ── WCAG 2.1 AA — SC 2.4.7 Focus Visible ──────────── */
