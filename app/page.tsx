@@ -243,7 +243,7 @@ export default function LandingPage() {
             ].map(({ n, label }) => (
               <div key={label} className="flex-1 min-w-[130px] px-6 sm:px-10 py-7 flex flex-col gap-1.5">
                 <span className="text-[2.5rem] sm:text-5xl font-bold text-white tabular-nums leading-none">{n}</span>
-                <span className="text-[9px] sm:text-[10px] text-white/60 uppercase tracking-widest font-semibold leading-tight">
+                <span className="text-[9px] sm:text-[10px] text-paper uppercase tracking-widest font-semibold leading-tight">
                   {label}
                 </span>
               </div>
