@@ -161,20 +161,20 @@ export default function GeneratedLandingPage({
 
       <GeoSignalTracker category={page.slug} />
 
-      <div className="min-h-screen bg-gray-950 text-white">
+      <div className="min-h-screen bg-paper text-ink">
 
         {/* ── Nav ───────────────────────────────────────────────── */}
-        <nav className="sticky top-0 z-20 backdrop-blur-sm bg-gray-950/80 border-b border-gray-800/40">
+        <nav className="sticky top-0 z-20 backdrop-blur-sm bg-paper/90 border-b border-ink/10">
           <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded-md bg-indigo-600 flex items-center justify-center text-xs font-bold">D</span>
-              <span className="text-sm font-semibold text-white">DEN</span>
+              <span className="w-6 h-6 rounded-md bg-accent flex items-center justify-center text-xs font-bold text-white">D</span>
+              <span className="text-sm font-semibold text-ink">DEN</span>
             </Link>
             <div className="flex items-center gap-3 text-xs">
-              <Link href={`/${page.category}`} className="text-gray-500 hover:text-gray-300 transition-colors capitalize">
+              <Link href={`/${page.category}`} className="text-muted hover:text-ink transition-colors capitalize">
                 {page.category} →
               </Link>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-950/50 border border-violet-800/40 text-violet-400">
+              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-accent/10 border border-accent/30 text-accent">
                 {enrichment.geoGrade} Match
               </span>
             </div>
@@ -183,16 +183,16 @@ export default function GeneratedLandingPage({
 
         {/* ── Breadcrumb ────────────────────────────────────────── */}
         <nav aria-label="Breadcrumb" className="max-w-4xl mx-auto px-6 pt-4 pb-0">
-          <ol className="flex items-center gap-1.5 text-xs text-gray-600">
-            <li><Link href="/" className="hover:text-gray-400 transition-colors">Home</Link></li>
+          <ol className="flex items-center gap-1.5 text-xs text-muted">
+            <li><Link href="/" className="hover:text-ink transition-colors">Home</Link></li>
             <li aria-hidden="true" className="select-none">›</li>
             <li>
-              <Link href={`/${page.category}`} className="hover:text-gray-400 transition-colors capitalize">
+              <Link href={`/${page.category}`} className="hover:text-ink transition-colors capitalize">
                 {page.category}
               </Link>
             </li>
             <li aria-hidden="true" className="select-none">›</li>
-            <li className="text-gray-400 truncate max-w-[200px]">{page.h1}</li>
+            <li className="text-ink/50 truncate max-w-[200px]">{page.h1}</li>
           </ol>
         </nav>
 
@@ -202,37 +202,37 @@ export default function GeneratedLandingPage({
           <section aria-label="Page summary" className="space-y-4">
             <div className="space-y-1.5">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-[11px] font-bold uppercase tracking-widest text-indigo-400">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-accent">
                   Decision Intelligence · {page.category.charAt(0).toUpperCase() + page.category.slice(1)}
                 </span>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-950/40 border border-violet-800/30 text-violet-500">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-accent/10 border border-accent/30 text-accent">
                   {page.category.charAt(0).toUpperCase() + page.category.slice(1)} · Ranked
                 </span>
               </div>
               <h1 className="text-3xl font-bold tracking-tight">{page.h1}</h1>
             </div>
 
-            <div className="bg-gray-900 border border-gray-800 rounded-2xl p-5 space-y-3">
-              <p className="text-[11px] font-bold uppercase tracking-widest text-gray-500">Summary</p>
-              <p className="text-sm text-gray-300 leading-relaxed">{enrichment.summary}</p>
-              <dl className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 border-t border-gray-800 text-xs">
+            <div className="bg-paper-soft border border-ink/12 rounded-2xl p-5 space-y-3">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-muted">Summary</p>
+              <p className="text-sm text-ink/80 leading-relaxed">{enrichment.summary}</p>
+              <dl className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2 border-t border-ink/12 text-xs">
                 <div>
-                  <dt className="text-gray-600 uppercase tracking-widest text-[10px]">Products</dt>
+                  <dt className="text-muted uppercase tracking-widest text-[10px]">Products</dt>
                   <dd className="font-bold text-base tabular-nums mt-0.5">{sortedProducts.length}</dd>
                 </div>
                 <div>
-                  <dt className="text-gray-600 uppercase tracking-widest text-[10px]">Intent</dt>
-                  <dd className="font-semibold text-indigo-400 mt-0.5">{page.intent.replace(/_/g, " ")}</dd>
+                  <dt className="text-muted uppercase tracking-widest text-[10px]">Intent</dt>
+                  <dd className="font-semibold text-accent mt-0.5">{page.intent.replace(/_/g, " ")}</dd>
                 </div>
                 <div>
-                  <dt className="text-gray-600 uppercase tracking-widest text-[10px]">GEO Score</dt>
-                  <dd className={`font-bold mt-0.5 ${enrichment.geoGrade === "A" ? "text-emerald-400" : enrichment.geoGrade === "B" ? "text-indigo-400" : "text-amber-400"}`}>
+                  <dt className="text-muted uppercase tracking-widest text-[10px]">GEO Score</dt>
+                  <dd className={`font-bold mt-0.5 ${enrichment.geoGrade === "A" ? "text-emerald-600" : enrichment.geoGrade === "B" ? "text-accent" : "text-amber-600"}`}>
                     {enrichment.geoScore} / {enrichment.geoGrade}
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-gray-600 uppercase tracking-widest text-[10px]">AEL Confidence</dt>
-                  <dd className="font-bold text-violet-400 mt-0.5">{(page.confidence * 100).toFixed(0)}%</dd>
+                  <dt className="text-muted uppercase tracking-widest text-[10px]">AEL Confidence</dt>
+                  <dd className="font-bold text-accent mt-0.5">{(page.confidence * 100).toFixed(0)}%</dd>
                 </div>
               </dl>
             </div>
@@ -242,8 +242,8 @@ export default function GeneratedLandingPage({
           <section aria-label="Ranked products" className="space-y-4">
             <div className="space-y-1">
               <h2 className="text-xl font-bold tracking-tight">Ranked Picks</h2>
-              <p className="text-xs text-gray-500">
-                Scored for <strong className="text-gray-400">{page.intent.replace(/_/g, " ")}</strong> intent using truth-calibrated, composite weighting.
+              <p className="text-xs text-muted">
+                Scored for <strong className="text-ink/70">{page.intent.replace(/_/g, " ")}</strong> intent using truth-calibrated, composite weighting.
               </p>
             </div>
 
@@ -264,26 +264,26 @@ export default function GeneratedLandingPage({
                     id={product.id}
                     className={`rounded-2xl border p-5 space-y-4 ${
                       isBest
-                        ? "border-indigo-500/60 bg-indigo-950/20"
-                        : "border-gray-800 bg-gray-900 hover:border-gray-700"
+                        ? "border-accent/30 bg-accent/5"
+                        : "border-ink/12 bg-paper-soft hover:border-ink/25"
                     } transition-colors`}
                   >
 
                     <div className="flex items-start justify-between gap-3">
                       <div className="space-y-0.5">
-                        <span className={`text-[11px] font-bold uppercase tracking-widest ${isBest ? "text-indigo-400" : "text-gray-600"}`}>
+                        <span className={`text-[11px] font-bold uppercase tracking-widest ${isBest ? "text-accent" : "text-muted"}`}>
                           {i === 0 ? "Best Match" : i === 1 ? "Runner Up" : `Option ${i + 1}`}
                         </span>
-                        <h3 className={`font-bold tracking-tight ${isBest ? "text-xl text-white" : "text-lg text-gray-100"}`}>
+                        <h3 className={`font-bold tracking-tight ${isBest ? "text-xl text-ink" : "text-lg text-ink"}`}>
                           {product.name}
                         </h3>
-                        <p className="text-xs text-gray-600">{product.brand}</p>
+                        <p className="text-xs text-muted">{product.brand}</p>
                       </div>
                       <div className="flex flex-col items-end gap-1.5 shrink-0">
-                        <span className="text-[11px] font-semibold text-gray-500 bg-gray-800 px-2.5 py-1 rounded-full border border-gray-700">
+                        <span className="text-[11px] font-semibold text-muted bg-ink/8 px-2.5 py-1 rounded-full border border-ink/12">
                           {PRICE_BAND_LABEL[product.price_band] ?? product.price_band}
                         </span>
-                        <span className="text-[11px] font-bold text-indigo-400 tabular-nums">
+                        <span className="text-[11px] font-bold text-accent tabular-nums">
                           Intent score: {intentScore}
                         </span>
                       </div>
@@ -296,13 +296,13 @@ export default function GeneratedLandingPage({
                         const weight = w[key as keyof typeof w] ?? 0;
                         return (
                           <div key={label} className="text-center space-y-1">
-                            <div className={`h-10 rounded-lg overflow-hidden flex flex-col-reverse ${weight > 0.2 ? "bg-indigo-950/40" : "bg-gray-800"}`}>
+                            <div className={`h-10 rounded-lg overflow-hidden flex flex-col-reverse ${weight > 0.2 ? "bg-accent/10" : "bg-ink/8"}`}>
                               <div
-                                className={`w-full rounded-b-lg ${weight > 0.2 ? "bg-indigo-500/60" : "bg-gray-700"}`}
+                                className={`w-full rounded-b-lg ${weight > 0.2 ? "bg-accent/40" : "bg-ink/15"}`}
                                 style={{ height: `${val}%` }}
                               />
                             </div>
-                            <p className="text-[9px] text-gray-600 font-medium leading-tight">{label}</p>
+                            <p className="text-[9px] text-muted font-medium leading-tight">{label}</p>
                           </div>
                         );
                       })}
@@ -314,8 +314,8 @@ export default function GeneratedLandingPage({
                       rel="noopener noreferrer"
                       className={`flex items-center justify-center gap-2 w-full font-semibold rounded-xl px-5 py-3 text-sm transition-all duration-150 active:scale-[0.98] ${
                         isBest
-                          ? "bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/30"
-                          : "bg-gray-800 hover:bg-gray-700 text-gray-200"
+                          ? "bg-accent hover:bg-accent-dark text-white shadow-lg shadow-accent/20"
+                          : "bg-ink/8 hover:bg-ink/15 text-ink"
                       }`}
                     >
                       Check Current Price
@@ -334,13 +334,13 @@ export default function GeneratedLandingPage({
             <h2 className="text-xl font-bold tracking-tight">Common Questions</h2>
             <div className="space-y-2">
               {enrichment.faqBlocks.map((faq, i) => (
-                <details key={i} className="group bg-gray-900 border border-gray-800 rounded-xl overflow-hidden">
+                <details key={i} className="group bg-paper-soft border border-ink/12 rounded-xl overflow-hidden">
                   <summary className="flex items-center justify-between px-5 py-4 cursor-pointer list-none">
-                    <span className="text-sm font-medium text-gray-200">{faq.question}</span>
-                    <span className="ml-4 shrink-0 text-gray-600 group-open:rotate-180 transition-transform text-xs">▼</span>
+                    <span className="text-sm font-medium text-ink">{faq.question}</span>
+                    <span className="ml-4 shrink-0 text-muted group-open:rotate-180 transition-transform text-xs">▼</span>
                   </summary>
-                  <div className="px-5 pb-5 border-t border-gray-800">
-                    <p className="text-sm text-gray-400 leading-relaxed pt-4">{faq.answer}</p>
+                  <div className="px-5 pb-5 border-t border-ink/10">
+                    <p className="text-sm text-muted leading-relaxed pt-4">{faq.answer}</p>
                   </div>
                 </details>
               ))}
@@ -349,10 +349,10 @@ export default function GeneratedLandingPage({
 
           {/* ── Entity keywords ───────────────────────────────────── */}
           <section aria-label="Entity index" className="space-y-3">
-            <p className="text-[11px] font-bold uppercase tracking-widest text-gray-500">Related</p>
+            <p className="text-[11px] font-bold uppercase tracking-widest text-muted">Related</p>
             <div className="flex flex-wrap gap-2">
               {enrichment.keywords.map((kw) => (
-                <span key={kw} className="text-xs text-gray-500 bg-gray-900 border border-gray-800 px-3 py-1 rounded-full">
+                <span key={kw} className="text-xs text-muted bg-paper-soft border border-ink/12 px-3 py-1 rounded-full">
                   {kw}
                 </span>
               ))}
@@ -368,12 +368,12 @@ export default function GeneratedLandingPage({
                   <Link
                     key={link.slug}
                     href={link.href}
-                    className="group flex flex-col gap-1 bg-gray-900 border border-gray-800 hover:border-indigo-800/50 rounded-xl px-4 py-3.5 transition-all duration-150 hover:-translate-y-0.5"
+                    className="group flex flex-col gap-1 bg-paper-soft border border-ink/12 hover:border-accent/40 rounded-xl px-4 py-3.5 transition-all duration-150 hover:-translate-y-0.5"
                   >
-                    <span className="text-sm font-semibold text-gray-200 group-hover:text-indigo-300 transition-colors">
+                    <span className="text-sm font-semibold text-ink group-hover:text-accent transition-colors">
                       {link.title}
                     </span>
-                    <span className="text-xs text-gray-500">{link.description}</span>
+                    <span className="text-xs text-muted">{link.description}</span>
                   </Link>
                 ))}
               </div>
@@ -381,14 +381,14 @@ export default function GeneratedLandingPage({
           )}
 
           {/* ── CTA ───────────────────────────────────────────────── */}
-          <section className="text-center space-y-4 py-6 border-t border-gray-800/50">
+          <section className="text-center space-y-4 py-6 border-t border-ink/10">
             <div className="space-y-2">
               <h2 className="text-xl font-bold">Get a personalised recommendation</h2>
-              <p className="text-sm text-gray-500">Answer 6 questions and get a match scored exactly for your profile.</p>
+              <p className="text-sm text-muted">Answer 6 questions and get a match scored exactly for your profile.</p>
             </div>
             <Link
               href={quizHref}
-              className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl px-8 py-3.5 transition-all duration-150 text-sm shadow-lg shadow-indigo-900/30"
+              className="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white font-semibold rounded-xl px-8 py-3.5 transition-all duration-150 text-sm shadow-lg shadow-accent/20"
             >
               Start the quiz
               <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -397,7 +397,7 @@ export default function GeneratedLandingPage({
             </Link>
           </section>
 
-          <footer className="text-center text-xs text-gray-700 pb-4 space-y-1">
+          <footer className="text-center text-xs text-muted/50 pb-4 space-y-1">
             <p>DEN AEL — Autonomously generated page · Confidence {(page.confidence * 100).toFixed(0)}%</p>
             <p>No sponsored placements · Rankings driven by truth-calibrated intelligence</p>
           </footer>

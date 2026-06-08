@@ -99,17 +99,17 @@ export default function ElectronicsPage() {
   const category = getDenCategoryById("electronics")!;
 
   return (
-    <div className="min-h-[100dvh] flex flex-col bg-gray-950 text-gray-300">
+    <div className="min-h-[100dvh] flex flex-col bg-paper text-ink">
 
       {/* ── Nav ──────────────────────────────────────────── */}
-      <nav className="sticky top-0 z-20 backdrop-blur-sm bg-gray-950/80 border-b border-gray-800/40 flex items-center justify-between px-6 py-4">
+      <nav className="sticky top-0 z-20 backdrop-blur-sm bg-paper/90 border-b border-ink/10 flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-2.5">
-          <span className="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-sm font-bold tracking-tight text-white" aria-hidden="true">
+          <span className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center text-sm font-bold tracking-tight text-white" aria-hidden="true">
             D
           </span>
-          <span className="font-semibold text-white tracking-tight">DEN</span>
+          <span className="font-semibold text-ink tracking-tight">DEN</span>
         </div>
-        <Link href="/" className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors duration-150 font-medium py-2 px-1">
+        <Link href="/" className="flex items-center gap-1.5 text-xs text-muted hover:text-ink transition-colors duration-150 font-medium py-2 px-1">
           <ArrowLeft className="w-3.5 h-3.5" />
           All categories
         </Link>
@@ -120,13 +120,13 @@ export default function ElectronicsPage() {
         {/* ── Category header ───────────────────────────── */}
         <div className="mb-10 space-y-2 animate-fade-in">
           <div className="flex items-center gap-2.5 mb-3">
-            <p className="text-[11px] font-semibold tracking-widest text-gray-600 uppercase">Electronics</p>
-            <span className="text-[10px] font-bold tracking-wide bg-emerald-950/70 text-emerald-400 border border-emerald-800/50 px-2 py-0.5 rounded-full uppercase">Live</span>
+            <p className="text-[11px] font-semibold tracking-widest text-muted uppercase">Electronics</p>
+            <span className="text-[10px] font-bold tracking-wide bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full uppercase">Live</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tighter text-white leading-tight">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tighter text-ink leading-tight">
             {category.tagline}
           </h1>
-          <p className="text-sm text-gray-500 max-w-[50ch] leading-relaxed">
+          <p className="text-sm text-muted max-w-[50ch] leading-relaxed">
             Pick your device category, answer a few questions, and get a single ranked recommendation.
           </p>
         </div>
@@ -142,21 +142,21 @@ export default function ElectronicsPage() {
                 key={sub.id}
                 href={sub.href}
                 style={{ "--index": i } as React.CSSProperties}
-                className="stagger-item group flex flex-col gap-5 bg-gray-900 hover:bg-gray-800/70 border border-gray-800 hover:border-indigo-800/50 rounded-2xl px-5 py-5 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
+                className="stagger-item group flex flex-col gap-5 bg-paper-soft hover:bg-[#ddd6c4] border border-ink/12 hover:border-accent/40 rounded-2xl px-5 py-5 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
               >
                 <div className="flex items-start justify-between">
-                  <Icon className="w-5 h-5 text-indigo-400" />
-                  <span className="text-[10px] font-bold tracking-wide bg-emerald-950/70 text-emerald-400 border border-emerald-800/50 px-2 py-0.5 rounded-full uppercase">
+                  <Icon className="w-5 h-5 text-accent" />
+                  <span className="text-[10px] font-bold tracking-wide bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full uppercase">
                     Live
                   </span>
                 </div>
                 <div>
-                  <p className="font-semibold text-white group-hover:text-indigo-300 transition-colors duration-150 text-sm mb-1.5">
+                  <p className="font-semibold text-ink group-hover:text-accent transition-colors duration-150 text-sm mb-1.5">
                     {sub.label}
                   </p>
-                  <p className="text-xs text-gray-500 leading-relaxed">{sub.description}</p>
+                  <p className="text-xs text-muted leading-relaxed">{sub.description}</p>
                 </div>
-                <div className="flex items-center gap-1.5 text-xs font-medium text-indigo-400 group-hover:text-indigo-300 transition-colors duration-150 mt-auto">
+                <div className="flex items-center gap-1.5 text-xs font-medium text-accent transition-colors duration-150 mt-auto">
                   <span>Start Quiz</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-150" />
                 </div>
@@ -165,17 +165,17 @@ export default function ElectronicsPage() {
               <div
                 key={sub.id}
                 style={{ "--index": i } as React.CSSProperties}
-                className="stagger-item flex flex-col gap-5 bg-gray-900/60 border border-gray-800/60 rounded-2xl px-5 py-5 opacity-60"
+                className="stagger-item flex flex-col gap-5 bg-paper-soft/60 border border-ink/8 rounded-2xl px-5 py-5 opacity-60"
               >
                 <div className="flex items-start justify-between">
-                  <Icon className="w-5 h-5 text-gray-600" />
-                  <span className="text-[10px] font-bold tracking-wide bg-gray-800/80 text-gray-600 border border-gray-700/60 px-2 py-0.5 rounded-full uppercase">
+                  <Icon className="w-5 h-5 text-muted/50" />
+                  <span className="text-[10px] font-bold tracking-wide bg-ink/8 text-muted border border-ink/10 px-2 py-0.5 rounded-full uppercase">
                     Soon
                   </span>
                 </div>
                 <div>
-                  <p className="font-semibold text-gray-500 text-sm mb-1.5">{sub.label}</p>
-                  <p className="text-xs text-gray-600 leading-relaxed">{sub.description}</p>
+                  <p className="font-semibold text-muted text-sm mb-1.5">{sub.label}</p>
+                  <p className="text-xs text-muted/60 leading-relaxed">{sub.description}</p>
                 </div>
               </div>
             );
@@ -185,9 +185,9 @@ export default function ElectronicsPage() {
       </main>
 
       {/* ── Footer ───────────────────────────────────────── */}
-      <footer className="px-6 py-6 border-t border-gray-800/50">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-700">
-          <Link href="/" className="hover:text-gray-400 transition-colors duration-150">← DEN Home</Link>
+      <footer className="px-6 py-6 border-t border-ink/10">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted/50">
+          <Link href="/" className="hover:text-ink transition-colors duration-150">← DEN Home</Link>
           <span>© 2025 DEN</span>
         </div>
       </footer>

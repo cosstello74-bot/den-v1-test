@@ -17,17 +17,17 @@ function ArrowLeft({ className }: { className?: string }) {
 
 export default function HubStub({ category }: { category: DenTopCategory }) {
   return (
-    <div className="min-h-[100dvh] flex flex-col bg-gray-950 text-gray-300">
+    <div className="min-h-[100dvh] flex flex-col bg-paper text-ink">
 
       {/* ── Nav ──────────────────────────────────────────── */}
-      <nav className="sticky top-0 z-20 backdrop-blur-sm bg-gray-950/80 border-b border-gray-800/40 flex items-center justify-between px-6 py-4">
+      <nav className="sticky top-0 z-20 backdrop-blur-sm bg-paper/90 border-b border-ink/10 flex items-center justify-between px-6 py-4">
         <div className="flex items-center gap-2.5">
-          <span className="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-sm font-bold tracking-tight text-white" aria-hidden="true">
+          <span className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center text-sm font-bold tracking-tight text-white" aria-hidden="true">
             D
           </span>
-          <span className="font-semibold text-white tracking-tight">DEN</span>
+          <span className="font-semibold text-ink tracking-tight">DEN</span>
         </div>
-        <Link href="/" className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors duration-150 font-medium py-2 px-1">
+        <Link href="/" className="flex items-center gap-1.5 text-xs text-muted hover:text-ink transition-colors duration-150 font-medium py-2 px-1">
           <ArrowLeft className="w-3.5 h-3.5" />
           All categories
         </Link>
@@ -38,15 +38,15 @@ export default function HubStub({ category }: { category: DenTopCategory }) {
         {/* ── Category header ───────────────────────────── */}
         <div className="mb-10 space-y-2 animate-fade-in">
           <div className="flex items-center gap-2.5 mb-3">
-            <p className="text-[11px] font-semibold tracking-widest text-gray-600 uppercase">{category.label}</p>
-            <span className="text-[10px] font-bold tracking-wide bg-gray-800/80 text-gray-600 border border-gray-700/60 px-2 py-0.5 rounded-full uppercase">
+            <p className="text-[11px] font-semibold tracking-widest text-muted uppercase">{category.label}</p>
+            <span className="text-[10px] font-bold tracking-wide bg-ink/8 text-muted border border-ink/10 px-2 py-0.5 rounded-full uppercase">
               Coming Soon
             </span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tighter text-white leading-tight max-w-[28rem]">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tighter text-ink leading-tight max-w-[28rem]">
             {category.tagline}
           </h1>
-          <p className="text-sm text-gray-600 max-w-[48ch] leading-relaxed">
+          <p className="text-sm text-muted max-w-[48ch] leading-relaxed">
             Ranked recommendations for {category.label.toLowerCase()} are in development.
             We&apos;ll have scored results ready soon.
           </p>
@@ -58,30 +58,30 @@ export default function HubStub({ category }: { category: DenTopCategory }) {
             <div
               key={sub.id}
               style={{ "--index": i } as React.CSSProperties}
-              className="stagger-item flex flex-col gap-4 bg-gray-900/50 border border-gray-800/50 rounded-2xl px-5 py-5 opacity-50"
+              className="stagger-item flex flex-col gap-4 bg-paper-soft/50 border border-ink/8 rounded-2xl px-5 py-5 opacity-50"
             >
               <div className="flex items-start justify-between">
-                <div className="w-5 h-5 rounded bg-gray-800" />
-                <span className="text-[10px] font-bold tracking-wide bg-gray-800/80 text-gray-600 border border-gray-700/60 px-2 py-0.5 rounded-full uppercase">
+                <div className="w-5 h-5 rounded bg-ink/10" />
+                <span className="text-[10px] font-bold tracking-wide bg-ink/8 text-muted border border-ink/10 px-2 py-0.5 rounded-full uppercase">
                   Soon
                 </span>
               </div>
               <div>
-                <p className="font-semibold text-gray-500 text-sm mb-1.5">{sub.label}</p>
-                <p className="text-xs text-gray-700 leading-relaxed">{sub.description}</p>
+                <p className="font-semibold text-muted text-sm mb-1.5">{sub.label}</p>
+                <p className="text-xs text-muted/60 leading-relaxed">{sub.description}</p>
               </div>
             </div>
           ))}
         </div>
 
         {/* ── Back CTA ──────────────────────────────────── */}
-        <div className="mt-16 pt-8 border-t border-gray-800/50">
-          <p className="text-sm text-gray-600 mb-4">
+        <div className="mt-16 pt-8 border-t border-ink/10">
+          <p className="text-sm text-muted mb-4">
             While we build out {category.label}, the Electronics quiz is live now.
           </p>
           <Link
             href="/electronics"
-            className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 active:-translate-y-[1px] text-white font-semibold px-5 py-3 rounded-xl text-sm transition-all duration-150"
+            className="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark active:-translate-y-[1px] text-white font-semibold px-5 py-3 rounded-xl text-sm transition-all duration-150"
           >
             Try Electronics Quiz
           </Link>
@@ -90,9 +90,9 @@ export default function HubStub({ category }: { category: DenTopCategory }) {
       </main>
 
       {/* ── Footer ───────────────────────────────────────── */}
-      <footer className="px-6 py-6 border-t border-gray-800/50">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-700">
-          <Link href="/" className="hover:text-gray-400 transition-colors duration-150">← DEN Home</Link>
+      <footer className="px-6 py-6 border-t border-ink/10">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted/50">
+          <Link href="/" className="hover:text-ink transition-colors duration-150">← DEN Home</Link>
           <span>© 2025 DEN</span>
         </div>
       </footer>
