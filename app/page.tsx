@@ -299,7 +299,7 @@ export default function LandingPage() {
                           className={`text-[11px] font-medium px-3 py-1.5 rounded-full border ${
                             sub.comingSoon
                               ? "bg-paper/5 text-paper/30 border-paper/10"
-                              : "bg-accent/15 text-accent border-accent/30"
+                              : "bg-paper/10 text-paper border-paper/20"
                           }`}
                         >
                           {sub.label}

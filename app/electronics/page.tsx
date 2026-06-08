@@ -147,7 +147,7 @@ export default function ElectronicsPage() {
                   </span>
                 </div>
                 <div>
-                  <p className="font-semibold text-paper text-sm mb-1.5">
+                  <p className="font-semibold text-ink group-hover:text-accent transition-colors duration-150 text-sm mb-1.5">
                     {sub.label}
                   </p>
                   <p className="text-xs text-muted leading-relaxed">{sub.description}</p>
@@ -170,7 +170,7 @@ export default function ElectronicsPage() {
                   </span>
                 </div>
                 <div>
-                  <p className="font-semibold text-paper/60 text-sm mb-1.5">{sub.label}</p>
+                  <p className="font-semibold text-muted text-sm mb-1.5">{sub.label}</p>
                   <p className="text-xs text-muted/60 leading-relaxed">{sub.description}</p>
                 </div>
               </div>
