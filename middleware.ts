@@ -12,6 +12,16 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
+import { createHmac, timingSafeEqual } from "crypto";
+
+function isValidToken(token: string, adminPw: string): boolean {
+  const expected = createHmac("sha256", adminPw).update("den-admin-session").digest("hex");
+  try {
+    return timingSafeEqual(Buffer.from(token), Buffer.from(expected));
+  } catch {
+    return false;
+  }
+}
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -26,12 +36,12 @@ export function middleware(req: NextRequest) {
     }
   }
 
-  // ── Admin: password protection ──────────────────────────────────────────────
+  // ── Admin: HMAC-signed session token validation ─────────────────────────────
   if (pathname.startsWith("/admin") && pathname !== "/admin/login") {
     const token = req.cookies.get("den_admin_auth")?.value;
     const pw    = process.env.ADMIN_PASSWORD;
 
-    const valid = pw && token && token === Buffer.from(pw).toString("base64");
+    const valid = pw && token && isValidToken(token, pw);
 
     if (!valid) {
       return NextResponse.redirect(new URL("/admin/login", req.url));

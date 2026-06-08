@@ -1,4 +1,9 @@
 import { NextResponse } from "next/server";
+import { createHmac } from "crypto";
+
+function makeSessionToken(adminPw: string): string {
+  return createHmac("sha256", adminPw).update("den-admin-session").digest("hex");
+}
 
 export async function POST(req: Request) {
   const { password } = await req.json() as { password: string };
@@ -8,7 +13,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const token    = Buffer.from(adminPw).toString("base64");
+  const token    = makeSessionToken(adminPw);
   const isProd   = process.env.NODE_ENV === "production";
   const response = NextResponse.json({ ok: true });
 

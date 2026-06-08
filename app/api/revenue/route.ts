@@ -2,6 +2,7 @@ import { NextResponse }           from "next/server";
 import type { NextRequest }       from "next/server";
 import type { RevenueModelSnapshot } from "@/lib/metrics/revenueMetrics";
 import { updateRevenueModel, persistRevenueModel } from "@/lib/revenueLearningLoop";
+import type { Event } from "@/types/event";
 import seedRevenue from "@/data/revenueModel.json";
 
 // In-memory model — persists within the Node.js process lifetime
@@ -18,8 +19,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "events array required" }, { status: 400 });
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const updated = updateRevenueModel(body.events as any[], runtimeRevenue);
+    const updated = updateRevenueModel(body.events as Event[], runtimeRevenue);
     runtimeRevenue = updated;
     persistRevenueModel(updated);
 

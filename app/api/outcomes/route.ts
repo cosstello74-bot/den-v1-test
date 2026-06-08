@@ -36,8 +36,10 @@ export async function POST(req: NextRequest) {
       ok: true,
       processed: outcomeEvents.length,
     });
-  } catch {
-    return NextResponse.json({ error: "Failed to process outcomes" }, { status: 500 });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("[outcomes] POST error:", message);
+    return NextResponse.json({ error: "Failed to process outcomes", detail: message }, { status: 500 });
   }
 }
 
@@ -48,7 +50,8 @@ export async function GET() {
       const derived = buildTruthModel(allEvents);
       runtimeTruth  = mergeTruthModels(seedTruth as TruthModel, derived);
     }
-  } catch {
+  } catch (err) {
+    console.error("[outcomes] GET rebuild error:", err);
     // fall back to current runtimeTruth
   }
   return NextResponse.json(runtimeTruth);

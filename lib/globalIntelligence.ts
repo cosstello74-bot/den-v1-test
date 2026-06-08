@@ -12,7 +12,7 @@ export function mergeEvents(model: GlobalModel, events: TrackingEvent[]): Global
 
   for (const event of events) {
     const productId = event.productId;
-    const category = (event.metadata.category as string) ?? "laptops";
+    const category = (event.metadata?.category as string | undefined) ?? "laptops";
 
     if (productId) {
       if (!updated.productStats[productId]) {

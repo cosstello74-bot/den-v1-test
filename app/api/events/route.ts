@@ -28,8 +28,10 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json({ ok: true, processed: body.events.length });
-  } catch {
-    return NextResponse.json({ error: "Failed to process events" }, { status: 500 });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("[events] POST error:", message);
+    return NextResponse.json({ error: "Failed to process events", detail: message }, { status: 500 });
   }
 }
 

@@ -40,6 +40,7 @@ function buildAwinUrl(rawUrl: string): string {
 
 function buildCjUrl(rawUrl: string): string {
   const id = TRACKING_IDS.cj;
+  if (!id) return rawUrl;
   return `https://www.anrdoezrs.net/click-${id}-${encodeURIComponent(rawUrl)}`;
 }
 
@@ -53,7 +54,7 @@ export function detectNetwork(url: string): AffiliateNetwork {
 }
 
 /** Returns the first active (non-PENDING) URL from affiliate_urls, or falls back to affiliate_url. */
-function pickBestRaw(product: Product): { url: string; network: AffiliateNetwork } {
+function pickBestRaw(product: Product): { url: string; network: AffiliateNetwork } | null {
   if (product.affiliate_urls?.length) {
     const active = product.affiliate_urls.find(
       (l) => l.url && l.url !== "PENDING"
@@ -61,12 +62,17 @@ function pickBestRaw(product: Product): { url: string; network: AffiliateNetwork
     if (active) return { url: active.url, network: active.network as AffiliateNetwork };
   }
   const url = product.affiliate_url;
+  if (!url) return null;
   return { url, network: detectNetwork(url) };
 }
 
 export function resolveAffiliateUrl(product: Product): string {
-  const { url, network } = pickBestRaw(product);
-
+  const best = pickBestRaw(product);
+  if (!best) {
+    console.warn(`[affiliateResolver] no active URL for product ${product.id}`);
+    return "";
+  }
+  const { url, network } = best;
   switch (network) {
     case "amazon": return buildAmazonUrl(url);
     case "awin":   return buildAwinUrl(url);
@@ -76,13 +82,13 @@ export function resolveAffiliateUrl(product: Product): string {
 }
 
 export function resolveWithEntry(product: Product): AffiliateEntry {
-  const { url, network } = pickBestRaw(product);
+  const best = pickBestRaw(product);
+  const { url, network } = best ?? { url: "", network: "direct" as AffiliateNetwork };
   return {
     network,
     rawUrl:     url,
     trackingId: TRACKING_IDS[network],
   };
-
 }
 
 /** Returns all active affiliate links for a product, with tracking applied. */

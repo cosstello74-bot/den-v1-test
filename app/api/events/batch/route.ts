@@ -34,8 +34,10 @@ export async function POST(req: NextRequest) {
       processed: body.events.length,
       totalEvents: allEvents.length,
     });
-  } catch {
-    return NextResponse.json({ error: "Failed to process batch" }, { status: 500 });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("[events/batch] POST error:", message);
+    return NextResponse.json({ error: "Failed to process batch", detail: message }, { status: 500 });
   }
 }
 
@@ -50,7 +52,8 @@ export async function GET() {
       const derivedTruth = buildTruthModel(allEvents);
       runtimeTruth       = mergeTruthModels(seedTruth as TruthModel, derivedTruth);
     }
-  } catch {
+  } catch (err) {
+    console.error("[events/batch] GET rebuild error:", err);
     // fall back to current runtime models
   }
   return NextResponse.json(runtimeModel);

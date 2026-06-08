@@ -15,7 +15,17 @@ async function loadContext(): Promise<CycleContext> {
   };
 }
 
-export async function GET() {
+export async function GET(req: Request) {
+  const cronSecret = process.env.CRON_SECRET;
+  if (cronSecret) {
+    const auth = req.headers instanceof Headers
+      ? req.headers.get("authorization")
+      : (req.headers as Record<string, string>)["authorization"];
+    if (auth !== `Bearer ${cronSecret}`) {
+      return Response.json({ error: "Unauthorized" }, { status: 401 });
+    }
+  }
+
   const result = await runCycleFromApi(loadContext);
 
   return Response.json({

@@ -10,15 +10,20 @@ export function getRecommendation(input: Input) {
     (r) => r.if.purpose === input.purpose && r.if.budget === input.budget
   );
 
-  const products = rule
+  const candidates = rule
     ? rule.recommendations.map((id) => data.products.find((p) => p.id === id))
     : data.products.slice(0, 3);
 
-  return products
-    .filter(Boolean)
+  return candidates
+    .filter((p): p is NonNullable<typeof p> => {
+      if (p === undefined) {
+        console.warn("[engine] recommendation references unknown product id");
+      }
+      return p !== undefined;
+    })
     .map((p, index) => ({
       rank: index + 1,
       ...p,
-      affiliate_url: p!.affiliate_url,
+      affiliate_url: p.affiliate_url,
     }));
 }
