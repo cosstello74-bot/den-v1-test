@@ -1,8 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 import { appendEvents, readAllEvents } from "@/lib/eventStore";
 import { buildTruthModel, mergeTruthModels, type TruthModel } from "@/lib/truthModel";
-import type { Event, EventType } from "@/types/event";
+import type { EventType } from "@/types/event";
 import seedTruth from "@/data/truthModel.json";
+
+const EventSchema = z.object({
+  id:        z.string(),
+  timestamp: z.number(),
+  sessionId: z.string(),
+  type:      z.string(),
+  category:  z.string(),
+  productId: z.string().optional(),
+  metadata:  z.record(z.string(), z.unknown()).optional(),
+});
+
+const PayloadSchema = z.object({ events: z.array(EventSchema).min(1) });
 
 const OUTCOME_TYPES = new Set<EventType>([
   "product_returned",
@@ -15,18 +28,19 @@ let runtimeTruth: TruthModel = seedTruth as TruthModel;
 
 export async function POST(req: NextRequest) {
   try {
-    const body: { events: Event[] } = await req.json();
-
-    if (!Array.isArray(body?.events)) {
-      return NextResponse.json({ error: "Expected { events: Event[] }" }, { status: 400 });
+    const raw   = await req.json();
+    const parse = PayloadSchema.safeParse(raw);
+    if (!parse.success) {
+      return NextResponse.json({ error: "Invalid payload", detail: parse.error.flatten() }, { status: 400 });
     }
 
-    const outcomeEvents = body.events.filter((e) => OUTCOME_TYPES.has(e.type));
+    const outcomeEvents = parse.data.events.filter((e) => OUTCOME_TYPES.has(e.type as EventType));
     if (outcomeEvents.length === 0) {
       return NextResponse.json({ error: "No valid outcome event types" }, { status: 400 });
     }
 
-    await appendEvents(outcomeEvents);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await appendEvents(outcomeEvents as any[]);
 
     const allEvents = await readAllEvents();
     const derived   = buildTruthModel(allEvents);

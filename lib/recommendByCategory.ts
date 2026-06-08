@@ -1,4 +1,7 @@
 import { getCategoryConfig } from "./category";
+
+const STRENGTH_MIN_SCORE = 72;  // minimum dimension score to surface as a strength
+const STRENGTH_BOOST     = 15;  // score boost when dimension matches user priority
 import { calculateScore } from "./scoring";
 import { getProductFeedback } from "./feedback";
 import { updateProductWeights } from "./learning";
@@ -70,16 +73,16 @@ function deriveStrengths(
 
   const boosted = candidates.map((c) => {
     let boost = 0;
-    if (c.label.includes("Battery")      && user.battery_importance === "very-important")    boost = 15;
-    if (c.label.includes("Portable")     && user.portability        === "frequently-travel") boost = 15;
-    if (c.label.includes("Gaming")       && user.purpose            === "gaming")            boost = 15;
-    if (c.label.includes("Productivity") && (user.purpose === "work" || user.purpose === "creative")) boost = 15;
-    if (c.label.includes("Value")        && user.purpose            === "university")        boost = 15;
+    if (c.label.includes("Battery")      && user.battery_importance === "very-important")    boost = STRENGTH_BOOST;
+    if (c.label.includes("Portable")     && user.portability        === "frequently-travel") boost = STRENGTH_BOOST;
+    if (c.label.includes("Gaming")       && user.purpose            === "gaming")            boost = STRENGTH_BOOST;
+    if (c.label.includes("Productivity") && (user.purpose === "work" || user.purpose === "creative")) boost = STRENGTH_BOOST;
+    if (c.label.includes("Value")        && user.purpose            === "university")        boost = STRENGTH_BOOST;
     return { ...c, sortValue: c.value + boost };
   });
 
   return boosted
-    .filter((c) => c.value >= 72)
+    .filter((c) => c.value >= STRENGTH_MIN_SCORE)
     .sort((a, b) => b.sortValue - a.sortValue)
     .slice(0, 3)
     .map((c) => c.label);

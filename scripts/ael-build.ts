@@ -102,10 +102,41 @@ type ExpansionState = {
   currentOpportunities: ExpansionOpportunity[];
   revenueScans: RevenueScanResult[];
   feedbackState: { confidenceThreshold: number; expansionRecords: FeedbackRecord[]; avgExpansionScore: number; lastEvaluated: string };
+  suppressedSlugs: string[]; // pages suppressed due to zero conversions after grace period
 };
 
 // ── Confidence threshold ─────────────────────────────────────────────────────
 const CONFIDENCE_THRESHOLD = 0.85;
+
+// ── Suppression: pages with zero conversions after this many days are suppressed
+const SUPPRESSION_GRACE_DAYS = 30;
+
+function detectSuppressedSlugs(
+  pages: GeneratedPage[],
+  feedbackRecords: FeedbackRecord[],
+  existingSuppressed: string[],
+  now: Date,
+): string[] {
+  const suppressed = new Set(existingSuppressed);
+  const recordMap  = new Map(feedbackRecords.map((r) => [r.pageSlug, r]));
+
+  for (const page of pages) {
+    if (suppressed.has(page.slug)) continue;
+    const ageMs   = now.getTime() - new Date(page.createdAt).getTime();
+    const ageDays = ageMs / (1000 * 60 * 60 * 24);
+    if (ageDays < SUPPRESSION_GRACE_DAYS) continue;
+
+    const record = recordMap.get(page.slug);
+    const hasConversions = record && record.quizConversions > 0;
+    const hasSessions    = record && record.sessions > 0;
+
+    if (!hasConversions && !hasSessions) {
+      suppressed.add(page.slug);
+    }
+  }
+
+  return Array.from(suppressed);
+}
 
 // ── Category avg conversion ──────────────────────────────────────────────────
 const CATEGORY_AVG_CONV = 0.074;
@@ -184,6 +215,7 @@ async function main(): Promise<void> {
     lastRun: now, totalPagesGenerated: 0, totalCategoriesGenerated: 0,
     expansionHistory: [], currentOpportunities: [], revenueScans: [],
     feedbackState: { confidenceThreshold: 0.85, expansionRecords: [], avgExpansionScore: 0, lastEvaluated: now },
+    suppressedSlugs: [],
   });
   const revenue = readJson<RevenueModel>(REVENUE_MODEL, { products: {}, categories: {} });
   const intel   = readJson<IntelModel>(INTEL_MODEL, { products: {} });
@@ -193,12 +225,25 @@ async function main(): Promise<void> {
   const existingPageSlugs  = existingPages.map((p) => p.slug);
   const existingCategoryIds = existingCats.map((c) => c.id);
 
+  // Suppress pages that have been live 30+ days with zero traffic/conversions
+  const suppressedSlugs = detectSuppressedSlugs(
+    existingPages,
+    state.feedbackState.expansionRecords,
+    state.suppressedSlugs ?? [],
+    new Date(now),
+  );
+  if (suppressedSlugs.length > (state.suppressedSlugs ?? []).length) {
+    const newlySuppressed = suppressedSlugs.filter((s) => !(state.suppressedSlugs ?? []).includes(s));
+    log(`Suppressed ${newlySuppressed.length} zero-conversion page(s): ${newlySuppressed.join(", ")}`);
+  }
+
   log(`Loaded: ${existingPages.length} pages, ${existingCats.length} categories, ${signals.length} GEO signals`);
 
   // 2. Detect new intent pages
   const newPages: GeneratedPage[] = [];
   for (const intent of INTENT_VOCAB) {
     if (existingPageSlugs.includes(intent.slug)) continue;
+    if (suppressedSlugs.includes(intent.slug)) continue;  // skip suppressed pages
     if (intent.confidence < threshold) continue;
     newPages.push({
       slug: intent.slug, title: intent.slug.replace(/-/g,"  ").replace(/\b\w/g,(l)=>l.toUpperCase()),
@@ -327,6 +372,7 @@ async function main(): Promise<void> {
     lastRun:                now,
     totalPagesGenerated:    allPages.length,
     totalCategoriesGenerated: allCategories.length,
+    suppressedSlugs,
     expansionHistory: [
       ...state.expansionHistory,
       {

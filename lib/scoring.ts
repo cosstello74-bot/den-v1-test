@@ -1,4 +1,6 @@
 import type { ProductWithMetrics, ScoringProfile } from "@/types/product";
+
+const EXACT_MATCH_BONUS = 10;  // added to score when screen size or brand preference matches exactly
 import type { IntelligenceModel } from "./learningEngine";
 import type { TruthModel } from "./truthModel";
 import type { ScoringSignals } from "./v15/categoryScoring";
@@ -26,10 +28,10 @@ function calculateBaseScore(user: ScoringSignals, product: ProductWithMetrics): 
   }
 
   if (user.screen_size !== "no-preference" && product.screen_size === user.screen_size) {
-    score += 10;
+    score += EXACT_MATCH_BONUS;
   }
   if (user.brand_preference !== "no-preference" && product.brand === user.brand_preference) {
-    score += 10;
+    score += EXACT_MATCH_BONUS;
   }
 
   return score;
