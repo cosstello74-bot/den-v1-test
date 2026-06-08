@@ -1,8 +1,5 @@
 /**
- * DEN Homepage — Server Component
- *
- * Reads x-vercel-ip-country header to determine whether to show the
- * UK-only Beauty category. All other categories are shown globally.
+ * DEN Homepage — Server Component (editorial redesign)
  */
 
 import type React from "react";
@@ -10,6 +7,23 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import { getPublicCategories } from "@/lib/den-categories";
 import type { DenTopCategory } from "@/lib/den-categories";
+
+// ─── Logo mark ────────────────────────────────────────────────────────────────
+// Simplified abstraction of the D speed-mark from the DEN logo
+// (dots + horizontal data-stream bars)
+
+function DenMark({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <circle cx="1.5" cy="4.5"  r="1.2" fill="currentColor" opacity="0.55" />
+      <circle cx="1.5" cy="9"    r="1.2" fill="currentColor" opacity="0.75" />
+      <circle cx="1.5" cy="13.5" r="1.2" fill="currentColor" opacity="0.55" />
+      <rect x="4.5" y="3.5"  width="4.5" height="2" rx="1" fill="currentColor" opacity="0.6" />
+      <rect x="4.5" y="8"    width="9"   height="2" rx="1" fill="currentColor" />
+      <rect x="4.5" y="12.5" width="6"   height="2" rx="1" fill="currentColor" opacity="0.6" />
+    </svg>
+  );
+}
 
 // ─── Category icons ────────────────────────────────────────────────────────────
 
@@ -79,20 +93,10 @@ function BeautyIcon({ className }: { className?: string }) {
   );
 }
 
-// ─── Utility icons ─────────────────────────────────────────────────────────────
-
 function ArrowRight({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
       <path d="M5 12h14M12 5l7 7-7 7" />
-    </svg>
-  );
-}
-
-function CheckIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4.5 12.75l6 6 9-13.5" />
     </svg>
   );
 }
@@ -109,31 +113,31 @@ const CAT_ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
   beauty:      BeautyIcon,
 };
 
-// ─── Badge component ───────────────────────────────────────────────────────────
+// ─── Status badge ──────────────────────────────────────────────────────────────
 
-function CategoryBadge({ cat }: { cat: DenTopCategory }) {
+function StatusBadge({ cat }: { cat: DenTopCategory }) {
   if (cat.id === "electronics") {
     return (
-      <span className="text-[10px] font-bold tracking-wide bg-emerald-950/70 text-emerald-400 border border-emerald-800/50 px-2 py-0.5 rounded-full uppercase">
+      <span className="text-[10px] font-bold tracking-wide bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full uppercase">
         Live
       </span>
     );
   }
   if (cat.locationBadge) {
     return (
-      <span className="text-[10px] font-medium text-accent/70 border border-accent/30 px-2 py-0.5 rounded-full">
+      <span className="text-[10px] font-medium text-accent/80 border border-accent/30 px-2 py-0.5 rounded-full">
         {cat.locationBadge}
       </span>
     );
   }
   return (
-    <span className="text-[10px] font-bold tracking-wide bg-ink/8 text-muted border border-ink/15 px-2 py-0.5 rounded-full uppercase">
+    <span className="text-[10px] font-bold tracking-wide bg-ink/6 text-muted border border-ink/12 px-2 py-0.5 rounded-full uppercase">
       Soon
     </span>
   );
 }
 
-// ─── How it works ──────────────────────────────────────────────────────────────
+// ─── Method steps ─────────────────────────────────────────────────────────────
 
 const STEPS = [
   {
@@ -160,324 +164,267 @@ export default function LandingPage() {
   const isUK        = (headersList.get("x-vercel-ip-country") ?? "") === "GB";
   const categories  = getPublicCategories(isUK);
 
-  // Split categories for the asymmetric grid layout
   const electronics = categories.find(c => c.id === "electronics")!;
-  const beauty      = categories.find(c => c.id === "beauty");          // undefined outside UK
-  const business    = categories.find(c => c.id === "business")!;
-  // Finance, Home, Health, Travel — displayed in 2-col grid
-  const midCats     = categories.filter(c => !["electronics", "beauty", "business"].includes(c.id));
+  const restCats    = categories.filter(c => c.id !== "electronics");
 
   return (
     <div className="min-h-[100dvh] flex flex-col bg-paper text-ink">
 
-      {/* ── Nav ──────────────────────────────────────────── */}
-      <nav className="sticky top-0 z-20 backdrop-blur-sm bg-paper/90 border-b border-ink/10 flex items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-2.5">
-          <span className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center text-sm font-bold tracking-tight text-white" aria-hidden="true">
-            D
-          </span>
-          <span className="font-semibold text-ink tracking-tight">DEN</span>
+      {/* ── Nav ────────────────────────────────────────────────── */}
+      <nav className="sticky top-0 z-20 backdrop-blur-sm bg-paper/90 border-b border-ink/10">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <Link href="/" aria-label="DEN home">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="DEN — Decisions. Engineered. Now." className="h-9 w-auto" />
+          </Link>
+          <Link
+            href="/electronics"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:text-accent-dark transition-colors duration-150"
+          >
+            Start now
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
-        <Link
-          href="/electronics"
-          className="text-xs text-muted hover:text-ink transition-colors duration-150 font-medium py-2 px-1"
-        >
-          Start →
-        </Link>
       </nav>
 
       <main className="flex-1">
 
-        {/* ── Hero ─────────────────────────────────────────── */}
-        <section className="relative px-6 pt-20 pb-16 md:pt-28 md:pb-24 overflow-hidden">
-          {/* Ambient background accent — barely visible */}
-          <div
-            className="absolute top-0 right-0 w-[480px] h-[480px] bg-accent/[0.06] rounded-full blur-3xl pointer-events-none"
-            aria-hidden="true"
-          />
+        {/* ── Hero ───────────────────────────────────────────────── */}
+        <section className="max-w-7xl mx-auto px-6">
 
-          <div className="max-w-7xl mx-auto">
-            <div className="max-w-[38rem] space-y-7 animate-slide-up">
-
-              {/* Eyebrow */}
-              <div className="inline-flex items-center gap-2 border border-accent/30 rounded-full px-3.5 py-1 text-[11px] font-semibold text-accent tracking-widest uppercase">
-                Decision Intelligence
-              </div>
-
-              {/* Headline */}
-              <h1 className="text-5xl md:text-[5.5rem] font-bold tracking-tighter leading-none text-ink">
-                Stop scrolling
-                <br />
-                Reddit.
-                <br />
-                <span className="text-accent">Get your match.</span>
-              </h1>
-
-              {/* Body */}
-              <p className="text-base text-muted leading-relaxed max-w-[52ch]">
-                Answer a few questions about use case, budget, and priorities.
-                We rank against real purchase outcomes — not what paid the most.
+          {/* Editorial identity bar */}
+          <div className="flex items-center justify-between py-5 border-b border-ink/12">
+            <div className="flex items-center gap-3">
+              <DenMark className="w-4 h-4 text-accent" />
+              <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-muted">
+                Decisions. Engineered. Now.
               </p>
+            </div>
+            <p className="text-[10px] tracking-[0.15em] uppercase text-muted/40 hidden sm:block">
+              United Kingdom · Est. 2025
+            </p>
+          </div>
 
-              {/* Primary CTA */}
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
+          {/* Main display headline */}
+          <div className="py-16 md:py-24">
+            <h1 className="text-[clamp(3rem,9vw,8.5rem)] font-bold tracking-tighter leading-[0.88] text-ink mb-10">
+              Stop scrolling.<br />
+              <span className="text-accent">Get your match.</span>
+            </h1>
+
+            {/* Sub-copy + CTA — editorial split layout */}
+            <div className="border-t border-ink/10 pt-8 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+              <p className="text-base md:text-lg text-muted leading-relaxed max-w-[44ch]">
+                Answer a few questions about use case, budget, and priorities.
+                We rank against real purchase outcomes — not what paid the highest commission.
+              </p>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
                 <Link
                   href="/electronics"
-                  className="inline-flex items-center gap-2.5 bg-accent hover:bg-accent-dark active:-translate-y-[1px] text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-150 text-sm shadow-lg shadow-accent/20"
+                  className="inline-flex items-center gap-2.5 bg-accent hover:bg-accent-dark active:-translate-y-[1px] text-white font-semibold px-7 py-4 rounded-xl transition-all duration-150 text-sm shadow-lg shadow-accent/20"
                 >
                   Find My Match
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-                <span className="text-xs text-muted/60 tracking-wide">Free · No sign-up · 60 seconds</span>
+                <span className="text-xs text-muted/55">Free · No account · 60 seconds</span>
               </div>
-
-              {/* Trust signals */}
-              <div className="flex items-center gap-6 flex-wrap pt-1">
-                {[
-                  "Ranked by real outcomes",
-                  "No sponsored results",
-                  "No account required",
-                ].map((s) => (
-                  <div key={s} className="flex items-center gap-1.5 text-xs text-muted">
-                    <CheckIcon className="w-3.5 h-3.5 text-accent shrink-0" />
-                    {s}
-                  </div>
-                ))}
-              </div>
-
             </div>
           </div>
         </section>
 
-        {/* ── Category grid ─────────────────────────────────── */}
-        <section className="px-6 pb-20 max-w-7xl mx-auto space-y-3">
+        {/* ── Trust strip ────────────────────────────────────────── */}
+        <div className="border-y border-ink/10 bg-paper-soft overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 py-3.5 flex items-center gap-8 overflow-x-auto scrollbar-none">
+            {[
+              "No sponsored results",
+              "Ranked by real purchase outcomes",
+              "No account required",
+              "UK-focused recommendations",
+              "Truth-calibrated scoring",
+            ].map((s) => (
+              <span key={s} className="flex items-center gap-2.5 text-[11px] text-muted whitespace-nowrap">
+                <span className="w-1 h-1 rounded-full bg-accent shrink-0" aria-hidden="true" />
+                {s}
+              </span>
+            ))}
+          </div>
+        </div>
 
-          {/* Electronics — featured, full-width */}
-          <Link
-            href={electronics.href}
-            className="stagger-item group block bg-paper-soft hover:bg-[#ddd6c4] border border-ink/12 hover:border-accent/40 rounded-2xl px-6 py-6 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
-          >
-            <div className="flex items-start justify-between mb-4">
-              <div className="flex items-center gap-3">
-                <ElectronicsIcon className="w-6 h-6 text-accent" />
-                <span className="font-bold text-ink text-lg tracking-tight group-hover:text-accent transition-colors duration-150">
-                  {electronics.label}
-                </span>
-              </div>
-              <CategoryBadge cat={electronics} />
-            </div>
+        {/* ── Categories ─────────────────────────────────────────── */}
+        <section className="max-w-7xl mx-auto px-6 py-20">
 
-            <p className="text-sm text-muted leading-relaxed max-w-[60ch] mb-5">
-              {electronics.tagline}
+          {/* Section label */}
+          <div className="flex items-baseline justify-between pb-4 mb-1 border-b border-ink/12">
+            <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-muted">
+              Choose a vertical
             </p>
-
-            {/* Sub-category chips */}
-            <div className="flex flex-wrap gap-1.5 mb-5">
-              {electronics.subCategories.map((sub) => (
-                <span
-                  key={sub.id}
-                  className={`text-[11px] font-medium px-2.5 py-1 rounded-full border ${
-                    sub.comingSoon
-                      ? "bg-ink/5 text-muted border-ink/10"
-                      : "bg-accent/10 text-accent border-accent/30"
-                  }`}
-                >
-                  {sub.label}
-                </span>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-1.5 text-sm font-medium text-accent group-hover:text-accent-dark transition-colors duration-150">
-              <span>Start Quiz</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-150" />
-            </div>
-          </Link>
-
-          {/* Finance + Home — 2-col */}
-          {/* Health + Travel — 2-col */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {midCats.map((cat, i) => {
-              const Icon = CAT_ICON_MAP[cat.id] ?? ElectronicsIcon;
-              return (
-                <Link
-                  key={cat.id}
-                  href={cat.href}
-                  style={{ "--index": i + 1 } as React.CSSProperties}
-                  className="stagger-item group block bg-paper-soft hover:bg-[#ddd6c4] border border-ink/12 hover:border-ink/20 rounded-2xl px-5 py-5 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <Icon className="w-5 h-5 text-muted group-hover:text-ink transition-colors duration-150" />
-                    <CategoryBadge cat={cat} />
-                  </div>
-
-                  <p className="font-semibold text-ink text-sm mb-1.5">
-                    {cat.label}
-                  </p>
-                  <p className="text-xs text-muted leading-relaxed mb-4 max-w-[38ch]">
-                    {cat.tagline}
-                  </p>
-
-                  {/* Sub-category pills — muted, informational only */}
-                  <div className="flex flex-wrap gap-1">
-                    {cat.subCategories.slice(0, 3).map((sub) => (
-                      <span key={sub.id} className="text-[10px] text-muted border border-ink/10 px-2 py-0.5 rounded-full">
-                        {sub.label}
-                      </span>
-                    ))}
-                    {cat.subCategories.length > 3 && (
-                      <span className="text-[10px] text-muted border border-ink/10 px-2 py-0.5 rounded-full">
-                        +{cat.subCategories.length - 3} more
-                      </span>
-                    )}
-                  </div>
-                </Link>
-              );
-            })}
+            <p className="text-[10px] text-muted/40 tabular-nums">
+              {categories.length} verticals
+            </p>
           </div>
 
-          {/* Business — full-width, compact row */}
-          {(() => {
-            const Icon = CAT_ICON_MAP[business.id] ?? BusinessIcon;
-            return (
-              <Link
-                href={business.href}
-                style={{ "--index": 5 } as React.CSSProperties}
-                className="stagger-item group flex items-center justify-between gap-6 bg-paper-soft hover:bg-[#ddd6c4] border border-ink/12 hover:border-ink/20 rounded-2xl px-6 py-5 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
+          {/* Electronics — hero row */}
+          <Link
+            href={electronics.href}
+            className="group block py-10 border-b border-ink/10 -mx-4 px-4 hover:bg-paper-soft rounded-xl transition-colors duration-150"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-[5.5rem_1fr_auto] gap-5 md:gap-10 items-start">
+              <span
+                className="text-[4.5rem] font-bold text-ink/[0.07] font-mono tracking-tighter leading-none tabular-nums select-none"
+                aria-hidden="true"
               >
-                <div className="flex items-center gap-4 min-w-0">
-                  <Icon className="w-5 h-5 text-muted group-hover:text-ink transition-colors duration-150 shrink-0" />
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-2.5 mb-0.5">
-                      <span className="font-semibold text-ink text-sm">{business.label}</span>
-                      <CategoryBadge cat={business} />
-                    </div>
-                    <p className="text-xs text-muted truncate max-w-[55ch]">{business.tagline}</p>
-                  </div>
+                01
+              </span>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 flex-wrap">
+                  <h2 className="text-2xl md:text-3xl font-bold text-ink tracking-tight group-hover:text-accent transition-colors duration-150">
+                    {electronics.label}
+                  </h2>
+                  <span className="text-[10px] font-bold tracking-wide bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full uppercase">
+                    Live now
+                  </span>
                 </div>
-                <ArrowRight className="w-4 h-4 text-muted/40 group-hover:text-muted group-hover:translate-x-0.5 transition-all duration-150 shrink-0" />
-              </Link>
-            );
-          })()}
-
-          {/* Beauty — UK-only booking, full-width */}
-          {beauty && (() => {
-            return (
-              <Link
-                href={beauty.href}
-                style={{ "--index": 6 } as React.CSSProperties}
-                className="stagger-item group block bg-paper-soft hover:bg-[#ddd6c4] border border-ink/12 hover:border-accent/30 rounded-2xl px-6 py-6 transition-all duration-150 hover:-translate-y-[1px] cursor-pointer"
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <BeautyIcon className="w-6 h-6 text-accent/70" />
-                    <span className="font-bold text-ink text-lg tracking-tight group-hover:text-accent transition-colors duration-150">
-                      {beauty.label}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CategoryBadge cat={beauty} />
-                    <span className="text-[10px] font-bold tracking-wide bg-emerald-950/70 text-emerald-400 border border-emerald-800/50 px-2 py-0.5 rounded-full uppercase">
-                      Live
-                    </span>
-                  </div>
-                </div>
-
-                <p className="text-sm text-muted leading-relaxed max-w-[60ch] mb-5">
-                  {beauty.tagline}
+                <p className="text-sm text-muted leading-relaxed max-w-[55ch]">
+                  {electronics.tagline}
                 </p>
-
-                {/* Treatment chips */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  {beauty.subCategories.map((sub) => (
+                <div className="flex flex-wrap gap-1.5 pt-1">
+                  {electronics.subCategories.map((sub) => (
                     <span
                       key={sub.id}
-                      className="text-[11px] font-medium px-2.5 py-1 rounded-full border bg-accent/8 text-accent/80 border-accent/25"
+                      className={`text-[11px] font-medium px-2.5 py-1 rounded-full border ${
+                        sub.comingSoon
+                          ? "bg-ink/5 text-muted border-ink/10"
+                          : "bg-accent/10 text-accent border-accent/30"
+                      }`}
                     >
                       {sub.label}
                     </span>
                   ))}
                 </div>
+              </div>
+              <ArrowRight className="w-5 h-5 text-muted/25 group-hover:text-accent group-hover:translate-x-0.5 transition-all duration-150 hidden md:block mt-1 shrink-0" />
+            </div>
+          </Link>
 
-                <div className="flex items-center gap-1.5 text-sm font-medium text-accent group-hover:text-accent-dark transition-colors duration-150">
-                  <span>Book Treatment</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-150" />
+          {/* Remaining categories — numbered editorial list */}
+          {restCats.map((cat, i) => {
+            const Icon = CAT_ICON_MAP[cat.id] ?? ElectronicsIcon;
+            const num  = String(i + 2).padStart(2, "0");
+            return (
+              <Link
+                key={cat.id}
+                href={cat.href}
+                className="group block border-b border-ink/10 -mx-4 px-4 py-7 hover:bg-paper-soft rounded-xl transition-colors duration-150"
+              >
+                <div className="grid grid-cols-[4rem_1fr_auto] gap-5 md:gap-8 items-center">
+                  <span
+                    className="text-3xl font-bold text-ink/[0.07] font-mono tracking-tighter leading-none tabular-nums select-none"
+                    aria-hidden="true"
+                  >
+                    {num}
+                  </span>
+                  <div className="space-y-1 min-w-0">
+                    <div className="flex items-center gap-2.5 flex-wrap">
+                      <Icon className="w-4 h-4 text-muted/50 group-hover:text-muted transition-colors duration-150 shrink-0" />
+                      <h3 className="font-semibold text-base text-ink group-hover:text-accent transition-colors duration-150 tracking-tight">
+                        {cat.label}
+                      </h3>
+                      <StatusBadge cat={cat} />
+                    </div>
+                    <p className="text-xs text-muted leading-relaxed max-w-[52ch] pl-[1.4rem]">
+                      {cat.tagline}
+                    </p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-muted/20 group-hover:text-accent group-hover:translate-x-0.5 transition-all duration-150 shrink-0" />
                 </div>
               </Link>
             );
-          })()}
+          })}
 
         </section>
 
-        {/* ── How it works ──────────────────────────────────── */}
-        <section className="px-6 py-16 border-t border-ink/10">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-[5rem_1fr] gap-x-10 items-start">
+        {/* ── Method ─────────────────────────────────────────────── */}
+        <section className="border-t border-ink/10 bg-paper-soft">
+          <div className="max-w-7xl mx-auto px-6 py-20">
 
-              {/* Rotated label */}
-              <div className="hidden md:flex items-start pt-1">
-                <p className="text-[11px] font-semibold tracking-widest text-muted uppercase">
-                  The&nbsp;method
-                </p>
-              </div>
+            <div className="pb-4 mb-14 border-b border-ink/12">
+              <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-muted">
+                The method
+              </p>
+            </div>
 
-              {/* Steps */}
-              <div className="divide-y divide-ink/10">
-                {STEPS.map(({ n, title, body }) => (
-                  <div key={n} className="grid grid-cols-[3rem_1fr] gap-6 py-6 first:pt-0 last:pb-0">
-                    <span className="text-3xl font-bold text-accent/30 font-mono tracking-tighter leading-none tabular-nums">
-                      {n}
-                    </span>
-                    <div className="space-y-1.5 pt-1">
-                      <h3 className="font-semibold text-ink text-sm tracking-tight">{title}</h3>
-                      <p className="text-sm text-muted leading-relaxed max-w-[55ch]">{body}</p>
-                    </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+              {STEPS.map(({ n, title, body }) => (
+                <div key={n} className="space-y-5">
+                  <span
+                    className="block text-6xl font-bold text-ink/[0.09] font-mono tracking-tighter leading-none tabular-nums select-none"
+                    aria-hidden="true"
+                  >
+                    {n}
+                  </span>
+                  <div className="space-y-2">
+                    <h3 className="font-bold text-lg text-ink tracking-tight">{title}</h3>
+                    <p className="text-sm text-muted leading-relaxed">{body}</p>
                   </div>
-                ))}
-              </div>
-
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* ── Why DEN ──────────────────────────────────────── */}
-        <section className="px-6 py-16 border-t border-ink/10">
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-end justify-between gap-8">
-            <div className="space-y-3 max-w-[38rem]">
-              <p className="text-[11px] font-semibold tracking-widest text-accent uppercase">
+        {/* ── Manifesto ──────────────────────────────────────────── */}
+        <section className="border-t border-ink/10">
+          <div className="max-w-7xl mx-auto px-6 py-24">
+
+            <div className="pb-4 mb-14 border-b border-ink/12">
+              <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-muted">
                 What makes DEN different
               </p>
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tighter leading-tight text-ink">
-                Built on outcomes, not opinions.
-              </h2>
-              <p className="text-sm text-muted leading-relaxed max-w-[55ch]">
-                Most recommendation engines rank by click-through or affiliate margin.
-                DEN tracks what happens after the decision — returns, revisits, satisfaction
-                signals — and weights every result against your specific profile.
-              </p>
             </div>
-            <div className="shrink-0">
-              <Link
-                href="/electronics"
-                className="inline-flex items-center gap-2 bg-accent hover:bg-accent-dark active:-translate-y-[1px] text-white font-semibold px-5 py-3 rounded-xl text-sm transition-all duration-150"
-              >
-                Try it now
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-end">
+              <h2 className="text-[clamp(2rem,5vw,3.75rem)] font-bold tracking-tighter leading-[1.0] text-ink">
+                Built on outcomes,<br />
+                not opinions.
+              </h2>
+              <div className="space-y-8">
+                <p className="text-base text-muted leading-relaxed">
+                  Most recommendation engines rank by click-through or affiliate margin.
+                  DEN tracks what happens after the decision — returns, revisits, satisfaction
+                  signals — and weights every result against your specific profile.
+                  One ranked output. No hedging.
+                </p>
+                <Link
+                  href="/electronics"
+                  className="inline-flex items-center gap-2.5 bg-accent hover:bg-accent-dark active:-translate-y-[1px] text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-150 text-sm shadow-lg shadow-accent/20"
+                >
+                  Try it now
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
 
       </main>
 
-      {/* ── Footer ───────────────────────────────────────── */}
-      <footer className="px-6 py-6 border-t border-ink/10">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted">
-          <span>© {new Date().getFullYear()} DEN</span>
-          <div className="flex items-center gap-4">
+      {/* ── Footer ─────────────────────────────────────────────── */}
+      <footer className="border-t border-ink/10">
+        <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5">
+            <DenMark className="w-4 h-4 text-accent" />
+            <span className="text-xs text-muted">
+              © {new Date().getFullYear()} DEN · Decisions. Engineered. Now.
+            </span>
+          </div>
+          <div className="flex items-center gap-6 text-xs text-muted">
             <Link href="/privacy" className="hover:text-ink transition-colors duration-150">
               Privacy
             </Link>
-            <Link href="/electronics" className="hover:text-ink transition-colors duration-150">
+            <Link
+              href="/electronics"
+              className="text-accent hover:text-accent-dark font-semibold transition-colors duration-150"
+            >
               Start Quiz →
             </Link>
           </div>

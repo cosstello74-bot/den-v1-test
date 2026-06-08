@@ -103,12 +103,8 @@ export default function ElectronicsPage() {
 
       {/* ── Nav ──────────────────────────────────────────── */}
       <nav className="sticky top-0 z-20 backdrop-blur-sm bg-paper/90 border-b border-ink/10 flex items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-2.5">
-          <span className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center text-sm font-bold tracking-tight text-white" aria-hidden="true">
-            D
-          </span>
-          <span className="font-semibold text-ink tracking-tight">DEN</span>
-        </div>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo.png" alt="DEN" className="h-9 w-auto" />
         <Link href="/" className="flex items-center gap-1.5 text-xs text-muted hover:text-ink transition-colors duration-150 font-medium py-2 px-1">
           <ArrowLeft className="w-3.5 h-3.5" />
           All categories

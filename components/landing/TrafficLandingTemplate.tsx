@@ -80,9 +80,9 @@ export default function TrafficLandingTemplate({
         {/* ── Nav ─────────────────────────────────────────────────── */}
         <nav className="sticky top-0 z-20 backdrop-blur-sm bg-paper/90 border-b border-ink/10">
           <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded-md bg-accent flex items-center justify-center text-xs font-bold text-white">D</span>
-              <span className="text-sm font-semibold text-ink">DEN</span>
+            <Link href="/" aria-label="DEN home">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.png" alt="DEN" className="h-8 w-auto" />
             </Link>
             <Link
               href={quizHref}

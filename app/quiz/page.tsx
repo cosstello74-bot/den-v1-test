@@ -115,9 +115,10 @@ function QuizContent() {
 
       {/* ── Top bar ────────────────────────────────────────── */}
       <div className="flex items-center justify-between px-6 py-4 border-b border-ink/10">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="w-6 h-6 rounded-md bg-accent flex items-center justify-center text-xs font-bold text-white">D</span>
-          <span className="text-sm font-semibold text-ink">{categoryMeta.label}</span>
+        <Link href="/" className="flex items-center gap-2.5" aria-label="DEN home">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="DEN" className="h-8 w-auto" />
+          <span className="text-xs text-muted font-medium">{categoryMeta.label}</span>
         </Link>
         <div className="flex items-center gap-3">
           {detectedSegment && (
