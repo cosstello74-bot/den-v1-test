@@ -12,18 +12,29 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
-import { createHmac, timingSafeEqual } from "crypto";
 
-function isValidToken(token: string, adminPw: string): boolean {
-  const expected = createHmac("sha256", adminPw).update("den-admin-session").digest("hex");
+// Web Crypto API — available in Edge Runtime (no Node.js crypto needed)
+async function isValidToken(token: string, adminPw: string): Promise<boolean> {
   try {
-    return timingSafeEqual(Buffer.from(token), Buffer.from(expected));
+    const enc = new TextEncoder();
+    const key = await globalThis.crypto.subtle.importKey(
+      "raw",
+      enc.encode(adminPw),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["sign"]
+    );
+    const sig = await globalThis.crypto.subtle.sign("HMAC", key, enc.encode("den-admin-session"));
+    const expected = Array.from(new Uint8Array(sig))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+    return token === expected;
   } catch {
     return false;
   }
 }
 
-export function middleware(req: NextRequest) {
+export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // ── Beauty: UK-only geo restriction ────────────────────────────────────────
@@ -41,7 +52,7 @@ export function middleware(req: NextRequest) {
     const token = req.cookies.get("den_admin_auth")?.value;
     const pw    = process.env.ADMIN_PASSWORD;
 
-    const valid = pw && token && isValidToken(token, pw);
+    const valid = pw && token && await isValidToken(token, pw);
 
     if (!valid) {
       return NextResponse.redirect(new URL("/admin/login", req.url));
