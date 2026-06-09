@@ -89,6 +89,17 @@ function BeautyIcon({ className }: { className?: string }) {
   );
 }
 
+function SoftwareIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="7" height="7" rx="1" />
+      <rect x="14" y="3" width="7" height="7" rx="1" />
+      <rect x="3" y="14" width="7" height="7" rx="1" />
+      <rect x="14" y="14" width="7" height="7" rx="1" />
+    </svg>
+  );
+}
+
 function ArrowRight({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
@@ -105,6 +116,7 @@ const CAT_ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
   home:        HomeIcon,
   health:      HealthIcon,
   travel:      TravelIcon,
+  software:    SoftwareIcon,
   business:    BusinessIcon,
   beauty:      BeautyIcon,
 };
@@ -112,7 +124,8 @@ const CAT_ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
 // ─── Status badge ─────────────────────────────────────────────────────────────
 
 function StatusBadge({ cat }: { cat: DenTopCategory }) {
-  if (cat.id === "electronics") {
+  const hasLiveSub = cat.subCategories.some((s) => !s.comingSoon);
+  if (hasLiveSub) {
     return (
       <span className="text-[9px] font-bold tracking-widest uppercase bg-emerald-500/15 text-emerald-600 border border-emerald-500/25 px-2 py-0.5 rounded-full">
         Live
