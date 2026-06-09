@@ -172,6 +172,20 @@
       "value_score": 80,
       "screen_size": "13-14",
       "brand": "ASUS"
+    },
+    {
+      "id": "p13",
+      "name": "Microsoft Office 2024 Professional (Digital License)",
+      "category": "work",
+      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=87185&awinaffid=2926103&ued=https%3A%2F%2Fmrkeyshop.com%2Fen%2Fmicrosoft-office-2024%2F331-office-2024-professional",
+      "price_band": "budget",
+      "battery_score": 72,
+      "portability_score": 85,
+      "gaming_score": 35,
+      "productivity_score": 98,
+      "value_score": 96,
+      "screen_size": "no-preference",
+      "brand": "Microsoft"
     }
   ]
 }
