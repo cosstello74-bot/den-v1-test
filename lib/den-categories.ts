@@ -78,14 +78,15 @@ export const DEN_CATEGORIES: DenTopCategory[] = [
   {
     id: 'health',
     label: 'Health',
-    tagline: 'Dental aligners, sleep tech, fitness trackers, insurance — one clear answer.',
+    tagline: 'Supplements, dental, sleep tech, fitness trackers — one clear answer.',
     href: '/health',
     type: 'affiliate',
     subCategories: [
-      { id: 'dental',           label: 'Dental Aligners',   description: 'At-home vs. in-clinic treatment — ranked for your case.',  href: '/health/dental',           comingSoon: true },
-      { id: 'sleep-tech',       label: 'Sleep Technology',  description: 'Trackers, aids and smart monitors — ranked for quality.',  href: '/health/sleep-tech',       comingSoon: true },
-      { id: 'fitness-trackers', label: 'Fitness Trackers',  description: 'Wearables ranked by activity type and precision needs.',   href: '/health/fitness-trackers', comingSoon: true },
-      { id: 'health-insurance', label: 'Health Insurance',  description: 'Private medical cover — ranked by profile and budget.',   href: '/health/health-insurance', comingSoon: true },
+      { id: 'supplements',      label: 'Supplements & Nutrition', description: 'Vitamins, protein and health foods — ranked for your goal.',  href: '/quiz?category=health' },
+      { id: 'dental',           label: 'Dental Aligners',         description: 'At-home vs. in-clinic treatment — ranked for your case.',     href: '/health/dental',           comingSoon: true },
+      { id: 'sleep-tech',       label: 'Sleep Technology',        description: 'Trackers, aids and smart monitors — ranked for quality.',     href: '/health/sleep-tech',       comingSoon: true },
+      { id: 'fitness-trackers', label: 'Fitness Trackers',        description: 'Wearables ranked by activity type and precision needs.',      href: '/health/fitness-trackers', comingSoon: true },
+      { id: 'health-insurance', label: 'Health Insurance',        description: 'Private medical cover — ranked by profile and budget.',      href: '/health/health-insurance', comingSoon: true },
     ],
   },
   {

@@ -5,7 +5,7 @@ export type Portability = "desk-use" | "occasionally-travel" | "frequently-trave
 export type ScreenPreference = "13-14" | "15-16" | "17+" | "no-preference";
 export type BrandPreference = "no-preference" | "Lenovo" | "ASUS" | "HP" | "Dell" | "Apple";
 export type PriceBand = "budget" | "mid" | "high" | "premium";
-export type CategoryKey = "laptops" | "phones" | "monitors" | "tablets" | "pcs";
+export type CategoryKey = "laptops" | "phones" | "monitors" | "tablets" | "pcs" | "health";
 
 export interface RevenueProfile {
   affiliatePayout:        number;

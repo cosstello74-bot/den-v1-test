@@ -34,6 +34,7 @@ const CATEGORY_SUMMARIES: Record<CategoryKey, string> = {
   monitors: "Monitors are scored on panel type, refresh rate, colour accuracy, resolution, and value. Recommendations are adjusted for intended use: gaming monitors prioritise response time and refresh rate; creative monitors prioritise colour gamut and resolution.",
   tablets: "Tablets are assessed for processing power, display quality, battery endurance, input support, and ecosystem compatibility. Rankings weight portability and use-case alignment — education, creative work, and media consumption each produce different optimal choices.",
   pcs: "Desktop PCs are evaluated on processing throughput, GPU capability, memory capacity, upgradeability, and value-per-performance. Segment weighting adjusts rankings for professional workloads, gaming, and general productivity.",
+  health: "Health supplements are scored across five dimensions: effectiveness (potency for stated goal), ingredient quality (purity and sourcing), scientific backing (evidence base), ease of use (taste, format convenience), and value for money. Rankings weight goal alignment first — fitness goals surface high-protein and performance products; natural/organic goals surface Linwoods whole-food products; general wellness surfaces science-backed daily vitamins.",
 };
 
 const CATEGORY_USE_CASES: Record<CategoryKey, string[]> = {
@@ -42,6 +43,7 @@ const CATEGORY_USE_CASES: Record<CategoryKey, string[]> = {
   monitors: ["gaming", "video editing", "graphic design", "office productivity", "dual-screen setup"],
   tablets:  ["note-taking", "digital art", "media consumption", "mobile work", "education"],
   pcs:      ["gaming", "video editing", "3D rendering", "software development", "home office"],
+  health:   ["fitness and performance", "general wellness", "weight management", "organic and natural nutrition"],
 };
 
 const DECISION_LOGIC_TEMPLATES: Record<CategoryKey, string[]> = {
@@ -82,6 +84,13 @@ const DECISION_LOGIC_TEMPLATES: Record<CategoryKey, string[]> = {
     "Step 3 — Professional segment applies 1.30× revenue multiplier.",
     "Step 4 — Truth model applies bias-corrected CTR and outcome-verified conversion rates.",
     "Step 5 — Composite scoring: 0.60 × intelligence + 0.40 × revenue efficiency.",
+  ],
+  health: [
+    "Step 1 — Goal mapping: fitness → effectiveness (gaming_score × 0.40); general wellness → scientific backing (productivity_score × 0.40); weight management → value (value_score × 0.25); organic → ingredient quality emphasis.",
+    "Step 2 — Activity level: very-active applies ingredient quality bonus (battery_score × 0.20) and ease-of-use weight (portability_score × 0.20).",
+    "Step 3 — Dietary preference: vegan/natural routes brand_preference to Linwoods, surfacing organic plant-based products first.",
+    "Step 4 — Category bias: effectiveness (+0.15×), ingredient quality (+0.10×), scientific backing (+0.12×), value (+0.15×) applied across all results.",
+    "Step 5 — Truth calibration and composite scoring applied once outcome data accumulates.",
   ],
 };
 
@@ -154,6 +163,20 @@ const FAQ_TEMPLATES: Record<CategoryKey, FaqBlock[]> = {
     {
       question: "What is the best desktop PC for video editing?",
       answer: "Video editing PCs require high productivity_score (CPU multi-thread performance) and sufficient GPU for hardware acceleration. DEN weights these for the creative use case and applies the creator segment multiplier (1.15×). Systems with 16GB+ RAM and dedicated GPU score highest.",
+    },
+  ],
+  health: [
+    {
+      question: "How are supplement recommendations ranked on DEN?",
+      answer: "Supplements are scored across effectiveness, ingredient quality, scientific backing, ease of use, and value for money. Rankings weight your stated goal first — fitness goals surface high-performance products; organic goals surface Linwoods whole-food range; general wellness weights scientific backing. Truth calibration adjusts rankings as outcome data accumulates.",
+    },
+    {
+      question: "What is the best protein supplement for fitness?",
+      answer: "Fitness supplements score highest on effectiveness (gaming_score) and scientific backing (productivity_score). Sci-Mx Ultra Whey and All-In-One Extreme rank at the top for fitness goals, with effectiveness scores above 90. Creatine monohydrate has the strongest scientific evidence base in the dataset.",
+    },
+    {
+      question: "What is the best supplement for general daily health?",
+      answer: "General wellness recommendations weight scientific backing and value for money. Known Nutrition Daily Multivitamin leads for everyday use due to its high ease-of-use score and competitive value. Linwoods Milled Flaxseed scores highest on ingredient quality and value in the organic segment.",
     },
   ],
 };

@@ -318,6 +318,55 @@ const PC_STEPS: QuizStep[] = [
   },
 ];
 
+// ─── Health & Supplements ─────────────────────────────────────────────────────
+
+const HEALTH_STEPS: QuizStep[] = [
+  {
+    id:       "purpose",
+    question: "What's your main health goal?",
+    subtitle: "This shapes which products get weighted highest for you.",
+    options: [
+      { value: "fitness", label: "Fitness & Performance", description: "Build muscle, improve endurance and recovery" },
+      { value: "general", label: "General Wellness",      description: "Daily health support and vitality" },
+      { value: "weight",  label: "Weight Management",     description: "Support a balanced diet and healthy weight" },
+      { value: "organic", label: "Natural & Clean",       description: "Whole-food, organic and minimal ingredients" },
+    ],
+  },
+  {
+    id:       "budget",
+    question: "Monthly supplement budget?",
+    subtitle: "We'll find the best quality at your price point.",
+    options: [
+      { value: "under-20", label: "Under £20/month",  description: "Essential, no-frills nutrition" },
+      { value: "20-40",    label: "£20–£40/month",    description: "Good range and quality" },
+      { value: "40-60",    label: "£40–£60/month",    description: "Premium formulations" },
+      { value: "60+",      label: "£60+/month",       description: "Comprehensive stack" },
+    ],
+  },
+  {
+    id:       "dietary",
+    question: "Any dietary requirements?",
+    subtitle: "We'll filter out anything that doesn't fit.",
+    options: [
+      { value: "no-preference", label: "No Preference",  description: "Show me the best regardless" },
+      { value: "vegan",         label: "Vegan",           description: "100% plant-based ingredients only" },
+      { value: "natural",       label: "Natural Only",    description: "Whole foods, no artificial additives" },
+      { value: "gluten-free",   label: "Gluten-Free",     description: "No gluten-containing ingredients" },
+    ],
+  },
+  {
+    id:       "lifestyle",
+    question: "How active are you?",
+    subtitle: "Higher activity needs different formulas and dosages.",
+    options: [
+      { value: "very-active", label: "Very Active",  description: "Training 4+ times per week" },
+      { value: "active",      label: "Active",       description: "Exercise 2–3 times per week" },
+      { value: "light",       label: "Light",        description: "Some walking and occasional exercise" },
+      { value: "sedentary",   label: "Desk-bound",   description: "Mostly seated, looking to improve" },
+    ],
+  },
+];
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 const QUESTION_REGISTRY: Record<CategoryKey, QuizStep[]> = {
@@ -326,6 +375,7 @@ const QUESTION_REGISTRY: Record<CategoryKey, QuizStep[]> = {
   monitors: MONITOR_STEPS,
   tablets:  TABLET_STEPS,
   pcs:      PC_STEPS,
+  health:   HEALTH_STEPS,
 };
 
 export function getQuestions(category: CategoryKey): QuizStep[] {

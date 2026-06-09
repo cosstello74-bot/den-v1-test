@@ -23,6 +23,7 @@ const PERFORMANCE_ATTRIBUTES: Record<CategoryKey, string[]> = {
   monitors: ["refresh rate", "response time", "colour accuracy", "resolution", "panel type", "HDR support", "value for money"],
   tablets:  ["processing speed", "display quality", "battery endurance", "stylus support", "portability", "value for money"],
   pcs:      ["CPU performance", "GPU capability", "memory capacity", "storage speed", "upgradeability", "value for money"],
+  health:   ["effectiveness", "ingredient quality", "scientific backing", "ease of use", "value for money", "taste", "bioavailability"],
 };
 
 const USE_CASE_ENTITIES: Record<CategoryKey, string[]> = {
@@ -31,6 +32,7 @@ const USE_CASE_ENTITIES: Record<CategoryKey, string[]> = {
   monitors: ["gaming monitors", "4K monitors", "ultrawide monitors", "creative monitors", "office monitors"],
   tablets:  ["iPad alternatives", "Android tablets", "drawing tablets", "education tablets", "productivity tablets"],
   pcs:      ["gaming desktops", "workstation PCs", "mini PCs", "all-in-one PCs", "budget PCs"],
+  health:   ["protein supplements", "vegan vitamins", "organic health foods", "weight management supplements", "sports nutrition", "daily vitamins"],
 };
 
 const CATEGORY_ENTITIES: Record<CategoryKey, string[]> = {
@@ -39,6 +41,7 @@ const CATEGORY_ENTITIES: Record<CategoryKey, string[]> = {
   monitors: ["monitor", "display", "screen", "PC display"],
   tablets:  ["tablet", "iPad", "Android tablet", "2-in-1"],
   pcs:      ["desktop PC", "desktop computer", "tower PC", "workstation"],
+  health:   ["supplement", "vitamins", "protein powder", "health food", "nutrition"],
 };
 
 // ─── Main function ────────────────────────────────────────────────────────────

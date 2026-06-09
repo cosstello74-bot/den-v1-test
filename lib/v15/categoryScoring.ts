@@ -136,6 +136,70 @@ const PC_PROFILE: CategoryScoringProfile = {
   }),
 };
 
+// ─── Health & Supplements ─────────────────────────────────────────────────────
+//
+// Score field remapping (data/categories/health.json):
+//   gaming_score       → effectiveness / potency
+//   battery_score      → ingredient quality / purity
+//   productivity_score → scientific backing
+//   portability_score  → ease of use / taste / format convenience
+//   value_score        → price-quality ratio
+//
+// ScoringSignals slots repurposed for health:
+//   purpose            ← goal    (fitness→gaming, general→work, weight→university, organic→creative)
+//   battery_importance ← activity level (very-active→very-important, active→somewhat-important)
+//   portability        ← activity level (very-active→frequently-travel, etc.)
+//   brand_preference   ← dietary pref (vegan/natural→Linwoods)
+//   screen_size        → always "no-preference" (format not surfaced in quiz v1)
+
+const HEALTH_PROFILE: CategoryScoringProfile = {
+  requiredFields: ["purpose", "budget", "dietary", "lifestyle"],
+  interpret: (p) => {
+    const goalMap: Record<string, string> = {
+      fitness: "gaming",     // effectiveness (gaming_score) boosted
+      general: "work",       // scientific backing (productivity_score) boosted
+      weight:  "university", // value for money (value_score) boosted
+      organic: "creative",   // ingredient quality emphasis
+    };
+
+    const budgetMap: Record<string, string> = {
+      "under-20": "under-500",
+      "20-40":    "500-1000",
+      "40-60":    "1000-1500",
+      "60+":      "1500+",
+    };
+
+    const activityToBattery: Record<string, string> = {
+      "very-active": "very-important",
+      "active":      "somewhat-important",
+      "light":       "not-important",
+      "sedentary":   "not-important",
+    };
+
+    const activityToPortability: Record<string, string> = {
+      "very-active": "frequently-travel",
+      "active":      "occasionally-travel",
+      "light":       "desk-use",
+      "sedentary":   "desk-use",
+    };
+
+    // vegan / natural users get Linwoods surfaced first (organic plant-based brand)
+    const dietToBrand: Record<string, string> = {
+      vegan:   "Linwoods",
+      natural: "Linwoods",
+    };
+
+    return {
+      purpose:            goalMap[p.purpose ?? ""]      ?? DEFAULTS.purpose,
+      budget:             budgetMap[p.budget ?? ""]     ?? DEFAULTS.budget,
+      battery_importance: activityToBattery[p.lifestyle ?? ""]    ?? DEFAULTS.battery_importance,
+      portability:        activityToPortability[p.lifestyle ?? ""] ?? DEFAULTS.portability,
+      screen_size:        "no-preference",
+      brand_preference:   dietToBrand[p.dietary ?? ""] ?? DEFAULTS.brand_preference,
+    };
+  },
+};
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const CATEGORY_SCORING_PROFILES: Record<CategoryKey, CategoryScoringProfile> = {
@@ -144,6 +208,7 @@ export const CATEGORY_SCORING_PROFILES: Record<CategoryKey, CategoryScoringProfi
   monitors: MONITOR_PROFILE,
   tablets:  TABLET_PROFILE,
   pcs:      PC_PROFILE,
+  health:   HEALTH_PROFILE,
 };
 
 /**
