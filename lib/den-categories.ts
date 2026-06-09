@@ -103,6 +103,20 @@ export const DEN_CATEGORIES: DenTopCategory[] = [
     ],
   },
   {
+    id: 'software',
+    label: 'Software',
+    tagline: 'OS, Office, antivirus and VPN — one ranked answer for your licence needs.',
+    href: '/software',
+    type: 'affiliate',
+    subCategories: [
+      { id: 'os',               label: 'Operating Systems',      description: 'Windows 10 and 11 — matched to your hardware and use case.',       href: '/quiz?category=software' },
+      { id: 'office',           label: 'Office & Productivity',  description: 'Word, Excel, PowerPoint — ranked by edition and budget.',           href: '/quiz?category=software' },
+      { id: 'security',         label: 'Security & Antivirus',   description: 'Home, small business and enterprise protection — ranked.',           href: '/quiz?category=software' },
+      { id: 'vpn',              label: 'VPN & Privacy',          description: 'Speed, privacy and streaming — ranked for your devices.',            href: '/quiz?category=software' },
+      { id: 'software-bundles', label: 'Bundles & Deals',        description: 'Windows + Office bundles and discounted licence packs.',             href: '/software/bundles', comingSoon: true },
+    ],
+  },
+  {
     id: 'business',
     label: 'Business',
     tagline: 'Accounting, CRM, hosting, payroll — ranked for your company size and sector.',

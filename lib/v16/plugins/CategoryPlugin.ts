@@ -87,6 +87,7 @@ export const CATEGORY_PLUGINS: Record<CategoryKey, CategoryPlugin> = {
   pcs:                 makePlugin("pcs"),
   health:              makePlugin("health"),
   "travel-insurance":  makePlugin("travel-insurance"),
+  software:            makePlugin("software"),
 };
 
 /**

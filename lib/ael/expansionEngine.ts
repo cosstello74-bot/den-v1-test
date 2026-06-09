@@ -91,6 +91,12 @@ const INTENT_VOCABULARY: Record<CategoryKey, Array<{
     { slug: "cheap-travel-insurance-europe",       confidence: 0.88, impact: "high",   rationale: "Europe budget travel insurance is highest-volume sub-segment. Coverwise Europe plans." },
     { slug: "travel-insurance-adventure-sports-uk",confidence: 0.86, impact: "medium", rationale: "Adventure sports cover is an under-served intent with high engagement." },
   ],
+  software: [
+    { slug: "best-windows-11-licence-uk",          confidence: 0.92, impact: "high",   rationale: "Windows OS upgrade intent is very high volume. Mr Key Shop licences at 70–90% off retail." },
+    { slug: "cheap-microsoft-office-licence-uk",   confidence: 0.91, impact: "high",   rationale: "Office suite licence buying intent is high. Office 2024 Home is top value play." },
+    { slug: "best-antivirus-uk",                   confidence: 0.89, impact: "high",   rationale: "Antivirus intent unserved. Kaspersky Standard is top home recommendation." },
+    { slug: "best-vpn-uk",                         confidence: 0.88, impact: "high",   rationale: "VPN intent growing. NordVPN and Surfshark are top value picks." },
+  ],
 };
 
 // ─── Cluster vocabulary — used to detect new category opportunities ───────────

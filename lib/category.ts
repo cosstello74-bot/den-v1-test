@@ -5,6 +5,7 @@ import tabletsData from "@/data/categories/tablets.json";
 import pcsData from "@/data/categories/pcs.json";
 import healthData          from "@/data/categories/health.json";
 import travelInsuranceData from "@/data/categories/travel-insurance.json";
+import softwareData        from "@/data/categories/software.json";
 import type { CategoryConfig, CategoryKey } from "@/types/product";
 
 const CATEGORY_MAP: Record<CategoryKey, CategoryConfig> = {
@@ -15,6 +16,7 @@ const CATEGORY_MAP: Record<CategoryKey, CategoryConfig> = {
   pcs:                 pcsData              as CategoryConfig,
   health:              healthData           as CategoryConfig,
   "travel-insurance":  travelInsuranceData  as CategoryConfig,
+  software:            softwareData         as CategoryConfig,
 };
 
 export const CATEGORY_META: Record<CategoryKey, { label: string; description: string }> = {
@@ -25,6 +27,7 @@ export const CATEGORY_META: Record<CategoryKey, { label: string; description: st
   pcs:                { label: "Desktop PCs",        description: "High-performance desktop systems for home and office" },
   health:             { label: "Supplements",        description: "Vitamins, protein and health foods ranked for your goal" },
   "travel-insurance": { label: "Travel Insurance",   description: "Single trip, annual and backpacker cover — ranked for your journey" },
+  software:           { label: "Software",           description: "OS, Office, antivirus and VPN licences — ranked for your setup" },
 };
 
 export function getCategoryConfig(category: string): CategoryConfig {

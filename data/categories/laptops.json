@@ -172,48 +172,6 @@
       "value_score": 80,
       "screen_size": "13-14",
       "brand": "ASUS"
-    },
-    {
-      "id": "p15",
-      "name": "Microsoft Office 2021 Home & Student (Digital License)",
-      "category": "university",
-      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=87185&awinaffid=2926103&ued=https%3A%2F%2Fmrkeyshop.com%2Fen%2Fmicrosoft-office-2021%2F78-microsoft-office-2021-home-student-product-key",
-      "price_band": "budget",
-      "battery_score": 72,
-      "portability_score": 85,
-      "gaming_score": 35,
-      "productivity_score": 80,
-      "value_score": 99,
-      "screen_size": "no-preference",
-      "brand": "Microsoft"
-    },
-    {
-      "id": "p14",
-      "name": "Microsoft Office 2024 Home (Digital License)",
-      "category": "general",
-      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=87185&awinaffid=2926103&ued=https%3A%2F%2Fmrkeyshop.com%2Fen%2Fmicrosoft-office-2024%2F328-office-2024-home-product-key-windows",
-      "price_band": "budget",
-      "battery_score": 72,
-      "portability_score": 85,
-      "gaming_score": 35,
-      "productivity_score": 88,
-      "value_score": 99,
-      "screen_size": "no-preference",
-      "brand": "Microsoft"
-    },
-    {
-      "id": "p13",
-      "name": "Microsoft Office 2024 Professional (Digital License)",
-      "category": "work",
-      "affiliate_url": "https://www.awin1.com/cread.php?awinmid=87185&awinaffid=2926103&ued=https%3A%2F%2Fmrkeyshop.com%2Fen%2Fmicrosoft-office-2024%2F331-office-2024-professional",
-      "price_band": "budget",
-      "battery_score": 72,
-      "portability_score": 85,
-      "gaming_score": 35,
-      "productivity_score": 98,
-      "value_score": 96,
-      "screen_size": "no-preference",
-      "brand": "Microsoft"
     }
   ]
 }

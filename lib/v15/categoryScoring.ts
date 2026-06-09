@@ -249,6 +249,67 @@ const TRAVEL_INSURANCE_PROFILE: CategoryScoringProfile = {
   },
 };
 
+// ─── Software & Licences ──────────────────────────────────────────────────────
+//
+// Score field remapping (data/categories/software.json):
+//   gaming_score       → performance / speed (OS compatibility, VPN throughput)
+//   battery_score      → system efficiency (lightweight, low resource usage)
+//   productivity_score → productivity / protection quality
+//   portability_score  → multi-device / cross-platform support
+//   value_score        → price-to-value ratio
+//
+// ScoringSignals slots repurposed for software:
+//   purpose            ← software_type: os→"gaming", office→"work", security→"university", vpn→"gaming"
+//   screen_size        ← software_type directly ("os"/"office"/"security"/"vpn")
+//                        The +10 exact screen_size match bonus is the primary sub-type filter.
+//                        os and vpn both map purpose="gaming" but screen_size discriminates them.
+//   battery_importance ← use_case: enterprise/business→"very-important", home→"somewhat-important", student→"not-important"
+//   portability        ← platform: cross-platform→"frequently-travel", mac→"occasionally-travel", windows→"desk-use"
+//   brand_preference   → DEFAULTS.brand_preference
+
+const SOFTWARE_PROFILE: CategoryScoringProfile = {
+  requiredFields: ["software_type", "use_case", "platform", "budget"],
+  interpret: (p) => {
+    const purposeMap: Record<string, string> = {
+      os:       "gaming",
+      office:   "work",
+      security: "university",
+      vpn:      "gaming",
+    };
+
+    const budgetMap: Record<string, string> = {
+      "under-20": "under-500",
+      "20-50":    "500-1000",
+      "50-100":   "1000-1500",
+      "100+":     "1500+",
+    };
+
+    const useCaseToBattery: Record<string, string> = {
+      enterprise: "very-important",
+      business:   "very-important",
+      home:       "somewhat-important",
+      student:    "not-important",
+    };
+
+    const platformToPortability: Record<string, string> = {
+      "cross-platform": "frequently-travel",
+      mac:              "occasionally-travel",
+      windows:          "desk-use",
+    };
+
+    const softwareType = p.software_type ?? "";
+
+    return {
+      purpose:            purposeMap[softwareType]                 ?? DEFAULTS.purpose,
+      budget:             budgetMap[p.budget ?? ""]                ?? DEFAULTS.budget,
+      battery_importance: useCaseToBattery[p.use_case ?? ""]      ?? DEFAULTS.battery_importance,
+      portability:        platformToPortability[p.platform ?? ""] ?? DEFAULTS.portability,
+      screen_size:        softwareType || DEFAULTS.screen_size,
+      brand_preference:   DEFAULTS.brand_preference,
+    };
+  },
+};
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const CATEGORY_SCORING_PROFILES: Record<CategoryKey, CategoryScoringProfile> = {
@@ -259,6 +320,7 @@ export const CATEGORY_SCORING_PROFILES: Record<CategoryKey, CategoryScoringProfi
   pcs:                 PC_PROFILE,
   health:              HEALTH_PROFILE,
   "travel-insurance":  TRAVEL_INSURANCE_PROFILE,
+  software:            SOFTWARE_PROFILE,
 };
 
 /**

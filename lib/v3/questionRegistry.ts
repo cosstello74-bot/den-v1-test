@@ -411,6 +411,54 @@ const TRAVEL_INSURANCE_STEPS: QuizStep[] = [
   },
 ];
 
+// ─── Software & Licences ──────────────────────────────────────────────────────
+
+const SOFTWARE_STEPS: QuizStep[] = [
+  {
+    id:       "software_type",
+    question: "What type of software are you looking for?",
+    subtitle: "This routes you directly to the right product group.",
+    options: [
+      { value: "os",       label: "Operating System",        description: "Windows 10 or 11 — required for a new PC or reinstall" },
+      { value: "office",   label: "Office Suite",             description: "Word, Excel, PowerPoint, Outlook — standalone or 2021/2024" },
+      { value: "security", label: "Security & Antivirus",     description: "Protect devices from malware, ransomware and phishing" },
+      { value: "vpn",      label: "VPN & Privacy",            description: "Encrypt your connection for safe browsing and remote work" },
+    ],
+  },
+  {
+    id:       "use_case",
+    question: "Who is it primarily for?",
+    subtitle: "Business and enterprise licences include extra management and compliance features.",
+    options: [
+      { value: "home",       label: "Home / Personal",             description: "Personal use on one or a few devices" },
+      { value: "student",    label: "Student",                     description: "Academic use at university or school" },
+      { value: "business",   label: "Small Business (2–25 users)", description: "Multiple licences for a small team" },
+      { value: "enterprise", label: "Enterprise (25+ users)",      description: "Organisation-wide deployment with central management" },
+    ],
+  },
+  {
+    id:       "platform",
+    question: "Which platform?",
+    subtitle: "Cross-platform licences cover Windows, Mac, Android and iOS simultaneously.",
+    options: [
+      { value: "cross-platform", label: "Cross-Platform",  description: "Windows, Mac, Android and iOS — all covered" },
+      { value: "windows",        label: "Windows Only",    description: "Using on a Windows PC or laptop only" },
+      { value: "mac",            label: "Mac Only",        description: "Using on a Mac or MacBook only" },
+    ],
+  },
+  {
+    id:       "budget",
+    question: "What's your licence budget?",
+    subtitle: "Mr Key Shop digital licences are typically 70–90% below retail price.",
+    options: [
+      { value: "under-20", label: "Under £20",   description: "Entry-level or student licences" },
+      { value: "20-50",    label: "£20–£50",     description: "Standard consumer and home licences" },
+      { value: "50-100",   label: "£50–£100",    description: "Professional editions" },
+      { value: "100+",     label: "£100+",       description: "Business and multi-device packs" },
+    ],
+  },
+];
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 const QUESTION_REGISTRY: Record<CategoryKey, QuizStep[]> = {
@@ -421,6 +469,7 @@ const QUESTION_REGISTRY: Record<CategoryKey, QuizStep[]> = {
   pcs:                PC_STEPS,
   health:             HEALTH_STEPS,
   "travel-insurance": TRAVEL_INSURANCE_STEPS,
+  software:           SOFTWARE_STEPS,
 };
 
 export function getQuestions(category: CategoryKey): QuizStep[] {
