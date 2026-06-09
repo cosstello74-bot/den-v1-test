@@ -80,10 +80,16 @@ const INTENT_VOCABULARY: Record<CategoryKey, Array<{
     { slug: "best-pcs-for-video-editing",      confidence: 0.88, impact: "medium", rationale: "Creator segment for desktops unserved." },
   ],
   health: [
-    { slug: "best-protein-powder-uk",          confidence: 0.90, impact: "high",   rationale: "Protein is the highest-volume supplement search intent. No dedicated page." },
-    { slug: "best-vegan-supplements-uk",       confidence: 0.87, impact: "high",   rationale: "Vegan supplement intent growing rapidly. Linwoods organic range serves this." },
-    { slug: "best-supplements-for-fitness",    confidence: 0.88, impact: "medium", rationale: "Fitness supplement intent unserved. Sci-Mx and Known Nutrition cover it." },
-    { slug: "best-daily-vitamins-uk",          confidence: 0.86, impact: "medium", rationale: "General wellness supplement demand high. Known Nutrition multivitamin fits." },
+    { slug: "best-protein-powder-uk",              confidence: 0.90, impact: "high",   rationale: "Protein is the highest-volume supplement search intent. No dedicated page." },
+    { slug: "best-vegan-supplements-uk",           confidence: 0.87, impact: "high",   rationale: "Vegan supplement intent growing rapidly. Linwoods organic range serves this." },
+    { slug: "best-supplements-for-fitness",        confidence: 0.88, impact: "medium", rationale: "Fitness supplement intent unserved. Sci-Mx and Known Nutrition cover it." },
+    { slug: "best-daily-vitamins-uk",              confidence: 0.86, impact: "medium", rationale: "General wellness supplement demand high. Known Nutrition multivitamin fits." },
+  ],
+  "travel-insurance": [
+    { slug: "best-travel-insurance-uk",            confidence: 0.91, impact: "high",   rationale: "High-volume top-of-funnel intent. Coverwise single-trip and annual policies serve it." },
+    { slug: "best-annual-travel-insurance-uk",     confidence: 0.89, impact: "high",   rationale: "Annual multi-trip intent is high value. Coverwise annual policies fit directly." },
+    { slug: "cheap-travel-insurance-europe",       confidence: 0.88, impact: "high",   rationale: "Europe budget travel insurance is highest-volume sub-segment. Coverwise Europe plans." },
+    { slug: "travel-insurance-adventure-sports-uk",confidence: 0.86, impact: "medium", rationale: "Adventure sports cover is an under-served intent with high engagement." },
   ],
 };
 

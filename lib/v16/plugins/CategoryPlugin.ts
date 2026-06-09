@@ -80,12 +80,13 @@ function makePlugin(id: CategoryKey): CategoryPlugin {
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const CATEGORY_PLUGINS: Record<CategoryKey, CategoryPlugin> = {
-  laptops:  makePlugin("laptops"),
-  phones:   makePlugin("phones"),
-  monitors: makePlugin("monitors"),
-  tablets:  makePlugin("tablets"),
-  pcs:      makePlugin("pcs"),
-  health:   makePlugin("health"),
+  laptops:             makePlugin("laptops"),
+  phones:              makePlugin("phones"),
+  monitors:            makePlugin("monitors"),
+  tablets:             makePlugin("tablets"),
+  pcs:                 makePlugin("pcs"),
+  health:              makePlugin("health"),
+  "travel-insurance":  makePlugin("travel-insurance"),
 };
 
 /**

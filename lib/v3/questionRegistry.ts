@@ -367,15 +367,60 @@ const HEALTH_STEPS: QuizStep[] = [
   },
 ];
 
+// ─── Travel Insurance ─────────────────────────────────────────────────────────
+
+const TRAVEL_INSURANCE_STEPS: QuizStep[] = [
+  {
+    id:       "trip_type",
+    question: "What type of trip cover do you need?",
+    subtitle: "Single trip is cheaper for one holiday; annual saves money if you travel twice or more.",
+    options: [
+      { value: "single-trip", label: "Single Trip",       description: "Cover for one specific trip" },
+      { value: "annual",      label: "Annual Multi-Trip", description: "Unlimited trips in a 12-month period" },
+    ],
+  },
+  {
+    id:       "destination",
+    question: "Where are you travelling?",
+    subtitle: "Worldwide cover costs more but is essential outside Europe.",
+    options: [
+      { value: "europe",    label: "Europe",    description: "EU countries and the UK mainland" },
+      { value: "worldwide", label: "Worldwide", description: "Any destination including USA, Asia and beyond" },
+    ],
+  },
+  {
+    id:       "activities",
+    question: "Any adventure activities planned?",
+    subtitle: "Standard cover excludes activities like skiing, diving and trekking above 4,000m.",
+    options: [
+      { value: "standard",  label: "No — standard holiday", description: "Beaches, cities, sightseeing" },
+      { value: "adventure", label: "Yes — adventure sports", description: "Skiing, hiking, water sports, cycling" },
+      { value: "extreme",   label: "Yes — extreme sports",   description: "Mountaineering, skydiving, bungee jumping" },
+    ],
+  },
+  {
+    id:       "budget",
+    question: "Budget for your travel insurance?",
+    subtitle: "We'll find the best policy value at your price point.",
+    options: [
+      { value: "under-20", label: "Under £20",  description: "Essential cover for a short trip" },
+      { value: "20-40",    label: "£20–£40",    description: "Good level of cover for most trips" },
+      { value: "40-60",    label: "£40–£60",    description: "Comprehensive cover with low excess" },
+      { value: "60+",      label: "£60+",       description: "Maximum cover including extended trips" },
+    ],
+  },
+];
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 const QUESTION_REGISTRY: Record<CategoryKey, QuizStep[]> = {
-  laptops:  LAPTOP_STEPS,
-  phones:   PHONE_STEPS,
-  monitors: MONITOR_STEPS,
-  tablets:  TABLET_STEPS,
-  pcs:      PC_STEPS,
-  health:   HEALTH_STEPS,
+  laptops:            LAPTOP_STEPS,
+  phones:             PHONE_STEPS,
+  monitors:           MONITOR_STEPS,
+  tablets:            TABLET_STEPS,
+  pcs:                PC_STEPS,
+  health:             HEALTH_STEPS,
+  "travel-insurance": TRAVEL_INSURANCE_STEPS,
 };
 
 export function getQuestions(category: CategoryKey): QuizStep[] {

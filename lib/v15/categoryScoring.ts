@@ -200,15 +200,65 @@ const HEALTH_PROFILE: CategoryScoringProfile = {
   },
 };
 
+// ─── Travel Insurance ─────────────────────────────────────────────────────────
+//
+// Score field remapping (data/categories/travel-insurance.json):
+//   gaming_score       → policy breadth / coverage comprehensiveness
+//   battery_score      → medical coverage quality (most critical factor)
+//   productivity_score → cancellation & disruption cover
+//   portability_score  → ease of purchase and claim experience
+//   value_score        → price-to-coverage ratio
+//
+// ScoringSignals slots repurposed for travel insurance:
+//   purpose            ← trip_type  (single-trip→gaming, annual→work)
+//   battery_importance ← activities (adventure→very-important, standard→somewhat-important)
+//   screen_size        ← destination ("europe" or "worldwide" — matched directly to product.screen_size)
+//   portability        → DEFAULTS.portability (not quiz-relevant)
+//   brand_preference   → DEFAULTS.brand_preference (single provider, no differentiation)
+
+const TRAVEL_INSURANCE_PROFILE: CategoryScoringProfile = {
+  requiredFields: ["trip_type", "destination", "activities", "budget"],
+  interpret: (p) => {
+    const tripTypeMap: Record<string, string> = {
+      "single-trip": "gaming",
+      "annual":      "work",
+    };
+
+    const budgetMap: Record<string, string> = {
+      "under-20": "under-500",
+      "20-40":    "500-1000",
+      "40-60":    "1000-1500",
+      "60+":      "1500+",
+    };
+
+    const activitiesToCoverage: Record<string, string> = {
+      "standard":  "somewhat-important",
+      "adventure": "very-important",
+      "extreme":   "very-important",
+    };
+
+    return {
+      purpose:            tripTypeMap[p.trip_type ?? ""]      ?? DEFAULTS.purpose,
+      budget:             budgetMap[p.budget ?? ""]           ?? DEFAULTS.budget,
+      battery_importance: activitiesToCoverage[p.activities ?? ""] ?? DEFAULTS.battery_importance,
+      portability:        DEFAULTS.portability,
+      // destination maps directly so product.screen_size match bonus applies
+      screen_size:        p.destination ?? DEFAULTS.screen_size,
+      brand_preference:   DEFAULTS.brand_preference,
+    };
+  },
+};
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const CATEGORY_SCORING_PROFILES: Record<CategoryKey, CategoryScoringProfile> = {
-  laptops:  LAPTOP_PROFILE,
-  phones:   PHONE_PROFILE,
-  monitors: MONITOR_PROFILE,
-  tablets:  TABLET_PROFILE,
-  pcs:      PC_PROFILE,
-  health:   HEALTH_PROFILE,
+  laptops:             LAPTOP_PROFILE,
+  phones:              PHONE_PROFILE,
+  monitors:            MONITOR_PROFILE,
+  tablets:             TABLET_PROFILE,
+  pcs:                 PC_PROFILE,
+  health:              HEALTH_PROFILE,
+  "travel-insurance":  TRAVEL_INSURANCE_PROFILE,
 };
 
 /**

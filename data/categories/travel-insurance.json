@@ -1,0 +1,67 @@
+{
+  "category": "travel-insurance",
+  "scoring_profile": {
+    "gaming_bonus":       0.18,
+    "battery_bonus":      0.15,
+    "productivity_bonus": 0.12,
+    "value_bonus":        0.20
+  },
+  "products": [
+    {
+      "id": "ti1",
+      "name": "Coverwise Single Trip Europe",
+      "category": "single-trip",
+      "affiliate_url": "http://www.awin1.com/awclick.php?mid=3622&id=2926103",
+      "price_band": "budget",
+      "gaming_score":       76,
+      "battery_score":      82,
+      "productivity_score": 78,
+      "portability_score":  88,
+      "value_score":        92,
+      "screen_size": "europe",
+      "brand": "Coverwise"
+    },
+    {
+      "id": "ti2",
+      "name": "Coverwise Single Trip Worldwide",
+      "category": "single-trip",
+      "affiliate_url": "http://www.awin1.com/awclick.php?mid=3622&id=2926103",
+      "price_band": "mid",
+      "gaming_score":       80,
+      "battery_score":      84,
+      "productivity_score": 78,
+      "portability_score":  88,
+      "value_score":        86,
+      "screen_size": "worldwide",
+      "brand": "Coverwise"
+    },
+    {
+      "id": "ti3",
+      "name": "Coverwise Annual Multi-Trip Europe",
+      "category": "annual",
+      "affiliate_url": "http://www.awin1.com/awclick.php?mid=3622&id=2926103",
+      "price_band": "mid",
+      "gaming_score":       82,
+      "battery_score":      86,
+      "productivity_score": 80,
+      "portability_score":  88,
+      "value_score":        90,
+      "screen_size": "europe",
+      "brand": "Coverwise"
+    },
+    {
+      "id": "ti4",
+      "name": "Coverwise Annual Multi-Trip Worldwide",
+      "category": "annual",
+      "affiliate_url": "http://www.awin1.com/awclick.php?mid=3622&id=2926103",
+      "price_band": "high",
+      "gaming_score":       85,
+      "battery_score":      84,
+      "productivity_score": 80,
+      "portability_score":  88,
+      "value_score":        82,
+      "screen_size": "worldwide",
+      "brand": "Coverwise"
+    }
+  ]
+}

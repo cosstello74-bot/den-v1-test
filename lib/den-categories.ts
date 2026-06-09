@@ -97,7 +97,7 @@ export const DEN_CATEGORIES: DenTopCategory[] = [
     type: 'affiliate',
     subCategories: [
       { id: 'hotels',           label: 'Hotels',            description: 'Ranked by destination, budget and style preference.',     href: '/travel/hotels',           comingSoon: true },
-      { id: 'travel-insurance', label: 'Travel Insurance',  description: 'Single trip, annual and backpacker — ranked.',            href: '/travel/travel-insurance', comingSoon: true },
+      { id: 'travel-insurance', label: 'Travel Insurance',  description: 'Single trip, annual and backpacker — ranked.',            href: '/quiz?category=travel-insurance' },
       { id: 'car-hire',         label: 'Car Hire',          description: 'Ranked by vehicle size, duration and destination.',       href: '/travel/car-hire',         comingSoon: true },
       { id: 'cruises',          label: 'Cruises',           description: 'Lines, routes and cabin grades — ranked for you.',        href: '/travel/cruises',          comingSoon: true },
     ],

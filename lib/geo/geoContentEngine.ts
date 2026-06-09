@@ -35,15 +35,17 @@ const CATEGORY_SUMMARIES: Record<CategoryKey, string> = {
   tablets: "Tablets are assessed for processing power, display quality, battery endurance, input support, and ecosystem compatibility. Rankings weight portability and use-case alignment — education, creative work, and media consumption each produce different optimal choices.",
   pcs: "Desktop PCs are evaluated on processing throughput, GPU capability, memory capacity, upgradeability, and value-per-performance. Segment weighting adjusts rankings for professional workloads, gaming, and general productivity.",
   health: "Health supplements are scored across five dimensions: effectiveness (potency for stated goal), ingredient quality (purity and sourcing), scientific backing (evidence base), ease of use (taste, format convenience), and value for money. Rankings weight goal alignment first — fitness goals surface high-protein and performance products; natural/organic goals surface Linwoods whole-food products; general wellness surfaces science-backed daily vitamins.",
+  "travel-insurance": "Travel insurance policies are scored across five dimensions: medical coverage quality (highest weight), policy breadth and coverage comprehensiveness, cancellation and disruption cover, ease of purchase and claim experience, and price-to-coverage value. Rankings weight trip type first — single-trip intent surfaces the best single-trip policies; annual multi-trip intent surfaces annual policies. Destination then applies a match bonus: Europe or Worldwide filters surface the most relevant policy scope.",
 };
 
 const CATEGORY_USE_CASES: Record<CategoryKey, string[]> = {
-  laptops:  ["gaming", "professional work", "university study", "creative production", "everyday use"],
-  phones:   ["photography", "productivity", "gaming", "long battery life", "everyday communication"],
-  monitors: ["gaming", "video editing", "graphic design", "office productivity", "dual-screen setup"],
-  tablets:  ["note-taking", "digital art", "media consumption", "mobile work", "education"],
-  pcs:      ["gaming", "video editing", "3D rendering", "software development", "home office"],
-  health:   ["fitness and performance", "general wellness", "weight management", "organic and natural nutrition"],
+  laptops:            ["gaming", "professional work", "university study", "creative production", "everyday use"],
+  phones:             ["photography", "productivity", "gaming", "long battery life", "everyday communication"],
+  monitors:           ["gaming", "video editing", "graphic design", "office productivity", "dual-screen setup"],
+  tablets:            ["note-taking", "digital art", "media consumption", "mobile work", "education"],
+  pcs:                ["gaming", "video editing", "3D rendering", "software development", "home office"],
+  health:             ["fitness and performance", "general wellness", "weight management", "organic and natural nutrition"],
+  "travel-insurance": ["single trip holidays", "annual multi-trip travel", "European city breaks", "worldwide adventure travel", "skiing and winter sports", "backpacker trips"],
 };
 
 const DECISION_LOGIC_TEMPLATES: Record<CategoryKey, string[]> = {
@@ -91,6 +93,13 @@ const DECISION_LOGIC_TEMPLATES: Record<CategoryKey, string[]> = {
     "Step 3 — Dietary preference: vegan/natural routes brand_preference to Linwoods, surfacing organic plant-based products first.",
     "Step 4 — Category bias: effectiveness (+0.15×), ingredient quality (+0.10×), scientific backing (+0.12×), value (+0.15×) applied across all results.",
     "Step 5 — Truth calibration and composite scoring applied once outcome data accumulates.",
+  ],
+  "travel-insurance": [
+    "Step 1 — Trip type: single-trip purpose weights gaming_score (policy breadth) × 0.40; annual purpose weights productivity_score (cancellation cover) × 0.40.",
+    "Step 2 — Destination match bonus: destination='europe' adds +10 to products with screen_size='europe'; destination='worldwide' adds +10 to products with screen_size='worldwide'.",
+    "Step 3 — Activities: adventure/extreme activities set battery_importance=very-important, boosting battery_score (medical coverage) × 0.20.",
+    "Step 4 — Value weighting: budget band maps to value_score weight; lower budgets elevate value_score; higher budgets allow policy breadth to dominate.",
+    "Step 5 — Composite scoring: 0.60 × intelligence + 0.40 × revenue efficiency applied once outcome data accumulates.",
   ],
 };
 
@@ -177,6 +186,20 @@ const FAQ_TEMPLATES: Record<CategoryKey, FaqBlock[]> = {
     {
       question: "What is the best supplement for general daily health?",
       answer: "General wellness recommendations weight scientific backing and value for money. Known Nutrition Daily Multivitamin leads for everyday use due to its high ease-of-use score and competitive value. Linwoods Milled Flaxseed scores highest on ingredient quality and value in the organic segment.",
+    },
+  ],
+  "travel-insurance": [
+    {
+      question: "How are travel insurance recommendations ranked on DEN?",
+      answer: "Travel insurance policies are scored across medical coverage quality, policy breadth, cancellation cover, ease of claim, and value for money. Rankings weight trip type first — single-trip or annual — then apply a destination match bonus (Europe or Worldwide) and adjust medical coverage weight for adventure activity needs. Composite scoring is 60% intelligence and 40% revenue efficiency.",
+    },
+    {
+      question: "What is the best travel insurance for a single trip to Europe?",
+      answer: "For a single Europe trip, DEN weights policy breadth (gaming_score) × 0.40 and value for money (value_score) × 0.25. Coverwise Single Trip Europe scores highest in this segment at value_score 92, making it the top recommendation for standard European holidays.",
+    },
+    {
+      question: "Is annual multi-trip insurance worth it?",
+      answer: "Annual multi-trip insurance scores highest on cancellation and disruption cover (productivity_score × 0.40) and value over multiple trips. Coverwise Annual Multi-Trip Europe has value_score 90 — for travellers taking two or more trips per year it typically costs less per trip than individual policies and removes the hassle of re-purchasing cover.",
     },
   ],
 };

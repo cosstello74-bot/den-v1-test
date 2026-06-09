@@ -69,6 +69,13 @@ export const CATEGORY_RULES: Record<CategoryKey, CategoryRule> = {
     minScores:      { value_score: 50, gaming_score: 50 },
     maxProducts:    30,
   },
+  "travel-insurance": {
+    category:       "travel-insurance",
+    requiredScores: ["gaming_score", "battery_score", "productivity_score", "portability_score", "value_score"],
+    optionalScores: [],
+    minScores:      { value_score: 50 },
+    maxProducts:    20,
+  },
 };
 
 // ─── Validation ───────────────────────────────────────────────────────────────
