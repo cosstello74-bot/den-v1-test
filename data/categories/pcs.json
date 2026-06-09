@@ -102,6 +102,20 @@
       "value_score": 83,
       "screen_size": "no-preference",
       "brand": "Apple"
+    },
+    {
+      "id": "pc8",
+      "name": "Windows 11 Professional (Digital License)",
+      "category": "work",
+      "affiliate_url": "https://tidd.ly/4apLuLZ",
+      "price_band": "budget",
+      "battery_score": 70,
+      "portability_score": 82,
+      "gaming_score": 80,
+      "productivity_score": 95,
+      "value_score": 97,
+      "screen_size": "no-preference",
+      "brand": "Microsoft"
     }
   ]
 }
