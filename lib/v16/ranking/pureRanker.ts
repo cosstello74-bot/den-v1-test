@@ -3,10 +3,14 @@
  *
  * Sorts any list of Rankable objects by relevance score (descending).
  *
- * Tiebreaker: when two scores are within TIEBREAK_EPSILON, the product
- * with the higher revenueScore wins. This is the ONLY point at which
- * revenue data may influence ordering — genuine relevance differences
- * (> epsilon) always produce revenue-blind ordering.
+ * Revenue neutrality: ordering is determined SOLELY by relevance score.
+ * Commission / revenueScore NEVER influences rank — not even as a tiebreaker.
+ * This makes the public "not what paid the highest commission" promise
+ * literally true at every score margin. revenueScore is retained on the
+ * enriched type for display/analytics only, never for ordering.
+ *
+ * When two products score identically, JS stable sort preserves their
+ * upstream (relevance) order — still revenue-blind.
  *
  * Generic over T extends Rankable so it can rank any enriched type
  * without coupling to a specific recommendation shape.
@@ -18,17 +22,14 @@
 import type { Rankable }      from "../types";
 import { TIEBREAK_EPSILON }   from "../config";
 
+// Re-exported for backwards compatibility with existing importers.
+// No longer used for ordering — see revenue-neutrality note above.
 export { TIEBREAK_EPSILON };
 
 /**
- * Sort items by relevance score descending.
- * Ties within TIEBREAK_EPSILON are broken by revenueScore descending.
+ * Sort items by relevance score descending. Revenue-blind.
  * Returns a new array; input is not mutated.
  */
 export function rankProducts<T extends Rankable>(items: T[]): T[] {
-  return [...items].sort((a, b) => {
-    const diff = b.score - a.score;
-    if (Math.abs(diff) > TIEBREAK_EPSILON) return diff;
-    return (b.revenueScore ?? 0) - (a.revenueScore ?? 0);
-  });
+  return [...items].sort((a, b) => b.score - a.score);
 }

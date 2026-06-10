@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getAllCategories }    from "@/lib/category";
 import generatedPagesData      from "@/data/ael/generated-pages.json";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://den-v1.vercel.app";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://askden.co";
 
 const TRAFFIC_SEEDING_SLUGS = [
   "best-laptops-for-gaming",

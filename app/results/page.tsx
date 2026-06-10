@@ -149,18 +149,18 @@ function TruthBadge({ truth }: { truth: ProductTruth | undefined }) {
     : isMid
     ? "text-accent bg-accent/10 border-accent/30"
     : "text-amber-700 bg-amber-50 border-amber-200";
-  const label  = isHigh ? "Verified" : isMid ? "Mixed signals" : "Sparse data";
+  const label  = isHigh ? "Strong signals" : isMid ? "Mixed signals" : "Sparse data";
   return (
     <span className={`inline-flex items-center gap-1.5 text-[11px] font-semibold px-2.5 py-1 rounded-full border ${cls}`}>
       <span className="w-1.5 h-1.5 rounded-full bg-current shrink-0" />
-      {pct}% truth · {label}
+      {pct}% match signal · {label}
     </span>
   );
 }
 
 function ConfidenceBadge({ confidence }: { confidence: number }) {
   if (confidence >= 1.0)
-    return <span className="text-[11px] font-semibold text-emerald-600">● High Confidence</span>;
+    return <span className="text-[11px] font-semibold text-emerald-600">● High data coverage</span>;
   if (confidence >= 0.8)
     return <span className="text-[11px] font-semibold text-accent">● Growing Data</span>;
   return <span className="text-[11px] font-semibold text-muted">● Early Signals</span>;
@@ -374,7 +374,13 @@ function ResultsContent() {
               Your ranked picks
             </h1>
             <p className="text-sm text-muted leading-relaxed max-w-[50ch]">
-              Ranked against real purchase outcomes for your profile. No sponsored results.
+              Ranked purely on how well each option fits your answers. Order is never
+              influenced by commission.
+            </p>
+            <p className="text-[11px] text-muted/70 leading-relaxed border-l-2 border-ink/15 pl-3 max-w-[55ch]">
+              Affiliate disclosure: DEN may earn a commission if you buy through links
+              on this page, at no extra cost to you. This never affects how products are
+              ranked — results are ordered only by fit to your answers.
             </p>
           </div>
 
@@ -468,6 +474,14 @@ function ResultsContent() {
                         <ScoreBar score={rec.score} variant={index} />
                       )}
                     </div>
+
+                    {/* ── Top reason (above the fold, #1 only) ── */}
+                    {isBest && rec.strengths.length > 0 && (
+                      <p className="text-sm text-ink leading-snug">
+                        <span className="text-muted">Top match because </span>
+                        {rec.strengths[0].toLowerCase()}.
+                      </p>
+                    )}
 
                     {/* ── Dimension bars ─────────────────────── */}
                     <div className="space-y-2">
