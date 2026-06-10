@@ -61,6 +61,12 @@ const PRICE_BAND_COLORS: Record<string, string> = {
 // Score bar delay class by rank position
 const SCORE_BAR_CLASSES = ["score-bar", "score-bar-600", "score-bar-800"] as const;
 
+const CATEGORY_HUB: Record<string, { href: string; label: string }> = {
+  software:          { href: "/software", label: "Software" },
+  health:            { href: "/health",   label: "Health" },
+  "travel-insurance":{ href: "/travel",   label: "Travel" },
+};
+
 // ─── Icons ────────────────────────────────────────────────────────────────────
 
 function ExternalLinkIcon({ className }: { className?: string }) {
@@ -99,13 +105,21 @@ function ScoreBar({ score, variant = 0 }: { score: number; variant?: number }) {
   );
 }
 
-function DimensionBars({ product }: { product: ProductWithMetrics }) {
+const DIMENSION_LABELS: Record<string, [string, string, string, string, string]> = {
+  software:         ["Efficiency",  "Cross-platform", "Performance",  "Productivity", "Value"],
+  health:           ["Energy",      "Absorption",     "Effectiveness","Wellness",     "Value"],
+  "travel-insurance":["Medical",    "Cancellation",   "Activities",   "Baggage",      "Value"],
+};
+
+function DimensionBars({ product, category }: { product: ProductWithMetrics; category: string }) {
+  const [batteryLabel, portableLabel, gamingLabel, productivityLabel, valueLabel] =
+    DIMENSION_LABELS[category] ?? ["Battery", "Portable", "Gaming", "Productivity", "Value"];
   const dims = [
-    { label: "Battery",      val: product.battery_score },
-    { label: "Portable",     val: product.portability_score },
-    { label: "Gaming",       val: product.gaming_score },
-    { label: "Productivity", val: product.productivity_score },
-    { label: "Value",        val: product.value_score },
+    { label: batteryLabel,      val: product.battery_score },
+    { label: portableLabel,     val: product.portability_score },
+    { label: gamingLabel,       val: product.gaming_score },
+    { label: productivityLabel, val: product.productivity_score },
+    { label: valueLabel,        val: product.value_score },
   ];
   return (
     <div className="space-y-2.5">
@@ -336,8 +350,8 @@ function ResultsContent() {
         </Link>
         {/* Breadcrumb */}
         <div className="flex items-center gap-1.5 text-xs text-muted">
-          <Link href="/electronics" className="hover:text-ink transition-colors duration-150">
-            Electronics
+          <Link href={CATEGORY_HUB[category]?.href ?? "/electronics"} className="hover:text-ink transition-colors duration-150">
+            {CATEGORY_HUB[category]?.label ?? "Electronics"}
           </Link>
           <span aria-hidden="true">/</span>
           <span>{meta.label}</span>
@@ -350,7 +364,7 @@ function ResultsContent() {
           {/* ── Page header ───────────────────────────────── */}
           <div className="animate-slide-up space-y-2">
             <div className="flex items-center gap-2 flex-wrap text-[11px]">
-              <span className="font-bold tracking-widest text-muted uppercase">Electronics</span>
+              <span className="font-bold tracking-widest text-muted uppercase">{CATEGORY_HUB[category]?.label ?? "Electronics"}</span>
               <span className="text-ink/20" aria-hidden="true">·</span>
               <span className="font-bold tracking-widest text-accent uppercase">{meta.label}</span>
               <span className="text-ink/20" aria-hidden="true">·</span>
@@ -460,7 +474,7 @@ function ResultsContent() {
                       <p className="text-[11px] text-muted uppercase tracking-widest font-semibold">
                         Dimensions
                       </p>
-                      <DimensionBars product={rec.product} />
+                      <DimensionBars product={rec.product} category={category} />
                     </div>
 
                     {/* ── Numbered strengths ─────────────────── */}

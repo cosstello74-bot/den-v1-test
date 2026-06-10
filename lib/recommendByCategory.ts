@@ -55,29 +55,56 @@ export function getRecommendations(
     rank:     index + 1,
     score:    item.score,
     product:  item.product,
-    strengths: deriveStrengths(item.product, signals),
+    strengths: deriveStrengths(item.product, signals, category),
   }));
 }
 
+const STRENGTH_LABEL_MAP: Record<string, { gaming: string; battery: string; portable: string; productivity: string; value: string }> = {
+  software: {
+    gaming:       "High Performance Score",
+    battery:      "Efficient Licensing",
+    portable:     "Cross-Platform Support",
+    productivity: "High Productivity Rating",
+    value:        "Exceptional Value for Money",
+  },
+  health: {
+    gaming:       "High Effectiveness Score",
+    battery:      "Sustained Energy",
+    portable:     "Easy to Take",
+    productivity: "Supports Wellness Goals",
+    value:        "Exceptional Value for Money",
+  },
+};
+
+const DEFAULT_STRENGTH_LABELS = {
+  gaming:       "Excellent Gaming Performance",
+  battery:      "Outstanding Battery Life",
+  portable:     "Highly Portable Design",
+  productivity: "High Productivity Rating",
+  value:        "Exceptional Value for Money",
+};
+
 function deriveStrengths(
-  product: ReturnType<typeof updateProductWeights>[number],
-  user:    ScoringSignals
+  product:  ReturnType<typeof updateProductWeights>[number],
+  user:     ScoringSignals,
+  category: string
 ): string[] {
+  const labels = STRENGTH_LABEL_MAP[category] ?? DEFAULT_STRENGTH_LABELS;
   const candidates = [
-    { label: "Excellent Gaming Performance", value: product.gaming_score },
-    { label: "Outstanding Battery Life",     value: product.battery_score },
-    { label: "Highly Portable Design",       value: product.portability_score },
-    { label: "High Productivity Rating",     value: product.productivity_score },
-    { label: "Exceptional Value for Money",  value: product.value_score },
+    { key: "gaming",       label: labels.gaming,       value: product.gaming_score },
+    { key: "battery",      label: labels.battery,      value: product.battery_score },
+    { key: "portable",     label: labels.portable,     value: product.portability_score },
+    { key: "productivity", label: labels.productivity, value: product.productivity_score },
+    { key: "value",        label: labels.value,        value: product.value_score },
   ];
 
   const boosted = candidates.map((c) => {
     let boost = 0;
-    if (c.label.includes("Battery")      && user.battery_importance === "very-important")    boost = STRENGTH_BOOST;
-    if (c.label.includes("Portable")     && user.portability        === "frequently-travel") boost = STRENGTH_BOOST;
-    if (c.label.includes("Gaming")       && user.purpose            === "gaming")            boost = STRENGTH_BOOST;
-    if (c.label.includes("Productivity") && (user.purpose === "work" || user.purpose === "creative")) boost = STRENGTH_BOOST;
-    if (c.label.includes("Value")        && user.purpose            === "university")        boost = STRENGTH_BOOST;
+    if (c.key === "battery"      && user.battery_importance === "very-important")             boost = STRENGTH_BOOST;
+    if (c.key === "portable"     && user.portability        === "frequently-travel")          boost = STRENGTH_BOOST;
+    if (c.key === "gaming"       && user.purpose            === "gaming")                     boost = STRENGTH_BOOST;
+    if (c.key === "productivity" && (user.purpose === "work" || user.purpose === "creative")) boost = STRENGTH_BOOST;
+    if (c.key === "value"        && user.purpose            === "university")                 boost = STRENGTH_BOOST;
     return { ...c, sortValue: c.value + boost };
   });
 

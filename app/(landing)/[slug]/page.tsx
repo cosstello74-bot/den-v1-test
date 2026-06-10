@@ -18,8 +18,13 @@ import generatedPagesData       from "@/data/ael/generated-pages.json";
 
 // ─── Static params ────────────────────────────────────────────────────────────
 
+// Categories with dedicated hub pages take precedence over the GEO landing page.
+const HUB_PAGE_CATEGORIES = new Set(["software", "health"]);
+
 export function generateStaticParams() {
-  return getAllCategories().map((slug) => ({ slug }));
+  return getAllCategories()
+    .filter((slug) => !HUB_PAGE_CATEGORIES.has(slug))
+    .map((slug) => ({ slug }));
 }
 
 // ─── Per-page metadata ────────────────────────────────────────────────────────
