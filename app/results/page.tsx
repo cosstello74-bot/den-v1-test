@@ -14,7 +14,7 @@ import type { IntelligenceModel } from "@/lib/learningEngine";
 import type { TruthModel, ProductTruth } from "@/lib/truthModel";
 import type { RevenueModelSnapshot } from "@/lib/metrics/revenueMetrics";
 import type { RevenueEnrichedRecommendation } from "@/lib/compositeRanking";
-import { resolveAffiliateUrl } from "@/lib/v4/affiliateResolver";
+import { resolveAffiliateUrl, hasResolvableAffiliateUrl } from "@/lib/v4/affiliateResolver";
 import PopularGuides from "@/components/PopularGuides";
 import { collectParams } from "@/lib/v15/inputLayer";
 import { interpretParams } from "@/lib/v15/categoryScoring";
@@ -512,39 +512,48 @@ function ResultsContent() {
                     )}
 
                     {/* ── CTA ────────────────────────────────── */}
-                    <a
-                      href={resolveAffiliateUrl(rec.product)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => {
-                        logEvent("affiliate_clicked", category, {
-                          productId: rec.product.id,
-                          purpose:   signals.purpose,
-                          metadata:  { rank: rec.rank },
-                        });
-                        recordAffiliateClick(rec.product.id);
-                        trackAffiliateClick(rec.product.id);
-                        recordSignal({
-                          sessionId,
-                          productId: rec.product.id,
-                          category,
-                          type: "affiliate_click",
-                          timestamp: Date.now(),
-                          rank: rec.rank,
-                        });
-                      }}
-                      className={`
-                        flex items-center justify-center gap-2 w-full font-semibold rounded-xl px-6 py-3.5
-                        transition-all duration-150 active:scale-[0.98] text-sm cursor-pointer
-                        ${isBest
-                          ? "bg-accent hover:bg-accent-dark text-white shadow-lg shadow-accent/20"
-                          : "bg-ink/8 hover:bg-ink/15 text-ink"
-                        }
-                      `}
-                    >
-                      Check Current Price
-                      <ExternalLinkIcon className="w-4 h-4 shrink-0" />
-                    </a>
+                    {hasResolvableAffiliateUrl(rec.product) ? (
+                      <a
+                        href={resolveAffiliateUrl(rec.product)}
+                        target="_blank"
+                        rel="noopener noreferrer sponsored"
+                        onClick={() => {
+                          logEvent("affiliate_clicked", category, {
+                            productId: rec.product.id,
+                            purpose:   signals.purpose,
+                            metadata:  { rank: rec.rank },
+                          });
+                          recordAffiliateClick(rec.product.id);
+                          trackAffiliateClick(rec.product.id);
+                          recordSignal({
+                            sessionId,
+                            productId: rec.product.id,
+                            category,
+                            type: "affiliate_click",
+                            timestamp: Date.now(),
+                            rank: rec.rank,
+                          });
+                        }}
+                        className={`
+                          flex items-center justify-center gap-2 w-full font-semibold rounded-xl px-6 py-3.5
+                          transition-all duration-150 active:scale-[0.98] text-sm cursor-pointer
+                          ${isBest
+                            ? "bg-accent hover:bg-accent-dark text-white shadow-lg shadow-accent/20"
+                            : "bg-ink/8 hover:bg-ink/15 text-ink"
+                          }
+                        `}
+                      >
+                        Check Current Price
+                        <ExternalLinkIcon className="w-4 h-4 shrink-0" />
+                      </a>
+                    ) : (
+                      <div
+                        aria-disabled="true"
+                        className="flex items-center justify-center gap-2 w-full font-semibold rounded-xl px-6 py-3.5 text-sm bg-ink/5 text-muted/70 border border-ink/10 cursor-not-allowed select-none"
+                      >
+                        Price link coming soon
+                      </div>
+                    )}
 
                   </div>
                 </article>

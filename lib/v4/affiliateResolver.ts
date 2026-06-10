@@ -53,16 +53,31 @@ export function detectNetwork(url: string): AffiliateNetwork {
   return "direct";
 }
 
-/** Returns the first active (non-PENDING) URL from affiliate_urls, or falls back to affiliate_url. */
+// Patterns that mark a URL as a non-live placeholder. A placeholder must never
+// be rendered as a clickable buy link — it 404s and erodes trust on first use.
+const PLACEHOLDER_PATTERNS = [/\/dp\/example/i, /^PENDING$/i, /example\.com/i];
+
+/** True when a URL is missing or a known placeholder (e.g. amazon.co.uk/dp/example1). */
+export function isPlaceholderUrl(url: string | undefined | null): boolean {
+  if (!url) return true;
+  return PLACEHOLDER_PATTERNS.some((re) => re.test(url));
+}
+
+/** Whether a product has at least one real, clickable affiliate URL. */
+export function hasResolvableAffiliateUrl(product: Product): boolean {
+  return pickBestRaw(product) !== null;
+}
+
+/** Returns the first live (non-PENDING, non-placeholder) URL, or null. */
 function pickBestRaw(product: Product): { url: string; network: AffiliateNetwork } | null {
   if (product.affiliate_urls?.length) {
     const active = product.affiliate_urls.find(
-      (l) => l.url && l.url !== "PENDING"
+      (l) => l.url && !isPlaceholderUrl(l.url)
     );
     if (active) return { url: active.url, network: active.network as AffiliateNetwork };
   }
   const url = product.affiliate_url;
-  if (!url) return null;
+  if (!url || isPlaceholderUrl(url)) return null;
   return { url, network: detectNetwork(url) };
 }
 
