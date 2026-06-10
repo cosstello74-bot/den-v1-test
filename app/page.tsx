@@ -7,6 +7,7 @@ import { headers } from "next/headers";
 import Link from "next/link";
 import { getPublicCategories } from "@/lib/den-categories";
 import type { DenTopCategory } from "@/lib/den-categories";
+import { isLondonVisitor } from "@/lib/geo/londonDetect";
 
 // ─── Decorative logo mark ─────────────────────────────────────────────────────
 
@@ -169,8 +170,12 @@ const STEPS = [
 
 export default function LandingPage() {
   const headersList = headers();
-  const isUK        = (headersList.get("x-vercel-ip-country") ?? "") === "GB";
-  const categories  = getPublicCategories(isUK);
+  const isLondon    = isLondonVisitor(
+    headersList.get("x-vercel-ip-latitude"),
+    headersList.get("x-vercel-ip-longitude"),
+    headersList.get("x-vercel-ip-city"),
+  );
+  const categories  = getPublicCategories(isLondon);
 
 
   return (

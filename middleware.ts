@@ -1,10 +1,11 @@
 /**
  * DEN Middleware
  *
- * 1. Geo-restriction: /beauty/* is a UK-only booking service (Mikki's Wax Bar, London).
- *    Non-GB visitors are redirected to the homepage.
- *    x-vercel-ip-country is injected by Vercel edge. On localhost this header is absent —
- *    Beauty pages will redirect to / unless: document.cookie = "den_uk_override=1"
+ * 1. Geo-restriction: /beauty/* is London-only (Mikki's Wax Bar is a physical salon).
+ *    Visitors outside 35km of central London are redirected to the homepage.
+ *    Vercel injects x-vercel-ip-latitude/longitude at the edge at no extra cost.
+ *    On localhost these headers are absent — set a cookie to bypass:
+ *      document.cookie = "den_london_override=1"
  *
  * 2. Admin auth: /admin/* requires a valid den_admin_auth cookie.
  *    Set ADMIN_PASSWORD in your environment variables.
@@ -12,6 +13,7 @@
  */
 
 import { NextRequest, NextResponse } from "next/server";
+import { isLondonVisitor } from "@/lib/geo/londonDetect";
 
 // Web Crypto API — available in Edge Runtime (no Node.js crypto needed)
 async function isValidToken(token: string, adminPw: string): Promise<boolean> {
@@ -37,12 +39,16 @@ async function isValidToken(token: string, adminPw: string): Promise<boolean> {
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // ── Beauty: UK-only geo restriction ────────────────────────────────────────
+  // ── Beauty: London-only geo restriction ────────────────────────────────────
   if (pathname.startsWith("/beauty")) {
-    const country     = req.headers.get("x-vercel-ip-country") ?? "";
-    const devOverride = req.cookies.get("den_uk_override")?.value === "1";
+    const devOverride = req.cookies.get("den_london_override")?.value === "1";
+    const inLondon    = isLondonVisitor(
+      req.headers.get("x-vercel-ip-latitude"),
+      req.headers.get("x-vercel-ip-longitude"),
+      req.headers.get("x-vercel-ip-city"),
+    );
 
-    if (country !== "GB" && !devOverride) {
+    if (!devOverride && !inLondon) {
       return NextResponse.redirect(new URL("/", req.url));
     }
   }

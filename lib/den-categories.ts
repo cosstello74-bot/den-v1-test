@@ -5,9 +5,9 @@
  * Electronics sub-categories map directly to the existing quiz routing.
  * All other sub-categories are stubs — comingSoon: true until populated.
  *
- * Beauty is geo-restricted to the UK:
- *   - middleware.ts redirects /beauty/* for non-GB visitors
- *   - getPublicCategories(isUK) excludes Beauty for non-UK homepage renders
+ * Beauty is geo-restricted to London (Mikki's Wax Bar is a physical salon):
+ *   - middleware.ts redirects /beauty/* for visitors outside 35km of central London
+ *   - getPublicCategories(isLondon) hides the Beauty card for non-London visitors
  */
 
 export interface DenSubCategory {
@@ -135,7 +135,7 @@ export const DEN_CATEGORIES: DenTopCategory[] = [
     tagline: "Professional treatments matched to your skin, hair type and goals.",
     href: '/beauty',
     type: 'booking',
-    geoRestricted: 'GB',
+    geoRestricted: 'LONDON',
     locationBadge: 'London',
     subCategories: [
       { id: 'laser',     label: 'Laser Hair Removal',       description: 'Long-lasting results — find your ideal course.', href: '/beauty#book' },
@@ -153,9 +153,9 @@ export function getAllDenCategories(): DenTopCategory[] {
 }
 
 /** Returns categories visible to a visitor, applying geo restrictions. */
-export function getPublicCategories(isUK: boolean): DenTopCategory[] {
+export function getPublicCategories(isLondon: boolean): DenTopCategory[] {
   return DEN_CATEGORIES.filter(c => {
-    if (c.geoRestricted && !isUK) return false
+    if (c.geoRestricted && !isLondon) return false
     return true
   })
 }

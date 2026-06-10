@@ -2,21 +2,21 @@
 
 import { useState } from "react";
 
-/**
- * Phorest booking embed — Mikki's Wax Bar
- * Client component: handles iframe loading state.
- */
 export default function PhorestEmbed() {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="relative w-full rounded-xl overflow-hidden border border-gray-800 bg-gray-900" style={{ minHeight: 600 }}>
-
-      {/* Loading skeleton */}
+    <div
+      className="relative w-full rounded-2xl overflow-hidden border border-ink/12 bg-paper-soft"
+      style={{ minHeight: 600 }}
+    >
       {!loaded && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-gray-900">
-          <div className="w-6 h-6 border-2 border-indigo-600 border-t-transparent rounded-full spinner" aria-hidden="true" />
-          <p className="text-xs text-gray-600">Loading booking calendar…</p>
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-paper-soft">
+          <div
+            className="w-5 h-5 border-2 border-accent border-t-transparent rounded-full animate-spin"
+            aria-hidden="true"
+          />
+          <p className="text-xs text-muted">Loading booking calendar…</p>
         </div>
       )}
 
