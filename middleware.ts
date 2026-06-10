@@ -2,10 +2,12 @@
  * DEN Middleware
  *
  * 1. Geo-restriction: /beauty/* is London-only (Mikki's Wax Bar is a physical salon).
- *    Visitors outside 35km of central London are redirected to the homepage.
+ *    Human visitors outside 35km of central London are redirected to the homepage.
  *    Vercel injects x-vercel-ip-latitude/longitude at the edge at no extra cost.
  *    On localhost these headers are absent — set a cookie to bypass:
  *      document.cookie = "den_london_override=1"
+ *    Search-engine crawlers are ALWAYS let through (they crawl from non-London
+ *    IPs) — otherwise the page can never be indexed and local SEO is impossible.
  *
  * 2. Admin auth: /admin/* requires a valid den_admin_auth cookie.
  *    Set ADMIN_PASSWORD in your environment variables.
@@ -14,6 +16,14 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { isLondonVisitor } from "@/lib/geo/londonDetect";
+
+// Known search-engine / social crawlers. Let through the London gate so the
+// booking page is indexable and can rank for "waxing London" searches.
+const CRAWLER_UA = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandex|sogou|exabot|facebookexternalhit|facebot|twitterbot|linkedinbot|applebot|petalbot|google-inspectiontool/i;
+
+function isSearchCrawler(req: NextRequest): boolean {
+  return CRAWLER_UA.test(req.headers.get("user-agent") ?? "");
+}
 
 // Web Crypto API — available in Edge Runtime (no Node.js crypto needed)
 async function isValidToken(token: string, adminPw: string): Promise<boolean> {
@@ -48,7 +58,7 @@ export async function middleware(req: NextRequest) {
       req.headers.get("x-vercel-ip-city"),
     );
 
-    if (!devOverride && !inLondon) {
+    if (!devOverride && !inLondon && !isSearchCrawler(req)) {
       return NextResponse.redirect(new URL("/", req.url));
     }
   }

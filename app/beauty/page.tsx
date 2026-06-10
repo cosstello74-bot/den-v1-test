@@ -5,9 +5,74 @@
  * Server component — Phorest iframe is isolated in PhorestEmbed (client).
  */
 
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getDenCategoryById } from "@/lib/den-categories";
 import PhorestEmbed from "@/components/beauty/PhorestEmbed";
+
+// ─── Salon NAP (single source of truth for SEO + structured data) ──────────────
+// TODO(owner): fill in streetAddress + postalCode with the real salon address.
+// Until then the LocalBusiness schema omits the postal address (an inaccurate
+// address is worse for local SEO than none — Google penalises NAP mismatch).
+const SALON = {
+  name:      "Mikki's Wax Bar",
+  telephone: "+442081097007",
+  phoneDisplay: "020 8109 7007",
+  url:       "https://askden.co/beauty",
+  bookingUrl: "https://www.phorest.com/salon/mikkiwaxbar",
+  city:      "London",
+  region:    "Greater London",
+  country:   "GB",
+  streetAddress: "", // e.g. "12 Example Street"
+  postalCode:    "", // e.g. "N1 1AA"
+  priceRange: "££",
+} as const;
+
+export const metadata: Metadata = {
+  title:       "Mikki's Wax Bar — Waxing, Laser & Lash Treatments in London",
+  description:
+    "Book professional waxing, laser hair removal, LVL lash lifts, and brow treatments at Mikki's Wax Bar in London. Online booking available.",
+  alternates: { canonical: SALON.url },
+  openGraph: {
+    title:       "Mikki's Wax Bar — London",
+    description: "Professional waxing, laser and lash treatments in London. Book online.",
+    url:         SALON.url,
+    type:        "website",
+  },
+};
+
+function buildLocalBusinessSchema(treatments: { label: string; description: string }[]) {
+  const schema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type":    "HealthAndBeautyBusiness",
+    name:        SALON.name,
+    image:       `${SALON.url.replace("/beauty", "")}/logo.png`,
+    url:         SALON.url,
+    telephone:   SALON.telephone,
+    priceRange:  SALON.priceRange,
+    areaServed:  { "@type": "City", name: SALON.city },
+    makesOffer:  treatments.map((t) => ({
+      "@type": "Offer",
+      itemOffered: { "@type": "Service", name: t.label, description: t.description },
+    })),
+    potentialAction: {
+      "@type":  "ReserveAction",
+      target:   SALON.bookingUrl,
+      result:   { "@type": "Reservation", name: "Treatment booking" },
+    },
+  };
+  if (SALON.streetAddress && SALON.postalCode) {
+    schema.address = {
+      "@type":          "PostalAddress",
+      streetAddress:    SALON.streetAddress,
+      addressLocality:  SALON.city,
+      addressRegion:    SALON.region,
+      postalCode:       SALON.postalCode,
+      addressCountry:   SALON.country,
+    };
+  }
+  return schema;
+}
 
 function ArrowLeft({ className }: { className?: string }) {
   return (
@@ -36,9 +101,17 @@ function MapPinIcon({ className }: { className?: string }) {
 
 export default function BeautyPage() {
   const category = getDenCategoryById("beauty")!;
+  const schema   = buildLocalBusinessSchema(
+    category.subCategories.map((s) => ({ label: s.label, description: s.description })),
+  );
 
   return (
     <div className="min-h-[100dvh] flex flex-col bg-paper text-ink">
+      {/* ── LocalBusiness structured data (local SEO) ──────── */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
 
       {/* ── Nav ──────────────────────────────────────────── */}
       <nav className="sticky top-0 z-20 backdrop-blur-sm bg-paper/90 border-b border-ink/10 flex items-center justify-between px-6 py-4">
