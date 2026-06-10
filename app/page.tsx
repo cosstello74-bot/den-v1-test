@@ -82,9 +82,8 @@ function BusinessIcon({ className }: { className?: string }) {
 function BeautyIcon({ className }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="6" cy="6" r="3" />
-      <circle cx="6" cy="18" r="3" />
-      <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12" />
+      <path d="M12 3c-2 3.5-4.5 6.5-4.5 9.5a4.5 4.5 0 009 0C16.5 9.5 14 6.5 12 3z" />
+      <path d="M10.5 17a2.5 2.5 0 003 0" />
     </svg>
   );
 }
@@ -127,20 +126,20 @@ function StatusBadge({ cat }: { cat: DenTopCategory }) {
   const hasLiveSub = cat.subCategories.some((s) => !s.comingSoon);
   if (hasLiveSub) {
     return (
-      <span className="text-[9px] font-bold tracking-widest uppercase bg-emerald-500/15 text-emerald-600 border border-emerald-500/25 px-2 py-0.5 rounded-full">
+      <span className="text-[9px] font-bold tracking-widest uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full">
         Live
       </span>
     );
   }
   if (cat.locationBadge) {
     return (
-      <span className="text-[9px] font-medium text-accent/80 border border-accent/30 px-2 py-0.5 rounded-full">
+      <span className="text-[9px] font-medium text-accent border border-accent/40 px-2 py-0.5 rounded-full">
         {cat.locationBadge}
       </span>
     );
   }
   return (
-    <span className="text-[9px] font-bold tracking-widest uppercase bg-ink/5 text-muted border border-ink/10 px-2 py-0.5 rounded-full">
+    <span className="text-[9px] font-bold tracking-widest uppercase bg-paper/10 text-paper/40 border border-paper/20 px-2 py-0.5 rounded-full">
       Soon
     </span>
   );
@@ -173,8 +172,6 @@ export default function LandingPage() {
   const isUK        = (headersList.get("x-vercel-ip-country") ?? "") === "GB";
   const categories  = getPublicCategories(isUK);
 
-  const electronics = categories.find(c => c.id === "electronics")!;
-  const restCats    = categories.filter(c => c.id !== "electronics");
 
   return (
     <div className="min-h-[100dvh] flex flex-col">
@@ -279,78 +276,64 @@ export default function LandingPage() {
             </h2>
           </div>
 
-          {/* Electronics — featured dark card */}
-          <Link href={electronics.href} className="group block mb-3 cursor-pointer">
-            <div className="relative bg-ink text-paper rounded-2xl md:rounded-3xl p-7 md:p-10 overflow-hidden transition-all duration-200 group-hover:ring-2 ring-accent/35 active:scale-[0.995]">
-              {/* Glow inside card */}
-              <div
-                className="absolute -top-10 -right-10 w-72 h-72 bg-accent/12 rounded-full blur-[80px] pointer-events-none"
-                aria-hidden="true"
-              />
-              {/* Large watermark */}
-              <DenMark className="absolute right-8 top-8 w-32 h-32 text-paper/[0.035]" />
-
-              <div className="relative flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-                <div className="space-y-4 md:space-y-5 max-w-xl">
-                  <div className="flex items-center gap-3">
-                    <span className="text-[9px] font-bold tracking-widest uppercase bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded-full">
-                      Live now
-                    </span>
-                    <ElectronicsIcon className="w-4 h-4 text-accent/70" />
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-paper tracking-tight">
-                    {electronics.label}
-                  </h3>
-                  <p className="text-sm text-paper/50 leading-relaxed">
-                    {electronics.tagline}
-                  </p>
-                  {electronics.subCategories && (
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {electronics.subCategories.map((sub) => (
-                        <span
-                          key={sub.id}
-                          className={`text-[11px] font-medium px-3 py-1.5 rounded-full border ${
-                            sub.comingSoon
-                              ? "bg-paper/5 text-paper/30 border-paper/10"
-                              : "bg-paper/10 text-paper border-paper/20"
-                          }`}
-                        >
-                          {sub.label}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                {/* Explore arrow */}
-                <div className="flex items-center gap-2 text-paper/35 group-hover:text-accent transition-colors duration-200 shrink-0 self-end md:self-auto">
-                  <span className="text-sm font-semibold">Explore rankings</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-150" />
-                </div>
-              </div>
-            </div>
-          </Link>
-
-          {/* Remaining categories — bento grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 md:gap-3">
-            {restCats.map((cat) => {
+          {/* All categories — equal dark cards */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {categories.map((cat) => {
               const Icon = CAT_ICON_MAP[cat.id] ?? ElectronicsIcon;
               return (
-                <Link key={cat.id} href={cat.href} className="group block stagger-item cursor-pointer">
-                  <div className="h-full min-h-[140px] bg-paper-soft border border-ink/10 group-hover:border-accent/35 group-hover:shadow-sm rounded-xl md:rounded-2xl p-5 flex flex-col gap-3 transition-all duration-150 active:scale-[0.97]">
-                    <div className="flex items-start justify-between">
-                      <div className="w-8 h-8 rounded-lg bg-ink/5 group-hover:bg-accent/10 flex items-center justify-center transition-colors duration-150 shrink-0">
-                        <Icon className="w-4 h-4 text-muted group-hover:text-accent transition-colors duration-150" />
+                <Link key={cat.id} href={cat.href} className="group block cursor-pointer">
+                  <div className="relative h-full bg-ink text-paper rounded-2xl p-5 md:p-6 overflow-hidden transition-all duration-200 group-hover:ring-2 ring-accent/35 active:scale-[0.98]">
+                    <div
+                      className="absolute -top-8 -right-8 w-44 h-44 bg-accent/8 rounded-full blur-[70px] pointer-events-none"
+                      aria-hidden="true"
+                    />
+                    <div className="relative flex flex-col gap-3 h-full min-h-[200px]">
+
+                      {/* icon + badge */}
+                      <div className="flex items-start justify-between">
+                        <div className="w-9 h-9 rounded-xl bg-paper/10 flex items-center justify-center shrink-0">
+                          <Icon className="w-5 h-5 text-accent" />
+                        </div>
+                        <StatusBadge cat={cat} />
                       </div>
-                      <StatusBadge cat={cat} />
-                    </div>
-                    <div className="mt-auto">
-                      <h3 className="font-semibold text-sm text-ink group-hover:text-accent transition-colors duration-150 tracking-tight">
-                        {cat.label}
-                      </h3>
-                      <p className="text-xs text-muted mt-1 leading-relaxed line-clamp-2">
-                        {cat.tagline}
-                      </p>
+
+                      {/* label + tagline */}
+                      <div className="flex-1">
+                        <h3 className="font-bold text-paper tracking-tight group-hover:text-accent transition-colors duration-150 leading-tight">
+                          {cat.label}
+                        </h3>
+                        <p className="text-xs text-paper/45 mt-1.5 leading-relaxed line-clamp-2">
+                          {cat.tagline}
+                        </p>
+                      </div>
+
+                      {/* sub-category pills */}
+                      <div className="flex flex-wrap gap-1.5">
+                        {cat.subCategories.slice(0, 3).map((sub) => (
+                          <span
+                            key={sub.id}
+                            className={`text-[10px] font-medium px-2.5 py-1 rounded-full border ${
+                              sub.comingSoon
+                                ? "bg-paper/5 text-paper/25 border-paper/10"
+                                : "bg-paper/10 text-paper/70 border-paper/20"
+                            }`}
+                          >
+                            {sub.label}
+                          </span>
+                        ))}
+                        {cat.subCategories.length > 3 && (
+                          <span className="text-[10px] text-paper/30 self-center">
+                            +{cat.subCategories.length - 3}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* explore */}
+                      <div className="flex items-center gap-1.5 text-paper/35 group-hover:text-accent transition-colors duration-200 text-xs font-semibold">
+                        <span>Explore rankings</span>
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-150" />
+                      </div>
+
                     </div>
                   </div>
                 </Link>
