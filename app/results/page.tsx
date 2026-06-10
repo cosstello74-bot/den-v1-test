@@ -15,6 +15,7 @@ import type { TruthModel, ProductTruth } from "@/lib/truthModel";
 import type { RevenueModelSnapshot } from "@/lib/metrics/revenueMetrics";
 import type { RevenueEnrichedRecommendation } from "@/lib/compositeRanking";
 import { resolveAffiliateUrl } from "@/lib/v4/affiliateResolver";
+import PopularGuides from "@/components/PopularGuides";
 import { collectParams } from "@/lib/v15/inputLayer";
 import { interpretParams } from "@/lib/v15/categoryScoring";
 import { runV16Guardrails } from "@/lib/v16/guardrails/guardrailRunner";
@@ -576,6 +577,9 @@ function ResultsContent() {
               </div>
             );
           })()}
+
+          {/* ── Related guides (internal links to AEL pages) ── */}
+          <PopularGuides categories={[category]} heading="Related guides" limit={4} />
 
           {/* ── Footer links ──────────────────────────────── */}
           <div className="animate-fade-in delay-500 border-t border-ink/10 pt-8 space-y-3">

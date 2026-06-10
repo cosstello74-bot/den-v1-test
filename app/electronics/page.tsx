@@ -8,6 +8,7 @@
 import type React from "react";
 import Link from "next/link";
 import { getDenCategoryById } from "@/lib/den-categories";
+import PopularGuides from "@/components/PopularGuides";
 
 // ─── Icons ─────────────────────────────────────────────────────────────────────
 
@@ -177,6 +178,9 @@ export default function ElectronicsPage() {
             );
           })}
         </div>
+
+        {/* ── Popular guides (internal links to AEL landing pages) ── */}
+        <PopularGuides categories={["laptops", "phones", "tablets", "monitors", "pcs"]} />
 
       </main>
 

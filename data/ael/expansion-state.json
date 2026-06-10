@@ -1,5 +1,5 @@
 {
-  "lastRun": "2026-06-09T16:52:02.046Z",
+  "lastRun": "2026-06-10T05:03:36.470Z",
   "totalPagesGenerated": 16,
   "totalCategoriesGenerated": 3,
   "suppressedSlugs": [
@@ -40,6 +40,14 @@
       "categoriesAdded": 0,
       "opportunitiesDetected": 0,
       "confidenceThreshold": 0.89
+    },
+    {
+      "runId": "run-1781067816470",
+      "timestamp": "2026-06-10T05:03:36.470Z",
+      "pagesAdded": 0,
+      "categoriesAdded": 0,
+      "opportunitiesDetected": 0,
+      "confidenceThreshold": 0.91
     }
   ],
   "currentOpportunities": [
@@ -205,12 +213,12 @@
   ],
   "revenueScans": [],
   "feedbackState": {
-    "confidenceThreshold": 0.91,
+    "confidenceThreshold": 0.85,
     "expansionRecords": [
       {
         "pageSlug": "best-gaming-laptops-under-1000",
         "generatedAt": "2025-01-01T00:00:00.000Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -221,7 +229,7 @@
       {
         "pageSlug": "best-laptops-for-students",
         "generatedAt": "2025-01-01T00:00:00.000Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -232,7 +240,7 @@
       {
         "pageSlug": "best-laptops-for-coding",
         "generatedAt": "2025-01-01T00:00:00.000Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -243,7 +251,7 @@
       {
         "pageSlug": "lightweight-laptops-for-travel",
         "generatedAt": "2025-01-01T00:00:00.000Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -254,7 +262,7 @@
       {
         "pageSlug": "best-laptops-for-video-editing",
         "generatedAt": "2026-06-03T17:12:48.165Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -265,7 +273,7 @@
       {
         "pageSlug": "best-gaming-monitors",
         "generatedAt": "2026-06-03T17:12:48.165Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -276,7 +284,7 @@
       {
         "pageSlug": "best-tablets-for-students",
         "generatedAt": "2026-06-03T17:12:48.165Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -287,7 +295,7 @@
       {
         "pageSlug": "best-gaming-pcs",
         "generatedAt": "2026-06-03T17:12:48.165Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -298,7 +306,7 @@
       {
         "pageSlug": "best-phones-for-photography",
         "generatedAt": "2026-06-03T17:12:48.169Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -309,7 +317,7 @@
       {
         "pageSlug": "best-budget-smartphones",
         "generatedAt": "2026-06-03T17:12:48.169Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -320,7 +328,7 @@
       {
         "pageSlug": "best-budget-laptops-under-500",
         "generatedAt": "2026-06-03T17:12:48.169Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -331,7 +339,7 @@
       {
         "pageSlug": "best-premium-laptops-for-professionals",
         "generatedAt": "2026-06-03T17:12:48.169Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -342,7 +350,7 @@
       {
         "pageSlug": "best-battery-life-phones",
         "generatedAt": "2026-06-03T17:12:48.169Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -353,7 +361,7 @@
       {
         "pageSlug": "best-monitors-for-video-editing",
         "generatedAt": "2026-06-03T17:12:48.169Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -364,7 +372,7 @@
       {
         "pageSlug": "best-tablets-for-drawing",
         "generatedAt": "2026-06-05T20:48:04.516Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -375,7 +383,7 @@
       {
         "pageSlug": "best-pcs-for-video-editing",
         "generatedAt": "2026-06-05T20:48:04.516Z",
-        "evaluatedAt": "2026-06-09T16:52:02.048Z",
+        "evaluatedAt": "2026-06-10T05:03:36.472Z",
         "sessions": 0,
         "quizConversions": 0,
         "conversionRate": 0,
@@ -385,6 +393,6 @@
       }
     ],
     "avgExpansionScore": 0,
-    "lastEvaluated": "2026-06-09T16:52:02.048Z"
+    "lastEvaluated": "2026-06-10T05:03:36.472Z"
   }
 }
