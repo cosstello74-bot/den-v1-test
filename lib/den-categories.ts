@@ -64,15 +64,15 @@ export const DEN_CATEGORIES: DenTopCategory[] = [
   {
     id: 'home',
     label: 'Home',
-    tagline: 'Mattresses, appliances, smart home — ranked for your space and budget.',
+    tagline: 'Air treatment, kitchen and cleaning appliances — ranked for your home.',
     href: '/home',
     type: 'affiliate',
     subCategories: [
-      { id: 'mattresses',    label: 'Mattresses',         description: 'Ranked by sleep position, weight and firmness preference.',  href: '/home/mattresses',    comingSoon: true },
-      { id: 'kitchen',       label: 'Kitchen Appliances', description: 'Coffee machines, stand mixers, air fryers — ranked.',        href: '/home/kitchen',       comingSoon: true },
-      { id: 'air-purifiers', label: 'Air Purifiers',      description: 'Matched to your room size, allergens and noise tolerance.',  href: '/home/air-purifiers', comingSoon: true },
-      { id: 'exercise',      label: 'Exercise Equipment', description: 'Home gym, cardio and strength gear — ranked for your goals.',href: '/home/exercise',      comingSoon: true },
-      { id: 'smart-home',    label: 'Smart Home',         description: 'Hubs, cameras, thermostats — ranked by ecosystem.',         href: '/home/smart-home',    comingSoon: true },
+      { id: 'climate',    label: 'Air & Climate',      description: 'Air purifiers, dehumidifiers, heaters and fans — ranked for your room.', href: '/quiz?category=home' },
+      { id: 'kitchen',    label: 'Kitchen Appliances', description: 'Air fryers and countertop cooking — ranked by capacity and value.',       href: '/quiz?category=home' },
+      { id: 'cleaning',   label: 'Cleaning',           description: 'Vacuums and home cleaning gear — ranked for your space.',                 href: '/quiz?category=home' },
+      { id: 'smart-home', label: 'Smart Home',         description: 'Hubs, cameras, thermostats — ranked by ecosystem.',                       href: '/home/smart-home', comingSoon: true },
+      { id: 'mattresses', label: 'Mattresses',         description: 'Ranked by sleep position, weight and firmness preference.',               href: '/home/mattresses', comingSoon: true },
     ],
   },
   {

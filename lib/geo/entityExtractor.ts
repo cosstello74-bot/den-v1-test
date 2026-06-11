@@ -26,6 +26,7 @@ const PERFORMANCE_ATTRIBUTES: Record<CategoryKey, string[]> = {
   health:             ["effectiveness", "ingredient quality", "scientific backing", "ease of use", "value for money", "taste", "bioavailability"],
   "travel-insurance": ["medical coverage", "cancellation cover", "baggage protection", "policy excess", "24/7 emergency assistance", "value for money", "claim ease"],
   software:           ["performance", "compatibility", "multi-device support", "ease of activation", "security features", "value for money", "update frequency"],
+  home:               ["performance", "energy efficiency", "capacity", "compact design", "ease of use", "noise level", "value for money"],
 };
 
 const USE_CASE_ENTITIES: Record<CategoryKey, string[]> = {
@@ -37,6 +38,7 @@ const USE_CASE_ENTITIES: Record<CategoryKey, string[]> = {
   health:             ["protein supplements", "vegan vitamins", "organic health foods", "weight management supplements", "sports nutrition", "daily vitamins"],
   "travel-insurance": ["single trip insurance", "annual multi-trip insurance", "Europe travel insurance", "worldwide travel insurance", "backpacker insurance", "adventure sports cover"],
   software:           ["Windows licence", "Office suite", "antivirus protection", "VPN service", "small business security", "productivity software"],
+  home:               ["air purifiers", "dehumidifiers", "fan heaters", "air fryers", "cordless vacuums", "home cleaning appliances"],
 };
 
 const CATEGORY_ENTITIES: Record<CategoryKey, string[]> = {
@@ -48,6 +50,7 @@ const CATEGORY_ENTITIES: Record<CategoryKey, string[]> = {
   health:             ["supplement", "vitamins", "protein powder", "health food", "nutrition"],
   "travel-insurance": ["travel insurance", "holiday insurance", "trip insurance", "medical cover abroad"],
   software:           ["software licence", "digital licence", "product key", "download key", "software activation"],
+  home:               ["home appliance", "air treatment", "kitchen appliance", "cleaning appliance", "small domestic appliance"],
 };
 
 // ─── Main function ────────────────────────────────────────────────────────────

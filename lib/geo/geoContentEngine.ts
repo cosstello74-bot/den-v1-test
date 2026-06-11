@@ -37,6 +37,7 @@ const CATEGORY_SUMMARIES: Record<CategoryKey, string> = {
   health: "Health supplements are scored across five dimensions: effectiveness (potency for stated goal), ingredient quality (purity and sourcing), scientific backing (evidence base), ease of use (taste, format convenience), and value for money. Rankings weight goal alignment first — fitness goals surface high-protein and performance products; natural/organic goals surface Linwoods whole-food products; general wellness surfaces science-backed daily vitamins.",
   "travel-insurance": "Travel insurance policies are scored across five dimensions: medical coverage quality (highest weight), policy breadth and coverage comprehensiveness, cancellation and disruption cover, ease of purchase and claim experience, and price-to-coverage value. Rankings weight trip type first — single-trip intent surfaces the best single-trip policies; annual multi-trip intent surfaces annual policies. Destination then applies a match bonus: Europe or Worldwide filters surface the most relevant policy scope.",
   software: "Software licences are scored across five dimensions: performance and compatibility (operating system and application launch speed), multi-device and cross-platform support, productivity or protection quality, ease of activation and management, and price-to-value ratio. Rankings weight software type first — OS intent surfaces operating systems; Office intent surfaces productivity suites; Security intent surfaces antivirus products; VPN intent surfaces privacy tools. A sub-type match bonus (screen_size field) ensures products from the exact requested category rank at the top regardless of shared purpose signals.",
+  home: "Home and living appliances are scored across five dimensions: power and capacity, energy efficiency (running cost), performance and effectiveness at the core job, compactness and ease of use, and price-to-value ratio. Rankings weight the appliance type first — Air & Climate intent surfaces purifiers, dehumidifiers and heaters; Kitchen intent surfaces air fryers and countertop cooking; Cleaning intent surfaces vacuums. A sub-type match bonus (screen_size field) ensures products from the requested group rank at the top. All products come from Boxed2me via Awin, with boxed and clearance deals below typical retail.",
 };
 
 const CATEGORY_USE_CASES: Record<CategoryKey, string[]> = {
@@ -48,6 +49,7 @@ const CATEGORY_USE_CASES: Record<CategoryKey, string[]> = {
   health:             ["fitness and performance", "general wellness", "weight management", "organic and natural nutrition"],
   "travel-insurance": ["single trip holidays", "annual multi-trip travel", "European city breaks", "worldwide adventure travel", "skiing and winter sports", "backpacker trips"],
   software:           ["Windows OS upgrade", "Office suite for home", "Office suite for business", "antivirus for small business", "VPN for privacy", "student productivity software"],
+  home:               ["air purification for allergies", "damp and condensation control", "energy-efficient heating", "healthy low-fat cooking", "cordless home cleaning", "small-room appliances"],
 };
 
 const DECISION_LOGIC_TEMPLATES: Record<CategoryKey, string[]> = {
@@ -108,6 +110,13 @@ const DECISION_LOGIC_TEMPLATES: Record<CategoryKey, string[]> = {
     "Step 2 — Sub-type match bonus: screen_size field stores software_type value ('os'/'office'/'security'/'vpn'); exact match adds +10, ensuring products from the requested sub-type rank at top even when purpose scores overlap.",
     "Step 3 — Use-case weighting: enterprise/business use_case sets battery_importance=very-important, boosting productivity_score weight; student sets not-important.",
     "Step 4 — Platform: cross-platform sets portability=frequently-travel, boosting portability_score (multi-device support).",
+    "Step 5 — Composite scoring: 0.60 × intelligence + 0.40 × revenue efficiency applied once outcome data accumulates.",
+  ],
+  home: [
+    "Step 1 — Appliance routing: home_type='climate' maps purpose='work'; 'kitchen' maps purpose='creative'; 'cleaning' maps purpose='university'. The screen_size field stores the appliance type and a +10 exact-match bonus keeps the requested group on top.",
+    "Step 2 — Priority weighting: priority='efficiency' sets battery_importance=very-important, boosting energy-efficiency (battery_score) × 0.20; 'performance' sets not-important so raw power and effectiveness dominate.",
+    "Step 3 — Space weighting: space='compact' sets portability=frequently-travel, boosting compactness (portability_score) × 0.20; 'freestanding' favours higher-capacity units.",
+    "Step 4 — Value weighting: budget band maps to value_score weight; lower budgets elevate value_score.",
     "Step 5 — Composite scoring: 0.60 × intelligence + 0.40 × revenue efficiency applied once outcome data accumulates.",
   ],
 };
@@ -223,6 +232,20 @@ const FAQ_TEMPLATES: Record<CategoryKey, FaqBlock[]> = {
     {
       question: "What is the best cheap Microsoft Office licence?",
       answer: "Office 2024 Home (value_score 99) is the top value recommendation — it includes Word, Excel and PowerPoint as a one-time purchase, with no monthly subscription. Office 2024 Professional (value_score 96) adds Access and Publisher for business users who need the full suite. Office 2021 Home & Student (value_score 99) is ideal for students requiring a permanent licence at minimum cost.",
+    },
+  ],
+  home: [
+    {
+      question: "How are home appliance recommendations ranked on DEN?",
+      answer: "Appliances are ranked by type match first — the quiz detects whether you need air & climate, kitchen, or cleaning gear and applies a +10 match bonus to products in that group. Within each group, scoring weights power and capacity, energy efficiency, performance, compactness, and value for money against your stated priority, space and budget. All products come from Boxed2me via Awin, with boxed and clearance deals below typical retail.",
+    },
+    {
+      question: "What is the best air purifier for allergies?",
+      answer: "For allergy and asthma relief, HEPA air purifiers score highest on performance — the Nedis HEPA Air Purifier captures up to 99.97% of airborne particles and covers rooms up to 45m². DEN weights effectiveness and energy efficiency, then applies a compactness bonus for smaller rooms.",
+    },
+    {
+      question: "What is the best value air fryer?",
+      answer: "Value-focused buyers score highest on the value_score dimension — the Ex-Pro 6.5L Hot Air Fryer leads for budget single-household cooking, while the Nedis 7.6L Dual Basket model ranks top for families needing two zones. Both use hot-air circulation for low-fat cooking and rank ahead on capacity per pound.",
     },
   ],
 };

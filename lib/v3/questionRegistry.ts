@@ -459,6 +459,52 @@ const SOFTWARE_STEPS: QuizStep[] = [
   },
 ];
 
+// ─── Home & Living ────────────────────────────────────────────────────────────
+
+const HOME_STEPS: QuizStep[] = [
+  {
+    id:       "home_type",
+    question: "What do you need for your home?",
+    subtitle: "This routes you to the right group of appliances.",
+    options: [
+      { value: "climate",  label: "Air & Climate",      description: "Air purifiers, dehumidifiers, heaters and fans" },
+      { value: "kitchen",  label: "Kitchen",            description: "Air fryers and countertop cooking appliances" },
+      { value: "cleaning", label: "Cleaning",           description: "Vacuums and home cleaning gear" },
+    ],
+  },
+  {
+    id:       "priority",
+    question: "What matters most to you?",
+    subtitle: "We'll weight the ranking towards what you care about.",
+    options: [
+      { value: "performance", label: "Maximum performance", description: "Most powerful and effective option" },
+      { value: "efficiency",  label: "Energy efficiency",   description: "Lower running costs and energy use" },
+      { value: "balanced",    label: "A good all-rounder",  description: "Balanced across performance and cost" },
+    ],
+  },
+  {
+    id:       "space",
+    question: "How much space do you have?",
+    subtitle: "Compact models suit small rooms; freestanding units pack more power.",
+    options: [
+      { value: "compact",      label: "Tight on space",     description: "Small rooms — compact and easy to store" },
+      { value: "flexible",     label: "Some flexibility",   description: "Move it between rooms as needed" },
+      { value: "freestanding", label: "A dedicated spot",   description: "Room for a larger freestanding unit" },
+    ],
+  },
+  {
+    id:       "budget",
+    question: "What's your budget?",
+    subtitle: "Boxed2me stocks boxed and clearance deals below typical retail.",
+    options: [
+      { value: "under-30", label: "Under £30",  description: "Entry-level and compact units" },
+      { value: "30-75",    label: "£30–£75",    description: "Mainstream home appliances" },
+      { value: "75-150",   label: "£75–£150",   description: "Higher-capacity and smart models" },
+      { value: "150+",     label: "£150+",      description: "Premium and large-capacity units" },
+    ],
+  },
+];
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 const QUESTION_REGISTRY: Record<CategoryKey, QuizStep[]> = {
@@ -470,6 +516,7 @@ const QUESTION_REGISTRY: Record<CategoryKey, QuizStep[]> = {
   health:             HEALTH_STEPS,
   "travel-insurance": TRAVEL_INSURANCE_STEPS,
   software:           SOFTWARE_STEPS,
+  home:               HOME_STEPS,
 };
 
 export function getQuestions(category: CategoryKey): QuizStep[] {

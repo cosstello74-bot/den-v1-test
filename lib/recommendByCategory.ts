@@ -74,6 +74,13 @@ const STRENGTH_LABEL_MAP: Record<string, { gaming: string; battery: string; port
     productivity: "Supports Wellness Goals",
     value:        "Exceptional Value for Money",
   },
+  home: {
+    gaming:       "High Power & Capacity",
+    battery:      "Energy Efficient",
+    portable:     "Compact & Easy to Use",
+    productivity: "Excellent Performance",
+    value:        "Exceptional Value for Money",
+  },
 };
 
 const DEFAULT_STRENGTH_LABELS = {

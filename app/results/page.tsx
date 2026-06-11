@@ -66,6 +66,7 @@ const CATEGORY_HUB: Record<string, { href: string; label: string }> = {
   software:          { href: "/software", label: "Software" },
   health:            { href: "/health",   label: "Health" },
   "travel-insurance":{ href: "/travel",   label: "Travel" },
+  home:              { href: "/home",     label: "Home" },
 };
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
@@ -110,6 +111,7 @@ const DIMENSION_LABELS: Record<string, [string, string, string, string, string]>
   software:         ["Efficiency",  "Cross-platform", "Performance",  "Productivity", "Value"],
   health:           ["Energy",      "Absorption",     "Effectiveness","Wellness",     "Value"],
   "travel-insurance":["Medical",    "Cancellation",   "Activities",   "Baggage",      "Value"],
+  home:             ["Efficiency",  "Compact",        "Power",        "Performance",  "Value"],
 };
 
 function DimensionBars({ product, category }: { product: ProductWithMetrics; category: string }) {

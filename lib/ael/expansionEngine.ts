@@ -97,6 +97,12 @@ const INTENT_VOCABULARY: Record<CategoryKey, Array<{
     { slug: "best-antivirus-uk",                   confidence: 0.89, impact: "high",   rationale: "Antivirus intent unserved. Kaspersky Standard is top home recommendation." },
     { slug: "best-vpn-uk",                         confidence: 0.88, impact: "high",   rationale: "VPN intent growing. NordVPN and Surfshark are top value picks." },
   ],
+  home: [
+    { slug: "best-air-purifiers-uk",               confidence: 0.89, impact: "high",   rationale: "Air purifier intent high for allergy/asthma. Boxed2me HEPA units serve it." },
+    { slug: "best-dehumidifiers-uk",               confidence: 0.88, impact: "high",   rationale: "Damp and condensation control is high-volume seasonal demand. Boxed2me compressor and Peltier units." },
+    { slug: "best-air-fryers-uk",                  confidence: 0.90, impact: "high",   rationale: "Air fryer buying intent is very high volume. Boxed2me Nedis and Ex-Pro models cover budget to family." },
+    { slug: "best-cordless-vacuums-uk",            confidence: 0.86, impact: "medium", rationale: "Cordless vacuum intent strong. Boxed2me Nedis stick and handheld units fit." },
+  ],
 };
 
 // ─── Cluster vocabulary — used to detect new category opportunities ───────────

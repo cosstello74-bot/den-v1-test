@@ -55,7 +55,7 @@ export function detectNetwork(url: string): AffiliateNetwork {
 
 // Patterns that mark a URL as a non-live placeholder. A placeholder must never
 // be rendered as a clickable buy link — it 404s and erodes trust on first use.
-const PLACEHOLDER_PATTERNS = [/\/dp\/example/i, /^PENDING$/i, /example\.com/i];
+const PLACEHOLDER_PATTERNS = [/\/dp\/example/i, /^PENDING$/i, /example\.com/i, /[?&]awinmid=0(&|$)/i];
 
 /** True when a URL is missing or a known placeholder (e.g. amazon.co.uk/dp/example1). */
 export function isPlaceholderUrl(url: string | undefined | null): boolean {

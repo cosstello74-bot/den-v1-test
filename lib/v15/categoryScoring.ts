@@ -310,6 +310,63 @@ const SOFTWARE_PROFILE: CategoryScoringProfile = {
   },
 };
 
+// ─── Home & Living ────────────────────────────────────────────────────────────
+//
+// Score field remapping (data/categories/home.json):
+//   gaming_score       → power / capacity
+//   battery_score      → energy efficiency (lower running cost)
+//   productivity_score → performance / effectiveness
+//   portability_score  → compactness / ease of use
+//   value_score        → price-to-value ratio
+//
+// ScoringSignals slots repurposed for home:
+//   purpose            ← home_type: climate→"work", kitchen→"creative", cleaning→"university"
+//   screen_size        ← home_type directly ("climate"/"kitchen"/"cleaning")
+//                        The +10 exact screen_size match bonus is the sub-type filter.
+//   battery_importance ← priority: efficiency→"very-important", performance→"not-important"
+//   portability        ← space: compact→"frequently-travel", freestanding→"desk-use"
+
+const HOME_PROFILE: CategoryScoringProfile = {
+  requiredFields: ["home_type", "priority", "space", "budget"],
+  interpret: (p) => {
+    const purposeMap: Record<string, string> = {
+      climate:  "work",
+      kitchen:  "creative",
+      cleaning: "university",
+    };
+
+    const priorityToBattery: Record<string, string> = {
+      efficiency:  "very-important",
+      balanced:    "somewhat-important",
+      performance: "not-important",
+    };
+
+    const spaceToPortability: Record<string, string> = {
+      compact:      "frequently-travel",
+      flexible:     "occasionally-travel",
+      freestanding: "desk-use",
+    };
+
+    const budgetMap: Record<string, string> = {
+      "under-30": "under-500",
+      "30-75":    "500-1000",
+      "75-150":   "1000-1500",
+      "150+":     "1500+",
+    };
+
+    const homeType = p.home_type ?? "";
+
+    return {
+      purpose:            purposeMap[homeType]                  ?? DEFAULTS.purpose,
+      budget:             budgetMap[p.budget ?? ""]             ?? DEFAULTS.budget,
+      battery_importance: priorityToBattery[p.priority ?? ""]  ?? DEFAULTS.battery_importance,
+      portability:        spaceToPortability[p.space ?? ""]    ?? DEFAULTS.portability,
+      screen_size:        homeType || DEFAULTS.screen_size,
+      brand_preference:   DEFAULTS.brand_preference,
+    };
+  },
+};
+
 // ─── Registry ─────────────────────────────────────────────────────────────────
 
 export const CATEGORY_SCORING_PROFILES: Record<CategoryKey, CategoryScoringProfile> = {
@@ -321,6 +378,7 @@ export const CATEGORY_SCORING_PROFILES: Record<CategoryKey, CategoryScoringProfi
   health:              HEALTH_PROFILE,
   "travel-insurance":  TRAVEL_INSURANCE_PROFILE,
   software:            SOFTWARE_PROFILE,
+  home:                HOME_PROFILE,
 };
 
 /**
