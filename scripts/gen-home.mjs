@@ -5,7 +5,7 @@
 import { writeFileSync } from "node:fs";
 
 const AWINAFFID = "2926103";          // publisher ID (same across all Awin programs)
-const AWINMID   = "0";                // SENTINEL — replace with Boxed2me merchant ID
+const AWINMID   = "75674";            // Boxed2me advertiser ID (Awin)
 
 const link = (dest) =>
   `https://www.awin1.com/cread.php?awinmid=${AWINMID}&awinaffid=${AWINAFFID}&ued=${encodeURIComponent(dest)}`;
@@ -51,4 +51,4 @@ const out = {
 };
 
 writeFileSync(new URL("../data/categories/home.json", import.meta.url), JSON.stringify(out, null, 2) + "\n");
-console.log("wrote home.json with", products.length, "products (awinmid sentinel =", AWINMID + ")");
+console.log("wrote home.json with", products.length, "products (awinmid =", AWINMID + ")");
