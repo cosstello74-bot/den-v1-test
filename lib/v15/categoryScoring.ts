@@ -320,19 +320,22 @@ const SOFTWARE_PROFILE: CategoryScoringProfile = {
 //   value_score        → price-to-value ratio
 //
 // ScoringSignals slots repurposed for home:
-//   purpose            ← home_type: climate→"work", kitchen→"creative", cleaning→"university"
-//   screen_size        ← home_type directly ("climate"/"kitchen"/"cleaning")
-//                        The +10 exact screen_size match bonus is the sub-type filter.
+//   screen_size        ← home_type directly ("purifier"/"dehumidifier"/"heater"/"vacuum")
+//                        The +10 exact screen_size match bonus routes to the exact
+//                        appliance type so ranking happens within one coherent type.
 //   battery_importance ← priority: efficiency→"very-important", performance→"not-important"
 //   portability        ← space: compact→"frequently-travel", freestanding→"desk-use"
 
 const HOME_PROFILE: CategoryScoringProfile = {
   requiredFields: ["home_type", "priority", "space", "budget"],
   interpret: (p) => {
+    // All appliance types map to a neutral purpose; the screen_size exact-match
+    // bonus is what routes the user to the specific appliance they chose.
     const purposeMap: Record<string, string> = {
-      climate:  "work",
-      kitchen:  "creative",
-      cleaning: "university",
+      purifier:     "work",
+      dehumidifier: "work",
+      heater:       "work",
+      vacuum:       "work",
     };
 
     const priorityToBattery: Record<string, string> = {
@@ -348,9 +351,9 @@ const HOME_PROFILE: CategoryScoringProfile = {
     };
 
     const budgetMap: Record<string, string> = {
-      "under-30": "under-500",
-      "30-75":    "500-1000",
-      "75-150":   "1000-1500",
+      "under-40": "under-500",
+      "40-80":    "500-1000",
+      "80-150":   "1000-1500",
       "150+":     "1500+",
     };
 

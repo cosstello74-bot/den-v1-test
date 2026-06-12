@@ -64,15 +64,15 @@ export const DEN_CATEGORIES: DenTopCategory[] = [
   {
     id: 'home',
     label: 'Home',
-    tagline: 'Air treatment, kitchen and cleaning appliances — ranked for your home.',
+    tagline: 'Air purifiers, dehumidifiers, heaters and vacuums — ranked for your home.',
     href: '/home',
     type: 'affiliate',
     subCategories: [
-      { id: 'climate',    label: 'Air & Climate',      description: 'Air purifiers, dehumidifiers, heaters and fans — ranked for your room.', href: '/quiz?category=home' },
-      { id: 'kitchen',    label: 'Kitchen Appliances', description: 'Air fryers and countertop cooking — ranked by capacity and value.',       href: '/quiz?category=home' },
-      { id: 'cleaning',   label: 'Cleaning',           description: 'Vacuums and home cleaning gear — ranked for your space.',                 href: '/quiz?category=home' },
-      { id: 'smart-home', label: 'Smart Home',         description: 'Hubs, cameras, thermostats — ranked by ecosystem.',                       href: '/home/smart-home', comingSoon: true },
-      { id: 'mattresses', label: 'Mattresses',         description: 'Ranked by sleep position, weight and firmness preference.',               href: '/home/mattresses', comingSoon: true },
+      { id: 'purifier',     label: 'Air Purifiers', description: 'HEPA purifiers ranked by room size, effectiveness and value.',   href: '/quiz?category=home' },
+      { id: 'dehumidifier', label: 'Dehumidifiers', description: 'Tackle damp and condensation — ranked by capacity and running cost.', href: '/quiz?category=home' },
+      { id: 'heater',       label: 'Heaters',       description: 'Fast electric heating — ranked by efficiency and output.',        href: '/quiz?category=home' },
+      { id: 'vacuum',       label: 'Vacuums',       description: 'Robot, cordless and specialist vacuums — ranked for your home.',  href: '/quiz?category=home' },
+      { id: 'smart-home',   label: 'Smart Home',    description: 'Hubs, cameras, thermostats — ranked by ecosystem.',              href: '/home/smart-home', comingSoon: true },
     ],
   },
   {

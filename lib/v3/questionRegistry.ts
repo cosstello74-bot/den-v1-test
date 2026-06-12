@@ -464,12 +464,13 @@ const SOFTWARE_STEPS: QuizStep[] = [
 const HOME_STEPS: QuizStep[] = [
   {
     id:       "home_type",
-    question: "What do you need for your home?",
-    subtitle: "This routes you to the right group of appliances.",
+    question: "What are you shopping for?",
+    subtitle: "We rank within the exact appliance you need.",
     options: [
-      { value: "climate",  label: "Air & Climate",      description: "Air purifiers, dehumidifiers, heaters and fans" },
-      { value: "kitchen",  label: "Kitchen",            description: "Air fryers and countertop cooking appliances" },
-      { value: "cleaning", label: "Cleaning",           description: "Vacuums and home cleaning gear" },
+      { value: "purifier",     label: "Air Purifier",  description: "Cleaner air — allergens, dust, smoke and odours" },
+      { value: "dehumidifier", label: "Dehumidifier",  description: "Tackle damp, condensation and mould" },
+      { value: "heater",       label: "Heater",        description: "Fast, efficient electric heating" },
+      { value: "vacuum",       label: "Vacuum",        description: "Robot, cordless and specialist vacuums" },
     ],
   },
   {
@@ -497,9 +498,9 @@ const HOME_STEPS: QuizStep[] = [
     question: "What's your budget?",
     subtitle: "Boxed2me stocks boxed and clearance deals below typical retail.",
     options: [
-      { value: "under-30", label: "Under £30",  description: "Entry-level and compact units" },
-      { value: "30-75",    label: "£30–£75",    description: "Mainstream home appliances" },
-      { value: "75-150",   label: "£75–£150",   description: "Higher-capacity and smart models" },
+      { value: "under-40", label: "Under £40",  description: "Entry-level and compact units" },
+      { value: "40-80",    label: "£40–£80",    description: "Mainstream home appliances" },
+      { value: "80-150",   label: "£80–£150",   description: "Higher-capacity and smart models" },
       { value: "150+",     label: "£150+",      description: "Premium and large-capacity units" },
     ],
   },
